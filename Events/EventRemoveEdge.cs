@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Waremap.Models;
 
 namespace Waremap.Events
 {
     public class EventRemoveEdge: IEvent
     {
-        private int _from;
-        private int _to;
+        private readonly int _from;
+        private readonly int _to;
 
         public EventRemoveEdge(int from, int to)
         {
@@ -19,7 +16,10 @@ namespace Waremap.Events
 
         public void Run(State state)
         {
-            var edge = state.Geo.Edges.FirstOrDefault(x => x.To == _to && x.From == _from);
+            var edge = state.Geo.Edges.FirstOrDefault(
+                x => (x.To == _to && x.From == _from) 
+                     || (x.From == _to && x.To == _from)
+            );
             if (edge != null)
             {
                 state.Geo.Edges.Remove(edge);

@@ -1,3 +1,4 @@
+using System.Linq;
 using Waremap.Models;
 
 namespace Waremap.Events
@@ -13,7 +14,29 @@ namespace Waremap.Events
         
         public void Run(State state)
         {
-            
+            var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == Id);
+            if (node != null)
+            {
+                // update node
+                node.Type = Type;
+                node.X = X;
+                node.Y = Y;
+                node.Floor = Floor;
+                node.Depot = Depot;
+            }
+            else
+            {
+                // add node
+                state.Geo.Nodes.Add(new Node
+                {
+                    Id = Utils.CreateIdFor(state.Geo.Nodes.Select(n => n.Id)),
+                    Depot = Depot,
+                    Floor = Floor,
+                    Type = Type,
+                    X = X,
+                    Y = Y
+                });
+            }
         }
     }
 }
