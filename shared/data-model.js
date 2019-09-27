@@ -3,20 +3,23 @@ module.exports = {
     depots: [{
       id: Number,
       floor: Number,
-      name: String,
-      width: Number,
+      w: Number,
+      h: Number,
+      x: Number,
+      y: Number
     }],
     nodes: [{
       id: Number,
-      type: String, // enum('machine', 'point'),
-      depot_id: Number,
+      type: String, // enum('Machine', 'Point'),
+      depot: Number,
+      floor: Number,
       x: Number,
       y: Number
     }],
     edges: [{
       from: Number,
       to: Number,
-      type: String, // enum(...)
+      type: String, // enum('Road', 'Elevator', 'Ladder')
       weight: Number
     }]
   },
