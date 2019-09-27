@@ -8,7 +8,7 @@ namespace Waremap.Events
 {
     public class EventAddEdge: IEvent
     {
-        public EdgeType EdgeType { get; set; }
+        public EdgeType Type { get; set; }
         public int Weight { get; set; }
         public int From { get; set; }
         public int To { get; set; }
@@ -18,19 +18,21 @@ namespace Waremap.Events
             var edge = state.Geo.Edges.FirstOrDefault(x => x.To == To && x.From == From);
             if (edge != null)
             {
-                edge.Type = EdgeType;
+                edge.Type = Type;
                 edge.Weight = Weight;
                 edge.To = To;
                 edge.From = From;
             }
             else
+            {
                 state.Geo.Edges.Add(new Edge
                 {
-                    Type = EdgeType,
+                    Type = Type,
                     Weight = Weight,
                     From = From,
                     To = To
                 });
+            }
         }
     }
 }
