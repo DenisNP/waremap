@@ -1,5 +1,5 @@
 <template>
-  <rect :x="down ? x : data.x" :y="down ? y : data.y" width="10" height="10"/>
+  <rect :x="data.x" :y=" data.y" :width="w" :height="h"/>
 </template>
 
 <script>
@@ -10,31 +10,29 @@ export default {
   ],
   data() {
     return {
-      down: false,
-      x: null,
-      y: null
+      w: 30,
+      h: 30,
+      down: false
     };
   },
   methods: {
     onMouseDown(e) {
       this.down = true;
-      this.x = e.clientX;
-      this.y = e.clientY;
+      this.data.x = e.clientX - this.w / 2;
+      this.data.y = e.clientY - this.h / 2;
     },
     onMouseMove(e) {
       if (this.down !== true) return;
 
-      this.x = e.clientX;
-      this.y = e.clientY;
+      this.data.x = e.clientX - this.w / 2;
+      this.data.y = e.clientY - this.h / 2;
     },
     onMouseUp(e) {
       this.down = false;
+      this.$root.$emit('nodeUpdated', this.data);
     }
   },
   mounted() {
-    this.x = this.data.x;
-    this.y = this.data.y;
-
     this.$el.addEventListener('mousedown', this.onMouseDown);
     window.addEventListener('mousemove', this.onMouseMove);
     this.$el.addEventListener('mouseup', this.onMouseUp);

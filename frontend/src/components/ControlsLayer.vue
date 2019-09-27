@@ -100,6 +100,8 @@ export default {
 <style>
 
 .pallete {
+    z-index: 10;
+    background-color: #FFF;
     position: absolute;
     top: 15px;
     left: 15px;
