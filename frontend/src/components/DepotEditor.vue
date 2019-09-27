@@ -5,6 +5,7 @@
         v-for="data in $store.state.serverState.geo.nodes"
         :key="data.id"
         :data="data"
+        :selected="$store.state.depotEditor.selectedNodeId === data.id"
       ></Node>
       <Edge
         v-for="data in $store.state.serverState.geo.edges"
@@ -33,6 +34,10 @@ export default {
 
     this.$root.$on('nodeUpdated', data => {
       this.$store.dispatch('depotEditor/updateNode', data);
+    });
+
+    this.$root.$on('nodeSelected', data => {
+      this.$store.commit('depotEditor/selectNode', data);
     });
   },
   components: {

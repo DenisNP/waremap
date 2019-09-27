@@ -1,5 +1,5 @@
 <template>
-  <rect :x="draggingX || data.x" :y="draggingY || data.y" :width="w" :height="h"/>
+  <rect :x="draggingX || data.x" :y="draggingY || data.y" :width="w" :height="h" :fill="selected ? '#f00' : '#000'"/>
 </template>
 
 <script>
@@ -9,6 +9,7 @@ export default {
   name: 'Node',
   props: [
     'data',
+    'selected',
   ],
   data() {
     return {
@@ -47,16 +48,13 @@ export default {
       this.draggingY = newY;
     },
     onMouseUp(e) {
-      this.down = false;
-      this.dragging = false;
-
-      if (this.data.x === this.draggingX &&
-          this.data.y === this.draggingY) {
-        console.log('selected');
+      if (this.down && !this.dragging) {
         // we just selected
-        return;
+        this.$root.$emit('nodeSelected', this.data);
       }
 
+      this.down = false;
+      this.dragging = false;
       this.$root.$emit('nodeUpdated', {...this.data, x: this.draggingX, y: this.draggingY});
     }
   },
