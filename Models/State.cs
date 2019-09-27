@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Waremap.Models
@@ -16,6 +17,8 @@ namespace Waremap.Models
         public int Floor { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+
+
     }
 
     public class Edge
@@ -56,8 +59,11 @@ namespace Waremap.Models
 
     public class Waypoint
     {
+        public int Id { get; set; }
         public int NodeId { get; set; }
         public int ProcessingTime { get; set; }
+        public int StarTime { get; set; }
+        public int EndTime { get; set; }
     }
 
     public class Part

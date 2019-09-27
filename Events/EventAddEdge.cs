@@ -8,28 +8,28 @@ namespace Waremap.Events
 {
     public class EventAddEdge: IEvent
     {
-        private EdgeType _type;
-        private int _weight;
-        private int _from;
-        private int _to;
+        public EdgeType EdgeType { get; set; }
+        public int Weight { get; set; }
+        public int From { get; set; }
+        public int To { get; set; }
 
         public void Run(State state)
         {
-            var edge = state.Geo.Edges.FirstOrDefault(x => x.To == _to && x.From == _from);
+            var edge = state.Geo.Edges.FirstOrDefault(x => x.To == To && x.From == From);
             if (edge != null)
             {
-                edge.Type = _type;
-                edge.Weight = _weight;
-                edge.To = _to;
-                edge.From = _from;
+                edge.Type = EdgeType;
+                edge.Weight = Weight;
+                edge.To = To;
+                edge.From = From;
             }
             else
                 state.Geo.Edges.Add(new Edge
                 {
-                    Type = _type,
-                    Weight = _weight,
-                    From = _from,
-                    To = _to
+                    Type = EdgeType,
+                    Weight = Weight,
+                    From = From,
+                    To = To
                 });
         }
     }
