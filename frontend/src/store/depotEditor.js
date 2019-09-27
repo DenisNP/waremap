@@ -5,8 +5,10 @@ export default {
   modules: {
   },
   state: {
-    mode: 'default', // 'draggingNode', 'addingNode', 'addingEdge'
+    mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
+    selectedNode: null,
+    selectedEdge: null,
     floor: 0,
     depot: 0,
   },
@@ -37,6 +39,11 @@ export default {
         depot: c.state.depot,
       });
 
+      c.commit('setServerState', newState, {root: true});
+    },
+
+    async updateNode(c, data) {
+      const newState = await API.updateNode(data);
       c.commit('setServerState', newState, {root: true});
     }
   }

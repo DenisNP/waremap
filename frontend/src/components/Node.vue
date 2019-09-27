@@ -1,8 +1,10 @@
 <template>
-  <rect :x="data.x" :y=" data.y" :width="w" :height="h"/>
+  <rect :x="draggingX || data.x" :y="draggingY || data.y" :width="w" :height="h"/>
 </template>
 
 <script>
+const MIN_DRAGGING_DISTANCE = 50;
+
 export default {
   name: 'Node',
   props: [
@@ -12,30 +14,60 @@ export default {
     return {
       w: 30,
       h: 30,
-      down: false
+      draggingX: null,
+      draggingY: null,
+      down: false,
+      dragging: false,
     };
   },
   methods: {
     onMouseDown(e) {
+      e.preventDefault();
       this.down = true;
-      this.data.x = e.clientX - this.w / 2;
-      this.data.y = e.clientY - this.h / 2;
     },
     onMouseMove(e) {
       if (this.down !== true) return;
 
-      this.data.x = e.clientX - this.w / 2;
-      this.data.y = e.clientY - this.h / 2;
+      const newX = e.clientX - this.w / 2;
+      const newY = e.clientY - this.h / 2;
+
+      if (!this.dragging) {
+        const distance = Math.max(
+          Math.abs(this.data.x - newX),
+          Math.abs(this.data.y - newY)
+        );
+
+        if (distance < MIN_DRAGGING_DISTANCE) {
+          return;
+        }
+      }
+
+      this.dragging = true;
+      this.draggingX = newX;
+      this.draggingY = newY;
     },
     onMouseUp(e) {
       this.down = false;
-      this.$root.$emit('nodeUpdated', this.data);
+      this.dragging = false;
+
+      if (this.data.x === this.draggingX &&
+          this.data.y === this.draggingY) {
+        console.log('selected');
+        // we just selected
+        return;
+      }
+
+      this.$root.$emit('nodeUpdated', {...this.data, x: this.draggingX, y: this.draggingY});
     }
   },
   mounted() {
     this.$el.addEventListener('mousedown', this.onMouseDown);
     window.addEventListener('mousemove', this.onMouseMove);
     this.$el.addEventListener('mouseup', this.onMouseUp);
+  },
+  updated() {
+    this.data.draggingX = null;
+    this.data.draggingY = null;
   },
   destroyed() {
     this.$el.removeEventListener('mousedown', this.onMouseDown);

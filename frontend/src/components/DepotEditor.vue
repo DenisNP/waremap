@@ -30,6 +30,10 @@ export default {
     this.$root.$on('floorSelect', floor => {
       this.$store.commit('depotEditor/setFloor', floor);
     });
+
+    this.$root.$on('nodeUpdated', data => {
+      this.$store.dispatch('depotEditor/updateNode', data);
+    });
   },
   components: {
     Node,
