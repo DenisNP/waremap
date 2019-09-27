@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <ControlsLayer/>
+    <ControlsLayer floor="2" tool="3" />
     <DepotEditor/>
   </div>
 </template>
