@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
@@ -18,5 +19,10 @@ namespace Waremap
                 new StringEnumConverter()
             }
         };
+
+        public static int CreateIdFor(IEnumerable<int> ids)
+        {
+            return ids.Max() + 1;
+        }
     }
 }
