@@ -11,6 +11,7 @@ module.exports = {
     nodes: [{
       id: Number,
       type: String, // enum('Machine', 'Point'),
+      icon: String, // Machine, Point, Ladder, Elevator, Door
       depot: Number,
       floor: Number,
       x: Number,

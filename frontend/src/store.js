@@ -4,12 +4,14 @@ import helpers from './common/helpers';
 import config from './common/config';
 import API from './common/api';
 import serverState from './store/serverState';
+import depotEditor from './store/depotEditor';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     serverState,
+    depotEditor,
   },
   state: {
     currentDepotId: null, // if null = creating new depo
@@ -21,6 +23,9 @@ export default new Vuex.Store({
     set(state, {field, value}) {
       state[field] = value;
     },
+    setServerState(state, newState) {
+      state.serverState = newState;
+    }
   },
   actions: {
     async init(context) {

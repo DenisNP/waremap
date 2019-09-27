@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="onClick">
     <svg>
       <Node
         v-for="data in $store.state.serverState.geo.nodes"
@@ -21,6 +21,16 @@ import Edge from './Edge.vue';
 
 export default {
   name: 'DepotEditor',
+  mounted() {
+    this.$root.$on('toolSelected', e => {
+      const {name, key, icon} = e;
+      this.$store.commit('depotEditor/startAddingNode', key);
+    });
+
+    this.$root.$on('floorSelect', floor => {
+      this.$store.commit('depotEditor/setFloor', floor);
+    });
+  },
   components: {
     Node,
     Edge
@@ -28,6 +38,20 @@ export default {
   props: {
     msg: String,
   },
+  computed: {
+
+  },
+  methods: {
+    onClick(e) {
+      console.log(111, e);
+      const x = e.clientX;
+      const y = e.clientY;
+
+      if (this.$store.state.depotEditor.mode === 'addingNode') {
+        this.$store.dispatch('depotEditor/endAddingNode', {x, y});
+      }
+    }
+  }
 };
 </script>
 

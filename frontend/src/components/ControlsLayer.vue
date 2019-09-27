@@ -43,27 +43,27 @@ export default {
             tools: [
                 {
                     name: 'Участок',
-                    key: 'machine',
+                    key: 'Machine',
                     icon: require('../assets/logo.png')
                 },
                 {
                     name: 'Узел',
-                    key: 'node',
+                    key: 'Node',
                     icon: ''
                 },
                 {
                     name: 'Лестница',
-                    key: 'stairs',
+                    key: 'Ladder',
                     icon: ''
                 },
                 {
                     name: 'Лифт',
-                    key: 'elevator',
+                    key: 'Elevator',
                     icon: ''
                 },
                 {
                     name: 'Дверь',
-                    key: 'door',
+                    key: 'Door',
                     icon: ''
                 }
             ],
@@ -159,7 +159,7 @@ export default {
 
 .pallete-item-icon {
     margin-right: 10px;
-    max-height: 25px;    
+    max-height: 25px;
 }
 
 .floors .pallete-item {
