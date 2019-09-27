@@ -68,6 +68,12 @@ export default {
       this.dragging = true;
       this.draggingX = this.newX;
       this.draggingY = this.newY;
+
+      this.$store.commit('serverState/updateNode', {
+        id: this.data.id,
+        x: this.draggingX,
+        y: this.draggingY
+      });
       this.$store.commit('depotEditor/unselect');
     },
     onMouseUp(e) {
