@@ -61,7 +61,6 @@ export default {
       }
     },
     onClick(e) {
-      console.log(111, e);
       const x = e.clientX;
       const y = e.clientY;
 
