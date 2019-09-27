@@ -10,11 +10,6 @@ namespace Waremap
         public static void Main(string[] args)
         {
             // preload mock data
-            using (var reader = new StreamReader("shared/cars.json"))
-            {
-                LoadDataController.LoadCarsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
-                Console.WriteLine("Mock cars loaded: " + ReceiveEventController.GetState().Equipment.Cars.Count);
-            }
             using (var reader = new StreamReader("shared/parts.json"))
             {
                 LoadDataController.LoadPartsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
