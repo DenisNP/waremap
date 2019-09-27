@@ -50,6 +50,11 @@ export default {
     async updateNode(c, data) {
       const newState = await API.updateNode(data);
       c.commit('setServerState', newState, {root: true});
+    },
+
+    async removeSelectedNode(c) {
+      const newState = await API.removeNode(c.state.selectedNodeId);
+      c.commit('setServerState', newState, {root: true});
     }
   }
 };
