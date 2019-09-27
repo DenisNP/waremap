@@ -13,7 +13,7 @@ namespace Waremap.Events
         
         public void Run(State state)
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
