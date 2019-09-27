@@ -1,7 +1,6 @@
 <template>
   <div>
     <svg>
-
       <Node
         v-for="data in $store.state.serverState.geo.nodes"
         :key="data.id"

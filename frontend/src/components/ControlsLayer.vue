@@ -43,22 +43,27 @@ export default {
             tools: [
                 {
                     name: 'Участок',
-                    key: '',
+                    key: 'machine',
                     icon: require('../assets/logo.png')
                 },
                 {
+                    name: 'Узел',
+                    key: 'node',
+                    icon: ''
+                },
+                {
                     name: 'Лестница',
-                    key: '',
+                    key: 'stairs',
                     icon: ''
                 },
                 {
                     name: 'Лифт',
-                    key: '',
+                    key: 'elevator',
                     icon: ''
                 },
                 {
                     name: 'Дверь',
-                    key: '',
+                    key: 'door',
                     icon: ''
                 }
             ],
