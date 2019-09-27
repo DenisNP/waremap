@@ -8,34 +8,34 @@ namespace Waremap.Events
 {
     public class EventAddDepot: IEvent
     {
-        private int _id;
-        private int _x;
-        private int _y;
-        private int _w;
-        private int _h;
-        private int _floor;
+        public int Id { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int W { get; set; }
+        public int H { get; set; }
+        public int Floor { get; set; }
 
         public void Run(State state)
         {
-            var depot = state.Geo.Depots.FirstOrDefault(x => x.X == _x && x.Y == _y);
+            var depot = state.Geo.Depots.FirstOrDefault(x => x.X == X && x.Y == Y);
             if (depot != null)
             {
-                depot.Id = _id;
-                depot.X = _x;
-                depot.Y = _y;
-                depot.W = _w;
-                depot.H = _h;
-                depot.Floor = _floor;
+                depot.Id = Id;
+                depot.X = X;
+                depot.Y = Y;
+                depot.W = W;
+                depot.H = H;
+                depot.Floor = Floor;
             }
             else
                 state.Geo.Depots.Add(new Depot
                 {
-                    Id = _id,
-                    X = _x,
-                    Y = _y,
-                    W = _w,
-                    H = _h,
-                    Floor = _floor
+                    Id = Id,
+                    X = X,
+                    Y = Y,
+                    W = W,
+                    H = H,
+                    Floor = Floor
         });
         }
     }

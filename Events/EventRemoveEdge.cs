@@ -5,20 +5,20 @@ namespace Waremap.Events
 {
     public class EventRemoveEdge: IEvent
     {
-        private readonly int _from;
-        private readonly int _to;
-
+        public int From { get; set; }
+        public int To { get; set; }
+        
         public EventRemoveEdge(int from, int to)
         {
-            _from = from;
-            _to = to;
+            From = from;
+            To = to;
         }
 
         public void Run(State state)
         {
             var edge = state.Geo.Edges.FirstOrDefault(
-                x => (x.To == _to && x.From == _from) 
-                     || (x.From == _to && x.To == _from)
+                x => (x.To == To && x.From == From) 
+                     || (x.From == To && x.To == From)
             );
             if (edge != null)
             {
