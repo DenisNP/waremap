@@ -28,7 +28,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async init(context) {
+    async init(c) {
       let data;
       let initNeeded = true;
 
@@ -44,7 +44,7 @@ export default new Vuex.Store({
         return;
       }
 
-      // set state from data
+      c.commit('setServerState', data);
     },
   }
 });
