@@ -5,7 +5,7 @@ namespace Waremap.Events
 {
     public class EventRemoveNode : IEvent
     {
-        private int _id;
+        private readonly int _id;
         
         public EventRemoveNode(int id)
         {
