@@ -36,6 +36,12 @@ namespace Waremap.Controllers
                             
                         }
                         break;
+                    case "addEdge":
+                        if (body != "")
+                        {
+
+                        }
+                        break;
                 }
             }
             return State;

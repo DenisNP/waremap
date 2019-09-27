@@ -11,7 +11,7 @@ namespace Waremap.Models
     public class Node
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public NodeType Type { get; set; }
         public int Depot { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
@@ -21,7 +21,7 @@ namespace Waremap.Models
     {
         public int From { get; set; }
         public int To { get; set; }
-        public string Type { get; set; }
+        public EdgeType Type { get; set; }
         public int Weight { get; set; }
     }
 
@@ -67,5 +67,11 @@ namespace Waremap.Models
     {
         Machine,
         Point
+    }
+    public enum EdgeType
+    {
+        Road,
+        Elevator,
+        Ladder
     }
 }
