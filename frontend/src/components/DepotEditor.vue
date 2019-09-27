@@ -1,6 +1,7 @@
 <template>
   <div>
-    <svg>
+    <div>
+
       <Node
         v-for="data in $store.state.serverState.geo.nodes"
         :key="data.id"
@@ -11,7 +12,7 @@
         :key="data.id"
         :data="data"
       ></Edge>
-    </svg>
+    </div>
   </div>
 </template>
 

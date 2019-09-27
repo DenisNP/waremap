@@ -12,10 +12,10 @@ export default {
   ],
   computed: {
     fromNode() {
-      return this.$store.getters['serverState.nodeById'](this.from);
+      return this.$store.getters['serverState/nodeById'](this.data.from);
     },
     toNode() {
-      return this.$store.getters['serverState.nodeById'](this.to);
+      return this.$store.getters['serverState/nodeById'](this.data.to);
     },
   }
 };

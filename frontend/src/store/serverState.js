@@ -6,8 +6,14 @@ export default {
   state: {
     geo: {
       depots: [],
-      nodes: [],
-      edges: []
+      nodes: [
+        {x: 10, y: 50, id: 1},
+        {x: 110, y: 101, id: 2}
+      ],
+      edges: [{
+        from: 1,
+        to: 2,
+      }]
     },
     equipment: {
       cars: [],
