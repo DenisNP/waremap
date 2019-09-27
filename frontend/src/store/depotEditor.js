@@ -1,4 +1,5 @@
 import API from '../common/api';
+import helpers from '../common/helpers';
 
 export default {
   namespaced: true,
@@ -60,6 +61,17 @@ export default {
 
     async removeSelectedNode(c) {
       const newState = await API.removeNode(c.state.selectedNodeId);
+      c.commit('setServerState', newState, {root: true});
+    },
+
+    async addingEdge(c, {from, to}) {
+      const newState = await API.addOrUpdateEdge({
+        type: 'Road',
+        weight: helpers.distance(c.rootGetters['serverState/nodeById'](from), c.rootGetters['serverState/nodeById'](to)),
+        from,
+        to
+      });
+
       c.commit('setServerState', newState, {root: true});
     }
   }
