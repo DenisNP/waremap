@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Waremap.Models;
 
 namespace Waremap.Controllers
 {
@@ -7,10 +7,19 @@ namespace Waremap.Controllers
     [Route("/state")]
     public class ReceiveEventController : ControllerBase
     {
+        private static readonly State State = new State();
+            
         [HttpGet]
-        public object Get()
+        public State Get()
         {
-            throw new NotImplementedException();
+            return State;
+        }
+
+        [HttpPost]
+        public State Post()
+        {
+            // TODO events
+            return State;
         }
     }
 }

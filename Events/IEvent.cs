@@ -7,8 +7,6 @@ namespace Waremap.Events
 
     public enum EventType
     {
-        AddDepot,
-        RemoveDepot,
         AddNode,
         RemoveNode,
         AddEdge,
