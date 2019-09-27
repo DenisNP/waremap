@@ -47,8 +47,8 @@ namespace Waremap.Controllers
         {
             var parts = JsonConvert.DeserializeObject<List<Part>>(json, Utils.ConverterSettings);
             var existIds = state.Equipment.Parts.Select(p => p.Id);
-            var newCars = parts.Where(p => !existIds.Contains(p.Id));
-            state.Equipment.Parts.AddRange(newCars);
+            var newParts = parts.Where(p => !existIds.Contains(p.Id));
+            state.Equipment.Parts.AddRange(newParts);
         }
 
         public static void LoadCarsToState(string json, State state)
@@ -57,6 +57,14 @@ namespace Waremap.Controllers
             var existIds = state.Equipment.Cars.Select(c => c.Id);
             var newCars = cars.Where(c => !existIds.Contains(c.Id));
             state.Equipment.Cars.AddRange(newCars);
+        }
+
+        public static void LoadNodesToState(string json, State state)
+        {
+            var nodes = JsonConvert.DeserializeObject<List<Node>>(json, Utils.ConverterSettings);
+            var existIds = state.Geo.Nodes.Select(p => p.Id);
+            var newNodes = nodes.Where(p => !existIds.Contains(p.Id));
+            state.Geo.Nodes.AddRange(newNodes);
         }
     }
 }

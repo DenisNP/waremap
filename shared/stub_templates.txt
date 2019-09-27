@@ -1,0 +1,38 @@
+[
+  {
+    'repeat(100)': {
+      id: '{{index(100)}}',
+      car_id: '{{integer(0, 5)}}',
+      name: '{{random("Деталь_", "Деталька_")}}{{index(100)}}',
+      weight: '{{integer(2, 18)}}',
+      assembly_id: '{{integer(0, 15)}}',
+      path: [
+        {
+          'repeat(10, 15)': {
+            id: '{{index()}}',
+      		order: '{{integer(1, 5)}}',
+     		node_id: '{{integer(0, 100)}}',
+     		processing_time: '{{integer(1, 3600)}}',
+     		start_time: '{{integer(0, 6)}}',
+            end_time: '{{integer(6, 12)}}'
+          }
+        }
+      ]
+    }
+
+  }
+]
+
+
+
+[
+  {
+    'repeat(100, 100)': {
+      id: '{{index()}}',
+      type: '{{random("Machine", "Point", "0")}}',
+      depot: '{{integer(0, 5)}}',
+      floor: '{{integer(0, 5)}}',
+      x: '{{integer(0, 20)}}',
+      y: '{{integer(0, 20)}}'}
+  }
+]

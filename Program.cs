@@ -15,7 +15,7 @@ namespace Waremap
                 LoadDataController.LoadCarsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
                 Console.WriteLine("Mock cars loaded: " + ReceiveEventController.GetState().Equipment.Cars.Count);
             }
-            using (var reader = new StreamReader("shared/cars.json"))
+            using (var reader = new StreamReader("shared/parts.json"))
             {
                 LoadDataController.LoadPartsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
                 Console.WriteLine("Mock parts loaded: " + ReceiveEventController.GetState().Equipment.Parts.Count);
