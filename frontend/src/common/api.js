@@ -36,7 +36,7 @@ function getData(url = '') {
 }
 
 export default {
-  async api(method, endpoint, data = {}) {
+  async api(method, action, data = {}) {
     if (this.sessionId) {
       data.id = this.sessionId;
     }
@@ -44,8 +44,8 @@ export default {
     const endpoint = window.endpoint || ENDPOINT;
 
     const res = method === 'GET' ?
-      await getData(`${endpoint}/${method}`, data) :
-      await postData(`${endpoint}/${method}`, data);
+      await getData(`${endpoint}/${action}`, data) :
+      await postData(`${endpoint}/${action}`, data);
 
 
     if (!res.ok || res.status !== 200) {
