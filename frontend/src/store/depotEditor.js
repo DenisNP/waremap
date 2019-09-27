@@ -10,7 +10,9 @@ export default {
     selectedNodeId: null,
     selectedEdgeId: null,
     floor: 0,
-    depot: 0,
+    depot: {
+      id: null
+    },
   },
   getters: {
   },
@@ -61,6 +63,11 @@ export default {
     async removeSelectedNode(c) {
       const newState = await API.removeNode(c.state.selectedNodeId);
       c.commit('setServerState', newState, {root: true});
-    }
+    },
+
+    async autoComputeEdges(c) {
+      const newState = await API.autoComputeEdges(c.state.depot.id);
+      c.commit('setServerState', newState, {root: true});
+    },
   }
 };

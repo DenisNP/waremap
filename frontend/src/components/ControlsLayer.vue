@@ -10,6 +10,14 @@
                 <img class="pallete-item-icon" :src="tool.icon" v-if="tool.icon" />
                 <span class="pallete-item--name">{{ tool.name }}</span>
             </div>
+
+            <div class="pallete-item"
+                 :class="{selected: index == selectedTool}"
+                 @click="autoComputeEdges()"
+            >
+              <img class="pallete-item-icon" :src="tool.icon" />
+              <span class="pallete-item--name">Заполнить связи</span>
+            </div>
         </div>
 
         <div class="pallete pallete-right floors">
@@ -91,6 +99,9 @@ export default {
         floorSelect(floor) {
             this.selectedFloor = floor;
             this.$root.$emit('floorSelected', floor);
+        },
+        autoComputeEdges() {
+            this.$store.dispatch('depotEditor/autoComputeEdges');
         }
     }
 }
