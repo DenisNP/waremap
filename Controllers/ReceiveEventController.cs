@@ -79,6 +79,20 @@ namespace Waremap.Controllers
                             (new EventRemoveDepot(depotId)).Run(State);
                         }
                         break;
+                    case "addWaypoint":
+                        if (body != "")
+                        {
+                            var eventAddWaypoint = JsonConvert.DeserializeObject<EventAddWaypoint>(body);
+                            eventAddWaypoint.Run(State);
+                        }
+                        break;
+                    case "removeWaypoint":
+                        if (int.TryParse(Request.Query["id"], out var waypointId) && int.TryParse(Request.Query["partId"], out var partId))
+                        {
+                            (new EventRemoveWaypoint(partId, waypointId)).Run(State);
+                        }
+                        break;
+
                 }
             }
             return State;

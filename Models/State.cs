@@ -72,7 +72,14 @@ namespace Waremap.Models
         public int CarId { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
+        public int AssemblyId { get; set; }
         public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+    }
+
+    public class Assembly
+    {
+        public int Id { get; set; }
+        public int Name { get; set; }
     }
 
     public class Equipment
