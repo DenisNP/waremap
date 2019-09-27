@@ -26,10 +26,21 @@ namespace Waremap.Models
         public int Weight { get; set; }
     }
 
+    public class Depot
+    {
+        public int Id { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int W { get; set; }
+        public int H { get; set; }
+        public int Floor { get; set; }
+    }
+
     public class Geo
     {
         public List<Node> Nodes { get; set; } = new List<Node>();
         public List<Edge> Edges { get; set; } = new List<Edge>();
+        public List<Depot> Depots { get; set; } = new List<Depot>();
     }
 
     public class Car
