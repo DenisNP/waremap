@@ -1,3 +1,4 @@
+using System.Linq;
 using Waremap.Models;
 
 namespace Waremap.Events
@@ -13,7 +14,13 @@ namespace Waremap.Events
 
         public void Run(State state)
         {
-            throw new System.NotImplementedException();
+            var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == _id);
+            if (node != null)
+            {
+                state.Geo.Nodes.Remove(node);
+                var edges = state.Geo.Edges.Where(e => e.From == _id || e.To == _id).ToList();
+                edges.ForEach(e => state.Geo.Edges.Remove(e));
+            }
         }
     }
 }
