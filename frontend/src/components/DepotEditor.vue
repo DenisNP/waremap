@@ -39,6 +39,8 @@ export default {
     this.$root.$on('nodeSelected', data => {
       this.$store.commit('depotEditor/selectNode', data);
     });
+
+    window.addEventListener('keydown', this.onKeyDown);
   },
   components: {
     Node,
@@ -51,6 +53,13 @@ export default {
 
   },
   methods: {
+    async onKeyDown(e) {
+      if (e.keyCode === 46) { // delete
+        if (this.$store.state.depotEditor.mode === 'nodeSelected') {
+          await this.$store.dispatch('depotEditor/removeSelectedNode');
+        }
+      }
+    },
     onClick(e) {
       console.log(111, e);
       const x = e.clientX;

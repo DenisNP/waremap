@@ -64,12 +64,16 @@ export default {
       this.draggingY = this.newY;
     },
     onMouseUp(e) {
-      if (this.down && !this.dragging) {
+      const wasDown = this.down;
+      this.down = false;
+
+      if (wasDown && !this.dragging) {
         // we just selected
         this.$root.$emit('nodeSelected', this.data);
+        return;
       }
 
-      this.down = false;
+      console.log('update node');
       this.dragging = false;
       this.$root.$emit('nodeUpdated', {...this.data, x: this.draggingX, y: this.draggingY});
     }
