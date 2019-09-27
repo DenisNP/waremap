@@ -1,14 +1,41 @@
 <template>
-  <line :x1="fromNode.x" :y1="fromNode.y" :x2="toNode.x" :y2="toNode.y" stroke="black" />
+  <g
+    cursor="pointer"
+    @click="$store.commit('depotEditor/selectEdge', data)"
+  >
+    <line
+      :x1="fromNode.x"
+      :y1="fromNode.y"
+      :x2="toNode.x"
+      :y2="toNode.y"
+      stroke-width="3"
+      :stroke="selected ? '#f00' : '#000'"
+    />
+    <line
+      :x1="fromNode.x"
+      :y1="fromNode.y"
+      :x2="toNode.x"
+      :y2="toNode.y"
+      stroke-width="20"
+      stroke="rgba(0,0,0,0.05)"
+    />
+  </g>
 </template>
 
 <script>
 export default {
   name: 'Edge',
   props: [
-    'data'
+    'data',
   ],
   computed: {
+    id() {
+      return this.data.from + '_' + this.data.to;
+    },
+    selected() {
+      const selected = this.$store.state.depotEditor.selectedEdge;
+      return selected && selected.from === this.data.from && selected.to === this.data.to;
+    },
     fromNode() {
       return this.$store.getters['serverState/nodeById'](this.data.from);
     },

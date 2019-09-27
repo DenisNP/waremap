@@ -9,10 +9,10 @@ export default {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
-    selectedEdgeId: null,
+    selectedEdge: null,
     floor: 0,
     depot: {
-      id: null
+      id: 0
     },
   },
   getters: {
@@ -33,13 +33,20 @@ export default {
 
     selectNode(state, node) {
       state.mode = 'nodeSelected';
+      state.selectedEdge = null;
       state.selectedNodeId = node.id;
+    },
+
+    selectEdge(state, edge) {
+      state.mode = 'edgeSelected';
+      state.selectedEdge = edge;
+      state.selectedNodeId = null;
     },
 
     unselect(state) {
       state.mode = 'default';
       state.selectedNodeId = null;
-      state.selectedEdgeId = null;
+      state.selectedEdge = null;
     },
   },
   actions: {
@@ -50,7 +57,7 @@ export default {
         x,
         y,
         floor: c.state.floor,
-        depot: c.state.depot,
+        depot: c.state.depot.id,
       });
 
       c.commit('setServerState', newState, {root: true});
@@ -80,6 +87,14 @@ export default {
       });
 
       c.commit('setServerState', newState, {root: true});
-    }
+    },
+
+    async removeSelectedEdge(c) {
+      const newState = await API.removeEdge({
+        from: c.state.selectedEdge.from,
+        to: c.state.selectedEdge.to,
+      });
+      c.commit('setServerState', newState, {root: true});
+    },
   }
 };

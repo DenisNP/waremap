@@ -1,17 +1,17 @@
 <template>
   <div @click="onClick">
     <svg>
+      <Edge
+        v-for="data in $store.state.serverState.geo.edges"
+        :key="data.from + '_' + data.to"
+        :data="data"
+      ></Edge>
       <Node
         v-for="data in $store.state.serverState.geo.nodes"
         :key="data.id"
         :data="data"
         :selected="$store.state.depotEditor.selectedNodeId === data.id"
       ></Node>
-      <Edge
-        v-for="data in $store.state.serverState.geo.edges"
-        :key="data.id"
-        :data="data"
-      ></Edge>
     </svg>
   </div>
 </template>
@@ -57,6 +57,9 @@ export default {
       if (e.keyCode === 46) { // delete
         if (this.$store.state.depotEditor.mode === 'nodeSelected') {
           await this.$store.dispatch('depotEditor/removeSelectedNode');
+        }
+        if (this.$store.state.depotEditor.mode === 'edgeSelected') {
+          await this.$store.dispatch('depotEditor/removeSelectedEdge');
         }
       }
     },
