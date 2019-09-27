@@ -49,6 +49,20 @@ namespace Waremap.Controllers
                             eventAddEdge.Run(State);
                         }
                         break;
+                    case "removeNode":
+                        if (body != "")
+                        {
+                            var eventAddNode = JsonConvert.DeserializeObject<EventRemoveNode>(body);
+                            eventAddNode.Run(State);
+                        }
+                        break;
+                    case "removeEdge":
+                        if (body != "")
+                        {
+                            var eventAddEdge = JsonConvert.DeserializeObject<EventRemoveEdge>(body);
+                            eventAddEdge.Run(State);
+                        }
+                        break;
                 }
             }
             return State;
