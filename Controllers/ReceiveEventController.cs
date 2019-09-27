@@ -45,7 +45,8 @@ namespace Waremap.Controllers
                     case "addEdge":
                         if (body != "")
                         {
-
+                            var eventAddEdge = JsonConvert.DeserializeObject<EventAddEdge>(body);
+                            eventAddEdge.Run(State);
                         }
                         break;
                 }
