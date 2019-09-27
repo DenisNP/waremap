@@ -12,7 +12,7 @@ export default {
     selectedEdge: null,
     floor: 0,
     depot: {
-      id: null
+      id: 0
     },
   },
   getters: {
@@ -57,7 +57,7 @@ export default {
         x,
         y,
         floor: c.state.floor,
-        depot: c.state.depot,
+        depot: c.state.depot.id,
       });
 
       c.commit('setServerState', newState, {root: true});
