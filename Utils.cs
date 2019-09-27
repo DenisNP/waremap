@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
 namespace Waremap
@@ -9,8 +11,12 @@ namespace Waremap
         {
             ContractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new SnakeCaseNamingStrategy()
+                NamingStrategy = new SnakeCaseNamingStrategy(),
             },
+            Converters = new List<JsonConverter>
+            {
+                new StringEnumConverter()
+            }
         };
     }
 }

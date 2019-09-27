@@ -62,4 +62,10 @@ namespace Waremap.Models
         public List<Car> Cars { get; set; }
         public List<Part> Parts { get; set; }
     }
+
+    public enum NodeType
+    {
+        Machine,
+        Point
+    }
 }

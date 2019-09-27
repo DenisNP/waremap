@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.IO;
+using Microsoft.AspNetCore.Mvc;
 using Waremap.Models;
 
 namespace Waremap.Controllers
@@ -18,7 +19,25 @@ namespace Waremap.Controllers
         [HttpPost]
         public State Post()
         {
-            // TODO events
+            if (Request.Query.ContainsKey("event"))
+            {
+                var eventName = Request.Query["event"];
+                var body = "";
+                using (var reader = new StreamReader(Request.Body))
+                {
+                    body = reader.ReadToEnd();
+                }
+                
+                switch (eventName)
+                {
+                    case "addNode":
+                        if (body != "")
+                        {
+                            
+                        }
+                        break;
+                }
+            }
             return State;
         }
     }
