@@ -25,6 +25,7 @@ namespace Waremap
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
+            app.UseFileServer();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Waremap.Controllers
 {
     [ApiController]
-    [Route("")]
+    [Route("/state")]
     public class ReceiveEventController : ControllerBase
     {
         [HttpGet]
