@@ -91,6 +91,10 @@ export default {
     return await this.sendAction('removeEdge', {from, to});
   },
 
+  async autoComputeEdges(depotId) {
+    return await this.sendAction('computeEdges', {depotId});
+  },
+
   async addDepot({x, y, w, h, floor}) {
     return await this.sendAction('addDepot', {
       x, y, w, h, floor
