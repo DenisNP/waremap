@@ -1,7 +1,16 @@
 <template>
   <g>
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" />
-    <rect :x="(draggingX || data.x) - w/2" :y="(draggingY || data.y) - h/2" :width="w" :height="h" :fill="selected ? '#f00' : '#000'" @click="onClick" :id="data.id" />
+    <rect
+      :id="data.id"
+      :x="(draggingX || data.x) - w/2"
+      :y="(draggingY || data.y) - h/2"
+      :width="w"
+      :height="h"
+      :fill="selected ? '#f00' : '#000'"
+      @click="onClick"
+      cursor="pointer"
+    />
   </g>
 </template>
 

@@ -12,7 +12,7 @@
             </div>
 
             <div class="pallete-item"
-                 :class="{selected: index == selectedTool}"
+                 key="autoComputeEdges"
                  @click="autoComputeEdges()"
             >
               <img class="pallete-item-icon" :src="tool.icon" />
