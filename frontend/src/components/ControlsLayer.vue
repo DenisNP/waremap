@@ -12,8 +12,7 @@
             </div>
 
             <div class="pallete-item"
-                 :class="{selected: index == selectedTool}"
-                 @click="autoComputeEdges()"
+                @click="autoComputeEdges()"
             >
               <img class="pallete-item-icon" :src="tool.icon" />
               <span class="pallete-item--name">Заполнить связи</span>
