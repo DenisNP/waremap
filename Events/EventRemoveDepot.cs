@@ -5,17 +5,17 @@ namespace Waremap.Events
 {
     public class EventRemoveDepot: IEvent
     {
-        public int Id { get; set; }
+        private readonly int _id;
         
         public EventRemoveDepot(int id)
         {
-            Id = id;
+            _id = id;
         }
 
         public void Run(State state)
         {
             var depot = state.Geo.Depots.FirstOrDefault(
-                x => (x.Id == Id) 
+                x => (x.Id == _id) 
             );
             if (depot != null)
             {
