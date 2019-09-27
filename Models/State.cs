@@ -60,6 +60,7 @@ namespace Waremap.Models
     public class Waypoint
     {
         public int Id { get; set; }
+        public int Order { get; set; }
         public int NodeId { get; set; }
         public int ProcessingTime { get; set; }
         public int StarTime { get; set; }
