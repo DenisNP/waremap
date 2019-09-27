@@ -15,6 +15,13 @@ export default {
     }
   },
   getters: {
+    nodeById: state => nodeId => {
+      if (!state.geo.nodes) {
+        return false;
+      }
+
+      return state.geo.nodes.find(r => r.id === nodeId);
+    },
   },
   mutations: {
   },
