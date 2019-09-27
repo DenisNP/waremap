@@ -49,7 +49,7 @@ namespace Waremap.Models
     public class Car
     {
         public int Id { get; set; }
-        public string Type { get; set; }
+        public CarType Type { get; set; }
         public int TotalCapacity { get; set; }
         public int FreeCapacity { get; set; }
         public int FromNodeId { get; set; }
@@ -91,5 +91,12 @@ namespace Waremap.Models
         Road,
         Elevator,
         Ladder
+    }
+
+    public enum CarType
+    {
+        Man,
+        ManWithCar,
+        Forklift
     }
 }

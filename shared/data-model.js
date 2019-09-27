@@ -26,7 +26,7 @@ module.exports = {
   equipment: {
     cars: [{
       id: Number,
-      type: String, // enum(...)
+      type: String, // enum('Man', 'ManWithCar', 'Forklift')
       total_capacity: Number,
       free_capacity: Number,
       from_node_id: Number,
