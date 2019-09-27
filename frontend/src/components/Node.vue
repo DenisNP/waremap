@@ -30,12 +30,9 @@ export default {
     onClick(e) {
       e.preventDefault();
 
-      console.log(this.$store.state.depotEditor.selectedNodeId, this.data.id);
-
       if (this.$store.state.depotEditor.selectedNodeId && this.data.id !== this.$store.state.depotEditor.selectedNodeId) {
-        // add edge
-      } else {
-        // disable selecting
+        this.$store.dispatch('depotEditor/addingEdge', {from: this.$store.state.depotEditor.selectedNodeId, to: this.data.id});
+        this.$store.commit('depotEditor/unselect');
       }
     },
     onMouseDown(e) {
@@ -62,12 +59,13 @@ export default {
       this.dragging = true;
       this.draggingX = this.newX;
       this.draggingY = this.newY;
+      this.$store.commit('depotEditor/unselect');
     },
     onMouseUp(e) {
       const wasDown = this.down;
       this.down = false;
 
-      if (wasDown && !this.dragging) {
+      if (wasDown && !this.dragging && !this.$store.state.depotEditor.selectedNodeId) {
         // we just selected
         this.$root.$emit('nodeSelected', this.data);
         return;
