@@ -14,12 +14,12 @@ namespace Waremap.Events
 
         public void Run(State state)
         {
-            var edge = state.Geo.Edges.FirstOrDefault(
-                x => (x.To == _id) 
+            var depot = state.Geo.Depots.FirstOrDefault(
+                x => (x.Id == _id) 
             );
-            if (edge != null)
+            if (depot != null)
             {
-                state.Geo.Edges.Remove(edge);
+                state.Geo.Depots.Remove(depot);
             }
         }
     }

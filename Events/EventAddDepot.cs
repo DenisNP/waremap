@@ -8,29 +8,35 @@ namespace Waremap.Events
 {
     public class EventAddDepot: IEvent
     {
-        private EdgeType _type;
-        private int _weight;
-        private int _from;
-        private int _to;
+        private int _id;
+        private int _x;
+        private int _y;
+        private int _w;
+        private int _h;
+        private int _floor;
 
         public void Run(State state)
         {
-            var edge = state.Geo.Edges.FirstOrDefault(x => x.To == _to && x.From == _from);
-            if (edge != null)
+            var depot = state.Geo.Depots.FirstOrDefault(x => x.X == _x && x.Y == _y);
+            if (depot != null)
             {
-                edge.Type = _type;
-                edge.Weight = _weight;
-                edge.To = _to;
-                edge.From = _from;
+                depot.Id = _id;
+                depot.X = _x;
+                depot.Y = _y;
+                depot.W = _w;
+                depot.H = _h;
+                depot.Floor = _floor;
             }
             else
-                state.Geo.Edges.Add(new Edge
+                state.Geo.Depots.Add(new Depot
                 {
-                    Type = _type,
-                    Weight = _weight,
-                    From = _from,
-                    To = _to
-                });
+                    Id = _id,
+                    X = _x,
+                    Y = _y,
+                    W = _w,
+                    H = _h,
+                    Floor = _floor
+        });
         }
     }
 }

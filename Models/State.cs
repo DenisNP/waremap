@@ -40,6 +40,7 @@ namespace Waremap.Models
     {
         public List<Node> Nodes { get; set; } = new List<Node>();
         public List<Edge> Edges { get; set; } = new List<Edge>();
+        public List<Depot> Depots { get; set; } = new List<Depot>();
     }
 
     public class Car
