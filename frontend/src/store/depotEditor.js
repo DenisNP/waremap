@@ -7,8 +7,8 @@ export default {
   state: {
     mode: 'default', // 'draggingNode', 'addingNode', 'addingEdge'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
-    floor: null,
-    depot: null,
+    floor: 0,
+    depot: 0,
   },
   getters: {
   },
