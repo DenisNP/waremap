@@ -48,14 +48,13 @@ namespace Waremap.Controllers
                                 var eventAddNode = JsonConvert.DeserializeObject<EventAddNode>(body);
                                 eventAddNode.Run(State);
                             }
-
                             break;
                         case "removeNode":
-                            if (int.TryParse(Request.Query["id"], out var id))
+                            if (body != "")
                             {
-                                (new EventRemoveNode(id)).Run(State);
+                                var eventRemoveNode = JsonConvert.DeserializeObject<EventRemoveNode>(body);
+                                eventRemoveNode.Run(State);
                             }
-
                             break;
                         case "addEdge":
                             if (body != "")
@@ -63,15 +62,13 @@ namespace Waremap.Controllers
                                 var eventAddEdge = JsonConvert.DeserializeObject<EventAddEdge>(body);
                                 eventAddEdge.Run(State);
                             }
-
                             break;
                         case "removeEdge":
-                            if (int.TryParse(Request.Query["from"], out var from) &&
-                                int.TryParse(Request.Query["to"], out var to))
+                            if (body != "")
                             {
-                                (new EventRemoveEdge(from, to)).Run(State);
+                                var eventRemoveEdge = JsonConvert.DeserializeObject<EventRemoveEdge>(body);
+                                eventRemoveEdge.Run(State);
                             }
-
                             break;
                         case "addDepot":
                             if (body != "")
@@ -79,14 +76,13 @@ namespace Waremap.Controllers
                                 var eventAddEdge = JsonConvert.DeserializeObject<EventAddDepot>(body);
                                 eventAddEdge.Run(State);
                             }
-
                             break;
                         case "removeDepot":
-                            if (int.TryParse(Request.Query["id"], out var depotId))
+                            if (body != "")
                             {
-                                (new EventRemoveDepot(depotId)).Run(State);
+                                var eventRemoveDepot = JsonConvert.DeserializeObject<EventRemoveDepot>(body);
+                                eventRemoveDepot.Run(State);
                             }
-
                             break;
                         case "addWaypoint":
                             if (body != "")
@@ -94,15 +90,13 @@ namespace Waremap.Controllers
                                 var eventAddWaypoint = JsonConvert.DeserializeObject<EventAddWaypoint>(body);
                                 eventAddWaypoint.Run(State);
                             }
-
                             break;
                         case "removeWaypoint":
-                            if (int.TryParse(Request.Query["id"], out var waypointId) &&
-                                int.TryParse(Request.Query["partId"], out var partId))
+                            if (body != "")
                             {
-                                (new EventRemoveWaypoint(partId, waypointId)).Run(State);
+                                var eventRemoveWaypoint = JsonConvert.DeserializeObject<EventRemoveWaypoint>(body);
+                                eventRemoveWaypoint.Run(State);
                             }
-
                             break;
                         case "computeEdges":
                             (new EventComputeEdges()).Run(State);

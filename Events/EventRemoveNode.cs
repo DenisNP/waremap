@@ -5,20 +5,15 @@ namespace Waremap.Events
 {
     public class EventRemoveNode : IEvent
     {
-        private readonly int _id;
-        
-        public EventRemoveNode(int id)
-        {
-            _id = id;
-        }
+        public int Id { get; set; }
 
         public void Run(State state)
         {
-            var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == _id);
+            var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == Id);
             if (node != null)
             {
                 state.Geo.Nodes.Remove(node);
-                var edges = state.Geo.Edges.Where(e => e.From == _id || e.To == _id).ToList();
+                var edges = state.Geo.Edges.Where(e => e.From == Id || e.To == Id).ToList();
                 edges.ForEach(e => state.Geo.Edges.Remove(e));
             }
         }
