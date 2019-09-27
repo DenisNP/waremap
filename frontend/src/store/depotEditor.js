@@ -8,7 +8,7 @@ export default {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
-    selectedEdge: null,
+    selectedEdgeId: null,
     floor: 0,
     depot: 0,
   },
@@ -31,6 +31,12 @@ export default {
     selectNode(state, node) {
       state.mode = 'nodeSelected';
       state.selectedNodeId = node.id;
+    },
+
+    unselect(state) {
+      state.mode = 'default';
+      state.selectedNodeId = null;
+      state.selectedEdgeId = null;
     },
   },
   actions: {
