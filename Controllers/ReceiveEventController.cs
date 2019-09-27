@@ -42,6 +42,12 @@ namespace Waremap.Controllers
                             eventAddNode.Run(State);
                         }
                         break;
+                    case "removeNode":
+                        if (int.TryParse(Request.Query["id"], out var id))
+                        {
+                            (new EventRemoveNode(id)).Run(State);
+                        }
+                        break;
                     case "addEdge":
                         if (body != "")
                         {
