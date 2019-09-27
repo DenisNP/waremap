@@ -1,5 +1,8 @@
 <template>
-  <rect :x="draggingX || data.x" :y="draggingY || data.y" :width="w" :height="h" :fill="selected ? '#f00' : '#000'"/>
+  <g>
+    <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" />
+    <rect :x="(draggingX || data.x) - w/2" :y="(draggingY || data.y) - h/2" :width="w" :height="h" :fill="selected ? '#f00' : '#000'" @click="onClick" :id="data.id" />
+  </g>
 </template>
 
 <script>
@@ -19,23 +22,36 @@ export default {
       draggingY: null,
       down: false,
       dragging: false,
+      newX: null,
+      newY: null
     };
   },
   methods: {
+    onClick(e) {
+      e.preventDefault();
+
+      console.log(this.$store.state.depotEditor.selectedNodeId, this.data.id);
+
+      if (this.$store.state.depotEditor.selectedNodeId && this.data.id !== this.$store.state.depotEditor.selectedNodeId) {
+        // add edge
+      } else {
+        // disable selecting
+      }
+    },
     onMouseDown(e) {
       e.preventDefault();
       this.down = true;
     },
     onMouseMove(e) {
-      if (this.down !== true) return;
+      this.newX = e.clientX;
+      this.newY = e.clientY;
 
-      const newX = e.clientX - this.w / 2;
-      const newY = e.clientY - this.h / 2;
+      if (this.down !== true) return;
 
       if (!this.dragging) {
         const distance = Math.max(
-          Math.abs(this.data.x - newX),
-          Math.abs(this.data.y - newY)
+          Math.abs(this.data.x - this.newX),
+          Math.abs(this.data.y - this.newY)
         );
 
         if (distance < MIN_DRAGGING_DISTANCE) {
@@ -44,8 +60,8 @@ export default {
       }
 
       this.dragging = true;
-      this.draggingX = newX;
-      this.draggingY = newY;
+      this.draggingX = this.newX;
+      this.draggingY = this.newY;
     },
     onMouseUp(e) {
       if (this.down && !this.dragging) {
