@@ -92,7 +92,9 @@ namespace Waremap.Controllers
                             (new EventRemoveWaypoint(partId, waypointId)).Run(State);
                         }
                         break;
-
+                    case "computeEdges":
+                        (new EventComputeEdges()).Run(State);
+                        break;
                 }
             }
             return State;
