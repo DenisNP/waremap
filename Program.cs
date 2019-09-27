@@ -7,6 +7,11 @@ namespace Waremap
     {
         public static void Main(string[] args)
         {
+            StartServer();
+        }
+
+        private static void StartServer()
+        {
             new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())

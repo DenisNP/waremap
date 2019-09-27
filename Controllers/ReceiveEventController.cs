@@ -12,7 +12,12 @@ namespace Waremap.Controllers
     public class ReceiveEventController : ControllerBase
     {
         private static readonly State State = new State();
-            
+
+        public static State GetState()
+        {
+            return State;
+        }
+        
         [HttpGet]
         public State Get()
         {
