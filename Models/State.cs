@@ -4,8 +4,8 @@ namespace Waremap.Models
 {
     public class State
     {
-        public Geo Geo { get; set; }
-        public Equipment Equipment { get; set; }
+        public Geo Geo { get; set; } = new Geo();
+        public Equipment Equipment { get; set; } = new Equipment();
     }
     
     public class Node
@@ -27,8 +27,8 @@ namespace Waremap.Models
 
     public class Geo
     {
-        public List<Node> Nodes { get; set; }
-        public List<Edge> Edges { get; set; }
+        public List<Node> Nodes { get; set; } = new List<Node>();
+        public List<Edge> Edges { get; set; } = new List<Edge>();
     }
 
     public class Car
@@ -54,13 +54,13 @@ namespace Waremap.Models
         public int CarId { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
-        public List<Waypoint> Path { get; set; }
+        public List<Waypoint> Path { get; set; } = new List<Waypoint>();
     }
 
     public class Equipment
     {
-        public List<Car> Cars { get; set; }
-        public List<Part> Parts { get; set; }
+        public List<Car> Cars { get; set; } = new List<Car>();
+        public List<Part> Parts { get; set; } = new List<Part>();
     }
 
     public enum NodeType

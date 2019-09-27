@@ -1,5 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Waremap.Events;
 using Waremap.Models;
 
 namespace Waremap.Controllers
@@ -28,12 +31,15 @@ namespace Waremap.Controllers
                     body = reader.ReadToEnd();
                 }
                 
+                Console.WriteLine("\nEvent got: " + eventName + "\n" + body + "\n");
+                
                 switch (eventName)
                 {
                     case "addNode":
                         if (body != "")
                         {
-                            
+                            var eventAddNode = JsonConvert.DeserializeObject<EventAddNode>(body);
+                            eventAddNode.Run(State);
                         }
                         break;
                     case "addEdge":
