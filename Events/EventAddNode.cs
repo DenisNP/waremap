@@ -29,7 +29,7 @@ namespace Waremap.Events
                 // add node
                 state.Geo.Nodes.Add(new Node
                 {
-                    Id = Utils.CreateIdFor(state.Geo.Nodes.Select(n => n.Id)),
+                    Id = Utils.CreateIdFor(state.Geo.Nodes.Select(n => n.Id).ToList()),
                     Depot = Depot,
                     Floor = Floor,
                     Type = Type,

@@ -22,9 +22,9 @@ namespace Waremap
             }
         };
 
-        public static int CreateIdFor(IEnumerable<int> ids)
+        public static int CreateIdFor(List<int> ids)
         {
-            return ids.Max() + 1;
+            return !ids.Any() ? 1 : ids.Max() + 1;
         }
 
         public static int Dist(int x1, int y1, int x2, int y2)
