@@ -37,9 +37,51 @@ export default {
   },
 
   async sendAction(actionName, data) {
-    return this.api('stage', {
+    return this.api('state', {
       action: actionName,
       ...data
     });
+  },
+
+  async addNode({type, x, y, floor, depot}) {
+    return await this.sendAction('addNode', {
+      type, x, y, floor, depot
+    });
+  },
+
+  async updateNode({id, type, x, y, floor, depot}) {
+    return await this.sendAction('addNode', {
+      id, type, x, y, floor, depot
+    });
+  },
+
+  async removeNode(id) {
+    return await this.sendAction('removeNode', {id});
+  },
+
+  async addOrUpdateEdge({type, weight, from, to}) {
+    return await this.sendAction('addEdge', {
+      type, weight, from, to
+    });
+  },
+
+  async removeEdge({from, to}) {
+    return await this.sendAction('removeEdge', {from, to});
+  },
+
+  async addDepot({x, y, w, h, floor}) {
+    return await this.sendAction('addDepot', {
+      x, y, w, h, floor
+    });
+  },
+
+  async updateDepot({id, x, y, w, h, floor}) {
+    return await this.sendAction('addDepot', {
+      id, x, y, w, h, floor
+    });
+  },
+
+  async removeDepot(id) {
+    return await this.sendAction('removeDepot', {id});
   },
 };
