@@ -17,7 +17,7 @@ namespace Waremap.Models
         public int Floor { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public List<Operation> Operations { get; set; } = new List<Operation>();
+        public List<int> OperationIds { get; set; } = new List<int>();
     }
 
     public class Operation
@@ -80,6 +80,7 @@ namespace Waremap.Models
 
     public class Equipment
     {
+        public List<Operation> Operations { get; set; } = new List<Operation>();
         public List<Part> Parts { get; set; } = new List<Part>();
     }
 
