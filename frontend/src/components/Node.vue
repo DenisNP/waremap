@@ -1,19 +1,12 @@
 <template>
-  <div>
-    <h6>Node</h6>
-  </div>
+  <rect :x="data.x" :y="data.y" width="10" height="10"/>
 </template>
 
 <script>
 export default {
   name: 'Node',
   props: [
-    'id',
-    'type',
-    'depot',
-    'floor',
-    'x',
-    'y',
+    'data',
   ],
 };
 </script>

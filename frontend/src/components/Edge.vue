@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <h6>{{ fromNode.x }}, {{ fromNode.y }}</h6>
-  </div>
+  <line :x1="fromNode.x" :y1="fromNode.y" :x2="toNode.x" :y2="toNode.y" stroke="black" />
 </template>
 
 <script>
