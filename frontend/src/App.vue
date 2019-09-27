@@ -1,16 +1,19 @@
 <template>
   <div id="app">
+    <ControlsLayer/>
     <DepotEditor/>
   </div>
 </template>
 
 <script>
 import DepotEditor from './components/DepotEditor.vue';
+import ControlsLayer from './components/ControlsLayer.vue';
 
 export default {
   name: 'app',
   components: {
     DepotEditor,
+    ControlsLayer
   },
 };
 </script>
