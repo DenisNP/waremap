@@ -17,8 +17,6 @@ namespace Waremap.Models
         public int Floor { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-
-
     }
 
     public class Edge
