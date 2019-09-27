@@ -27,76 +27,94 @@ namespace Waremap.Controllers
         [HttpPost]
         public State Post()
         {
-            if (Request.Query.ContainsKey("event"))
+            try
             {
-                var eventName = Request.Query["event"];
-                var body = "";
-                using (var reader = new StreamReader(Request.Body))
+                if (Request.Query.ContainsKey("event"))
                 {
-                    body = reader.ReadToEnd();
-                }
-                
-                Console.WriteLine("\nEvent got: " + eventName + "\n" + body + "\n");
-                
-                switch (eventName)
-                {
-                    case "addNode":
-                        if (body != "")
-                        {
-                            var eventAddNode = JsonConvert.DeserializeObject<EventAddNode>(body);
-                            eventAddNode.Run(State);
-                        }
-                        break;
-                    case "removeNode":
-                        if (int.TryParse(Request.Query["id"], out var id))
-                        {
-                            (new EventRemoveNode(id)).Run(State);
-                        }
-                        break;
-                    case "addEdge":
-                        if (body != "")
-                        {
-                            var eventAddEdge = JsonConvert.DeserializeObject<EventAddEdge>(body);
-                            eventAddEdge.Run(State);
-                        }
-                        break;
-                    case "removeEdge":
-                        if (int.TryParse(Request.Query["from"], out var from) && int.TryParse(Request.Query["to"], out var to))
-                        {
-                            (new EventRemoveEdge(from, to)).Run(State);
-                        }
-                        break;
-                    case "addDepot":
-                        if (body != "")
-                        {
-                            var eventAddEdge = JsonConvert.DeserializeObject<EventAddDepot>(body);
-                            eventAddEdge.Run(State);
-                        }
-                        break;
-                    case "removeDepot":
-                        if (int.TryParse(Request.Query["id"], out var depotId))
-                        {
-                            (new EventRemoveDepot(depotId)).Run(State);
-                        }
-                        break;
-                    case "addWaypoint":
-                        if (body != "")
-                        {
-                            var eventAddWaypoint = JsonConvert.DeserializeObject<EventAddWaypoint>(body);
-                            eventAddWaypoint.Run(State);
-                        }
-                        break;
-                    case "removeWaypoint":
-                        if (int.TryParse(Request.Query["id"], out var waypointId) && int.TryParse(Request.Query["partId"], out var partId))
-                        {
-                            (new EventRemoveWaypoint(partId, waypointId)).Run(State);
-                        }
-                        break;
-                    case "computeEdges":
-                        (new EventComputeEdges()).Run(State);
-                        break;
+                    var eventName = Request.Query["event"];
+                    var body = "";
+                    using (var reader = new StreamReader(Request.Body))
+                    {
+                        body = reader.ReadToEnd();
+                    }
+
+                    Console.WriteLine("\nEvent got: " + eventName + "\n" + body + "\n");
+
+                    switch (eventName)
+                    {
+                        case "addNode":
+                            if (body != "")
+                            {
+                                var eventAddNode = JsonConvert.DeserializeObject<EventAddNode>(body);
+                                eventAddNode.Run(State);
+                            }
+
+                            break;
+                        case "removeNode":
+                            if (int.TryParse(Request.Query["id"], out var id))
+                            {
+                                (new EventRemoveNode(id)).Run(State);
+                            }
+
+                            break;
+                        case "addEdge":
+                            if (body != "")
+                            {
+                                var eventAddEdge = JsonConvert.DeserializeObject<EventAddEdge>(body);
+                                eventAddEdge.Run(State);
+                            }
+
+                            break;
+                        case "removeEdge":
+                            if (int.TryParse(Request.Query["from"], out var from) &&
+                                int.TryParse(Request.Query["to"], out var to))
+                            {
+                                (new EventRemoveEdge(from, to)).Run(State);
+                            }
+
+                            break;
+                        case "addDepot":
+                            if (body != "")
+                            {
+                                var eventAddEdge = JsonConvert.DeserializeObject<EventAddDepot>(body);
+                                eventAddEdge.Run(State);
+                            }
+
+                            break;
+                        case "removeDepot":
+                            if (int.TryParse(Request.Query["id"], out var depotId))
+                            {
+                                (new EventRemoveDepot(depotId)).Run(State);
+                            }
+
+                            break;
+                        case "addWaypoint":
+                            if (body != "")
+                            {
+                                var eventAddWaypoint = JsonConvert.DeserializeObject<EventAddWaypoint>(body);
+                                eventAddWaypoint.Run(State);
+                            }
+
+                            break;
+                        case "removeWaypoint":
+                            if (int.TryParse(Request.Query["id"], out var waypointId) &&
+                                int.TryParse(Request.Query["partId"], out var partId))
+                            {
+                                (new EventRemoveWaypoint(partId, waypointId)).Run(State);
+                            }
+
+                            break;
+                        case "computeEdges":
+                            (new EventComputeEdges()).Run(State);
+                            break;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
             return State;
         }
     }
