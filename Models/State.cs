@@ -4,7 +4,6 @@ namespace Waremap.Models
 {
     public class State
     {
-        
         public Geo Geo { get; set; }
         public Equipment Equipment { get; set; }
     }
