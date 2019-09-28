@@ -381,7 +381,7 @@ label.myLabel {
 
 /* -------------------------------------------------------------------- */
 
-.pallete.MachineParams {
+.pallete.pallete-right {
   background-image: url(../assets/right.svg);
   left: auto;
   right: 0;
@@ -397,14 +397,14 @@ label.myLabel {
   color: #333;
   font-size: 14px;
 }
-.pallete.MachineParams .pallete-heading {
+.pallete.pallete-right .pallete-heading {
   font-size: 16px;
   padding: 25px 30px 10px 35px;
 }
-.pallete.MachineParams .pallete-item {
+.pallete.pallete-right .pallete-item {
   padding: 10px 30px 10px 35px;
 }
-.MachineParams .pallete-item-icon {
+.pallete.pallete-right .pallete-item-icon {
     width: 18px;
     height: 18px;
     border-radius: 50%;
@@ -413,7 +413,7 @@ label.myLabel {
     position: relative;
     margin-top: -6px;
 }
-.MachineParams .pallete-item-icon:before {
+.pallete.pallete-right .pallete-item-icon:before {
     content: '';
     display: block;
     position: absolute;
@@ -424,10 +424,10 @@ label.myLabel {
     margin: -3.5px;
     border-radius: 50%;
 }
-.MachineParams .selected .pallete-item-icon {
+.pallete.pallete-right .selected .pallete-item-icon {
     background-color: #3878FF;
 }
-.MachineParams .selected .pallete-item-name {
+.pallete.pallete-right .selected .pallete-item-name {
     color: #3878FF;
     font-weight: initial;
 }
@@ -456,6 +456,28 @@ label.myLabel {
 .pallete.floorBgUpload .pallete-item-icon {
     width: auto;
     margin: 0 10px 0 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+.pallete-right .pallete-item:before {
+  display: none;
+}
+.pallete.PartsList .pallete-heading {
+  cursor: pointer;
+}
+.pallete.PartsList .pallete-item-icon {
+  border: 0;
+  padding: 0;
+  width: auto;
+}
+.pallete.PartsList .pallete-item {
+  padding: 5px 30px 5px 35px;
+  cursor: pointer;
+}
+.pallete.PartsList .pallete-heading:hover,
+.pallete.PartsList .pallete-item:hover {
+  color: #3878FF;
 }
 
 </style>
