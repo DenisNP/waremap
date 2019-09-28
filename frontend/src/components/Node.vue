@@ -1,20 +1,19 @@
 <template>
   <g>
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
-    <rect
-      :fill="selected ? '#f00' : '#000'"
-      @click="onClick"
-      cursor="pointer"
-    />
 
     <foreignObject
+      @click="onClick"
       :id="data.id"
       :x="(draggingX || data.x) - w/2"
       :y="(draggingY || data.y) - h/2"
       :width="w"
       :height="h"
     >
-      <div class="walls">
+      <div
+        class="walls"
+        :class="{selected}"
+      >
         <div class="wall top"></div>
         <div class="wall right"></div>
         <div class="wall bottom"></div>
@@ -139,6 +138,10 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #FFF;
+    cursor: pointer;
+}
+.walls.selected {
+  background-color: #f00;
 }
 .wall, .corner {
     position: absolute;

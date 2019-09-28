@@ -85,6 +85,16 @@ export default {
     },
 
     async createEdge(c, {from, to}) {
+      const existingEdge = c.rootState.serverState.geo.edges.find(edge =>
+        (edge.from === from && edge.to === to) ||
+        (edge.from === to && edge.to === from)
+      );
+
+      if (existingEdge) {
+        console.log('existingEdge');
+        return;
+      }
+
       const newState = await API.addOrUpdateEdge({
         type: 'Road',
         weight: helpers.distance(c.rootGetters['serverState/nodeById'](from), c.rootGetters['serverState/nodeById'](to)),
