@@ -1,6 +1,6 @@
 <template>
-  <g class="node" :class="{show, ['node-' + data.type]: true}">
-    <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
+  <g class="node" :class="{show, ['node-' + data.icon]: true}">
+    <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
       @click="onClick"
@@ -10,8 +10,8 @@
       :width="w"
       :height="h"
     >
-      <div class="node-icon" v-if="$store.state.icons.node[data.type]">
-        <img :src="$store.state.icons.node[data.type].i" />
+      <div class="node-icon" v-if="$store.state.icons.node[data.icon]">
+        <img :src="$store.state.icons.node[data.icon].i" />
       </div>
       <div
         class="walls"
