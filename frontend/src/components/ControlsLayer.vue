@@ -33,18 +33,33 @@
       <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
     </div>
 
-    <label class="pallete pallete-bottom floorBgUpload">
-      <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
-      <span class="pallete-item-icon">+</span>
-      <span class="pallete-item--name">
-        Добавить план помещения
-      </span>
-    </label>
+
+
+    <div  class="pallete pallete-bottom floorBgUpload">
+      <label class="pallete-item pallete-bottom">
+        <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+        <span class="pallete-item-icon">+</span>
+        <span class="pallete-item--name">
+          Добавить план помещения
+        </span>
+      </label>
+      <label class="pallete-item pallete-bottom">
+        <input type="file" @change="onImportClick" accept=".json"/>
+        <span class="pallete-item-icon">+</span>
+        <span class="pallete-item--name">
+          Импорт
+        </span>
+      </label>
+      <div class="pallete-item pallete-bottom" @click="onExportClick">
+        Экспорт
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import * as helpers from '../common/helpers';
+import API from '../common/api';
 
 export default {
   name: 'ControlsLayer',
@@ -126,6 +141,36 @@ export default {
       this.toolSelect(this.selectedTool);
   },
   methods: {
+    async onImportClick(e) {
+      const content = await e.currentTarget.files[0].text();
+      const json = JSON.parse(content);
+      await this.$store.dispatch('serverState/importFullState', json);
+    },
+    async onExportClick(e) {
+      function download(filename, text) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+      }
+
+      // make JSON from state and 3 floors backgrounds
+      const floors = [1, 2, 3];
+
+      const backgrounds = await Promise.all(floors.map(floor =>
+        API.getBackground(floor).then(base64 => ({floor, base64})).catch(err => null)
+      ));
+
+      const finalJson = {
+        state: this.$store.state.serverState,
+        backgrounds
+      };
+
+      download('waremap-state-' + new Date().toLocaleString() + '.json', JSON.stringify(finalJson));
+    },
     async onFileSelected(e) {
       const base64 = await helpers.toBase64(e.target.files[0]);
       await this.$store.dispatch('editor/uploadFloorBackground', base64);
