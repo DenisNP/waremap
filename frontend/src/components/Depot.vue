@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g v-show="show">
       <foreignObject
         class="node node-Depot show"
         @click="onClick"
@@ -37,6 +37,11 @@ export default {
     'isNew',
   ],
   computed: {
+    show() {
+      return this.isNew ||
+        (this.$store.state.editor.displayMode === 'floor' && this.data.floor === this.$store.state.editor.floor) ||
+        (this.$store.state.editor.displayMode === 'depot' && this.data.depot === this.$store.state.editor.depot.id);
+    }
   },
   methods: {
     onMouseDown(e) {

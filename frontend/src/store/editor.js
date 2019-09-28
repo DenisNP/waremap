@@ -13,7 +13,7 @@ export default {
     selectedEdge: null,
     isSelectedSomething: false,
     displayMode: 'floor', // 'floor', 'depot'
-    floor: 0,
+    floor: 1,
     depot: {
       id: 0
     },
@@ -159,7 +159,10 @@ export default {
     },
 
     async addDepot(c, data) {
-      const newState = await API.addDepot(data);
+      const newState = await API.addDepot({
+        ...data,
+        floor: c.state.floor
+      });
       c.commit('setServerState', newState, {root: true});
     },
 

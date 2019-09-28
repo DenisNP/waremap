@@ -54,7 +54,6 @@ export default {
     });
 
     this.$root.$on('floorSelected', floor => {
-      this.$store.commit('editor/setFloor', floor);
     });
 
     this.$root.$on('nodeUpdated', data => {
