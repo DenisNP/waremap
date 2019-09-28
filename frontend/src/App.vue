@@ -13,6 +13,10 @@
         v-if="isMachineSelected"
         :data="$store.state.editor.selectedNode"
       />
+
+      <PartsList
+        v-if="!isMachineSelected"
+      />
     </div>
   </div>
 </template>
@@ -24,6 +28,7 @@ import Editor from './components/Editor.vue';
 import ControlsLayer from './components/ControlsLayer.vue';
 import EdgeParams from './components/EdgeParams.vue';
 import MachineParams from './components/MachineParams.vue';
+import PartsList from './components/PartsList.vue';
 
 export default {
   name: 'app',
@@ -32,6 +37,7 @@ export default {
     AppMobile,
     EdgeParams,
     MachineParams,
+    PartsList,
     Editor,
     ControlsLayer
   },
