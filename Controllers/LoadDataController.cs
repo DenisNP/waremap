@@ -26,8 +26,8 @@ namespace Waremap.Controllers
                 using var reader = new StreamReader(Request.Body);
                 switch (data)
                 {
-                    case "cars":
-                        LoadCarsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
+                    case "nodes":
+                        LoadNodesToState(reader.ReadToEnd(), ReceiveEventController.GetState());
                         return "ok";
                     case "parts":
                         LoadPartsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
