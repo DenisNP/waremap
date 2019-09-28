@@ -19,13 +19,13 @@ namespace Waremap.Controllers
         }
         
         [HttpGet]
-        public State Get()
+        public string Get()
         {
-            return State;
+            return JsonConvert.SerializeObject(State, Utils.ConverterSettings);
         }
 
         [HttpPost]
-        public State Post()
+        public string Post()
         {
             try
             {
@@ -83,7 +83,7 @@ namespace Waremap.Controllers
                 Console.WriteLine(e);
             }
 
-            return State;
+            return JsonConvert.SerializeObject(State, Utils.ConverterSettings);
         }
 
         private static void DeserializeAndRun<T>(string json) where T : IEvent

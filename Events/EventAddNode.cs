@@ -14,6 +14,7 @@ namespace Waremap.Events
         public int Depot { get; set; }
         
         public List<int>? OperationIds { get; set; }
+        
         public void Run(State state)
         {
             var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == Id);
