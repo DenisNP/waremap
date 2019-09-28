@@ -13,6 +13,8 @@ export default {
     selectedNodeId: null,
     selectedDepotId: null,
     selectedEdge: null,
+    highlightedNodes: {},
+    isSomeHighlighted: false,
     isSelectedSomething: false,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
@@ -61,6 +63,7 @@ export default {
       state.selectedNode = node;
       state.selectedNodeId = node.id;
       state.selectedDepotId = null;
+      state.isSomeHighlighted = false;
     },
 
     selectEdge(state, edge) {
@@ -70,6 +73,7 @@ export default {
       state.selectedNode = null;
       state.selectedNodeId = null;
       state.selectedDepotId = null;
+      state.isSomeHighlighted = false;
     },
 
     selectDepot(state, depot) {
@@ -79,11 +83,19 @@ export default {
       state.selectedNode = null;
       state.selectedNodeId = null;
       state.selectedDepotId = depot.id;
+      state.isSomeHighlighted = false;
     },
 
     unselect(state) {
       unselect(state);
     },
+
+    highlightNodes(state, nodesIds) {
+      let highlightedNodes = {};
+      nodesIds.map((id) => highlightedNodes[id] = true);
+      state.highlightedNodes = highlightedNodes;
+      state.isSomeHighlighted = (Object.keys(highlightedNodes).length > 0);
+    }
   },
   actions: {
     async endAddingNode(c, {x, y}) {
@@ -201,4 +213,6 @@ function unselect(state) {
   state.selectedNodeId = null;
   state.selectedEdge = null;
   state.selectedDepotId = null;
+  state.highlightedNodes = {};
+  state.isSomeHighlighted = false;
 }
