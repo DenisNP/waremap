@@ -6,11 +6,6 @@ namespace Waremap.Events
     public class EventRemoveNode : IEvent
     {
         public int Id { get; set; }
-        
-        public EventRemoveNode(int id)
-        {
-            Id = id;
-        }
 
         public void Run(State state)
         {

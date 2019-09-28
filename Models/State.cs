@@ -17,8 +17,14 @@ namespace Waremap.Models
         public int Floor { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public List<int> OperationIds { get; set; } = new List<int>();
+    }
 
-
+    public class Operation
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int ProcessingTime { get; set; }
     }
 
     public class Edge
@@ -46,22 +52,12 @@ namespace Waremap.Models
         public List<Depot> Depots { get; set; } = new List<Depot>();
     }
 
-    public class Car
-    {
-        public int Id { get; set; }
-        public CarType Type { get; set; }
-        public int TotalCapacity { get; set; }
-        public int FreeCapacity { get; set; }
-        public int FromNodeId { get; set; }
-        public int ToNodeId { get; set; }
-        public double Progress { get; set; }
-    }
 
     public class Waypoint
     {
         public int Id { get; set; }
-        public int NodeId { get; set; }
-        public int ProcessingTime { get; set; }
+        public int Order { get; set; }
+        public int OperationId { get; set; }
         public int StarTime { get; set; }
         public int EndTime { get; set; }
     }
@@ -72,12 +68,19 @@ namespace Waremap.Models
         public int CarId { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
+        public int AssemblyId { get; set; }
         public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+    }
+
+    public class Assembly
+    {
+        public int Id { get; set; }
+        public int Name { get; set; }
     }
 
     public class Equipment
     {
-        public List<Car> Cars { get; set; } = new List<Car>();
+        public List<Operation> Operations { get; set; } = new List<Operation>();
         public List<Part> Parts { get; set; } = new List<Part>();
     }
 
@@ -90,7 +93,8 @@ namespace Waremap.Models
     {
         Road,
         Elevator,
-        Ladder
+        Ladder,
+        Footway
     }
 
     public enum CarType

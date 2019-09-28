@@ -5,14 +5,15 @@ RUN npm install
 RUN npm run build
 
 # build server	
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0.100 AS BUILD_SERVER
-COPY . .
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS BUILD_SERVER
+COPY ./ ./app
+WORKDIR /app
 RUN dotnet restore
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o /app/out
 
 # copy client and server
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0
-COPY --from=BUILD_SERVER ./out /app
+COPY --from=BUILD_SERVER ./app/out /app
 COPY --from=BUILD_CLIENT ./dist /app/wwwroot
 
 # run

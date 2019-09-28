@@ -11,10 +11,22 @@ namespace Waremap
         {
             services.AddControllers();
             services.Configure<KestrelServerOptions>(options => { options.AllowSynchronousIO = true; });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("_myAll",
+                    builder =>
+                    {
+                        builder
+                            .AllowAnyHeader()
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod();
+                    });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors("_myAll");
             app.UseRouting();
             app.UseFileServer();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
