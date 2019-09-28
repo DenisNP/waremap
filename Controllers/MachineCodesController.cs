@@ -18,13 +18,12 @@ namespace Waremap.Controllers
                 if (node != null)
                 {
                     var parts = state.Equipment.Parts.Where(
-                        p => p.Waypoint.FromNode != p.Waypoint.ToNode
-                             && p.Waypoint.ToNode == nodeId
+                        p => p.Path.Any(process => node.OperationIds.Contains(process.Id))
                     );
 
                     var awaitingParts = parts.Select(p =>
                     {
-                        var operation = state.Equipment.Operations.FirstOrDefault(o => o.Id == p.Waypoint.OperationId);
+                        var operation = state.Equipment.Operations.FirstOrDefault(o => o.Id == node.OperationIds.First());
                         return new AwaitingPart
                         {
                             PartId = p.Id,
