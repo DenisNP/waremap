@@ -97,6 +97,7 @@ namespace Waremap.Models
         public int ToNode { get; set; }
         public int TimeLeft { get; set; }
         public int TimeTotal { get; set; }
+        public int OperationId { get; set; }
     }
 
     public class Assembly
