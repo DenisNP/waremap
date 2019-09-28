@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using Waremap.Models;
 
@@ -10,15 +9,14 @@ namespace Waremap.Events
         public string Name { get; set; }
         public int ProcessingTime { get; set; }
         
-        public List<int>? OperationIds { get; set; }
         public void Run(State state)
         {
-            var ops= state.Equipment.Operations.FirstOrDefault(n => n.Id == Id);
-            if (ops != null)
+            var operation = state.Equipment.Operations.FirstOrDefault(n => n.Id == Id);
+            if (operation != null)
             {
                 // update node
-                ops.Name = Name;
-                ops.ProcessingTime = ProcessingTime;
+                operation.Name = Name;
+                operation.ProcessingTime = ProcessingTime;
             }
             else
             {
@@ -27,7 +25,7 @@ namespace Waremap.Events
                 {
                     Name = Name,
                     ProcessingTime = ProcessingTime,
-                    Id = Id
+                    Id = Utils.CreateIdFor(state.Equipment.Operations.Select(o => o.Id).ToList())
                 });
             }
         }
