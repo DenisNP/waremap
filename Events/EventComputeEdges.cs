@@ -41,7 +41,7 @@ namespace Waremap.Events
                 {
                     From = firstNode.Id,
                     To = secondNode.Id,
-                    Type = EdgeType.Road,
+                    Type = firstNode.Depot == 0 ? EdgeType.Road : EdgeType.Footway,
                     Weight = Utils.Dist(firstNode, secondNode)
                 });
             }
