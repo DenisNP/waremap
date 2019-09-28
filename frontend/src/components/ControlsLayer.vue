@@ -25,8 +25,8 @@
       <div class="pallete-item"
         v-for="floor in floors"
         :key="floor"
-        :class="{selected: (floor - 1) == selectedFloor}"
-        @click="floorSelect(floor - 1)"
+        :class="{selected: floor == selectedFloor}"
+        @click="floorSelect(floor)"
       >
         <span class="pallete-item-name">
           {{ floor }}
@@ -87,20 +87,21 @@ export default {
       ],
       selectedTool: false,
 
-      _floor: null,
       floors: 3,
-      selectedFloor: false
     };
   },
   computed: {
     isDefaultMode() {
-      return ['default', 'nodeSelected', 'edgeSelected'].includes(this.$store.state.editor.mode);
+      return ['default', 'nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode);
     },
     isAddingNodeMode() {
       return ['addingNode', 'addingEdge'].includes(this.$store.state.editor.mode);
     },
     isAddingDepotMode() {
       return ['addingDepot'].includes(this.$store.state.editor.mode);
+    },
+    selectedFloor() {
+      return this.$store.state.editor.floor;
     }
   },
   mounted() {
@@ -108,11 +109,6 @@ export default {
       else this._tool = this.tool;
       this.selectedTool = this._tool;
       this.toolSelect(this.selectedTool);
-
-      if (!this.floor) this._floor = 1;
-      else this._floor = this.floor;
-      this.selectedFloor = this._floor;
-      this.floorSelect(this.selectedFloor);
   },
   methods: {
     setDefaultMode() {
@@ -127,8 +123,8 @@ export default {
       }
     },
     floorSelect(floor) {
-      this.selectedFloor = floor;
-      this.$root.$emit('floorSelected', floor);
+      console.log('select floor', floor);
+      this.$store.commit('editor/setFloor', floor);
     },
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');

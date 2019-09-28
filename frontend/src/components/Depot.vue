@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g v-show="show">
       <foreignObject
         class="node node-Depot show"
         @click="onClick"
@@ -37,6 +37,11 @@ export default {
     'isNew',
   ],
   computed: {
+    show() {
+      return this.isNew ||
+        (this.$store.state.editor.displayMode === 'floor' && this.data.floor === this.$store.state.editor.floor) ||
+        (this.$store.state.editor.displayMode === 'depot' && this.data.depot === this.$store.state.editor.depot.id);
+    }
   },
   methods: {
     onMouseDown(e) {
@@ -44,13 +49,15 @@ export default {
     },
     onClick(e) {
       e.preventDefault();
-      e.stopPropagation();
 
       if (this.isNew) {
         return;
       }
 
-      this.$store.commit('editor/selectDepot', this.data);
+      if (this.$store.state.editor.mode === 'default' || this.$store.state.editor.isSelectedSomething) {
+        this.$store.commit('editor/selectDepot', this.data);
+        e.stopPropagation();
+      }
 
       if (this.$store.state.editor.mode === 'depotSelected' && this.data.id !== this.$store.state.editor.selectedDepotId) {
       }

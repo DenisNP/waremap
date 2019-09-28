@@ -2,6 +2,7 @@
   <g
     cursor="pointer"
     @click="onClick"
+    v-show="show"
   >
     <line
       :x1="fromNode.x"
@@ -38,6 +39,15 @@ export default {
   computed: {
     id() {
       return this.data.from + '_' + this.data.to;
+    },
+    show() {
+      const from = this.$store.getters['serverState/nodeById'](this.data.from);
+
+      console.log('from node', from.id, from.floor, this.$store.state.editor.floor);
+      console.log('visible', this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor);
+
+      return (this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor)
+          || (this.$store.state.editor.displayMode === 'depot' && from.depot === this.$store.state.editor.depot.id);
     },
     selected() {
       const selected = this.$store.state.editor.selectedEdge;
