@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Waremap.Models
 {
@@ -6,6 +7,9 @@ namespace Waremap.Models
     {
         public Geo Geo { get; set; } = new Geo();
         public Equipment Equipment { get; set; } = new Equipment();
+        
+        [JsonIgnore]
+        public string Background { get; set; }
     }
     
     public class Node
