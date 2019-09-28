@@ -1,7 +1,7 @@
 <template>
   <div @click="onClick">
     <svg @mousemove="onMouseMove">
-      <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" />
+      <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" v-if="$store.state.editor.floorBackground" />
 
       <Depot
         v-for="data in $store.state.serverState.geo.depots"

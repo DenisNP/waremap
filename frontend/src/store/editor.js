@@ -7,6 +7,7 @@ export default {
   },
   state: {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
+    floorBackground: null,
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
     selectedDepotId: null,
