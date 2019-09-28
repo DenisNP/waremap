@@ -1,9 +1,10 @@
 <template>
-  <g class="node" :class="{show, ['node-' + data.icon]: true}">
+  <g class="node" :class="{show, ['node-' + data.icon]: true, selected}">
     <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
       @click="onClick"
+      @contextmenu="onMenu"
       :id="data.id"
       :x="(draggingX || data.x) - w/2"
       :y="(draggingY || data.y) - h/2"
@@ -13,19 +14,18 @@
       <div class="node-icon" v-if="$store.state.icons.node[data.icon]">
         <img :src="$store.state.icons.node[data.icon].i" />
       </div>
-      <div
-        class="walls"
-        :class="{selected}"
-      >
-        <div class="wall top"></div>
-        <div class="wall right"></div>
-        <div class="wall bottom"></div>
-        <div class="wall left"></div>
+    </foreignObject>
 
-        <div class="corner top"></div>
-        <div class="corner right"></div>
-        <div class="corner bottom"></div>
-        <div class="corner left"></div>
+    <foreignObject
+      v-show="showMenu"
+      :x="(draggingX || data.x)"
+      :y="(draggingY || data.y)"
+    >
+      <div class="menu">
+        <ul class="menu-options">
+          <li class="menu-option">Связь отсюда</li>
+          <li class="menu-option">Связь сюда</li>
+        </ul>
       </div>
     </foreignObject>
   </g>
@@ -40,8 +40,14 @@ export default {
     'data',
     'selected',
   ],
+  mounted() {
+    window.addEventListener('click', () => {
+      this.showMenu = false;
+    });
+  },
   data() {
     return {
+      showMenu: false,
       w: 40,
       h: 40,
       draggingX: null,
@@ -59,6 +65,10 @@ export default {
     }
   },
   methods: {
+    onMenu(e) {
+      e.preventDefault();
+      this.showMenu = true;
+    },
     onClick(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -101,7 +111,6 @@ export default {
         x: this.draggingX,
         y: this.draggingY
       });
-      this.$store.commit('editor/unselect');
     },
     onMouseUp(e) {
       const wasDown = this.down;
@@ -143,5 +152,44 @@ export default {
 </script>
 
 <style>
+  .menu {
+    width: 120px;
+    box-shadow: 0 4px 5px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: none;
+  }
+
+  .menu-options {
+    list-style: none;
+    padding: 10px 0;
+  }
+
+  .menu-option {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 10px 40px 10px 20px;
+    cursor: pointer;
+  }
+
+/*.node.selected .node-icon {
+  filter: hue-rotate(180deg);
+}*/
+
+.node.selected .node-icon:before {
+  z-index: -1;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -45%;
+  width: 90%;
+  height: 90%;
+  box-shadow: 0 0 0 6px rgba(255,0,0,1);
+  border-radius: 9px;
+}
+.node foreignObject {
+  overflow: visible;
+}
 
 </style>

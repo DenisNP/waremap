@@ -2,7 +2,7 @@
 const ENDPOINT = 'https://waremap.justanother.app';
 // const ENDPOINT = 'http://localhost:5000';
 
-function postData(url = '', data = {}) {
+function postJson(url = '', data = {}) {
   // Default options are marked with *
   return fetch(url, {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -16,6 +16,22 @@ function postData(url = '', data = {}) {
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // no-referrer, *client
     body: JSON.stringify(data), // body data type must match "Content-Type" header
+  });
+}
+
+function postData(url = '', data = '') {
+  // Default options are marked with *
+  return fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, cors, *same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // no-referrer, *client
+    body: data, // body data type must match "Content-Type" header
   });
 }
 
@@ -37,15 +53,11 @@ function getData(url = '') {
 
 export default {
   async api(method, action, data = {}) {
-    if (this.sessionId) {
-      data.id = this.sessionId;
-    }
-
     const endpoint = window.endpoint || ENDPOINT;
 
     const res = method === 'GET' ?
       await getData(`${endpoint}/${action}`, data) :
-      await postData(`${endpoint}/${action}`, data);
+      await postJson(`${endpoint}/${action}`, data);
 
 
     if (!res.ok || res.status !== 200) {
@@ -63,6 +75,18 @@ export default {
     return this.api('POST', 'state?event=' + actionName, {
       ...data
     });
+  },
+
+  async sendBackground(base64, floor) {
+    const endpoint = window.endpoint || ENDPOINT;
+
+    const res = await postData(`${endpoint}/background?floor=${floor}`, base64);
+
+    if (!res.ok || res.status !== 200) {
+      throw new Error('fetch fail', res);
+    }
+
+    return res.text();
   },
 
   async addNode({type, x, y, floor, depot, icon}) {

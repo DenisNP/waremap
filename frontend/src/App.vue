@@ -30,13 +30,19 @@ body {
   background-color: #4D4D4D;
 }
 
+svg {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 
 /* ---------------------------------------------------------------- */
@@ -120,7 +126,7 @@ body {
   stroke-width: 1px;
   fill: transparent;
   stroke-dasharray: 10 5;
-  animation: dash 50s linear infinite;
+  animation: dash 200s linear infinite;
 }
 .edge.inverse,
 .edge.edge-Dashed {
@@ -129,7 +135,7 @@ body {
 
 @keyframes dash {
   to {
-    stroke-dashoffset: 500;
+    stroke-dashoffset: 2000;
   }
 }
 
