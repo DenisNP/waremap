@@ -21,36 +21,20 @@ namespace Waremap.Controllers
 
         public static Node GetNextNode()
         {
-            if (State.CarWaypoints.Count == 0) return null;
-            
-            var nextIndex = State.CarPosition + 1;
-            if (nextIndex > State.CarWaypoints.Count - 1)
-            {
-                nextIndex = 0;
-            }
-            var waypoint = State.CarWaypoints[nextIndex];
-            
-            return State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.ToNode);
+            var waypoint = State.CarRoadmap.NextWaypoint();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode);
         }
 
         public static Node SwitchToNextNode()
         {
-            if (State.CarWaypoints.Count == 0) return null;
-            
-            if (State.CarWaypoints.Count - 1 < State.CarPosition)
-                State.CarPosition++;
-            else
-                State.CarPosition = 0;
-
-            var waypoint = State.CarWaypoints[State.CarPosition];
-            return State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode); 
+            var waypoint = State.CarRoadmap.GoToNext();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode); 
         }
 
         public static Node GetCurrentNode()
         {
-            if (State.CarWaypoints.Count == 0) return null;
-            var carPos = State.CarWaypoints[State.CarPosition];
-            return State.Geo.Nodes.FirstOrDefault(node => node.Id == carPos.FromNode);
+            var waypoint = State.CarRoadmap.CurrentWaypoint();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode);
         }
 
         [HttpGet]

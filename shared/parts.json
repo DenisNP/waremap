@@ -4,89 +4,101 @@
     "name": "Корпус редуктора",
     "weight": 12,
     "assembly_id": 1,
-    "path": [
+    "process": [
       {
         "id": 1,
         "order": 1,
         "operation_id": 11
       },
-            {
-        "id": 1,
+      {
+        "id": 2,
         "order": 3,
         "operation_id": 1
       },
-            {
-        "id": 2,
+      {
+        "id": 3,
         "order": 2,
         "operation_id": 2
       },
-            {
-        "id": 3,
+      {
+        "id": 4,
         "order": 2,
         "operation_id": 7
       },
-            {
-        "id": 4,
+      {
+        "id": 5,
         "order": 2,
         "operation_id": 8
       },
       {
-        "id": 5,
+        "id": 6,
         "order": 4,
         "operation_id": 10
       }
-    ]
+    ],
+    "roadmap": {
+      "path": [],
+      "current": 0
+    }
   },
   {
     "id": 2,
     "name": "Зубчатое колесо",
     "weight": 1,
     "assembly_id": 1,
-    "path": [
+    "process": [
       {
         "id": 1,
         "order": 1,
         "operation_id": 11
       },
             {
-        "id": 1,
+        "id": 2,
         "order": 3,
         "operation_id": 2
       },
             {
-        "id": 2,
+        "id": 3,
         "order": 2,
         "operation_id": 4
       },
             {
-        "id": 3,
+        "id": 4,
         "order": 2,
         "operation_id": 6
       }
-    ]
+    ],
+    "roadmap": {
+      "path": [],
+      "current": 0
+    }
   },
   {
     "id": 3,
     "name": "Вал",
     "weight": 2,
     "assembly_id": 1,
-    "path": [
+    "process": [
       {
         "id": 1,
         "order": 3,
         "operation_id": 1
       },
             {
-        "id": 1,
+        "id": 2,
         "order": 3,
         "operation_id": 2
       },
             {
-        "id": 2,
+        "id": 3,
         "order": 6,
         "operation_id": 4
       }
-    ]
+    ],
+    "roadmap": {
+      "path": [],
+      "current": 0
+    }
   }
   
  ]

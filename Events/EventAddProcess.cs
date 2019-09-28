@@ -16,7 +16,7 @@ namespace Waremap.Events
             var part = state.Equipment.Parts.FirstOrDefault(x => x.Id == PartId);
             if (part == null) return;
 
-            var process = part.Path.FirstOrDefault(x => x.Id == Id);
+            var process = part.Process.FirstOrDefault(x => x.Id == Id);
             if (process != null)
             {
                 process.OperationId = OperationId;
@@ -24,9 +24,9 @@ namespace Waremap.Events
             }
             else
             {
-                part.Path.Add(new Process
+                part.Process.Add(new Process
                 {
-                    Id = Utils.CreateIdFor(part.Path.Select(p => p.Id).ToList()),
+                    Id = Utils.CreateIdFor(part.Process.Select(p => p.Id).ToList()),
                     OperationId = OperationId,
                     Order = Order,
                 });

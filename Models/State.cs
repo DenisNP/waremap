@@ -8,8 +8,7 @@ namespace Waremap.Models
     {
         public Geo Geo { get; set; } = new Geo();
         public Equipment Equipment { get; set; } = new Equipment();
-        public List<Waypoint> CarWaypoints { get; set; } = new List<Waypoint>();
-        public int CarPosition { get; set; } = 0;
+        public Roadmap CarRoadmap { get; set; } = new Roadmap();
 
         [JsonIgnore]
         public Dictionary<int, string> Background { get; set; } = new Dictionary<int, string>();
@@ -81,22 +80,58 @@ namespace Waremap.Models
         public int OperationId { get; set; }
     }
 
+    public class Roadmap
+    {
+        public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+        public int Position { get; set; }
+
+        public Waypoint CurrentWaypoint()
+        {
+            return Path.Count == 0 ? null : Path[Position];
+        }
+
+        public Waypoint NextWaypoint()
+        {
+            if (Path.Count == 0) return null;
+            return Position < Path.Count - 1 ? Path[Position + 1] : Path[0];
+        }
+
+        public Waypoint GoToNext()
+        {
+            var next = NextWaypoint();
+            if (next == null) return null;
+            Position = Path.IndexOf(next);
+            return CurrentWaypoint();
+        }
+
+        public void SetWaypoint(Waypoint wp)
+        {
+            if (Path.Contains(wp))
+            {
+                Position = Path.IndexOf(wp);
+            }
+            else
+            {
+                Path.Insert(Position + 1, wp);
+                Position++;
+            }
+        }
+    }
+
     public class Part
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
         public int AssemblyId { get; set; }
-        public Waypoint Waypoint { get; set; }
-        public List<Process> Path { get; set; } = new List<Process>();
+        public Roadmap Roadmap { get; set; } = new Roadmap();
+        public List<Process> Process { get; set; } = new List<Process>();
     }
 
     public class Waypoint
     {
         public int FromNode { get; set; }
         public int ToNode { get; set; }
-        public int TimeLeft { get; set; }
-        public int TimeTotal { get; set; }
         public int OperationId { get; set; }
         public bool OffWay { get; set; }
     }

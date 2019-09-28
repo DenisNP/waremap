@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Waremap.Models;
@@ -57,29 +56,30 @@ namespace Waremap.Controllers
                 if (machineNode == null || machineNode.Type != NodeType.Machine || part == null)
                     return "No machine or part found";
 
-                var potentialWaypoint = state.CarWaypoints
+                var potentialWaypoint = state.CarRoadmap.Path
                     .FirstOrDefault(
                         wp => wp.FromNode == presence.MachineId
                               && wp.ToNode == presence.MachineId
-                              && part.Path.Select(process => process.Id).Contains(presence.OperationId)
+                              && part.Process.Select(process => process.Id).Contains(presence.OperationId)
                     );
 
                 if (potentialWaypoint != null)
                 {
-                    state.CarPosition = state.CarWaypoints.IndexOf(potentialWaypoint);
-                    part.Waypoint = potentialWaypoint;
+                    state.CarRoadmap.SetWaypoint(potentialWaypoint);
+                    part.Roadmap.SetWaypoint(potentialWaypoint);
                     return GetPosition();
                 }
 
                 // new waypoint
-                part.Waypoint = new Waypoint
+                var newWp = new Waypoint
                 {
                     FromNode = presence.MachineId,
                     ToNode = presence.MachineId,
                     OperationId = presence.OperationId,
                     OffWay = true
                 };
-                state.CarWaypoints.Insert(state.CarPosition + 1, part.Waypoint);
+                state.CarRoadmap.SetWaypoint(newWp);
+                part.Roadmap.SetWaypoint(newWp);
                 return JsonConvert.SerializeObject(Position(true), Utils.ConverterSettings);
             }
             catch (Exception e)

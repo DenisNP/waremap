@@ -11,8 +11,8 @@ namespace Waremap.Events
         public void Run(State state)
         {
             var part = state.Equipment.Parts.FirstOrDefault(n => n.Id == PartId);
-            var process = part?.Path.FirstOrDefault(x => x.Id == Id);
-            if (process != null) part.Path.Remove(process);
+            var process = part?.Process.FirstOrDefault(x => x.Id == Id);
+            if (process != null) part.Process.Remove(process);
         }
     }
 }
