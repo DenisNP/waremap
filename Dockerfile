@@ -1,6 +1,7 @@
 # build client	
 FROM node:10 as BUILD_CLIENT
 COPY ./frontend .
+RUN npm cache clean --force
 RUN npm install	
 RUN npm run build
 
