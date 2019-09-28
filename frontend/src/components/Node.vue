@@ -62,6 +62,10 @@ export default {
     show() {
       return (this.$store.state.editor.displayMode == 'floor' && this.data.floor == this.$store.state.editor.floor)
         ||   (this.$store.state.editor.displayMode == 'depot' && this.data.depot == this.$store.state.editor.depot.id);
+    },
+    iconWidth() {
+      let icon = this.$store.state.icons.node[this.data.icon];
+      if (icon) return icon.w;
     }
   },
   methods: {

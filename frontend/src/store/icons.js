@@ -6,13 +6,14 @@ export default {
   },
   state: {
     node: {
-      Machine: {i: require('../assets/machine-tool.svg'), w: 50},
-      Node: {i: require('../assets/node.svg'), w: 30},
+      Machine: {i: require('../assets/machine-tool.svg'), w: 40},
+      Node: {i: require('../assets/node.svg'), w: 15},
       Ladder: {i: require('../assets/stairs.svg'), w: 40},
       Elevator: {i: require('../assets/lift.svg'), w: 40},
       Door: {i: require('../assets/door.svg'), w: 40},
-      undefined: {i: require('../assets/node.svg'), w: 30},
-      '': {i: require('../assets/node.svg'), w: 30},
+
+      undefined: {i: require('../assets/node.svg'), w: 15},
+      '': {i: require('../assets/node.svg'), w: 15},
     },
     pallete: {
       Cursor: {i: require('../assets/cursor.svg'), w: 32},
@@ -24,6 +25,12 @@ export default {
       Edges: {i: require('../assets/create_edge.svg'), w: 32},
       Node: {i: require('../assets/add_edge.svg'), w: 32},
       UploadBg: {i: require('../assets/cursor_01.svg'), w: 32}
+    },
+    edgeParams: {
+      Road: {i: require('../assets/create_edge.svg'), w: 32},
+      Footway: {i: require('../assets/create_edge.svg'), w: 32},
+      Elevator: {i: require('../assets/create_edge.svg'), w: 32},
+      Ladder: {i: require('../assets/create_edge.svg'), w: 32},
     }
   },
   getters: {

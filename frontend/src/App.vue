@@ -3,7 +3,7 @@
     <AppQr v-if="page === 'qr'"></AppQr>
     <AppMobile v-if="page === 'mobile'"></AppMobile>
     <div v-if="page === 'main'">
-      <ControlsLayer floor="2" tool="1" />
+      <ControlsLayer floor="1" tool="0" />
       <Editor/>
       <EdgeParams
         v-if="$store.state.editor.mode === 'edgeSelected'"
@@ -54,7 +54,7 @@ export default {
 <style lang="scss">
 
 body {
-  background-color: #4D4D4D;
+  background-color: #333;
 }
 
 svg {
@@ -70,10 +70,6 @@ svg {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-svg image {
-  pointer-events: none;
 }
 
 /* ---------------------------------------------------------------- */

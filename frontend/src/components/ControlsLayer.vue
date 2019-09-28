@@ -29,18 +29,13 @@
       <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
     </div>
 
-    <!-- <label class="myLabel">
-      <div class="pallete-item"
-           key="uploadBackground"
-      >
-        <div class="pallete-item-icon"><img :src="$store.state.icons.pallete.UploadBg.i" /></div>
-          <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
-
-          <span class="pallete-item--name">
-            Загрузить план
-          </span>
-      </div>
-    </label> -->
+    <label class="pallete pallete-bottom floorBgUpload">
+      <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+      <span class="pallete-item-icon">+</span>
+      <span class="pallete-item--name">
+        Добавить план помещения
+      </span>
+    </label>
   </div>
 </template>
 
@@ -162,7 +157,6 @@ export default {
 
 .pallete {
   z-index: 10;
-  background-color: #4D4D4D;
   color: #FFF;
   position: absolute;
   top: 15px;
@@ -264,7 +258,7 @@ export default {
   background-repeat: no-repeat;
   background-position: top left;
   margin-top: 72px;
-  padding: 35px 0 0;
+  padding: 40px 0 0;
 }
 .tools .pallete-item {
   padding: 11px 35px;
@@ -292,7 +286,7 @@ export default {
 .tools .pallete-heading {
   font-size: 18px;
   color: #333;
-  padding: 20px 35px 10px;
+  padding: 15px 35px 10px;
 }
 
 
@@ -348,6 +342,118 @@ label.myLabel {
 }
 .pallete.floors .pallete-heading {
   font-size: 18px;
+}
+
+/* -------------------------------------------------------------------- */
+
+.pallete.edges {
+  left: 0;
+  top: 530px;
+  padding-left: 30px;
+  background-color: transparent;
+  box-shadow: none;
+  color: #333;
+}
+.pallete.edges .inline-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pallete.edges .pallete-heading {
+  padding: 5px;
+  font-size: 16px;
+}
+.pallete.edges .edge-type {
+  padding: 5px;
+  cursor: pointer;
+}
+.pallete.edges .edge-type.selected {
+  transform: scale(1.2);
+}
+.pallete.edges .edge-weight-input {
+  width: 95px;
+  margin-left: 5px;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+/* -------------------------------------------------------------------- */
+
+.pallete.MachineParams {
+  background-image: url(../assets/right.svg);
+  left: auto;
+  right: 0;
+  top: 0;
+  box-sizing: border-box;
+  height: 620px;
+  width: 228px;
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin-top: 72px;
+  padding: 30px 0 0;
+  color: #333;
+  font-size: 14px;
+}
+.pallete.MachineParams .pallete-heading {
+  font-size: 16px;
+  padding: 25px 30px 10px 35px;
+}
+.pallete.MachineParams .pallete-item {
+  padding: 10px 30px 10px 35px;
+}
+.MachineParams .pallete-item-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid #3878FF;
+    position: relative;
+    margin-top: -6px;
+}
+.MachineParams .pallete-item-icon:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px;
+    border-radius: 50%;
+}
+.MachineParams .selected .pallete-item-icon {
+    background-color: #3878FF;
+}
+.MachineParams .selected .pallete-item-name {
+    color: #3878FF;
+    font-weight: initial;
+}
+
+/* ----------------------------------------------------------------- */
+
+.pallete.floorBgUpload {
+    bottom: 10px;
+    left: 50%;
+    right: auto;
+    top: auto;
+    box-shadow: none;
+    background-color: #333;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.pallete.floorBgUpload input {
+    display: none;
+}
+.pallete.floorBgUpload .pallete-item-icon {
+    width: auto;
+    margin: 0 10px 0 0;
 }
 
 </style>
