@@ -11,7 +11,8 @@ namespace Waremap.Events
         private int _partId;
 
         public int Id { get; set; }
-        public int Nodeid { get; set; }
+        public int OperationId { get; set; }
+        public int Order { get; set; }
         public int ProcessingTime { get; set; }
         public int StartTime { get; set; }
         public int EndTime { get; set; }
@@ -29,8 +30,8 @@ namespace Waremap.Events
                 var waypoint = part.Path.FirstOrDefault(x => x.Id == Id);
 
                 waypoint.Id = Id;
-                waypoint.NodeId = Nodeid;
-                waypoint.ProcessingTime = ProcessingTime;
+                waypoint.OperationId = OperationId;
+                waypoint.Order = Order;
                 waypoint.StarTime = StartTime;
                 waypoint.EndTime = EndTime;
 
@@ -39,9 +40,9 @@ namespace Waremap.Events
                 part.Path.Add(new Waypoint
                 {
                     Id = Id,
-                    NodeId = Nodeid,
+                    OperationId = OperationId,
+                    Order = Order,
                     EndTime = EndTime,
-                    ProcessingTime = ProcessingTime,
                     StarTime = StartTime
                 });
         }

@@ -7,12 +7,6 @@ namespace Waremap.Events
     {
         public int From { get; set; }
         public int To { get; set; }
-        
-        public EventRemoveEdge(int from, int to)
-        {
-            From = from;
-            To = to;
-        }
 
         public void Run(State state)
         {

@@ -5,17 +5,12 @@ namespace Waremap.Events
 {
     public class EventRemoveWaypoint : IEvent
     {
-        private int _partId;
+        public int PartId { get; set; }
         public int Id { get; set; }
         
-        public EventRemoveWaypoint(int partId)
-        {
-            _partId = partId;
-        }
-
         public void Run(State state)
         {
-            var part = state.Equipment.Parts.FirstOrDefault(n => n.Id == _partId);
+            var part = state.Equipment.Parts.FirstOrDefault(n => n.Id == PartId);
             if (part != null)
             {
                 var waypoint = part.Path.FirstOrDefault(x => x.Id == Id);
