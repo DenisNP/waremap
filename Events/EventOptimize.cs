@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Waremap.Models;
 
 namespace Waremap.Events

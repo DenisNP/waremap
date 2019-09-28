@@ -35,7 +35,7 @@ namespace Waremap
                 graph.Nodes[start.From],
                 graph.Nodes[start.To]
             };
-            // var nextNode = graph.Nodes[start.]
+            var nextNode = graph.Nodes[start.]
 
             while (nodesLeft.Count > 0)
             {
