@@ -32,6 +32,7 @@ module.exports = {
       name: String,
       weight: Number,
       assembly_id: Number,
+      
       path: [{
         id: Number,
         order: Number,

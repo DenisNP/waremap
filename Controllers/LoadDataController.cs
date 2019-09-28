@@ -9,18 +9,18 @@ using Waremap.Models;
 namespace Waremap.Controllers
 {
     [ApiController]
-    [Route("/load")]
+    [Route("/data")]
     public class LoadDataController : ControllerBase
     {
         [HttpPost]
         public string Load()
         {
-            if (!Request.Query.ContainsKey("data"))
+            if (!Request.Query.ContainsKey("list"))
             {
                 return "no data field";
             }
             
-            var data = Request.Query["data"];
+            var data = Request.Query["list"];
             try
             {
                 using var reader = new StreamReader(Request.Body);

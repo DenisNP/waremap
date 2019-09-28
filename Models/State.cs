@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -29,6 +30,7 @@ namespace Waremap.Models
         public void AssignClosestCore(int v)
         {
             _closestCore = v;
+            Console.WriteLine($"For {Id} closest is {v}");
         }
 
         public int NeedClosestCore()
@@ -86,6 +88,10 @@ namespace Waremap.Models
         public string Name { get; set; }
         public int Weight { get; set; }
         public int AssemblyId { get; set; }
+        public int FromNode { get; set; }
+        public int ToNode { get; set; }
+        public int TimeLeft { get; set; }
+        public int TimeTotal { get; set; }
         public List<Waypoint> Path { get; set; } = new List<Waypoint>();
     }
 
