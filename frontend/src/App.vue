@@ -114,7 +114,7 @@ svg {
     width: 100%;
     height: 100%;
     opacity: .7;
-    background-image: url(/img/tile.73847b9d.svg);
+    background-image: url(./assets/tiles/tile.svg);
 }
 .walls.selected .wall,
 .walls.selected .corner {

@@ -50,9 +50,13 @@ namespace Waremap.Controllers
             }
         }
 
-        public static void LoadPartsToState(string json, State state)
+        public static void LoadPartsToState(string json, State state, bool force = false)
         {
             var parts = JsonConvert.DeserializeObject<List<Part>>(json, Utils.ConverterSettings);
+            if (force)
+            {
+                state.Equipment.Parts.Clear();
+            }
             var existIds = state.Equipment.Parts.Select(p => p.Id);
             var newParts = parts.Where(p => !existIds.Contains(p.Id));
             state.Equipment.Parts.AddRange(newParts);
@@ -66,17 +70,25 @@ namespace Waremap.Controllers
             state.Geo.Nodes.AddRange(newNodes);
         }
 
-        public static void LoadOperationsToState(string json, State state)
+        public static void LoadOperationsToState(string json, State state, bool force = true)
         {
             var operations = JsonConvert.DeserializeObject<List<Operation>>(json, Utils.ConverterSettings);
+            if (force)
+            {
+                state.Equipment.Operations.Clear();
+            }
             var existIds = state.Equipment.Operations.Select(p => p.Id);
             var newOperations = operations.Where(p => !existIds.Contains(p.Id));
             state.Equipment.Operations.AddRange(newOperations);
         }
 
-        public static void LoadAssembliesToState(string json, State state)
+        public static void LoadAssembliesToState(string json, State state, bool force = true)
         {
             var assemblies = JsonConvert.DeserializeObject<List<Assembly>>(json, Utils.ConverterSettings);
+            if (force)
+            {
+                state.Equipment.Assemblies.Clear();
+            }
             var existIds = state.Equipment.Assemblies.Select(p => p.Id);
             var newAssemblies = assemblies.Where(p => !existIds.Contains(p.Id));
             state.Equipment.Assemblies.AddRange(newAssemblies);

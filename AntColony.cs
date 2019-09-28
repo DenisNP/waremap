@@ -15,10 +15,11 @@ namespace Waremap
 
         public AntColony(Graph graph)
         {
-            _food = new double[graph.Nodes.Count, graph.Nodes.Count];
-            for (var i = 0; i < graph.Nodes.Count; i++)
+            var maxNodeId = graph.Nodes.Values.Select(n => n.Id).Max();
+            _food = new double[maxNodeId + 1, maxNodeId + 1];
+            for (var i = 0; i < maxNodeId + 1; i++)
             {
-                for (var j = 0; j < graph.Nodes.Count; j++)
+                for (var j = 0; j < maxNodeId + 1; j++)
                 {
                     _food[i, j] = InitialFood;
                 }
