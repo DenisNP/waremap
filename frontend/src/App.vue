@@ -137,7 +137,7 @@ svg image {
 
 .edge.edge-Dashed,
 .edge.edge-Footway {
-  stroke: rgba(30,30,30,.7);
+  stroke: rgba(255,255,255,.3);
   stroke-width: 2px;
   fill: transparent;
   stroke-dasharray: 10 5;
@@ -156,7 +156,7 @@ svg image {
 
 .edge.edge-Road {
   fill: transparent;
-  stroke: #333;
+  stroke: rgba(255,255,255,.6);
   stroke-width: 2px;
 }
 
