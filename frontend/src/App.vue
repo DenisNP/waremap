@@ -41,7 +41,9 @@ export default {
     }
   },
   mounted() {
-    this.page = location.pathname.replace('/', '') || 'main';
+    console.log('location', location);
+    const params = location.hash.replace('#', '').split('/');
+    this.page = params[0] || 'main';
   },
   computed: {
     isMachineSelected() {
@@ -54,6 +56,7 @@ export default {
 <style lang="scss">
 
 body {
+  color: #fff;
   background-color: #333;
 }
 
