@@ -85,6 +85,7 @@ export default {
         type: nodeType,
         x,
         y,
+        icon: c.state.addingNodeIcon,
         floor: c.state.floor,
         depot: c.state.depot.id,
       });
