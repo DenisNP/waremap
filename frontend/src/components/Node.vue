@@ -1,5 +1,5 @@
 <template>
-  <g :class="{show}">
+  <g class="node" :class="{show}">
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
@@ -51,9 +51,8 @@ export default {
   },
   computed: {
     show() {
-      return
-          (this.$store.state.depotEditor.displayMode == 'floor' && this.floor == this.$store.state.depotEditor.floor)
-       || (this.$store.state.depotEditor.displayMode == 'depot' && this.depot == this.$store.state.depotEditor.depot.id);
+      return (this.$store.state.depotEditor.displayMode == 'floor' && this.data.floor == this.$store.state.depotEditor.floor)
+        ||   (this.$store.state.depotEditor.displayMode == 'depot' && this.data.depot == this.$store.state.depotEditor.depot.id);
     }
   },
   methods: {
@@ -138,6 +137,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
+
+.node {
+  display: none;
+}
+.node.show {
+  display: block;
+}
 
 .walls {
     position: relative;
