@@ -31,7 +31,6 @@ namespace Waremap.Models
         public void AssignClosestCore(GraphUtils.PathToNode v)
         {
             _closestCore = v;
-            Console.WriteLine($"For {Id} closest is {v.NId} with {v.Weight}");
         }
 
         public GraphUtils.PathToNode NeedClosestCore()

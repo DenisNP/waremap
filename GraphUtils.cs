@@ -11,13 +11,12 @@ namespace Waremap
         public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude)
         {
             var edges = graph.EdgesAsList.Where(e => e.From == nodeId || e.To == nodeId).ToList();
-            var ids = exclude.Concat(new List<int>(nodeId));
 
             return edges
                 .Select(e => e.From)
                 .Concat(edges.Select(e => e.To))
                 .Distinct()
-                .Where(nId => !ids.Contains(nId))
+                .Where(nId => !exclude.Contains(nId) && nId != nodeId)
                 .ToList();
         }
         
@@ -99,6 +98,10 @@ namespace Waremap
                 if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
                 {
                     node.AssignClosestCore(FindClosestCore(graph, node.Id, coreIds, new List<int>()));
+                }
+                else
+                {
+                    node.AssignClosestCore(new PathToNode{NId = node.Id, Weight = 0});
                 }
             }
         }

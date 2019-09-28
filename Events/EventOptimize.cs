@@ -22,7 +22,7 @@ namespace Waremap.Events
             }
             else
             {
-                Console.WriteLine("Core ids: " + JsonConvert.SerializeObject(coreIds));
+                Console.WriteLine("Core ids: " + JsonConvert.SerializeObject(coreIds.Select(n => n.Id)));
                 GraphUtils.AssignClosestCores(graph, coreIds.Select(n => n.Id).ToList());
                 
                 state.CarRoadmap.Path.RemoveRange(1, state.CarRoadmap.Path.Count - 1);
@@ -36,9 +36,8 @@ namespace Waremap.Events
                 // go
                 _colony = new AntColony(graph);
                 Route bestRoute = null;
-                var initialResult = 999;
                 var k = 1000;
-                while (bestRoute == null || bestRoute.Result > initialResult / 2.0 && k-- > 0)
+                while (bestRoute == null || k-- > 0)
                 {
                     _route = new Route(graph, state);
                     _colony.RunAnt(_route);
@@ -46,7 +45,11 @@ namespace Waremap.Events
                     {
                         bestRoute = _route;
                     }
+
+                    Console.WriteLine(_route.Result);
                 }
+                
+                Console.WriteLine(JsonConvert.SerializeObject(bestRoute.CarWaypoints));
             }
         }
 

@@ -9,8 +9,8 @@ namespace Waremap
     {
         private const double InitialFood = 1.0;
         private const double ManSpeed = 12.0;
-        private const double TakeInFood = 5.0;
-        private const double TakeOutFood = 15.0;
+        private const double TakeInFood = 500.0;
+        private const double TakeOutFood = 1500.0;
         private readonly double[,] _food;
 
         public AntColony(Graph graph)
@@ -38,11 +38,10 @@ namespace Waremap
             while (steps-- > 0)
             {
                 var carNode = route.CarWaypoints.Last().ToNode;
-                var potential = GraphUtils.FindNeighbours(route.Graph, carNode, new List<int>());
+                var potential = GraphUtils.FindNeighbours(route.Graph, carNode, new List<int>()).Where(nId => nId != carNode).ToList();
                 var probs = new List<double>();
                 foreach (var neighbour in potential)
                 {
-                    if (neighbour == carNode) continue;
                     var edgeFood = _food[carNode, neighbour];
                     var edgeW = route.Graph.DistFromWeight(neighbour, carNode);
                     probs.Add(edgeFood * edgeW);
@@ -67,11 +66,15 @@ namespace Waremap
                 });
                 currentEdges.Add((carNode, nextNodeId));
                 currentWeight += route.Graph.Edges[carNode, nextNodeId].Weight;
-                
+
                 // add machine process if needed
                 var time = WeightToTime(route.Graph.Edges[carNode, nextNodeId].Weight);
                 route.Time += time;
-                var nextNode = route.Graph.Nodes.Values.First(n => n.NeedClosestCore().NId == nextNodeId);
+                var nextNode = route.Graph.Nodes.Values.FirstOrDefault(n => n.NeedClosestCore().NId == nextNodeId);
+                if (nextNode == null)
+                {
+                    nextNode = route.Graph.Nodes[nextNodeId];
+                }
                 currentFood += TakeInPart(route, nextNode.NeedClosestCore(), nextNode.Id, time);
                 currentFood += TakeOutPart(route, nextNode.NeedClosestCore(), nextNode.Id);
 
