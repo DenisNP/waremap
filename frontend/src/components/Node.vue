@@ -10,8 +10,8 @@
       :width="w"
       :height="h"
     >
-      <div class="node-icon">
-        <img :src="$store.state.icons.node[data.type]" />
+      <div class="node-icon" v-if="$store.state.icons.node[data.type]">
+        <img :src="$store.state.icons.node[data.type].i" />
       </div>
       <div
         class="walls"
@@ -42,8 +42,8 @@ export default {
   ],
   data() {
     return {
-      w: 30,
-      h: 30,
+      w: 40,
+      h: 40,
       draggingX: null,
       draggingY: null,
       down: false,
@@ -121,6 +121,11 @@ export default {
     }
   },
   mounted() {
+    if (this.iconWidth) {
+      this.w = this.iconWidth;
+      this.h = this.iconWidth;
+    }
+
     this.$el.addEventListener('mousedown', this.onMouseDown);
     window.addEventListener('mousemove', this.onMouseMove);
     this.$el.addEventListener('mouseup', this.onMouseUp);
@@ -187,7 +192,8 @@ export default {
   align-items: center;
 }
 .node-icon img {
-  max-height: 98%;
+  max-width: 98%;
+  max-height: 100%;
 }
 
 </style>
