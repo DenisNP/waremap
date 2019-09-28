@@ -13,18 +13,16 @@ namespace Waremap.Controllers
 {
     [ApiController]
     [Route("/alice")]
-    public class AliceController : Controller
+    public class AliceController : ControllerBase
     {
         [HttpPost]
-        public string AliceWebhook(HttpRequest request, HttpResponse response, RouteData routeData)
+        public string AliceWebhook()
         {
             try
             {
-                response.Headers.Add("Content-Type", "application/json");
-
                 // read request
                 string body;
-                using (var reader = new StreamReader(request.Body)) body = reader.ReadToEnd();
+                using (var reader = new StreamReader(Request.Body)) body = reader.ReadToEnd();
                 // Console.WriteLine("http got: " + body);
 
                 var aliceRequest = JsonConvert.DeserializeObject<AliceRequest>(body, Utils.ConverterSettings);
@@ -42,24 +40,24 @@ namespace Waremap.Controllers
                         Session = aliceRequest.Session
                     };
 
-                    return JsonConvert.SerializeObject(response.WriteAsync(JsonConvert.SerializeObject(pong, Utils.ConverterSettings)));
+                    return JsonConvert.SerializeObject(pong, Utils.ConverterSettings);
                 }
 
                 // parse request
-                Console.WriteLine("\nRequest got:", body);
+                Console.WriteLine($"\nRequest got: {body}" );
 
                 // return response
                 var aliceResponse = HandleRequest(aliceRequest);
                 var stringResponse = JsonConvert.SerializeObject(aliceResponse, Utils.ConverterSettings);
 
-                Console.WriteLine("\nResponse:", stringResponse);
+                Console.WriteLine($"\nResponse: {stringResponse}");
 
-                return JsonConvert.SerializeObject(response.WriteAsync(stringResponse));
+                return stringResponse;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return JsonConvert.SerializeObject(response.WriteAsync("Error"));
+                return "Error";
             }
         }
 
