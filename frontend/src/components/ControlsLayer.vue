@@ -447,6 +447,8 @@ label.myLabel {
     align-items: center;
     padding: 5px 15px;
     cursor: pointer;
+    width: 252px;
+    margin: 0 -126px;
 }
 .pallete.floorBgUpload input {
     display: none;
