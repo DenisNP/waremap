@@ -3,6 +3,7 @@ using Waremap.Models;
 
 namespace Waremap.Events
 {
+    #nullable enable
     public class EventAddDepot: IEvent
     {
         public int Id { get; set; }
@@ -66,4 +67,5 @@ namespace Waremap.Events
             }
         }
     }
+    #nullable disable
 }
