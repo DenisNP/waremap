@@ -61,22 +61,22 @@ export default {
         {
           name: 'Участок',
           key: 'Machine',
-          icon: require('../assets/logo.png')
+          icon: require('../assets/machine-tool.svg')
         },
         {
           name: 'Узел',
           key: 'Node',
-          icon: ''
+          icon: require('../assets/node.svg')
         },
         {
           name: 'Лестница',
           key: 'Ladder',
-          icon: ''
+          icon: require('../assets/stairs.svg')
         },
         {
           name: 'Лифт',
           key: 'Elevator',
-          icon: ''
+          icon: require('../assets/lift.svg')
         },
         {
           name: 'Дверь',

@@ -1,5 +1,5 @@
 <template>
-  <g class="node" :class="{show}">
+  <g class="node" :class="{show, ['node-' + data.type]: true}">
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
@@ -10,6 +10,9 @@
       :width="w"
       :height="h"
     >
+      <div class="node-icon">
+        <img :src="$store.state.icons.node[data.type]" />
+      </div>
       <div
         class="walls"
         :class="{selected}"
@@ -174,5 +177,17 @@ export default {
 .walls .bottom { top: auto; bottom: 0; }
 .walls .left { left: 0; right: auto; }
 .walls .right { left: auto; right: 0; }
+
+
+.node-icon {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.node-icon img {
+  max-width: 100%;
+}
 
 </style>
