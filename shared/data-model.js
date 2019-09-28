@@ -15,34 +15,32 @@ module.exports = {
       depot: Number,
       floor: Number,
       x: Number,
-      y: Number
+      y: Number,
+      operation_ids: [], // array of ints 
     }],
     edges: [{
       from: Number,
       to: Number,
-      type: String, // enum('Road', 'Elevator', 'Ladder')
+      type: String, // enum('Road', 'Elevator', 'Ladder', 'Footway')
       weight: Number
     }]
   },
   equipment: {
-    cars: [{
-      id: Number,
-      type: String, // enum('Man', 'ManWithCar', 'Forklift')
-      total_capacity: Number,
-      free_capacity: Number,
-      from_node_id: Number,
-      to_node_id: Number,
-      progress: Number // ?
-    }],
     parts: [{
       id: Number,
       car_id: Number,
       name: String,
       weight: Number,
+      assembly_id: Number,
       path: [{
         node_id: Number,
         processing_time: Number // sec
       }]
+    }],
+    operations: [{
+        id: Number,
+        name: String,
+        processing_time: Number
     }]
   }
 };
