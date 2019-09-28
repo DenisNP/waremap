@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +12,8 @@ namespace Waremap.Models
 
         public Graph(Geo geo)
         {
-            Edges = new Edge[geo.Nodes.Count, geo.Nodes.Count];
+            var maxNodeId = geo.Nodes.Select(n => n.Id).Max();
+            Edges = new Edge[maxNodeId + 1, maxNodeId + 1];
             geo.Edges.ForEach(e =>
             {
                 Edges[e.From, e.To] = e;

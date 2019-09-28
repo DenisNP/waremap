@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using MoreLinq;
 using Newtonsoft.Json;
 using Waremap.Models;
 
@@ -17,11 +18,17 @@ namespace Waremap.Events
             if (coreIds.Count == 0)
             {
                 // error!
+                Console.WriteLine("No core");
             }
             else
             {
                 Console.WriteLine("Core ids: " + JsonConvert.SerializeObject(coreIds));
                 GraphUtils.AssignClosestCores(graph, coreIds.Select(n => n.Id).ToList());
+                state.CarRoadmap.Path.RemoveRange(1, state.CarRoadmap.Path.Count - 1);
+                state.Equipment.Parts.ForEach(p =>
+                {
+                    p.Roadmap.Path.RemoveRange(1, p.Roadmap.Path.Count - 1);
+                });
                 
                 // go
                 _colony = new AntColony(graph);
