@@ -29,18 +29,13 @@
       <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
     </div>
 
-    <!-- <label class="myLabel">
-      <div class="pallete-item"
-           key="uploadBackground"
-      >
-        <div class="pallete-item-icon"><img :src="$store.state.icons.pallete.UploadBg.i" /></div>
-          <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
-
-          <span class="pallete-item--name">
-            Загрузить план
-          </span>
-      </div>
-    </label> -->
+    <label class="pallete pallete-bottom floorBgUpload">
+      <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+      <span class="pallete-item-icon">+</span>
+      <span class="pallete-item--name">
+        Добавить план помещения
+      </span>
+    </label>
   </div>
 </template>
 
@@ -162,7 +157,6 @@ export default {
 
 .pallete {
   z-index: 10;
-  background-color: #4D4D4D;
   color: #FFF;
   position: absolute;
   top: 15px;
@@ -436,6 +430,30 @@ label.myLabel {
 .MachineParams .selected .pallete-item-name {
     color: #3878FF;
     font-weight: initial;
+}
+
+/* ----------------------------------------------------------------- */
+
+.pallete.floorBgUpload {
+    bottom: 10px;
+    left: 50%;
+    right: auto;
+    top: auto;
+    box-shadow: none;
+    background-color: #333;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 15px;
+    cursor: pointer;
+}
+.pallete.floorBgUpload input {
+    display: none;
+}
+.pallete.floorBgUpload .pallete-item-icon {
+    width: auto;
+    margin: 0 10px 0 0;
 }
 
 </style>
