@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <AppQr v-if="page === 'qr'"></AppQr>
-    <div id="appMain" v-if="page === 'main'">
+    <div v-if="page === 'main'">
       <ControlsLayer floor="2" tool="1" />
       <Editor/>
       <EdgeParams
