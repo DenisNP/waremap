@@ -245,6 +245,27 @@ const toBase64 = file => new Promise((resolve, reject) => {
   max-width: 100%;
 }
 
+.pallete.tools {
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 14px;
+}
+::-webkit-scrollbar-track {
+  width: 14px;
+}
+::-webkit-scrollbar-thumb {
+  width: 14px;
+  background-color: #999;
+  border: 4px solid #4D4D4D;
+  border-radius: 7px;
+}
+
 
 
 .floors .pallete-item {
