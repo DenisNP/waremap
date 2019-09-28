@@ -40,15 +40,17 @@ namespace Waremap.Events
             }
             else
             {
+                var id = Utils.CreateIdFor(state.Geo.Depots.Select(d => d.Id).ToList());
+
                 state.Geo.Depots.Add(new Depot
                 {
-                    Id = Utils.CreateIdFor(state.Geo.Depots.Select(d => d.Id).ToList()),
+                    Id = id,
                     X = X,
                     Y = Y,
                     W = W,
                     H = H,
                     Floor = Floor,
-                    Name = Name ?? $"Цех {Id}, Этаж {Floor}"
+                    Name = Name ?? $"Цех {id}, Этаж {Floor}"
                 });
 
                 foreach (var node in state.Geo.Nodes)
