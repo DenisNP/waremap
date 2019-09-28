@@ -8,6 +8,7 @@ export default {
   state: {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
     floorBackground: null,
+    floorBackgroundMap: {},
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNode: null,
     selectedNodeId: null,
@@ -210,9 +211,15 @@ export default {
     },
 
     async downloadFloorBackground(c) {
+      if (c.state.floorBackgroundMap[c.state.floor]) {
+        c.state.floorBackground = c.state.floorBackgroundMap[c.state.floor];
+        return;
+      }
+
       c.state.floorBackground = '';
       try {
         c.state.floorBackground = await API.getBackground(c.state.floor);
+        c.state.floorBackgroundMap[c.state.floor] = c.state.floorBackground;
       } catch(e) {
         return;
       }
