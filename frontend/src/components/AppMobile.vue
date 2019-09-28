@@ -1,16 +1,22 @@
 <template>
   <div class="container">
-    <div v-if="!isScanning">
+    <div v-show="!isScanning">
       <button @click="showScanner">Отметиться через QR код</button>
       <br>
-      <div v-show="Boolean(code)">Отсканированный QR код: {{ code }}</div>
+      <div v-show="Boolean(code)">
+        Вы отметились {{ checkpointDate }}!
+        <br>
+        <small>
+          (Отсканированный QR код: {{ code }})
+        </small>
+      </div>
       <br>
-      <div>Ваше местоположение: {{ myPosition }}</div>
+      <div>Ваше местоположение: {{ position && position.current.node_name }}</div>
       <br>
-      <div>Точка назначения: {{ targetPosition }}</div>
+      <div>Точка назначения: {{ position && position.next.node_name }}</div>
     </div>
     <div class="qr-scanner" v-show="isScanning">
-      <div ref="loadingMessage">Unable to access video stream (please make sure you have a webcam enabled)</div>
+      <div ref="loadingMessage"></div>
       <canvas ref="canvas" hidden></canvas>
       <div ref="output" hidden>
         <div ref="outputMessage">No QR code detected.</div>
@@ -40,18 +46,15 @@ export default {
       animationFrame: null,
       code: null,
       stream: null,
+      position: null,
+      checkpointDate: null,
     };
   },
   async mounted() {
-    // const carId = urlParams.get('id');
-    // const data = await getData(ENDPOINT + '/position');
-
-    return;
-
     setInterval(async () => {
-      const lastPosition = await API.api('GET', 'position');
-      console.log('pos', lastPosition);
-    }, 2000);
+      const res = await API.api('GET', 'position');
+      this.position = res;
+    }, 5000);
   },
   computed: {
   },
@@ -66,26 +69,32 @@ export default {
       this.stream = null;
       cancelAnimationFrame(this.animationFrame);
     },
+    async sendCheckpoint(code) {
+      this.code = code;
+      this.checkpointDate = new Date().toLocaleString('ru');
+      this.hideScanner();
+
+      // const content = `${item.part_id}_${machineId}_${item.operation_id}`;
+      const [part_id, machine_id, operation_id] = code.split('_');
+
+      const res = await API.api('POST', 'position', {
+        part_id: Number(part_id),
+        machine_id: Number(machine_id),
+        operation_id: Number(operation_id),
+      });
+      console.log('send checkpoint res', res);
+    },
     async showScanner() {
       this.code = null;
       this.isScanning = true;
 
-      var video = document.createElement("video");
+      var video = document.createElement('video');
       var canvasElement = this.$refs.canvas;
-      var canvas = canvasElement.getContext("2d");
+      var canvas = canvasElement.getContext('2d');
       var loadingMessage = this.$refs.loadingMessage;
       var outputContainer = this.$refs.output;
       var outputMessage = this.$refs.outputMessage;
       var outputData = this.$refs.outputData;
-
-      function drawLine(begin, end, color) {
-        canvas.beginPath();
-        canvas.moveTo(begin.x, begin.y);
-        canvas.lineTo(end.x, end.y);
-        canvas.lineWidth = 4;
-        canvas.strokeStyle = color;
-        canvas.stroke();
-      }
 
       // Use facingMode: environment to attemt to get the front camera on phones
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -119,8 +128,7 @@ export default {
             inversionAttempts: "dontInvert",
           });
           if (code) {
-            this.code = code.chunks[0].text;
-            this.hideScanner();
+            this.sendCheckpoint(code.data);
           } else {
             outputMessage.hidden = false;
             outputData.parentElement.hidden = true;

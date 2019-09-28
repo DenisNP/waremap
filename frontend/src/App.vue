@@ -40,10 +40,15 @@ export default {
       page: ''
     }
   },
-  mounted() {
+  async mounted() {
     console.log('location', location);
     const params = location.hash.replace('#', '').split('/');
     this.page = params[0] || 'main';
+
+    if (this.page === 'main') {
+      await this.$store.dispatch('init');
+      await this.$store.dispatch('editor/downloadFloorBackground');
+    }
   },
   computed: {
     isMachineSelected() {
