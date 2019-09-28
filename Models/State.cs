@@ -82,7 +82,7 @@ namespace Waremap.Models
     public class Roadmap
     {
         public List<Waypoint> Path { get; set; } = new List<Waypoint>();
-        public int Position { get; set; }
+        public int Position { get; set; } = 0;
 
         public Waypoint CurrentWaypoint()
         {
