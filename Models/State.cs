@@ -18,6 +18,18 @@ namespace Waremap.Models
         public int Y { get; set; }
         public string Name { get; set; }
         public List<int> OperationIds { get; set; } = new List<int>();
+
+        private int _closestCore;
+
+        public void AssignClosestCore(int v)
+        {
+            _closestCore = v;
+        }
+
+        public int NeedClosestCore()
+        {
+            return _closestCore;
+        }
     }
 
     public class Operation

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Waremap.Models;
@@ -37,10 +36,56 @@ namespace Waremap
             var seen = new List<int>();
             for (var i = 0; i < nodeIds.Count; i++)
             {
-                // var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds[0..i]);
+                seen.Add(nodeIds[i]);
+                var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds.GetRange(0, i));
+                seen.AddRange(neighbours.Where(nId => nodeIds.Contains(nId)));
+            }
+
+            if (seen.Distinct().Count() == nodeIds.Count)
+            {
+                return nodeIds.Select(nId => graph.Nodes[nId]).ToList();
             }
             
-            throw new NotImplementedException();
+            return new List<Node>();
+        }
+
+        public static int FindClosestCore(Graph graph, int nodeId, List<int> coreIds, List<int> seen)
+        {
+            if (coreIds.Contains(nodeId)) return nodeId;
+            var neighbours = FindNeighbours(graph, nodeId, seen);
+            
+            foreach (var neighbour in neighbours)
+            {
+                if (coreIds.Contains(neighbour))
+                {
+                    return neighbour;
+                }
+            }
+
+            var newSeen = seen.Concat(neighbours).ToList();
+            newSeen.Add(nodeId);
+
+            foreach (var neighbour in neighbours)
+            {
+                var closestCore = FindClosestCore(graph, neighbour, coreIds, newSeen);
+                if (closestCore != -1)
+                {
+                    return closestCore;
+                }
+            }
+
+            return -1;
+        }
+
+        public static void AssignClosestCores(Graph graph, List<int> coreIds)
+        {
+            foreach (var node in graph.Nodes.Values)
+            {
+                if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
+                {
+                    node.AssignClosestCore(FindClosestCore(graph, node.Id, coreIds, new List<int>()));
+                }
+            }
         }
     }
 }
