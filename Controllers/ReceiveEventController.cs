@@ -43,60 +43,34 @@ namespace Waremap.Controllers
                     switch (eventName)
                     {
                         case "addNode":
-                            if (body != "")
-                            {
-                                var eventAddNode = JsonConvert.DeserializeObject<EventAddNode>(body);
-                                eventAddNode.Run(State);
-                            }
+                            DeserializeAndRun<EventAddNode>(body);
                             break;
                         case "removeNode":
-                            if (body != "")
-                            {
-                                var eventRemoveNode = JsonConvert.DeserializeObject<EventRemoveNode>(body);
-                                eventRemoveNode.Run(State);
-                            }
+                            DeserializeAndRun<EventRemoveNode>(body);
                             break;
                         case "addEdge":
-                            if (body != "")
-                            {
-                                var eventAddEdge = JsonConvert.DeserializeObject<EventAddEdge>(body);
-                                eventAddEdge.Run(State);
-                            }
+                            DeserializeAndRun<EventAddEdge>(body);
                             break;
                         case "removeEdge":
-                            if (body != "")
-                            {
-                                var eventRemoveEdge = JsonConvert.DeserializeObject<EventRemoveEdge>(body);
-                                eventRemoveEdge.Run(State);
-                            }
+                            DeserializeAndRun<EventRemoveEdge>(body);
                             break;
                         case "addDepot":
-                            if (body != "")
-                            {
-                                var eventAddEdge = JsonConvert.DeserializeObject<EventAddDepot>(body);
-                                eventAddEdge.Run(State);
-                            }
+                            DeserializeAndRun<EventAddDepot>(body);
                             break;
                         case "removeDepot":
-                            if (body != "")
-                            {
-                                var eventRemoveDepot = JsonConvert.DeserializeObject<EventRemoveDepot>(body);
-                                eventRemoveDepot.Run(State);
-                            }
+                            DeserializeAndRun<EventRemoveDepot>(body);
                             break;
                         case "addWaypoint":
-                            if (body != "")
-                            {
-                                var eventAddWaypoint = JsonConvert.DeserializeObject<EventAddWaypoint>(body);
-                                eventAddWaypoint.Run(State);
-                            }
+                            DeserializeAndRun<EventAddWaypoint>(body);
                             break;
                         case "removeWaypoint":
-                            if (body != "")
-                            {
-                                var eventRemoveWaypoint = JsonConvert.DeserializeObject<EventRemoveWaypoint>(body);
-                                eventRemoveWaypoint.Run(State);
-                            }
+                            DeserializeAndRun<EventRemoveWaypoint>(body);
+                            break;
+                        case "addOperation":
+                            DeserializeAndRun<EventAddOperation>(body);
+                            break;
+                        case "removeOperation":
+                            DeserializeAndRun<EventRemoveOperation>(body);
                             break;
                         case "computeEdges":
                             (new EventComputeEdges()).Run(State);
@@ -110,6 +84,13 @@ namespace Waremap.Controllers
             }
 
             return State;
+        }
+
+        private static void DeserializeAndRun<T>(string json) where T : IEvent
+        {
+            if (json == "") return;
+            var evt = JsonConvert.DeserializeObject<T>(json, Utils.ConverterSettings);
+            evt.Run(State);
         }
     }
 }
