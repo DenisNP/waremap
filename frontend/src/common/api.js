@@ -52,6 +52,8 @@ function getData(url = '') {
 }
 
 export default {
+  getData,
+
   async api(method, action, data = {}) {
     const endpoint = window.endpoint || ENDPOINT;
 
@@ -81,6 +83,18 @@ export default {
     const endpoint = window.endpoint || ENDPOINT;
 
     const res = await postData(`${endpoint}/background?floor=${floor}`, base64);
+
+    if (!res.ok || res.status !== 200) {
+      throw new Error('fetch fail', res);
+    }
+
+    return res.text();
+  },
+
+  async getBackground(floor) {
+    const endpoint = window.endpoint || ENDPOINT;
+
+    const res = await getData(`${endpoint}/background?floor=${floor}`);
 
     if (!res.ok || res.status !== 200) {
       throw new Error('fetch fail', res);

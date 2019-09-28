@@ -22,6 +22,7 @@ export default {
   },
   mutations: {
     setFloor(state, floor) {
+      // state.floorBackground = null;
       state.floor = floor;
     },
 
@@ -173,6 +174,13 @@ export default {
 
     async uploadFloorBackground(c, base64) {
       await API.sendBackground(base64, c.state.floor);
+    },
+
+    async downloadFloorBackground(c) {
+      c.state.floorBackground = '';
+      c.state.floorBackground = await API.getBackground(c.state.floor);
+
+      console.log('downloaded background', c.state.floorBackground.length);
     }
   }
 };

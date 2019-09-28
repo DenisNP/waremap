@@ -10,6 +10,7 @@ new Vue({
   store,
   render: h => h(App),
   async created() {
-    this.$store.dispatch('init');
+    await this.$store.dispatch('init');
+    await this.$store.dispatch('editor/downloadFloorBackground');
   }
 }).$mount('#app');
