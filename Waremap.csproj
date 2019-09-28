@@ -9,14 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Update="shared/cars.json">
-        <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-        <CopyToPublishDirectory>Always</CopyToPublishDirectory>
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
-
-    <ItemGroup>
         <Content Update="shared/parts.json">
             <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
             <CopyToPublishDirectory>Always</CopyToPublishDirectory>
