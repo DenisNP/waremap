@@ -319,14 +319,14 @@ export default {
   color: #F2F2F2;
 }
 .tools .pallete-item.selected .pallete-item--name {
-  color: #333;
+  color: #EE4722;
 }
 .tools .selected .pallete-item-icon img {
     transform: scale(1.2);
 }
 .tools .pallete-heading {
   font-size: 18px;
-  color: #333;
+  color: #FFF;
   padding: 15px 35px 10px;
 }
 
@@ -351,9 +351,9 @@ label.myLabel {
   padding: 0 0 4px;
   top: 0;
   left: 50%;
-  width: 520px;
+  width: 506px;
   font-size: 18px;
-  margin: 0 -260px;
+  margin: 0 -253px;
   box-shadow: none;
   border-radius: 0 0 25px 25px;
   display: flex;
@@ -363,6 +363,9 @@ label.myLabel {
   background-repeat: no-repeat;
   background-position: center top;
   background-image: url(../assets/top.svg);
+}
+.pallete.floors .pallete-item {
+  padding: 10px 18px 14px;
 }
 .pallete.floors .pallete-item:before {
   bottom: 5px;
@@ -383,6 +386,7 @@ label.myLabel {
 }
 .pallete.floors .pallete-heading {
   font-size: 18px;
+  padding: 10px 10px 14px;
 }
 
 /* -------------------------------------------------------------------- */

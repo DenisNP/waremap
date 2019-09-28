@@ -113,8 +113,8 @@ svg {
     left: 0;
     width: 100%;
     height: 100%;
-    opacity: .7;
-    background-image: url(./assets/tiles/tile.svg);
+    opacity: .5;
+    background-image: url(./assets/tiles/tile_03.svg);
 }
 .walls.selected .wall,
 .walls.selected .corner {
@@ -124,7 +124,7 @@ svg {
   position: absolute;
   width: 100vmax;
   height: 100vmax;
-  background-image: url(./assets/tiles/main.svg);
+  background-image: url(./assets/tiles/main_03.svg);
   background-size: 30px;
   background-repeat: repeat-x;
   background-position: center;
@@ -141,7 +141,7 @@ svg {
   margin: -10px;
   position: absolute;
   z-index: 1;
-  background-image: url(./assets/tiles/corner.svg);
+  background-image: url(./assets/tiles/corner_03.svg);
   background-size: 30px;
   background-repeat: repeat-x;
   background-position: center;
