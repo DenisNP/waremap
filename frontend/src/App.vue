@@ -1,19 +1,23 @@
 <template>
   <div id="app">
-    <ControlsLayer floor="2" tool="3" />
-    <Editor/>
-    <EdgeParams
-      v-if="$store.state.editor.mode === 'edgeSelected'"
-      :data="$store.state.editor.selectedEdge"
-    />
-    <MachineParams
-      v-if="isMachineSelected"
-      :data="$store.state.editor.selectedNode"
-    />
+    <AppQr v-if="page === 'qr'"></AppQr>
+    <div id="appMain" v-if="page === 'main'">
+      <ControlsLayer floor="2" tool="1" />
+      <Editor/>
+      <EdgeParams
+        v-if="$store.state.editor.mode === 'edgeSelected'"
+        :data="$store.state.editor.selectedEdge"
+      />
+      <MachineParams
+        v-if="isMachineSelected"
+        :data="$store.state.editor.selectedNode"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import AppQr from './components/AppQr.vue';
 import Editor from './components/Editor.vue';
 import ControlsLayer from './components/ControlsLayer.vue';
 import EdgeParams from './components/EdgeParams.vue';
@@ -22,10 +26,19 @@ import MachineParams from './components/MachineParams.vue';
 export default {
   name: 'app',
   components: {
+    AppQr,
     EdgeParams,
     MachineParams,
     Editor,
     ControlsLayer
+  },
+  data() {
+    return {
+      page: ''
+    }
+  },
+  mounted() {
+    this.page = location.pathname === '/qr' ? 'qr' : 'main';
   },
   computed: {
     isMachineSelected() {
