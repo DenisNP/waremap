@@ -109,9 +109,9 @@ export default {
     });
   },
 
-  async updateNode({id, type, x, y, floor, depot}) {
+  async updateNode({id, type, x, y, floor, depot, operation_ids}) {
     return await this.sendAction('addNode', {
-      id, type, x, y, floor, depot
+      id, type, x, y, floor, depot, operation_ids
     });
   },
 
