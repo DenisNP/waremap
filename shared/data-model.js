@@ -2,6 +2,7 @@ module.exports = {
   geo: {
     depots: [{
       id: Number,
+      name: String,
       floor: Number,
       w: Number,
       h: Number,
@@ -11,11 +12,12 @@ module.exports = {
     nodes: [{
       id: Number,
       type: String, // enum('Machine', 'Point'),
+      icon: String, // Machine, Point, Ladder, Elevator, Door
       depot: Number,
       floor: Number,
       x: Number,
       y: Number,
-      operation_ids: [], // array of ints 
+      operation_ids: [], // array of ints
     }],
     edges: [{
       from: Number,
