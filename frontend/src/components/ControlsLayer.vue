@@ -33,10 +33,7 @@
       <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
     </div>
 
-
-
     <div  class="pallete pallete-bottom floorBgUpload">
-      
       <label class="pallete-item pallete-bottom">
         <input type="file" @change="onImportClick" accept=".json"/>
           Импорт

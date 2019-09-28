@@ -4,9 +4,6 @@
       <image id="floorBg" :href="$store.state.editor.floorBackground" x="250" y="120" width="1000" />
     </svg>
     <svg @mousemove="onMouseMove" :class="{highlighted: $store.state.editor.isSomeHighlighted}" @click="clickBg">
-      <!-- <foreignObject v-if="$store.state.editor.floorBackground" x="242" y="125" width="100%" height="100%" style="pointer-events: none">
-        <img :src="$store.state.editor.floorBackground" style=" filter: invert(1); opacity: .6">
-      </foreignObject> -->
       <Depot
         v-for="data in $store.state.serverState.geo.depots"
         :key="'depot' + data.id"
@@ -30,6 +27,7 @@
         :data="data"
         :selected="$store.state.editor.selectedNodeId === data.id"
         :highlighted="$store.state.editor.highlightedNodes[data.id] === true"
+        :badge="floorsEdges[data.id]"
       ></Node>
 
       <FloorToFloorEdge
@@ -90,7 +88,26 @@ export default {
     }
   },
   computed: {
+    floorsEdges() {
+      let floorsEdges = {};
 
+      this.$store.state.serverState.geo.edges.map((edge) => {
+        const from = this.$store.getters['serverState/nodeById'](edge.from);
+        const to = this.$store.getters['serverState/nodeById'](edge.to);
+
+        if (from.floor !== to.floor) {
+          if (!(from.id in floorsEdges)) floorsEdges[from.id] = [];
+          if (!(to.id in floorsEdges)) floorsEdges[to.id] = [];
+          floorsEdges[from.id].push(to.floor);
+          floorsEdges[to.id].push(from.floor);
+
+          floorsEdges[from.id].sort();
+          floorsEdges[to.id].sort();
+        }
+      });
+
+      return floorsEdges;
+    }
   },
   methods: {
     clickBg(e) {
