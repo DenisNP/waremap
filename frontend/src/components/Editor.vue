@@ -94,6 +94,10 @@ export default {
         if (this.$store.state.editor.mode === 'depotSelected') {
           await this.$store.dispatch('editor/removeSelectedDepot');
         }
+        this.$store.commit('editor/unselect');
+      }
+      if (e.which == 27) {
+        this.$store.commit('editor/unselect');
       }
     },
     onMouseMove(e) {
@@ -140,11 +144,6 @@ export default {
           this.isDrawingDepot = false;
         }
       } else if (['nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode)) {
-        this.$store.commit('editor/unselect');
-      }
-    },
-    onKeyDown(e) {
-      if (e.which == 27) {
         this.$store.commit('editor/unselect');
       }
     }
