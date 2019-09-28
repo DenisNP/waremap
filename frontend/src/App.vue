@@ -2,7 +2,7 @@
   <div id="app">
     <AppQr v-if="page === 'qr'"></AppQr>
     <div v-if="page === 'main'">
-      <ControlsLayer floor="2" tool="1" />
+      <ControlsLayer floor="1" tool="0" />
       <Editor/>
       <EdgeParams
         v-if="$store.state.editor.mode === 'edgeSelected'"
