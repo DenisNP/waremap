@@ -142,7 +142,8 @@ export default {
 
 .pallete {
   z-index: 10;
-  background-color: #FFF;
+  background-color: #4D4D4D;
+  color: #FFF;
   position: absolute;
   top: 15px;
   left: 15px;
@@ -165,7 +166,7 @@ export default {
 .pallete-item {
   cursor: pointer;
   position: relative;
-  padding: 10px 15px;
+  padding: 13px 18px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -210,8 +211,8 @@ export default {
 }
 
 .pallete-item-icon {
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
   margin: -3px 14px -3px 0;
   display: flex;
   justify-content: center;

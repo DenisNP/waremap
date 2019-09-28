@@ -26,6 +26,10 @@ export default {
 
 <style lang="scss">
 
+body {
+  background-color: #4D4D4D;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -52,25 +56,24 @@ export default {
     cursor: pointer;
     background-image: url(./assets/tiles/tile.svg);
 }
-.walls.selected {
-  border: 5px solid #F00;
-  box-sizing: border-box;
-  overflow: hidden;
+.walls.selected .wall,
+.walls.selected .corner {
+    filter: hue-rotate(270deg)
 }
 .wall {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100vmax;
+  height: 100vmax;
   background-image: url(./assets/tiles/main.svg);
   background-size: 30px;
   background-repeat: repeat-x;
   background-position: center;
   left: 0;
 }
-.wall.top {   top: calc(-50% + 5px);  bottom: auto;             transform: rotate(0deg); }
-.wall.bottom {top: auto;              bottom: calc(-50% + 5px); transform: rotate(-180deg); }
-.wall.left {  left: calc(-50% + 5px); right: auto;              transform: rotate(90deg); }
-.wall.right { left: auto;             right: calc(-50% + 5px);  transform: rotate(-90deg); }
+.wall.top {   top: calc(-50vmax + 5px);  bottom: auto;                transform: rotate(0deg); }
+.wall.bottom {top: auto;                 bottom: calc(-50vmax + 5px); transform: rotate(-180deg); }
+.wall.left {  left: calc(-50vmax + 5px); right: auto;                 transform: rotate(90deg); }
+.wall.right { left: auto;                right:  calc(-50vmax + 5px); transform: rotate(-90deg); }
 
 .corner {
   width: 30px;
