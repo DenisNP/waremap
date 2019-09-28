@@ -2,15 +2,30 @@
   <g>
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
     <rect
+      :fill="selected ? '#f00' : '#000'"
+      @click="onClick"
+      cursor="pointer"
+    />
+
+    <foreignObject
       :id="data.id"
       :x="(draggingX || data.x) - w/2"
       :y="(draggingY || data.y) - h/2"
       :width="w"
       :height="h"
-      :fill="selected ? '#f00' : '#000'"
-      @click="onClick"
-      cursor="pointer"
-    />
+    >
+      <div class="walls">
+        <div class="wall top"></div>
+        <div class="wall right"></div>
+        <div class="wall bottom"></div>
+        <div class="wall left"></div>
+
+        <div class="corner top"></div>
+        <div class="corner right"></div>
+        <div class="corner bottom"></div>
+        <div class="corner left"></div>
+      </div>
+    </foreignObject>
   </g>
 </template>
 
@@ -25,8 +40,8 @@ export default {
   ],
   data() {
     return {
-      w: 30,
-      h: 30,
+      w: 50,
+      h: 50,
       draggingX: null,
       draggingY: null,
       down: false,
@@ -116,19 +131,32 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
+<style lang="scss">
+
+.walls {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+.wall, .corner {
+    position: absolute;
+    background-color: rgba(0,0,0,.5);
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+.wall.left,
+.wall.right,
+.corner { width: 5px; }
+.wall.left,
+.wall.right { height: 100%; }
+.wall.top,
+.wall.bottom,
+.corner { height: 5px; }
+.wall.top,
+.wall.bottom { width: 100%; }
+.walls .top { top: 0; bottom: auto; }
+.walls .bottom { top: auto; bottom: 0; }
+.walls .left { left: 0; right: auto; }
+.walls .right { left: auto; right: 0; }
+
 </style>
