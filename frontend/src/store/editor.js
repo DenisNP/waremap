@@ -179,7 +179,11 @@ export default {
 
     async downloadFloorBackground(c) {
       c.state.floorBackground = '';
-      c.state.floorBackground = await API.getBackground(c.state.floor);
+      try {
+        c.state.floorBackground = await API.getBackground(c.state.floor);
+      } catch(e) {
+        return;
+      }
 
       console.log('downloaded background', c.state.floorBackground.length);
     }
