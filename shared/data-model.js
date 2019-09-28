@@ -20,7 +20,7 @@ module.exports = {
     edges: [{
       from: Number,
       to: Number,
-      type: String, // enum('Road', 'Elevator', 'Ladder', 'Footwalk')
+      type: String, // enum('Road', 'Elevator', 'Ladder', 'Footway)
       weight: Number
     }]
   },
