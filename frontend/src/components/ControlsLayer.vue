@@ -1,32 +1,21 @@
 <template>
   <div class="controls">
     <div class="pallete tools">
-      <div class="pallete-item"
-        v-for="(tool, index) in tools"
-        :key="index"
-        :class="{selected: index == selectedTool}"
-        @click="toolSelect(index)"
-      >
-        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon" v-if="tool.icon"/></div>
-        <span class="pallete-item--name">{{ tool.name }}</span>
-      </div>
-
-      <label class="myLabel">
-        <div class="pallete-item"
-             key="uploadBackground"
+      <template v-for="(item, index) in tools">
+        <div class="pallete-heading" v-if="item.heading">{{ item.heading }}</div>
+        <div class="pallete-item" v-else
+          :key="index"
+          :class="{selected: index == selectedTool}"
+          @click="toolSelect(index)"
         >
-          <div class="pallete-item-icon"><img :src="$store.state.icons.pallete.UploadBg.i" /></div>
-            <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
-
-            <span class="pallete-item--name">
-              Загрузить план
-            </span>
+          <div v-if="item.icon" class="pallete-item-icon"><img :src="item.icon" v-if="item.icon"/></div>
+          <span class="pallete-item--name">{{ item.name }}</span>
         </div>
-      </label>
+      </template>
     </div>
 
-    <div class="pallete pallete-right floors">
-      <div class="pallete-heading">Этаж</div>
+    <div class="pallete pallete-top floors">
+      <div class="pallete-heading">Этажи</div>
       <div class="pallete-item"
         v-for="floor in floors"
         :key="floor"
@@ -39,6 +28,19 @@
       </div>
       <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
     </div>
+
+    <!-- <label class="myLabel">
+      <div class="pallete-item"
+           key="uploadBackground"
+      >
+        <div class="pallete-item-icon"><img :src="$store.state.icons.pallete.UploadBg.i" /></div>
+          <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+
+          <span class="pallete-item--name">
+            Загрузить план
+          </span>
+      </div>
+    </label> -->
   </div>
 </template>
 
@@ -61,12 +63,20 @@ export default {
           icon: this.$store.state.icons.pallete.Cursor.i
         },
         {
+          heading: 'Конструктор'
+        },
+        {
+          name: 'Цех',
+          key: 'Depot',
+          icon: this.$store.state.icons.pallete.Depot.i
+        },
+        {
           name: 'Участок',
           key: 'Machine',
           icon: this.$store.state.icons.pallete.Machine.i
         },
         {
-          name: 'Узел',
+          name: 'Создать узел',
           key: 'Node',
           icon: this.$store.state.icons.pallete.Node.i
         },
@@ -86,12 +96,7 @@ export default {
           icon: this.$store.state.icons.pallete.Door.i
         },
         {
-          name: 'Цех',
-          key: 'Depot',
-          icon: this.$store.state.icons.pallete.Depot.i
-        },
-        {
-          name: 'Сгенерировать связи',
+          name: 'Создать связи',
           key: 'autoComputeEdges',
           icon: this.$store.state.icons.pallete.Edges.i
         }
@@ -237,14 +242,6 @@ export default {
   max-width: 100%;
 }
 
-.pallete.tools {
-    left: 0;
-    top: 0;
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-}
 ::-webkit-scrollbar {
   width: 14px;
 }
@@ -256,6 +253,46 @@ export default {
   background-color: #999;
   border: 4px solid #4D4D4D;
   border-radius: 7px;
+}
+.pallete.tools {
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  background-image: url(../assets/left.svg);
+  height: 620px;
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin-top: 72px;
+  padding: 35px 0 0;
+}
+.tools .pallete-item {
+  padding: 11px 35px;
+}
+.tools .pallete-item-icon {
+  margin: -16px 15px -16px 0;
+}
+.tools .pallete-item.selected {
+  font-weight: inherit;
+  color: #333;
+}
+.tools .pallete-item:before {
+  display: none;
+}
+.tools .pallete-item--name {
+  font-size: 18px;
+  color: #F2F2F2;
+}
+.tools .pallete-item.selected .pallete-item--name {
+  color: #333;
+}
+.tools .selected .pallete-item-icon img {
+    transform: scale(1.2);
+}
+.tools .pallete-heading {
+  font-size: 18px;
+  color: #333;
+  padding: 20px 35px 10px;
 }
 
 
@@ -271,6 +308,46 @@ label.myLabel input[type="file"] {
 
 label.myLabel {
   cursor: pointer;
+}
+
+/* -------------------------------------------------------- */
+
+.pallete.floors {
+  padding: 0 0 4px;
+  top: 0;
+  left: 50%;
+  width: 520px;
+  font-size: 18px;
+  margin: 0 -260px;
+  box-shadow: none;
+  border-radius: 0 0 25px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-image: url(../assets/top.svg);
+}
+.pallete.floors .pallete-item:before {
+  bottom: 5px;
+  top: auto;
+  left: 50%;
+  margin: 0 0 0 -8px;
+}
+.pallete.floors .pallete-item:hover:before {
+  border-left-color: transparent;
+  border-bottom-color: #EE4722;
+}
+.pallete.floors .pallete-item.selected {
+  color: #3878FF;
+}
+.pallete.floors .pallete-item.selected:before {
+  border-left-color: transparent;
+  border-bottom-color: #EE4722;
+}
+.pallete.floors .pallete-heading {
+  font-size: 18px;
 }
 
 </style>
