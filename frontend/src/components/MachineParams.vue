@@ -6,7 +6,7 @@
     <div class="pallete pallete-right floors">
       <div>Возможные операции</div>
       <div
-        v-for="operation in operationTypes"
+        v-for="operation in $store.state.serverState.equipment.operations"
         :key="operation.id"
       >
         <span class="pallete-item-name">
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-  const operationTypes = require('../../../shared/operations.json');
-
   export default {
     name: 'MachineParams',
     props: [
@@ -32,7 +30,6 @@
     ],
     data() {
       return {
-        operationTypes,
         operation_ids: this.data.operation_ids,
       };
     },
