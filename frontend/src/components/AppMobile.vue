@@ -1,26 +1,35 @@
 <template>
-  <div class="container">
-    <div v-show="!isScanning">
+  <div class="root">
+    <div class="main-page" v-show="!isScanning">
       <button @click="showScanner">Отметиться через QR код</button>
       <br>
+      <div v-show="wrongQrCode" class="error msg">
+        Ошибочный QR-код
+      </div>
       <div v-show="Boolean(code)">
-        Вы отметились {{ checkpointDate }}!
-        <br>
-        <small>
-          (Отсканированный QR код: {{ code }})
-        </small>
+        <div class="success msg">
+          Вы отметились {{ checkpointDate }}!<br>
+          <span class="small">QR код: {{ code }}</span>
+        </div>
       </div>
       <br>
-      <div>Ваше местоположение: {{ position && position.current.node_name }}</div>
-      <br>
-      <div>Точка назначения: {{ position && position.next.node_name }}</div>
+      <div class="baloon">
+        <span class="small">Ваше местоположение:</span>
+        <br>
+        <span>{{ position && position.current.node_name || '...' }}</span>
+      </div>
+      <div class="arrow">↓</div>
+      <div class="baloon">
+        <span class="small">Точка назначения:</span>
+        <br>
+        <span>{{ position && position.next.node_name || '...' }}</span>
+      </div>
     </div>
     <div class="qr-scanner" v-show="isScanning">
+      <button @click="hideScanner">Назад</button>
       <div ref="loadingMessage"></div>
-      <canvas ref="canvas" hidden></canvas>
-      <div ref="output" hidden>
-        <div ref="outputMessage">No QR code detected.</div>
-        <div hidden><b>Data:</b> <span ref="outputData"></span></div>
+      <div>
+        <canvas ref="canvas" hidden></canvas>
       </div>
     </div>
   </div>
@@ -31,8 +40,6 @@ const jsQR = require('jsqr');
 import {postJson, postData, getData} from '../common/helpers';
 import config from '../common/config';
 import API from '../common/api';
-
-const ENDPOINT = config.backendUrl;
 
 export default {
   name: 'app',
@@ -48,12 +55,14 @@ export default {
       stream: null,
       position: null,
       checkpointDate: null,
+      wrongQrCode: false,
     };
   },
   async mounted() {
+    this.position = await API.api('GET', 'position');
+
     setInterval(async () => {
-      const res = await API.api('GET', 'position');
-      this.position = res;
+      this.position = await API.api('GET', 'position');
     }, 5000);
   },
   computed: {
@@ -70,12 +79,21 @@ export default {
       cancelAnimationFrame(this.animationFrame);
     },
     async sendCheckpoint(code) {
-      this.code = code;
-      this.checkpointDate = new Date().toLocaleString('ru');
       this.hideScanner();
 
       // const content = `${item.part_id}_${machineId}_${item.operation_id}`;
-      const [part_id, machine_id, operation_id] = code.split('_');
+      const arr = code.split('_').map(Number);
+
+      if (arr.length !== 3 || arr.some(a => !Number.isInteger(a))) {
+        // wrong QR code
+        this.wrongQrCode = true;
+        return;
+      }
+
+      this.code = code;
+      this.checkpointDate = new Date().toLocaleString('ru');
+
+      const [part_id, machine_id, operation_id] = arr;
 
       const res = await API.api('POST', 'position', {
         part_id: Number(part_id),
@@ -86,22 +104,20 @@ export default {
     },
     async showScanner() {
       this.code = null;
+      this.wrongQrCode = null;
       this.isScanning = true;
 
       var video = document.createElement('video');
       var canvasElement = this.$refs.canvas;
       var canvas = canvasElement.getContext('2d');
       var loadingMessage = this.$refs.loadingMessage;
-      var outputContainer = this.$refs.output;
-      var outputMessage = this.$refs.outputMessage;
-      var outputData = this.$refs.outputData;
 
       // Use facingMode: environment to attemt to get the front camera on phones
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: 'environment',
-          width: Math.max(screen.width, screen.height),
-          height: Math.min(screen.width, screen.height),
+          width: 320,
+          height: 320,
           frameRate: {
             ideal: 60,
             max: 60
@@ -114,11 +130,10 @@ export default {
       video.play();
 
       const tick = () => {
-        loadingMessage.innerText = 'Loading video...';
+        loadingMessage.innerText = 'Инициализируем камеру...';
         if (video.readyState === video.HAVE_ENOUGH_DATA) {
           loadingMessage.hidden = true;
           canvasElement.hidden = false;
-          outputContainer.hidden = false;
 
           canvasElement.height = video.videoHeight;
           canvasElement.width = video.videoWidth;
@@ -129,9 +144,6 @@ export default {
           });
           if (code) {
             this.sendCheckpoint(code.data);
-          } else {
-            outputMessage.hidden = false;
-            outputData.parentElement.hidden = true;
           }
         }
         this.animationFrame = window.requestAnimationFrame(tick);
@@ -144,14 +156,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    background: rgb(56, 120, 255);
     color: #fff;
-    font-size: 20px;
+    font-size: 1.6em;
+  }
+
+  button {
+  }
+
+  .root .main-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .root .qr-scanner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .root div * {
+    text-align: center;
   }
 
   button {
     padding: 20px;
     margin: 20px;
     font-size: 20px;
+  }
+
+  .msg {
+    padding: 14px;
+  }
+
+  .msg.error {
+    background: darkred;
+  }
+
+  .msg.success {
+    background: green;
+  }
+
+  .small {
+    font-size: 16px;
+    opacity: 0.5;
+  }
+
+  .baloon {
+    background: #ffffff;
+    border-radius: 40px;
+    padding: 10px 10px 20px 10px;
+    margin: 10px 20px;
+    color: #000;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  .arrow {
+    font-size: 40px;
+    font-weight: bold;
   }
 </style>
