@@ -100,13 +100,15 @@
       }
     },
     mounted() {
-      if (!this.tool) this._tool = 0;
-      else this._tool = this.tool;
-      this.selectedTool = this._tool;
+        if (!this.tool) this._tool = 0;
+        else this._tool = this.tool;
+        this.selectedTool = this._tool;
+        this.toolSelect(this.selectedTool);
 
-      if (!this.floor) this._floor = 1;
-      else this._floor = this.floor;
-      this.selectedFloor = this._floor;
+        if (!this.floor) this._floor = 1;
+        else this._floor = this.floor;
+        this.selectedFloor = this._floor;
+        this.floorSelect(this.selectedFloor);
     },
     methods: {
       setDefaultMode() {

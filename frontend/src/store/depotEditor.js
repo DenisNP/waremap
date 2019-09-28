@@ -10,6 +10,7 @@ export default {
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
     selectedEdge: null,
+    displayMode: 'floor', // 'floor', 'depot'
     floor: 0,
     depot: {
       id: 0

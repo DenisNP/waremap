@@ -1,5 +1,5 @@
 <template>
-  <g>
+  <g :class="{show}">
     <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
@@ -48,6 +48,13 @@ export default {
       newX: null,
       newY: null
     };
+  },
+  computed: {
+    show() {
+      return
+          (this.$store.state.depotEditor.displayMode == 'floor' && this.floor == this.$store.state.depotEditor.floor)
+       || (this.$store.state.depotEditor.displayMode == 'depot' && this.depot == this.$store.state.depotEditor.depot.id);
+    }
   },
   methods: {
     onClick(e) {
