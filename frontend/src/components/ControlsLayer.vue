@@ -2,18 +2,9 @@
   <div class="controls">
     <div class="pallete tools">
       <div class="pallete-item"
-        :class="{selected: isDefaultMode}"
-        key="setDefaultMode"
-        @click="setDefaultMode"
-      >
-        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon"/></div>
-        <span class="pallete-item--name">Режим курсора</span>
-      </div>
-
-      <div class="pallete-item"
         v-for="(tool, index) in tools"
         :key="index"
-        :class="{selected: isAddingNodeMode && index == selectedTool}"
+        :class="{selected: index == selectedTool}"
         @click="toolSelect(index)"
       >
         <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon" v-if="tool.icon"/></div>
@@ -24,7 +15,7 @@
         key="autoComputeEdges"
         @click="autoComputeEdges()"
       >
-        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon"/></div>
+        <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
         <span class="pallete-item--name">Заполнить связи</span>
       </div>
     </div>
@@ -59,6 +50,11 @@ export default {
       _tool: null,
       tools: [
         {
+          name: 'Режим курсора',
+          key: 'setDefaultMode',
+          icon: require('../assets/cursor_02.svg')
+        },
+        {
           name: 'Участок',
           key: 'Machine',
           icon: require('../assets/machine-tool.svg')
@@ -81,7 +77,7 @@ export default {
         {
           name: 'Дверь',
           key: 'Door',
-          icon: ''
+          icon: require('../assets/door.svg')
         },
         {
           name: 'Цех',
@@ -122,6 +118,10 @@ export default {
     toolSelect(index) {
       this.selectedTool = index;
       this.$root.$emit('toolSelected', this.tools[index]);
+
+      if (this.tools[index].key == 'setDefaultMode') {
+        this.setDefaultMode();
+      }
     },
     floorSelect(floor) {
       this.selectedFloor = floor;

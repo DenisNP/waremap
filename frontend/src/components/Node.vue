@@ -156,34 +156,48 @@ export default {
 
 .walls {
     position: relative;
-    display: block;
+    display: none;
     width: 100%;
     height: 100%;
     background-color: #FFF;
     cursor: pointer;
+    background-image: url(../assets/tiles/tile.svg);
 }
 .walls.selected {
-  background-color: #f00;
+  border: 5px solid #F00;
+  box-sizing: border-box;
+  overflow: hidden;
 }
-.wall, .corner {
-    position: absolute;
-    background-color: rgba(0,0,0,.5);
+.wall {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(../assets/tiles/main.svg);
+  background-size: 30px;
+  background-repeat: repeat-x;
+  background-position: center;
+  left: 0;
 }
-.wall.left,
-.wall.right,
-.corner { width: 5px; }
-.wall.left,
-.wall.right { height: 100%; }
-.wall.top,
-.wall.bottom,
-.corner { height: 5px; }
-.wall.top,
-.wall.bottom { width: 100%; }
-.walls .top { top: 0; bottom: auto; }
-.walls .bottom { top: auto; bottom: 0; }
-.walls .left { left: 0; right: auto; }
-.walls .right { left: auto; right: 0; }
+.wall.top {   top: calc(-50% + 5px);  bottom: auto;             transform: rotate(0deg); }
+.wall.bottom {top: auto;              bottom: calc(-50% + 5px); transform: rotate(-180deg); }
+.wall.left {  left: calc(-50% + 5px); right: auto;              transform: rotate(90deg); }
+.wall.right { left: auto;             right: calc(-50% + 5px);  transform: rotate(-90deg); }
 
+.corner {
+  width: 30px;
+  height: 30px;
+  margin: -10px;
+  position: absolute;
+  z-index: 1;
+  background-image: url(../assets/tiles/corner.svg);
+  background-size: 30px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+.corner.left {   top: 0;    bottom: auto; left: 0;    right: auto; transform: rotate(0deg); }
+.corner.top {    top: 0;    bottom: auto; left: auto; right: 0;    transform: rotate(90deg); }
+.corner.right {  top: auto; bottom: 0;    left: 0;    right: auto; transform: rotate(270deg); }
+.corner.bottom { top: auto; bottom: 0;    left: auto; right: 0;    transform: rotate(180deg); }
 
 .node-icon {
   display: flex;
@@ -195,6 +209,13 @@ export default {
 .node-icon img {
   max-width: 98%;
   max-height: 100%;
+}
+
+.node-Depot .walls {
+  display: block;
+}
+.node-Depot .node-icon {
+  display: none;
 }
 
 </style>
