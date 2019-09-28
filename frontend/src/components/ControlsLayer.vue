@@ -12,12 +12,25 @@
       </div>
 
       <div class="pallete-item"
-        key="autoComputeEdges"
-        @click="autoComputeEdges()"
+           key="autoComputeEdges"
+           @click="autoComputeEdges()"
       >
         <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
         <span class="pallete-item--name">Заполнить связи</span>
       </div>
+
+      <label class="myLabel">
+        <div class="pallete-item"
+             key="uploadBackground"
+        >
+          <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
+            <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+
+            <span class="pallete-item--name">
+              Загрузить план
+            </span>
+        </div>
+      </label>
     </div>
 
     <div class="pallete pallete-right floors">
@@ -38,6 +51,7 @@
 </template>
 
 <script>
+import * as helpers from '../common/helpers';
 
 export default {
   name: 'ControlsLayer',
@@ -111,6 +125,11 @@ export default {
       this.toolSelect(this.selectedTool);
   },
   methods: {
+    async onFileSelected(e) {
+      const base64 = await helpers.toBase64(e.target.files[0]);
+      // await this.$store.dispatch('editor/uploadBackground');
+      console.log(base64.length, 'bytes uploaded');
+    },
     setDefaultMode() {
       this.$store.commit('editor/setDefaultMode');
     },
@@ -129,9 +148,17 @@ export default {
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');
     },
+    uploadBackground() {
+
+    },
   }
 }
-
+const toBase64 = file => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = error => reject(error);
+});
 </script>
 
 <style>
@@ -222,6 +249,15 @@ export default {
 
 .floors .pallete-item {
   justify-content: center;
+}
+
+label.myLabel input[type="file"] {
+  position:absolute;
+  top: -1000px;
+}
+
+label.myLabel {
+  cursor: pointer;
 }
 
 </style>
