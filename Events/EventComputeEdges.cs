@@ -21,6 +21,7 @@ namespace Waremap.Events
                         for (var k = i + 1; k < nodes.Count; k++)
                         {
                             var secondNode = nodes[k];
+                            if (firstNode.Type == NodeType.Machine && secondNode.Type == NodeType.Machine) continue;
                             CheckAddEdge(firstNode, secondNode, state);
                         }
                     }

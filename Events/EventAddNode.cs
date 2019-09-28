@@ -50,6 +50,8 @@ namespace Waremap.Events
                     OperationIds = OperationIds ?? new List<int>() 
                 });
             }
+
+            EventAddDepot.RedefineDepots(state);
         }
     }
     #nullable disable

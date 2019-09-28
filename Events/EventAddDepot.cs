@@ -6,7 +6,7 @@ namespace Waremap.Events
     #nullable enable
     public class EventAddDepot: IEvent
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
         public int W { get; set; }
@@ -25,43 +25,43 @@ namespace Waremap.Events
                 depot.H = H;
                 depot.Floor = Floor;
                 depot.Name = Name ?? depot.Name;
-
-                foreach (var node in state.Geo.Nodes)
-                {
-                    if (node.X > X && node.X < X + W && node.Y > Y && node.Y < Y + H && node.Floor == Floor)
-                    {
-                        node.Depot = Id;
-                    }
-                    else
-                    {
-                        node.Depot = 0;
-                    }
-                }
             }
             else
             {
+                var id = Utils.CreateIdFor(state.Geo.Depots.Select(d => d.Id).ToList());
+
                 state.Geo.Depots.Add(new Depot
                 {
-                    Id = Utils.CreateIdFor(state.Geo.Depots.Select(d => d.Id).ToList()),
+                    Id = id,
                     X = X,
                     Y = Y,
                     W = W,
                     H = H,
                     Floor = Floor,
-                    Name = Name ?? $"Цех {Id}, Этаж {Floor}"
+                    Name = Name ?? $"Цех {id}, Этаж {Floor}"
                 });
+            }
+            
+            RedefineDepots(state);
+        }
 
-                foreach (var node in state.Geo.Nodes)
+        public static void RedefineDepots(State state)
+        {
+            foreach (var node in state.Geo.Nodes)
+            {
+                node.Depot = 0;
+                foreach (var depot in state.Geo.Depots)
                 {
-                    if (node.X > X && node.X < X + W 
-                                   && node.Y > Y && node.Y < Y + H 
-                                   && node.Floor == Floor)
+                    if (
+                        node.X >= depot.X
+                        && node.X <= depot.X + depot.W
+                        && node.Y >= depot.Y
+                        && node.Y <= depot.Y + depot.H
+                        && depot.Floor == node.Floor
+                    )
                     {
-                        node.Depot = Id;
-                    }
-                    else
-                    {
-                        node.Depot = 0;
+                        node.Depot = depot.Id;
+                        break;
                     }
                 }
             }

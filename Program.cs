@@ -12,11 +12,16 @@ namespace Waremap
             var state = ReceiveEventController.GetState();
             
             // preload mock data
-            /*using (var reader = new StreamReader("shared/nodes.json"))
+            /* using (var reader = new StreamReader("shared/nodes.json"))
             {
                 LoadDataController.LoadNodesToState(reader.ReadToEnd(), state);
+                foreach (var node in state.Geo.Nodes)
+                {
+                    node.Name = $"Участок {node.Id}, Цех {node.Depot}, Этаж {node.Floor}";
+                    node.Icon = node.Type == NodeType.Machine ? "Machine" : "Node";
+                }
                 Console.WriteLine($"Mock nodes loaded: {state.Geo.Nodes.Count}");
-            }*/
+            } */
             
             using (var reader = new StreamReader("shared/parts.json"))
             {
