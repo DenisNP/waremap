@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -12,16 +13,24 @@ namespace Waremap.Controllers
         [HttpPost]
         public string Post()
         {
-            using var reader = new StreamReader(Request.Body);
-            var body = reader.ReadToEnd();
-            var state = JsonConvert.DeserializeObject<State>(body);
+            try
+            {
+                using var reader = new StreamReader(Request.Body);
+                var body = reader.ReadToEnd();
+                var state = JsonConvert.DeserializeObject<State>(body);
 
-            var actualState = ReceiveEventController.GetState();
-            actualState.Equipment = state.Equipment;
-            actualState.Geo = state.Geo;
-            actualState.CarRoadmap = state.CarRoadmap;
+                var actualState = ReceiveEventController.GetState();
+                actualState.Equipment = state.Equipment;
+                actualState.Geo = state.Geo;
+                actualState.CarRoadmap = state.CarRoadmap;
 
-            return JsonConvert.SerializeObject(actualState);
+                return JsonConvert.SerializeObject(actualState);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

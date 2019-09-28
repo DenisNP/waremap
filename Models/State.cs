@@ -26,15 +26,15 @@ namespace Waremap.Models
         public List<int> OperationIds { get; set; } = new List<int>();
         public string Icon { get; set; }
 
-        private int _closestCore;
+        private GraphUtils.PathToNode _closestCore;
 
-        public void AssignClosestCore(int v)
+        public void AssignClosestCore(GraphUtils.PathToNode v)
         {
             _closestCore = v;
-            Console.WriteLine($"For {Id} closest is {v}");
+            Console.WriteLine($"For {Id} closest is {v.NId} with {v.Weight}");
         }
 
-        public int NeedClosestCore()
+        public GraphUtils.PathToNode NeedClosestCore()
         {
             return _closestCore;
         }

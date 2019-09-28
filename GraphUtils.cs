@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MoreLinq;
@@ -97,9 +98,21 @@ namespace Waremap
             {
                 if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
                 {
-                    node.AssignClosestCore(FindClosestCore(graph, node.Id, coreIds, new List<int>()).NId);
+                    node.AssignClosestCore(FindClosestCore(graph, node.Id, coreIds, new List<int>()));
                 }
             }
+        }
+        
+        public static int SelectFromRoulette(double[] weight, Random rng) {
+            double total = 0;
+            var amount = rng.NextDouble();
+            for(var a = 0; a < weight.Length; a++){
+                total += weight[a];
+                if(amount <= total){
+                    return a;
+                }
+            }
+            return -1;
         }
 
         public struct PathToNode
