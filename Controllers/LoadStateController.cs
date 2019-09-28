@@ -19,6 +19,7 @@ namespace Waremap.Controllers
             var actualState = ReceiveEventController.GetState();
             actualState.Equipment = state.Equipment;
             actualState.Geo = state.Geo;
+            actualState.CarRoadmap = state.CarRoadmap;
 
             return JsonConvert.SerializeObject(actualState);
         }
