@@ -56,7 +56,7 @@ export default {
      */
 
     data.forEach(item => {
-      const content = `${item.part_id}_${machineId}`;
+      const content = `${item.part_id}_${machineId}_${item.operation_id}`;
       QRCode.toDataURL(content, {
         errorCorrectionLevel: 'H',
         width: 400,
