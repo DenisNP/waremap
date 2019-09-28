@@ -74,7 +74,7 @@ namespace Waremap.Models
     public class Assembly
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 
     public class Equipment
