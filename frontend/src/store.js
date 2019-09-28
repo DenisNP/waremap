@@ -34,13 +34,7 @@ export default new Vuex.Store({
       let data;
       let initNeeded = true;
 
-      try {
-        data = await API.getState();
-      } catch (err) {
-        data = require('./common/backend-response.dist.json');
-        initNeeded = false;
-        console.warn('TEST DATA USED');
-      }
+      data = await API.getState();
 
       if (!initNeeded) {
         return;

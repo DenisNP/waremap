@@ -16,6 +16,7 @@ export default {
     highlightedNodes: {},
     isSomeHighlighted: false,
     isSelectedSomething: false,
+    FloorToFloorEdge: null,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
     depot: {
@@ -27,6 +28,20 @@ export default {
   mutations: {
     setFloor(state, floor) {
       // state.floorBackground = null;
+      if (state.selectedNode && ['Ladder', 'Elevator'].indexOf(state.selectedNode.icon) > -1 && state.selectedNode.floor != floor) {
+        let floorElement = document.querySelector('.pallete-item.floor-' + state.selectedNode.floor);
+        if (!floorElement) return false;
+
+        state.FloorToFloorEdge = {
+          fromNode: state.selectedNode,
+          fromFloor: state.selectedNode.floor,
+          toFloor: floor,
+          floorPos: {
+            x: window.innerWidth / 2 - 260 + floorElement.offsetLeft + floorElement.offsetWidth / 2,
+            y: floorElement.offsetTop + floorElement.offsetHeight
+          }
+        }
+      }
       state.floor = floor;
     },
 
@@ -215,4 +230,5 @@ function unselect(state) {
   state.selectedDepotId = null;
   state.highlightedNodes = {};
   state.isSomeHighlighted = false;
+  state.FloorToFloorEdge = null;
 }

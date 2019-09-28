@@ -24,7 +24,7 @@ namespace Waremap.Controllers
                 actualState.Geo = state.Geo;
                 actualState.CarRoadmap = state.CarRoadmap;
 
-                return JsonConvert.SerializeObject(actualState);
+                return JsonConvert.SerializeObject(actualState, Utils.ConverterSettings);
             }
             catch (Exception e)
             {

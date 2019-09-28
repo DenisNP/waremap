@@ -29,6 +29,10 @@
         :highlighted="$store.state.editor.highlightedNodes[data.id] === true"
       ></Node>
 
+      <FloorToFloorEdge
+        :data="$store.state.editor.selectedNodeId">
+      </FloorToFloorEdge>
+
       <Text>{{ $store.state.editor.floor }}</Text>
       <Text>{{ $store.state.editor.depot.id }}</Text>
     </svg>
@@ -40,12 +44,15 @@ import Node from './Node.vue';
 import Edge from './Edge.vue';
 import Depot from './Depot.vue';
 
+import FloorToFloorEdge from './FloorToFloorEdge.vue';
+
 export default {
   name: 'Editor',
   components: {
     Node,
     Depot,
-    Edge
+    Edge,
+    FloorToFloorEdge
   },
   mounted() {
     this.$root.$on('toolSelected', e => {
@@ -87,8 +94,10 @@ export default {
   },
   methods: {
     clickBg(e) {
-      if (e.target.tagName === 'svg') {
-        this.$store.commit('editor/unselect');
+      if (this.$store.state.editor.isSomeHighlighted) {
+        if (e.target.tagName === 'svg' || e.target.classList.contains('node-Depot')) {
+          this.$store.commit('editor/unselect');
+        }
       }
     },
     async onKeyDown(e) {

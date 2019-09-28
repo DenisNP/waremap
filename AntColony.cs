@@ -44,28 +44,33 @@ namespace Waremap
             }
 
             var nextNode = potential[index];
-            currentFood += AddFood(nextNode);
             route.Time += AddTime(carNode, nextNode);
             currentFood += TakeInPart(route, nextNode);
             currentFood += TakeOutPart(route, nextNode);
+            
+            route.CarWaypoints.Add(new Waypoint
+            {
+                FromNode = carNode,
+                ToNode = nextNode,
+                OperationId = 0
+            });
+            route.CarWaypoints.Add(new Waypoint
+            {
+                
+            });
         }
 
-        private double TakeOutPart(Route route, in int nextNode)
+        private double TakeOutPart(Route route, int node)
         {
             throw new NotImplementedException();
         }
 
-        private double TakeInPart(Route route, in int nextNode)
+        private double TakeInPart(Route route, int node)
         {
             throw new NotImplementedException();
         }
 
-        private int AddTime(in int carNode, in int nextNode)
-        {
-            throw new NotImplementedException();
-        }
-
-        private double AddFood(int nodeId)
+        private int AddTime(in int carNode, int node)
         {
             throw new NotImplementedException();
         }
