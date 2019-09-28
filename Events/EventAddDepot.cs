@@ -14,6 +14,7 @@ namespace Waremap.Events
         public int W { get; set; }
         public int H { get; set; }
         public int Floor { get; set; }
+        public string Name { get; set; }
 
         public void Run(State state)
         {
@@ -26,8 +27,10 @@ namespace Waremap.Events
                 depot.W = W;
                 depot.H = H;
                 depot.Floor = Floor;
+                depot.Name = Name;
             }
             else
+            {
                 state.Geo.Depots.Add(new Depot
                 {
                     Id = Id,
@@ -35,8 +38,10 @@ namespace Waremap.Events
                     Y = Y,
                     W = W,
                     H = H,
-                    Floor = Floor
-        });
+                    Floor = Floor,
+                    Name = Name
+                });
+            }
         }
     }
 }

@@ -42,6 +42,7 @@ namespace Waremap.Models
         public int W { get; set; }
         public int H { get; set; }
         public int Floor { get; set; }
+        public string Name { get; set; }
     }
 
     public class Geo
@@ -94,12 +95,5 @@ namespace Waremap.Models
         Elevator,
         Ladder,
         Footway
-    }
-
-    public enum CarType
-    {
-        Man,
-        ManWithCar,
-        Forklift
     }
 }
