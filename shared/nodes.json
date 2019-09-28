@@ -1,95 +1,130 @@
 [
   {
     "id": 0,
-    "type": "Point",
+    "type": "Machine",
     "depot": 2,
-    "floor": 5,
-    "x": 12,
-    "y": 5,
+    "floor": 2,
+    "x": 8,
+    "y": 10,
     "operation_ids": [
+      {
+        "id": 8
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      },
       {
         "id": 9
       },
       {
-        "id": 12
+        "id": 10
       },
       {
-        "id": 10
+        "id": 9
+      },
+      {
+        "id": 1
       }
     ]
   },
   {
     "id": 1,
-    "type": 0,
-    "depot": 5,
+    "type": "Point",
+    "depot": 3,
     "floor": 4,
-    "x": 5,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 9
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 19
-      }
-    ]
+    "x": 11,
+    "y": 15,
+    "operation_ids": []
   },
   {
     "id": 2,
     "type": "Machine",
-    "depot": 4,
-    "floor": 4,
-    "x": 8,
-    "y": 19,
+    "depot": 5,
+    "floor": 0,
+    "x": 1,
+    "y": 18,
     "operation_ids": [
-      {
-        "id": 7
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
       {
         "id": 8
-      }
-    ]
-  },
-  {
-    "id": 3,
-    "type": 0,
-    "depot": 3,
-    "floor": 0,
-    "x": 15,
-    "y": 8,
-    "operation_ids": [
-      {
-        "id": 15
       },
       {
-        "id": 10
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
       },
       {
         "id": 2
       },
       {
-        "id": 13
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 11
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 5,
+    "x": 8,
+    "y": 10,
+    "operation_ids": [
+      {
+        "id": 0
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 0
       }
     ]
   },
@@ -97,268 +132,292 @@
     "id": 4,
     "type": "Machine",
     "depot": 2,
-    "floor": 5,
-    "x": 9,
-    "y": 17,
+    "floor": 3,
+    "x": 6,
+    "y": 15,
     "operation_ids": [
       {
         "id": 1
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 10
-      }
-    ]
-  },
-  {
-    "id": 5,
-    "type": "Point",
-    "depot": 3,
-    "floor": 5,
-    "x": 2,
-    "y": 0,
-    "operation_ids": [
-      {
-        "id": 11
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 17
       },
       {
         "id": 6
       },
       {
+        "id": 2
+      },
+      {
         "id": 5
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 2,
+    "x": 10,
+    "y": 10,
+    "operation_ids": [
+      {
+        "id": 6
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
       }
     ]
   },
   {
     "id": 6,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 2,
-    "x": 6,
-    "y": 6,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 3
-      }
-    ]
+    "type": "Point",
+    "depot": 0,
+    "floor": 4,
+    "x": 5,
+    "y": 20,
+    "operation_ids": []
   },
   {
     "id": 7,
-    "type": "Point",
-    "depot": 2,
-    "floor": 5,
-    "x": 14,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 5
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "type": "Machine",
-    "depot": 3,
-    "floor": 1,
-    "x": 1,
-    "y": 6,
-    "operation_ids": [
-      {
-        "id": 1
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 4
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "type": 0,
-    "depot": 3,
-    "floor": 0,
-    "x": 16,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 10
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 0
-      }
-    ]
-  },
-  {
-    "id": 10,
-    "type": 0,
-    "depot": 3,
-    "floor": 2,
-    "x": 2,
-    "y": 1,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 7
-      }
-    ]
-  },
-  {
-    "id": 11,
     "type": "Machine",
     "depot": 2,
-    "floor": 4,
-    "x": 17,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 10
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      }
-    ]
-  },
-  {
-    "id": 12,
-    "type": "Machine",
-    "depot": 0,
     "floor": 1,
-    "x": 11,
-    "y": 7,
+    "x": 10,
+    "y": 10,
     "operation_ids": [
       {
-        "id": 4
-      },
-      {
-        "id": 11
+        "id": 3
       },
       {
         "id": 9
       },
       {
-        "id": 5
+        "id": 6
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 10
       }
     ]
   },
   {
-    "id": 13,
+    "id": 8,
+    "type": "Point",
+    "depot": 4,
+    "floor": 4,
+    "x": 17,
+    "y": 3,
+    "operation_ids": []
+  },
+  {
+    "id": 9,
+    "type": "Point",
+    "depot": 5,
+    "floor": 1,
+    "x": 19,
+    "y": 12,
+    "operation_ids": []
+  },
+  {
+    "id": 10,
     "type": "Machine",
     "depot": 0,
-    "floor": 2,
-    "x": 18,
-    "y": 18,
+    "floor": 3,
+    "x": 7,
+    "y": 14,
     "operation_ids": [
       {
-        "id": 14
+        "id": 11
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 5
       },
       {
         "id": 10
       },
       {
-        "id": 16
+        "id": 1
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 11
       }
     ]
   },
   {
-    "id": 14,
+    "id": 11,
     "type": "Point",
     "depot": 1,
     "floor": 5,
-    "x": 16,
-    "y": 20,
+    "x": 14,
+    "y": 15,
+    "operation_ids": []
+  },
+  {
+    "id": 12,
+    "type": "Point",
+    "depot": 5,
+    "floor": 4,
+    "x": 10,
+    "y": 16,
+    "operation_ids": []
+  },
+  {
+    "id": 13,
+    "type": "Point",
+    "depot": 0,
+    "floor": 3,
+    "x": 19,
+    "y": 7,
+    "operation_ids": []
+  },
+  {
+    "id": 14,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 0,
+    "x": 5,
+    "y": 19,
     "operation_ids": [
       {
-        "id": 20
+        "id": 1
       },
       {
-        "id": 16
-      },
-      {
-        "id": 19
+        "id": 7
       },
       {
         "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 0
       },
       {
         "id": 10
       },
       {
-        "id": 16
+        "id": 9
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 11
       },
       {
         "id": 3
+      },
+      {
+        "id": 2
       }
     ]
   },
@@ -366,252 +425,244 @@
     "id": 15,
     "type": "Point",
     "depot": 1,
+    "floor": 5,
+    "x": 13,
+    "y": 2,
+    "operation_ids": []
+  },
+  {
+    "id": 16,
+    "type": "Machine",
+    "depot": 5,
     "floor": 1,
-    "x": 7,
-    "y": 9,
+    "x": 11,
+    "y": 6,
     "operation_ids": [
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 2
+      },
       {
         "id": 8
       },
       {
-        "id": 5
+        "id": 10
+      },
+      {
+        "id": 6
       },
       {
         "id": 3
       },
       {
-        "id": 0
+        "id": 4
       },
       {
-        "id": 8
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 5
-      }
-    ]
-  },
-  {
-    "id": 16,
-    "type": 0,
-    "depot": 0,
-    "floor": 3,
-    "x": 11,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 1
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 14
-      }
-    ]
-  },
-  {
-    "id": 17,
-    "type": 0,
-    "depot": 0,
-    "floor": 5,
-    "x": 3,
-    "y": 5,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 10
-      }
-    ]
-  },
-  {
-    "id": 18,
-    "type": 0,
-    "depot": 1,
-    "floor": 3,
-    "x": 19,
-    "y": 13,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 6
-      }
-    ]
-  },
-  {
-    "id": 19,
-    "type": "Point",
-    "depot": 5,
-    "floor": 0,
-    "x": 18,
-    "y": 11,
-    "operation_ids": [
-      {
-        "id": 2
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 13
-      }
-    ]
-  },
-  {
-    "id": 20,
-    "type": "Point",
-    "depot": 0,
-    "floor": 0,
-    "x": 13,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 0
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 10
-      }
-    ]
-  },
-  {
-    "id": 21,
-    "type": "Machine",
-    "depot": 1,
-    "floor": 1,
-    "x": 20,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 12
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 15
-      }
-    ]
-  },
-  {
-    "id": 22,
-    "type": "Point",
-    "depot": 5,
-    "floor": 2,
-    "x": 1,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 15
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 2
-      }
-    ]
-  },
-  {
-    "id": 23,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 4,
-    "x": 18,
-    "y": 12,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 9
-      }
-    ]
-  },
-  {
-    "id": 24,
-    "type": 0,
-    "depot": 5,
-    "floor": 5,
-    "x": 14,
-    "y": 9,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 19
+        "id": 11
       },
       {
         "id": 4
       },
       {
-        "id": 18
+        "id": 0
+      },
+      {
+        "id": 0
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 3,
+    "x": 4,
+    "y": 0,
+    "operation_ids": [
+      {
+        "id": 5
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 0,
+    "x": 16,
+    "y": 13,
+    "operation_ids": [
+      {
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 10
       },
       {
         "id": 8
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "type": "Machine",
+    "depot": 3,
+    "floor": 4,
+    "x": 0,
+    "y": 2,
+    "operation_ids": [
+      {
+        "id": 4
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 1
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 1,
+    "x": 19,
+    "y": 15,
+    "operation_ids": [
+      {
+        "id": 5
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 1
       },
       {
         "id": 7
@@ -619,46 +670,97 @@
     ]
   },
   {
-    "id": 25,
-    "type": 0,
-    "depot": 4,
-    "floor": 2,
+    "id": 21,
+    "type": "Point",
+    "depot": 2,
+    "floor": 4,
     "x": 13,
-    "y": 12,
+    "y": 15,
+    "operation_ids": []
+  },
+  {
+    "id": 22,
+    "type": "Machine",
+    "depot": 5,
+    "floor": 2,
+    "x": 10,
+    "y": 20,
     "operation_ids": [
       {
-        "id": 18
+        "id": 3
       },
       {
-        "id": 12
+        "id": 10
       },
       {
-        "id": 20
+        "id": 7
       },
       {
-        "id": 17
-      },
-      {
-        "id": 6
+        "id": 11
       },
       {
         "id": 8
       },
       {
-        "id": 18
+        "id": 9
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 4
       }
     ]
   },
   {
+    "id": 23,
+    "type": "Point",
+    "depot": 0,
+    "floor": 4,
+    "x": 9,
+    "y": 9,
+    "operation_ids": []
+  },
+  {
+    "id": 24,
+    "type": "Point",
+    "depot": 5,
+    "floor": 2,
+    "x": 2,
+    "y": 11,
+    "operation_ids": []
+  },
+  {
+    "id": 25,
+    "type": "Point",
+    "depot": 5,
+    "floor": 2,
+    "x": 8,
+    "y": 7,
+    "operation_ids": []
+  },
+  {
     "id": 26,
     "type": "Machine",
-    "depot": 1,
-    "floor": 4,
-    "x": 11,
-    "y": 20,
+    "depot": 2,
+    "floor": 0,
+    "x": 10,
+    "y": 12,
     "operation_ids": [
       {
-        "id": 16
+        "id": 0
       },
       {
         "id": 9
@@ -667,278 +769,229 @@
         "id": 10
       },
       {
-        "id": 16
+        "id": 4
       },
       {
-        "id": 13
+        "id": 7
       },
       {
-        "id": 5
+        "id": 10
       },
       {
-        "id": 20
+        "id": 7
       },
       {
-        "id": 13
+        "id": 2
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
       }
     ]
   },
   {
     "id": 27,
-    "type": "Point",
-    "depot": 4,
-    "floor": 0,
-    "x": 1,
-    "y": 11,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 5,
+    "x": 12,
+    "y": 3,
     "operation_ids": [
       {
-        "id": 15
+        "id": 5
       },
       {
-        "id": 16
+        "id": 7
       },
       {
-        "id": 14
+        "id": 9
       },
       {
-        "id": 19
+        "id": 7
+      },
+      {
+        "id": 4
       },
       {
         "id": 8
       },
       {
-        "id": 19
+        "id": 5
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 6
       }
     ]
   },
   {
     "id": 28,
     "type": "Point",
-    "depot": 0,
-    "floor": 0,
-    "x": 17,
-    "y": 10,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 11
-      }
-    ]
+    "depot": 3,
+    "floor": 1,
+    "x": 0,
+    "y": 12,
+    "operation_ids": []
   },
   {
     "id": 29,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 4,
-    "x": 19,
-    "y": 4,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 1
-      }
-    ]
+    "type": "Point",
+    "depot": 3,
+    "floor": 0,
+    "x": 10,
+    "y": 1,
+    "operation_ids": []
   },
   {
     "id": 30,
-    "type": 0,
-    "depot": 4,
-    "floor": 1,
-    "x": 15,
-    "y": 6,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 0
-      }
-    ]
+    "type": "Point",
+    "depot": 0,
+    "floor": 5,
+    "x": 7,
+    "y": 5,
+    "operation_ids": []
   },
   {
     "id": 31,
-    "type": 0,
-    "depot": 2,
+    "type": "Point",
+    "depot": 5,
     "floor": 2,
-    "x": 1,
-    "y": 20,
-    "operation_ids": [
-      {
-        "id": 12
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      }
-    ]
+    "x": 6,
+    "y": 7,
+    "operation_ids": []
   },
   {
     "id": 32,
     "type": "Point",
-    "depot": 5,
-    "floor": 1,
-    "x": 17,
-    "y": 6,
+    "depot": 2,
+    "floor": 4,
+    "x": 20,
+    "y": 1,
+    "operation_ids": []
+  },
+  {
+    "id": 33,
+    "type": "Machine",
+    "depot": 3,
+    "floor": 5,
+    "x": 11,
+    "y": 15,
     "operation_ids": [
       {
-        "id": 10
+        "id": 0
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 8
       },
       {
         "id": 0
       },
       {
-        "id": 20
+        "id": 0
+      },
+      {
+        "id": 2
       },
       {
         "id": 5
       },
       {
-        "id": 1
-      }
-    ]
-  },
-  {
-    "id": 33,
-    "type": "Machine",
-    "depot": 1,
-    "floor": 4,
-    "x": 10,
-    "y": 17,
-    "operation_ids": [
-      {
-        "id": 12
+        "id": 8
       },
       {
-        "id": 19
+        "id": 4
       },
       {
-        "id": 10
+        "id": 7
       }
     ]
   },
   {
     "id": 34,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 2,
-    "x": 11,
-    "y": 13,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 7
-      }
-    ]
+    "type": "Point",
+    "depot": 5,
+    "floor": 3,
+    "x": 14,
+    "y": 16,
+    "operation_ids": []
   },
   {
     "id": 35,
-    "type": "Machine",
+    "type": "Point",
     "depot": 2,
-    "floor": 0,
-    "x": 13,
-    "y": 16,
+    "floor": 5,
+    "x": 4,
+    "y": 5,
+    "operation_ids": []
+  },
+  {
+    "id": 36,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 5,
+    "x": 12,
+    "y": 1,
     "operation_ids": [
       {
-        "id": 15
+        "id": 10
       },
       {
-        "id": 7
-      },
-      {
-        "id": 12
+        "id": 0
       },
       {
         "id": 9
+      },
+      {
+        "id": 3
       },
       {
         "id": 8
       },
       {
-        "id": 10
+        "id": 1
       },
-      {
-        "id": 6
-      }
-    ]
-  },
-  {
-    "id": 36,
-    "type": 0,
-    "depot": 2,
-    "floor": 4,
-    "x": 3,
-    "y": 3,
-    "operation_ids": [
       {
         "id": 4
       },
       {
-        "id": 6
+        "id": 5
       },
       {
-        "id": 13
+        "id": 9
+      },
+      {
+        "id": 6
       },
       {
         "id": 2
@@ -947,1028 +1000,565 @@
         "id": 7
       },
       {
-        "id": 17
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
       }
     ]
   },
   {
     "id": 37,
-    "type": "Point",
+    "type": "Machine",
     "depot": 1,
-    "floor": 5,
-    "x": 11,
-    "y": 17,
+    "floor": 2,
+    "x": 2,
+    "y": 1,
     "operation_ids": [
       {
-        "id": 15
+        "id": 10
       },
       {
-        "id": 19
+        "id": 0
       },
       {
-        "id": 11
+        "id": 5
       },
       {
-        "id": 16
+        "id": 10
       },
       {
-        "id": 12
+        "id": 7
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
       }
     ]
   },
   {
     "id": 38,
     "type": "Point",
-    "depot": 2,
-    "floor": 2,
-    "x": 16,
-    "y": 12,
+    "depot": 4,
+    "floor": 0,
+    "x": 11,
+    "y": 3,
+    "operation_ids": []
+  },
+  {
+    "id": 39,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 5,
+    "x": 8,
+    "y": 19,
     "operation_ids": [
+      {
+        "id": 11
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 2
+      },
       {
         "id": 3
       },
       {
-        "id": 18
+        "id": 7
+      },
+      {
+        "id": 4
       },
       {
         "id": 0
       },
       {
-        "id": 0
+        "id": 10
       },
       {
-        "id": 14
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 17
-      }
-    ]
-  },
-  {
-    "id": 39,
-    "type": 0,
-    "depot": 0,
-    "floor": 1,
-    "x": 11,
-    "y": 18,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 14
+        "id": 1
       }
     ]
   },
   {
     "id": 40,
     "type": "Point",
-    "depot": 3,
-    "floor": 4,
-    "x": 19,
-    "y": 17,
-    "operation_ids": [
-      {
-        "id": 10
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 8
-      }
-    ]
+    "depot": 1,
+    "floor": 5,
+    "x": 18,
+    "y": 5,
+    "operation_ids": []
   },
   {
     "id": 41,
     "type": "Point",
-    "depot": 0,
-    "floor": 2,
-    "x": 3,
-    "y": 16,
-    "operation_ids": [
-      {
-        "id": 0
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 1
-      }
-    ]
+    "depot": 1,
+    "floor": 1,
+    "x": 16,
+    "y": 19,
+    "operation_ids": []
   },
   {
     "id": 42,
     "type": "Point",
-    "depot": 0,
-    "floor": 5,
-    "x": 19,
-    "y": 13,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 4
-      }
-    ]
+    "depot": 3,
+    "floor": 4,
+    "x": 12,
+    "y": 20,
+    "operation_ids": []
   },
   {
     "id": 43,
     "type": "Point",
-    "depot": 2,
-    "floor": 0,
-    "x": 14,
-    "y": 7,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 4
-      }
-    ]
+    "depot": 1,
+    "floor": 2,
+    "x": 10,
+    "y": 2,
+    "operation_ids": []
   },
   {
     "id": 44,
-    "type": 0,
-    "depot": 4,
-    "floor": 1,
-    "x": 15,
-    "y": 1,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 3,
+    "x": 19,
+    "y": 0,
     "operation_ids": [
       {
-        "id": 1
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 15
-      },
-      {
         "id": 0
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 5
       },
       {
         "id": 9
       },
       {
-        "id": 16
+        "id": 0
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
       },
       {
         "id": 0
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 10
       }
     ]
   },
   {
     "id": 45,
     "type": "Machine",
-    "depot": 5,
-    "floor": 5,
-    "x": 8,
-    "y": 8,
+    "depot": 0,
+    "floor": 0,
+    "x": 10,
+    "y": 12,
     "operation_ids": [
       {
-        "id": 19
+        "id": 11
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 7
       },
       {
         "id": 5
       },
       {
-        "id": 1
+        "id": 7
       },
       {
-        "id": 17
+        "id": 10
       },
       {
-        "id": 12
+        "id": 5
       },
       {
-        "id": 16
+        "id": 0
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 9
       }
     ]
   },
   {
     "id": 46,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 2,
-    "x": 5,
-    "y": 15,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 18
-      }
-    ]
+    "type": "Point",
+    "depot": 5,
+    "floor": 1,
+    "x": 11,
+    "y": 4,
+    "operation_ids": []
   },
   {
     "id": 47,
     "type": "Point",
     "depot": 3,
-    "floor": 3,
-    "x": 7,
-    "y": 15,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 15
-      }
-    ]
+    "floor": 2,
+    "x": 17,
+    "y": 3,
+    "operation_ids": []
   },
   {
     "id": 48,
-    "type": 0,
+    "type": "Machine",
     "depot": 1,
-    "floor": 3,
-    "x": 9,
-    "y": 12,
+    "floor": 1,
+    "x": 11,
+    "y": 15,
     "operation_ids": [
       {
-        "id": 6
+        "id": 4
       },
       {
-        "id": 9
+        "id": 4
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 8
       },
       {
         "id": 0
       },
       {
-        "id": 11
+        "id": 4
       },
       {
-        "id": 15
+        "id": 7
       },
       {
-        "id": 16
+        "id": 8
       },
       {
-        "id": 19
+        "id": 0
       }
     ]
   },
   {
     "id": 49,
-    "type": 0,
-    "depot": 5,
-    "floor": 5,
-    "x": 12,
-    "y": 7,
-    "operation_ids": [
-      {
-        "id": 20
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      }
-    ]
+    "type": "Point",
+    "depot": 3,
+    "floor": 4,
+    "x": 13,
+    "y": 1,
+    "operation_ids": []
   },
   {
     "id": 50,
-    "type": "Machine",
-    "depot": 5,
+    "type": "Point",
+    "depot": 4,
     "floor": 2,
-    "x": 2,
-    "y": 1,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 20
-      }
-    ]
+    "x": 10,
+    "y": 0,
+    "operation_ids": []
   },
   {
     "id": 51,
     "type": "Point",
-    "depot": 5,
+    "depot": 2,
     "floor": 0,
-    "x": 5,
-    "y": 8,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 10
-      }
-    ]
+    "x": 6,
+    "y": 15,
+    "operation_ids": []
   },
   {
     "id": 52,
-    "type": "Point",
-    "depot": 2,
-    "floor": 2,
-    "x": 13,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 4
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 14
-      }
-    ]
-  },
-  {
-    "id": 53,
     "type": "Machine",
     "depot": 5,
-    "floor": 1,
-    "x": 0,
-    "y": 20,
-    "operation_ids": [
-      {
-        "id": 0
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 19
-      }
-    ]
-  },
-  {
-    "id": 54,
-    "type": "Machine",
-    "depot": 0,
-    "floor": 3,
-    "x": 12,
-    "y": 8,
-    "operation_ids": [
-      {
-        "id": 2
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 11
-      }
-    ]
-  },
-  {
-    "id": 55,
-    "type": 0,
-    "depot": 5,
-    "floor": 5,
-    "x": 5,
-    "y": 14,
-    "operation_ids": [
-      {
-        "id": 18
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 6
-      }
-    ]
-  },
-  {
-    "id": 56,
-    "type": 0,
-    "depot": 3,
     "floor": 4,
-    "x": 3,
-    "y": 20,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 0
-      }
-    ]
-  },
-  {
-    "id": 57,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 2,
-    "x": 20,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 18
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 8
-      }
-    ]
-  },
-  {
-    "id": 58,
-    "type": 0,
-    "depot": 1,
-    "floor": 3,
-    "x": 16,
-    "y": 18,
-    "operation_ids": [
-      {
-        "id": 8
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 7
-      }
-    ]
-  },
-  {
-    "id": 59,
-    "type": "Machine",
-    "depot": 3,
-    "floor": 3,
     "x": 15,
-    "y": 0,
-    "operation_ids": [
-      {
-        "id": 6
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 5
-      }
-    ]
-  },
-  {
-    "id": 60,
-    "type": "Machine",
-    "depot": 0,
-    "floor": 1,
-    "x": 18,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 15
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 13
-      }
-    ]
-  },
-  {
-    "id": 61,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 0,
-    "x": 19,
-    "y": 0,
-    "operation_ids": [
-      {
-        "id": 13
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 18
-      }
-    ]
-  },
-  {
-    "id": 62,
-    "type": "Point",
-    "depot": 0,
-    "floor": 3,
-    "x": 8,
-    "y": 17,
-    "operation_ids": [
-      {
-        "id": 2
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 9
-      }
-    ]
-  },
-  {
-    "id": 63,
-    "type": "Machine",
-    "depot": 0,
-    "floor": 0,
-    "x": 18,
-    "y": 12,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 1
-      }
-    ]
-  },
-  {
-    "id": 64,
-    "type": "Point",
-    "depot": 3,
-    "floor": 2,
-    "x": 20,
-    "y": 11,
-    "operation_ids": [
-      {
-        "id": 1
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 10
-      }
-    ]
-  },
-  {
-    "id": 65,
-    "type": "Machine",
-    "depot": 3,
-    "floor": 0,
-    "x": 8,
-    "y": 12,
-    "operation_ids": [
-      {
-        "id": 9
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 4
-      }
-    ]
-  },
-  {
-    "id": 66,
-    "type": "Point",
-    "depot": 3,
-    "floor": 2,
-    "x": 17,
-    "y": 7,
-    "operation_ids": [
-      {
-        "id": 2
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 0
-      }
-    ]
-  },
-  {
-    "id": 67,
-    "type": "Point",
-    "depot": 4,
-    "floor": 1,
-    "x": 6,
-    "y": 11,
-    "operation_ids": [
-      {
-        "id": 5
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 19
-      }
-    ]
-  },
-  {
-    "id": 68,
-    "type": 0,
-    "depot": 2,
-    "floor": 3,
-    "x": 1,
-    "y": 7,
-    "operation_ids": [
-      {
-        "id": 16
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 7
-      }
-    ]
-  },
-  {
-    "id": 69,
-    "type": "Machine",
-    "depot": 5,
-    "floor": 5,
-    "x": 5,
-    "y": 18,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 7
-      }
-    ]
-  },
-  {
-    "id": 70,
-    "type": "Machine",
-    "depot": 1,
-    "floor": 2,
-    "x": 4,
-    "y": 19,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 6
-      }
-    ]
-  },
-  {
-    "id": 71,
-    "type": "Point",
-    "depot": 5,
-    "floor": 3,
-    "x": 11,
-    "y": 12,
-    "operation_ids": [
-      {
-        "id": 6
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 6
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 14
-      }
-    ]
-  },
-  {
-    "id": 72,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 0,
-    "x": 11,
-    "y": 18,
-    "operation_ids": [
-      {
-        "id": 11
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 12
-      }
-    ]
-  },
-  {
-    "id": 73,
-    "type": "Machine",
-    "depot": 3,
-    "floor": 5,
-    "x": 19,
-    "y": 0,
-    "operation_ids": [
-      {
-        "id": 4
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 9
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 12
-      },
-      {
-        "id": 6
-      }
-    ]
-  },
-  {
-    "id": 74,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 2,
-    "x": 11,
     "y": 5,
     "operation_ids": [
       {
         "id": 8
       },
       {
+        "id": 9
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 9
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "type": "Point",
+    "depot": 1,
+    "floor": 4,
+    "x": 0,
+    "y": 15,
+    "operation_ids": []
+  },
+  {
+    "id": 54,
+    "type": "Point",
+    "depot": 5,
+    "floor": 1,
+    "x": 4,
+    "y": 1,
+    "operation_ids": []
+  },
+  {
+    "id": 55,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 2,
+    "x": 4,
+    "y": 20,
+    "operation_ids": [
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 0
+      }
+    ]
+  },
+  {
+    "id": 56,
+    "type": "Point",
+    "depot": 2,
+    "floor": 2,
+    "x": 17,
+    "y": 13,
+    "operation_ids": []
+  },
+  {
+    "id": 57,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 0,
+    "x": 17,
+    "y": 20,
+    "operation_ids": [
+      {
+        "id": 1
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 6
+      }
+    ]
+  },
+  {
+    "id": 58,
+    "type": "Machine",
+    "depot": 5,
+    "floor": 1,
+    "x": 3,
+    "y": 7,
+    "operation_ids": [
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 11
+      }
+    ]
+  },
+  {
+    "id": 59,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 4,
+    "x": 16,
+    "y": 1,
+    "operation_ids": [
+      {
+        "id": 1
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 3
+      },
+      {
         "id": 7
       },
       {
@@ -1978,95 +1568,95 @@
         "id": 4
       },
       {
-        "id": 14
+        "id": 4
       },
       {
-        "id": 19
+        "id": 3
       },
       {
-        "id": 1
+        "id": 3
       }
     ]
   },
   {
-    "id": 75,
+    "id": 60,
+    "type": "Point",
+    "depot": 1,
+    "floor": 0,
+    "x": 3,
+    "y": 4,
+    "operation_ids": []
+  },
+  {
+    "id": 61,
+    "type": "Point",
+    "depot": 5,
+    "floor": 2,
+    "x": 14,
+    "y": 16,
+    "operation_ids": []
+  },
+  {
+    "id": 62,
     "type": "Point",
     "depot": 0,
     "floor": 2,
-    "x": 17,
+    "x": 0,
+    "y": 17,
+    "operation_ids": []
+  },
+  {
+    "id": 63,
+    "type": "Point",
+    "depot": 1,
+    "floor": 5,
+    "x": 7,
+    "y": 4,
+    "operation_ids": []
+  },
+  {
+    "id": 64,
+    "type": "Point",
+    "depot": 2,
+    "floor": 2,
+    "x": 8,
     "y": 11,
+    "operation_ids": []
+  },
+  {
+    "id": 65,
+    "type": "Machine",
+    "depot": 5,
+    "floor": 0,
+    "x": 1,
+    "y": 10,
     "operation_ids": [
+      {
+        "id": 11
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 9
+      },
       {
         "id": 2
       },
       {
-        "id": 20
+        "id": 6
       },
       {
-        "id": 8
-      },
-      {
-        "id": 14
+        "id": 11
       },
       {
         "id": 7
       },
       {
-        "id": 2
-      }
-    ]
-  },
-  {
-    "id": 76,
-    "type": "Machine",
-    "depot": 0,
-    "floor": 2,
-    "x": 19,
-    "y": 11,
-    "operation_ids": [
-      {
-        "id": 0
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 15
-      }
-    ]
-  },
-  {
-    "id": 77,
-    "type": 0,
-    "depot": 0,
-    "floor": 4,
-    "x": 5,
-    "y": 16,
-    "operation_ids": [
-      {
-        "id": 17
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 18
-      }
-    ]
-  },
-  {
-    "id": 78,
-    "type": 0,
-    "depot": 2,
-    "floor": 5,
-    "x": 13,
-    "y": 12,
-    "operation_ids": [
-      {
-        "id": 10
-      },
-      {
-        "id": 16
+        "id": 9
       },
       {
         "id": 5
@@ -2074,13 +1664,477 @@
     ]
   },
   {
-    "id": 79,
-    "type": 0,
-    "depot": 2,
-    "floor": 1,
-    "x": 1,
-    "y": 10,
+    "id": 66,
+    "type": "Point",
+    "depot": 5,
+    "floor": 5,
+    "x": 12,
+    "y": 16,
+    "operation_ids": []
+  },
+  {
+    "id": 67,
+    "type": "Point",
+    "depot": 3,
+    "floor": 2,
+    "x": 14,
+    "y": 17,
+    "operation_ids": []
+  },
+  {
+    "id": 68,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 4,
+    "x": 15,
+    "y": 9,
     "operation_ids": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 11
+      }
+    ]
+  },
+  {
+    "id": 69,
+    "type": "Point",
+    "depot": 3,
+    "floor": 2,
+    "x": 17,
+    "y": 9,
+    "operation_ids": []
+  },
+  {
+    "id": 70,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 1,
+    "x": 10,
+    "y": 17,
+    "operation_ids": [
+      {
+        "id": 10
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 71,
+    "type": "Machine",
+    "depot": 5,
+    "floor": 0,
+    "x": 19,
+    "y": 20,
+    "operation_ids": [
+      {
+        "id": 3
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 6
+      }
+    ]
+  },
+  {
+    "id": 72,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 3,
+    "x": 17,
+    "y": 12,
+    "operation_ids": [
+      {
+        "id": 9
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 3
+      }
+    ]
+  },
+  {
+    "id": 73,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 0,
+    "x": 6,
+    "y": 20,
+    "operation_ids": [
+      {
+        "id": 11
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 10
+      }
+    ]
+  },
+  {
+    "id": 74,
+    "type": "Point",
+    "depot": 4,
+    "floor": 0,
+    "x": 13,
+    "y": 16,
+    "operation_ids": []
+  },
+  {
+    "id": 75,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 0,
+    "x": 10,
+    "y": 20,
+    "operation_ids": [
+      {
+        "id": 9
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "id": 76,
+    "type": "Point",
+    "depot": 2,
+    "floor": 4,
+    "x": 7,
+    "y": 20,
+    "operation_ids": []
+  },
+  {
+    "id": 77,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 1,
+    "x": 14,
+    "y": 7,
+    "operation_ids": [
+      {
+        "id": 4
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "id": 78,
+    "type": "Point",
+    "depot": 0,
+    "floor": 5,
+    "x": 6,
+    "y": 11,
+    "operation_ids": []
+  },
+  {
+    "id": 79,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 2,
+    "x": 5,
+    "y": 16,
+    "operation_ids": [
+      {
+        "id": 10
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 7
+      }
+    ]
+  },
+  {
+    "id": 80,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 2,
+    "x": 17,
+    "y": 9,
+    "operation_ids": [
+      {
+        "id": 6
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 3
+      },
       {
         "id": 3
       },
@@ -2088,92 +2142,108 @@
         "id": 9
       },
       {
-        "id": 18
-      }
-    ]
-  },
-  {
-    "id": 80,
-    "type": 0,
-    "depot": 0,
-    "floor": 3,
-    "x": 6,
-    "y": 7,
-    "operation_ids": [
-      {
-        "id": 3
-      },
-      {
-        "id": 5
+        "id": 0
       },
       {
         "id": 4
       },
       {
-        "id": 13
+        "id": 6
       },
       {
-        "id": 3
-      },
-      {
-        "id": 17
-      },
-      {
-        "id": 5
+        "id": 11
       }
     ]
   },
   {
     "id": 81,
-    "type": 0,
-    "depot": 2,
-    "floor": 2,
-    "x": 17,
-    "y": 11,
+    "type": "Machine",
+    "depot": 3,
+    "floor": 5,
+    "x": 6,
+    "y": 8,
     "operation_ids": [
       {
-        "id": 12
+        "id": 9
       },
       {
-        "id": 14
+        "id": 8
       },
       {
-        "id": 16
+        "id": 3
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 9
       }
     ]
   },
   {
     "id": 82,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 4,
-    "x": 18,
-    "y": 13,
-    "operation_ids": [
-      {
-        "id": 14
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 15
-      }
-    ]
+    "type": "Point",
+    "depot": 0,
+    "floor": 2,
+    "x": 9,
+    "y": 18,
+    "operation_ids": []
   },
   {
     "id": 83,
     "type": "Machine",
-    "depot": 4,
-    "floor": 5,
-    "x": 0,
-    "y": 20,
+    "depot": 2,
+    "floor": 1,
+    "x": 9,
+    "y": 1,
     "operation_ids": [
       {
-        "id": 15
+        "id": 7
       },
       {
-        "id": 18
+        "id": 7
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 7
       },
       {
         "id": 2
@@ -2182,12 +2252,27 @@
   },
   {
     "id": 84,
-    "type": 0,
-    "depot": 5,
-    "floor": 1,
-    "x": 15,
-    "y": 19,
+    "type": "Machine",
+    "depot": 2,
+    "floor": 0,
+    "x": 11,
+    "y": 6,
     "operation_ids": [
+      {
+        "id": 7
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 1
+      },
       {
         "id": 6
       },
@@ -2198,35 +2283,71 @@
         "id": 8
       },
       {
-        "id": 1
+        "id": 3
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 5
       }
     ]
   },
   {
     "id": 85,
-    "type": "Point",
-    "depot": 2,
-    "floor": 1,
-    "x": 2,
-    "y": 17,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 2,
+    "x": 10,
+    "y": 6,
     "operation_ids": [
       {
+        "id": 11
+      },
+      {
+        "id": 9
+      },
+      {
         "id": 5
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 10
       },
       {
         "id": 8
       },
       {
-        "id": 19
+        "id": 7
       },
       {
-        "id": 19
+        "id": 10
       },
       {
-        "id": 19
+        "id": 9
       },
       {
         "id": 11
+      },
+      {
+        "id": 8
       }
     ]
   },
@@ -2234,15 +2355,109 @@
     "id": 86,
     "type": "Point",
     "depot": 4,
-    "floor": 1,
-    "x": 1,
+    "floor": 2,
+    "x": 15,
     "y": 11,
+    "operation_ids": []
+  },
+  {
+    "id": 87,
+    "type": "Machine",
+    "depot": 5,
+    "floor": 3,
+    "x": 15,
+    "y": 13,
     "operation_ids": [
+      {
+        "id": 2
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 1
+      },
       {
         "id": 9
       },
       {
+        "id": 10
+      },
+      {
+        "id": 4
+      },
+      {
         "id": 0
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 0
+      }
+    ]
+  },
+  {
+    "id": 88,
+    "type": "Point",
+    "depot": 3,
+    "floor": 5,
+    "x": 4,
+    "y": 18,
+    "operation_ids": []
+  },
+  {
+    "id": 89,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 0,
+    "x": 13,
+    "y": 17,
+    "operation_ids": [
+      {
+        "id": 8
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 0
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 11
       },
       {
         "id": 5
@@ -2255,303 +2470,214 @@
       },
       {
         "id": 10
-      },
-      {
-        "id": 3
-      }
-    ]
-  },
-  {
-    "id": 87,
-    "type": "Machine",
-    "depot": 3,
-    "floor": 1,
-    "x": 11,
-    "y": 2,
-    "operation_ids": [
-      {
-        "id": 4
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 15
-      },
-      {
-        "id": 20
-      }
-    ]
-  },
-  {
-    "id": 88,
-    "type": "Machine",
-    "depot": 2,
-    "floor": 3,
-    "x": 6,
-    "y": 3,
-    "operation_ids": [
-      {
-        "id": 0
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 20
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 8
-      },
-      {
-        "id": 11
-      },
-      {
-        "id": 20
-      }
-    ]
-  },
-  {
-    "id": 89,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 0,
-    "x": 18,
-    "y": 17,
-    "operation_ids": [
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 10
-      },
-      {
-        "id": 18
       }
     ]
   },
   {
     "id": 90,
-    "type": "Point",
+    "type": "Machine",
     "depot": 0,
-    "floor": 3,
-    "x": 12,
-    "y": 12,
+    "floor": 2,
+    "x": 17,
+    "y": 2,
     "operation_ids": [
       {
-        "id": 1
-      },
-      {
-        "id": 0
-      },
-      {
-        "id": 16
-      },
-      {
-        "id": 13
-      },
-      {
-        "id": 0
+        "id": 8
       },
       {
         "id": 8
       },
       {
+        "id": 7
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 4
+      },
+      {
         "id": 6
       },
       {
-        "id": 0
+        "id": 4
+      },
+      {
+        "id": 9
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
       }
     ]
   },
   {
     "id": 91,
     "type": "Point",
+    "depot": 0,
+    "floor": 5,
+    "x": 20,
+    "y": 17,
+    "operation_ids": []
+  },
+  {
+    "id": 92,
+    "type": "Point",
+    "depot": 3,
+    "floor": 2,
+    "x": 10,
+    "y": 6,
+    "operation_ids": []
+  },
+  {
+    "id": 93,
+    "type": "Point",
     "depot": 5,
-    "floor": 4,
-    "x": 11,
-    "y": 9,
+    "floor": 5,
+    "x": 9,
+    "y": 13,
+    "operation_ids": []
+  },
+  {
+    "id": 94,
+    "type": "Machine",
+    "depot": 4,
+    "floor": 1,
+    "x": 8,
+    "y": 20,
     "operation_ids": [
       {
-        "id": 11
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
       },
       {
         "id": 9
       },
       {
-        "id": 6
+        "id": 5
       },
       {
         "id": 0
       },
       {
-        "id": 12
-      }
-    ]
-  },
-  {
-    "id": 92,
-    "type": "Point",
-    "depot": 1,
-    "floor": 3,
-    "x": 8,
-    "y": 6,
-    "operation_ids": [
-      {
         "id": 3
       },
       {
-        "id": 6
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 17
-      }
-    ]
-  },
-  {
-    "id": 93,
-    "type": "Machine",
-    "depot": 4,
-    "floor": 1,
-    "x": 11,
-    "y": 14,
-    "operation_ids": [
-      {
-        "id": 18
-      },
-      {
-        "id": 19
-      },
-      {
-        "id": 7
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      }
-    ]
-  },
-  {
-    "id": 94,
-    "type": "Point",
-    "depot": 3,
-    "floor": 1,
-    "x": 1,
-    "y": 0,
-    "operation_ids": [
-      {
-        "id": 7
+        "id": 11
       },
       {
         "id": 10
       },
       {
-        "id": 12
+        "id": 0
+      },
+      {
+        "id": 1
       }
     ]
   },
   {
     "id": 95,
-    "type": "Point",
-    "depot": 1,
-    "floor": 4,
-    "x": 10,
-    "y": 20,
+    "type": "Machine",
+    "depot": 0,
+    "floor": 0,
+    "x": 19,
+    "y": 14,
     "operation_ids": [
       {
-        "id": 8
+        "id": 5
       },
       {
-        "id": 8
+        "id": 11
       },
       {
-        "id": 3
+        "id": 5
       },
       {
-        "id": 16
+        "id": 0
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
       },
       {
         "id": 7
       },
       {
-        "id": 13
+        "id": 7
       },
       {
-        "id": 1
+        "id": 9
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6
+      },
+      {
+        "id": 11
       }
     ]
   },
   {
     "id": 96,
     "type": "Machine",
-    "depot": 0,
-    "floor": 2,
-    "x": 0,
-    "y": 8,
-    "operation_ids": [
-      {
-        "id": 20
-      },
-      {
-        "id": 14
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 0
-      }
-    ]
-  },
-  {
-    "id": 97,
-    "type": "Point",
-    "depot": 1,
-    "floor": 0,
-    "x": 15,
-    "y": 1,
-    "operation_ids": [
-      {
-        "id": 16
-      },
-      {
-        "id": 18
-      },
-      {
-        "id": 17
-      }
-    ]
-  },
-  {
-    "id": 98,
-    "type": "Machine",
-    "depot": 0,
+    "depot": 3,
     "floor": 3,
-    "x": 6,
-    "y": 9,
+    "x": 14,
+    "y": 14,
     "operation_ids": [
       {
-        "id": 18
+        "id": 5
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 4
       },
       {
         "id": 10
@@ -2560,33 +2686,87 @@
         "id": 3
       },
       {
-        "id": 7
+        "id": 5
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 11
       }
     ]
   },
   {
-    "id": 99,
-    "type": 0,
-    "depot": 2,
-    "floor": 1,
-    "x": 14,
-    "y": 1,
+    "id": 97,
+    "type": "Machine",
+    "depot": 1,
+    "floor": 3,
+    "x": 0,
+    "y": 0,
     "operation_ids": [
       {
-        "id": 10
+        "id": 2
+      },
+      {
+        "id": 3
       },
       {
         "id": 6
       },
       {
-        "id": 11
+        "id": 4
       },
       {
-        "id": 12
+        "id": 6
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6
       },
       {
         "id": 1
+      },
+      {
+        "id": 10
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 11
+      },
+      {
+        "id": 8
+      },
+      {
+        "id": 7
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 9
       }
     ]
+  },
+  {
+    "id": 98,
+    "type": "Point",
+    "depot": 1,
+    "floor": 3,
+    "x": 5,
+    "y": 14,
+    "operation_ids": []
+  },
+  {
+    "id": 99,
+    "type": "Point",
+    "depot": 2,
+    "floor": 0,
+    "x": 19,
+    "y": 12,
+    "operation_ids": []
   }
 ]
