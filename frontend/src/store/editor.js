@@ -139,7 +139,7 @@ export default {
     },
 
     async autoComputeEdges(c) {
-      const newState = await API.autoComputeEdges(c.state.depot.id);
+      const newState = await API.autoComputeEdges(c.state.depot.id, c.state.floor);
       c.commit('setServerState', newState, {root: true});
     },
 
