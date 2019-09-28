@@ -79,7 +79,13 @@ export default {
       // Use facingMode: environment to attemt to get the front camera on phones
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
-          facingMode: 'environment'
+          facingMode: 'environment',
+          width: Math.max(screen.width, screen.height),
+          height: Math.min(screen.width, screen.height),
+          frameRate: {
+            ideal: 60,
+            max: 60
+          }
         }
       });
       video.srcObject = stream;
@@ -109,7 +115,7 @@ export default {
           }
         }
         this.animationFrame = window.requestAnimationFrame(tick);
-      }
+      };
 
       this.animationFrame = window.requestAnimationFrame(tick);
     }
