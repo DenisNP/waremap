@@ -25,5 +25,11 @@ namespace Waremap.Models
                 Nodes.Add(n.Id, n);
             });
         }
+
+        public double DistFromWeight(int from, int to)
+        {
+            var edge = Edges[from, to];
+            return 10.0 / edge.Weight;
+        }
     }
 }
