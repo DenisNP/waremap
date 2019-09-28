@@ -60,11 +60,11 @@ namespace Waremap.Controllers
                         case "removeDepot":
                             DeserializeAndRun<EventRemoveDepot>(body);
                             break;
-                        case "addWaypoint":
-                            DeserializeAndRun<EventAddWaypoint>(body);
+                        case "addProcess":
+                            DeserializeAndRun<EventAddProcess>(body);
                             break;
-                        case "removeWaypoint":
-                            DeserializeAndRun<EventRemoveWaypoint>(body);
+                        case "removeProcess":
+                            DeserializeAndRun<EventRemoveProcess>(body);
                             break;
                         case "addOperation":
                             DeserializeAndRun<EventAddOperation>(body);

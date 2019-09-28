@@ -32,10 +32,12 @@ module.exports = {
       name: String,
       weight: Number,
       assembly_id: Number,
-      from_node: Number, // из какого узла прямо сейчас едет деталь
-      to_node: Number, // в какой узел прямо сейчас едет деталь, если from_node = to_node, то она сидит в конкретном узлу
-      time_left: Number, // сколько ещё времени будет продолжаться процесс над деталью
-      time_total: Number, // сколько всего времени занимает текущий процесс над деталью
+      waypoint: {
+          from_node: Number, // из какого узла прямо сейчас едет деталь
+          to_node: Number, // в какой узел прямо сейчас едет деталь, если from_node = to_node, то она сидит в конкретном узлу
+          time_left: Number, // сколько ещё времени будет продолжаться процесс над деталью
+          time_total: Number, // сколько всего времени занимает текущий процесс над деталью
+      },
       path: [{
         id: Number,
         order: Number,

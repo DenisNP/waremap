@@ -3,7 +3,7 @@ using Waremap.Models;
 
 namespace Waremap.Events
 {
-    public class EventRemoveWaypoint : IEvent
+    public class EventRemoveProcess : IEvent
     {
         public int PartId { get; set; }
         public int Id { get; set; }
@@ -11,11 +11,8 @@ namespace Waremap.Events
         public void Run(State state)
         {
             var part = state.Equipment.Parts.FirstOrDefault(n => n.Id == PartId);
-            if (part != null)
-            {
-                var waypoint = part.Path.FirstOrDefault(x => x.Id == Id);
-                part.Path.Remove(waypoint);
-            }
+            var process = part?.Path.FirstOrDefault(x => x.Id == Id);
+            if (process != null) part.Path.Remove(process);
         }
     }
 }
