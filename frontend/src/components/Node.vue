@@ -13,6 +13,7 @@
       :width="w"
       :height="h"
     >
+      <text v-if="badge" class="badge">{{ badge.join(', ') }}</text>
       <div class="node-icon" v-if="$store.state.icons.node[data.icon]">
         <img :src="$store.state.icons.node[data.icon].i" />
       </div>
@@ -41,7 +42,8 @@ export default {
   props: [
     'data',
     'selected',
-    'highlighted'
+    'highlighted',
+    'badge'
   ],
   mounted() {
     window.addEventListener('click', () => {
@@ -206,6 +208,24 @@ export default {
 }
 .node foreignObject {
   overflow: visible;
+}
+
+text.badge {
+  border: 1px solid #FFF;
+  min-width: 15px;
+  height: 15px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 3px;
+  text-align: center;
+  line-height: 13px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  background-color: #000;
+  box-sizing: border-box;
 }
 
 </style>
