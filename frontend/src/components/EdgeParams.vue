@@ -5,7 +5,7 @@
 
     <div class="pallete pallete-right floors">
       <div>Тип связи</div>
-      <select :value="data.type">
+      <select :value="data.type" @input="setType">
         <option :value="'Road'">Дорога для тележки</option>
         <option :value="'Footway'">Проход для человека</option>
         <option :value="'Elevator'">Лифт</option>
@@ -45,7 +45,8 @@
       async save() {
         await this.$store.dispatch('depotEditor/updateEdge', {
           ...this.data,
-          weight: this.weight
+          weight: this.weight,
+          type: this.type,
         });
         this.$store.commit('depotEditor/unselect');
       }
