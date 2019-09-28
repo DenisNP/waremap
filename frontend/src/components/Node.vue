@@ -1,5 +1,7 @@
 <template>
   <g class="node" :class="{show, highlighted, ['node-' + data.icon]: true, selected}">
+    <title>{{ data.id }}</title>
+    
     <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
