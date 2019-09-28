@@ -42,8 +42,8 @@ export default {
   ],
   data() {
     return {
-      w: 50,
-      h: 50,
+      w: 30,
+      h: 30,
       draggingX: null,
       draggingY: null,
       down: false,
@@ -143,6 +143,7 @@ export default {
 
 .node {
   display: none;
+  cursor: pointer;
 }
 .node.show {
   display: block;
@@ -187,7 +188,7 @@ export default {
   align-items: center;
 }
 .node-icon img {
-  max-width: 100%;
+  max-height: 98%;
 }
 
 </style>
