@@ -47,8 +47,9 @@ export default {
     },
     show() {
       const from = this.$store.getters['serverState/nodeById'](this.data.from);
+      const to = this.$store.getters['serverState/nodeById'](this.data.to);
 
-      return (this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor)
+      return (this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor && to.floor === this.$store.state.editor.floor)
           || (this.$store.state.editor.displayMode === 'depot' && from.depot === this.$store.state.editor.depot.id);
     },
     selected() {

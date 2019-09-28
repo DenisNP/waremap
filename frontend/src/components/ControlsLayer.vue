@@ -12,12 +12,25 @@
       </div>
 
       <div class="pallete-item"
-        key="autoComputeEdges"
-        @click="autoComputeEdges()"
+           key="autoComputeEdges"
+           @click="autoComputeEdges()"
       >
         <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
         <span class="pallete-item--name">Заполнить связи</span>
       </div>
+
+      <label class="myLabel">
+        <div class="pallete-item"
+             key="uploadBackground"
+        >
+          <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
+            <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+
+            <span class="pallete-item--name">
+              Загрузить план
+            </span>
+        </div>
+      </label>
     </div>
 
     <div class="pallete pallete-right floors">
@@ -38,6 +51,7 @@
 </template>
 
 <script>
+import * as helpers from '../common/helpers';
 
 export default {
   name: 'ControlsLayer',
@@ -111,6 +125,11 @@ export default {
       this.toolSelect(this.selectedTool);
   },
   methods: {
+    async onFileSelected(e) {
+      const base64 = await helpers.toBase64(e.target.files[0]);
+      await this.$store.dispatch('editor/uploadFloorBackground', base64);
+      console.log(base64.length, 'bytes uploaded');
+    },
     setDefaultMode() {
       this.$store.commit('editor/setDefaultMode');
     },
@@ -122,16 +141,16 @@ export default {
         this.setDefaultMode();
       }
     },
-    floorSelect(floor) {
+    async floorSelect(floor) {
       console.log('select floor', floor);
       this.$store.commit('editor/setFloor', floor);
+      await this.$store.dispatch('editor/downloadFloorBackground');
     },
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');
     },
   }
 }
-
 </script>
 
 <style>
@@ -218,10 +237,40 @@ export default {
   max-width: 100%;
 }
 
+.pallete.tools {
+    left: 0;
+    top: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+::-webkit-scrollbar {
+  width: 14px;
+}
+::-webkit-scrollbar-track {
+  width: 14px;
+}
+::-webkit-scrollbar-thumb {
+  width: 14px;
+  background-color: #999;
+  border: 4px solid #4D4D4D;
+  border-radius: 7px;
+}
+
 
 
 .floors .pallete-item {
   justify-content: center;
+}
+
+label.myLabel input[type="file"] {
+  position:absolute;
+  top: -1000px;
+}
+
+label.myLabel {
+  cursor: pointer;
 }
 
 </style>

@@ -27,6 +27,8 @@ namespace Waremap.Events
                     }
                 }
             }
+            
+            EventAddDepot.RedefineDepots(state);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -7,7 +8,9 @@ namespace Waremap.Models
     {
         public Geo Geo { get; set; } = new Geo();
         public Equipment Equipment { get; set; } = new Equipment();
-        
+        public List<Waypoint> CarWaypoints { get; set; } = new List<Waypoint>();
+        public int CarPosition { get; set; } = 0;
+
         [JsonIgnore]
         public Dictionary<int, string> Background { get; set; } = new Dictionary<int, string>();
     }
@@ -29,6 +32,7 @@ namespace Waremap.Models
         public void AssignClosestCore(int v)
         {
             _closestCore = v;
+            Console.WriteLine($"For {Id} closest is {v}");
         }
 
         public int NeedClosestCore()
@@ -69,15 +73,12 @@ namespace Waremap.Models
         public List<Edge> Edges { get; set; } = new List<Edge>();
         public List<Depot> Depots { get; set; } = new List<Depot>();
     }
-
-
-    public class Waypoint
+    
+    public class Process
     {
         public int Id { get; set; }
         public int Order { get; set; }
         public int OperationId { get; set; }
-        public int StarTime { get; set; }
-        public int EndTime { get; set; }
     }
 
     public class Part
@@ -86,7 +87,17 @@ namespace Waremap.Models
         public string Name { get; set; }
         public int Weight { get; set; }
         public int AssemblyId { get; set; }
-        public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+        public Waypoint Waypoint { get; set; }
+        public List<Process> Path { get; set; } = new List<Process>();
+    }
+
+    public class Waypoint
+    {
+        public int FromNode { get; set; }
+        public int ToNode { get; set; }
+        public int TimeLeft { get; set; }
+        public int TimeTotal { get; set; }
+        public int OperationId { get; set; }
     }
 
     public class Assembly

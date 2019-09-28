@@ -7,6 +7,7 @@ export default {
   },
   state: {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
+    floorBackground: null,
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
     selectedDepotId: null,
@@ -22,6 +23,7 @@ export default {
   },
   mutations: {
     setFloor(state, floor) {
+      // state.floorBackground = null;
       state.floor = floor;
     },
 
@@ -170,6 +172,21 @@ export default {
       const newState = await API.removeDepot(c.state.selectedDepotId);
       c.commit('setServerState', newState, {root: true});
     },
+
+    async uploadFloorBackground(c, base64) {
+      await API.sendBackground(base64, c.state.floor);
+    },
+
+    async downloadFloorBackground(c) {
+      c.state.floorBackground = '';
+      try {
+        c.state.floorBackground = await API.getBackground(c.state.floor);
+      } catch(e) {
+        return;
+      }
+
+      console.log('downloaded background', c.state.floorBackground.length);
+    }
   }
 };
 
