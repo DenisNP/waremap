@@ -9,7 +9,7 @@ namespace Waremap.Controllers
 {
     [ApiController]
     [Route("/position")]
-    public class PositionController : Controller
+    public class PositionController : ControllerBase
     {
         public struct WaypointInfo
         {
