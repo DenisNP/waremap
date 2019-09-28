@@ -21,9 +21,10 @@
 </template>
 
 <script>
+const jsQR = require('jsqr');
 import {postJson, postData, getData} from '../common/helpers';
 import config from '../common/config';
-const jsQR = require('jsqr');
+import API from '../common/api';
 
 const ENDPOINT = config.backendUrl;
 
@@ -37,23 +38,33 @@ export default {
       targetPosition: '-',
       isScanning: false,
       animationFrame: null,
-      code: null
+      code: null,
+      stream: null,
     };
   },
   async mounted() {
-    var urlParams = new URLSearchParams(window.location.search);
-
     // const carId = urlParams.get('id');
     // const data = await getData(ENDPOINT + '/position');
+
+    return;
+
+    setInterval(async () => {
+      const lastPosition = await API.api('GET', 'position');
+      console.log('pos', lastPosition);
+    }, 2000);
   },
   computed: {
   },
   methods: {
     hideScanner() {
       this.isScanning = false;
-      cancelAnimationFrame(this.animationFrame);
-      video.stop();
 
+      let tracks = this.stream.getTracks();
+      tracks.forEach(function(track) {
+        track.stop();
+      });
+      this.stream = null;
+      cancelAnimationFrame(this.animationFrame);
     },
     async showScanner() {
       this.code = null;
@@ -88,6 +99,7 @@ export default {
           }
         }
       });
+      this.stream = stream;
       video.srcObject = stream;
       video.setAttribute('playsinline', true); // required to tell iOS safari we don't want fullscreen
       video.play();
