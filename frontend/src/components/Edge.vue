@@ -43,9 +43,6 @@ export default {
     show() {
       const from = this.$store.getters['serverState/nodeById'](this.data.from);
 
-      console.log('from node', from.id, from.floor, this.$store.state.editor.floor);
-      console.log('visible', this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor);
-
       return (this.$store.state.editor.displayMode === 'floor' && from.floor === this.$store.state.editor.floor)
           || (this.$store.state.editor.displayMode === 'depot' && from.depot === this.$store.state.editor.depot.id);
     },

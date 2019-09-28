@@ -30,6 +30,7 @@ export default {
     },
 
     setDefaultMode(state) {
+      unselect(state);
       state.mode = 'default';
       state.isSelectedSomething = false;
       state.selectedEdge = null;
@@ -38,11 +39,13 @@ export default {
     },
 
     startAddingNode(state, nodeIcon) {
+      unselect(state);
       state.mode = 'addingNode';
       state.addingNodeIcon = nodeIcon;
     },
 
     startAddingDepot(state, nodeIcon) {
+      unselect(state);
       state.mode = 'addingDepot';
       state.addingNodeIcon = nodeIcon;
     },
@@ -72,11 +75,7 @@ export default {
     },
 
     unselect(state) {
-      state.mode = 'default';
-      state.isSelectedSomething = false;
-      state.selectedNodeId = null;
-      state.selectedEdge = null;
-      state.selectedDepotId = null;
+      unselect(state);
     },
   },
   actions: {
@@ -172,3 +171,11 @@ export default {
     },
   }
 };
+
+function unselect(state) {
+  state.mode = 'default';
+  state.isSelectedSomething = false;
+  state.selectedNodeId = null;
+  state.selectedEdge = null;
+  state.selectedDepotId = null;
+}
