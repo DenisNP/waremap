@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <AppQr v-if="page === 'qr'"></AppQr>
+    <AppMobile v-if="page === 'mobile'"></AppMobile>
     <div v-if="page === 'main'">
       <ControlsLayer floor="1" tool="0" />
       <Editor/>
@@ -18,6 +19,7 @@
 
 <script>
 import AppQr from './components/AppQr.vue';
+import AppMobile from './components/AppMobile.vue';
 import Editor from './components/Editor.vue';
 import ControlsLayer from './components/ControlsLayer.vue';
 import EdgeParams from './components/EdgeParams.vue';
@@ -27,6 +29,7 @@ export default {
   name: 'app',
   components: {
     AppQr,
+    AppMobile,
     EdgeParams,
     MachineParams,
     Editor,
@@ -38,7 +41,9 @@ export default {
     }
   },
   mounted() {
-    this.page = location.pathname === '/qr' ? 'qr' : 'main';
+    console.log('location', location);
+    const params = location.hash.replace('#', '').split('/');
+    this.page = params[0] || 'main';
   },
   computed: {
     isMachineSelected() {
@@ -51,6 +56,7 @@ export default {
 <style lang="scss">
 
 body {
+  color: #fff;
   background-color: #333;
 }
 

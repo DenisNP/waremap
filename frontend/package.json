@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --https",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "instascan": "^1.0.0",
+    "jsqr": "^1.2.0",
     "qrcode": "^1.4.2",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",

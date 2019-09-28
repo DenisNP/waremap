@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="container">
+      <div v-if="failed">Нет данных для данного участка.</div>
       <div
         v-for="(data, index) in qrs"
         :key="index"
@@ -18,6 +19,7 @@
 <script>
 import {postJson, postData, getData} from '../common/helpers';
 import config from '../common/config';
+import API from '../common/api';
 const QRCode = require('qrcode');
 
 const ENDPOINT = config.backendUrl;
@@ -28,15 +30,20 @@ export default {
   },
   data() {
     return {
-      qrs: []
+      qrs: [],
+      failed: false
     };
   },
   async mounted() {
-    var urlParams = new URLSearchParams(window.location.search);
+    const params = location.hash.replace('#', '').split('/').slice(1);
+    const machineId = params[0];
 
-    const machineId = urlParams.get('id');
+    const data = await API.api('GET', 'machine?id=' + machineId);
 
-    //const data = await getData(ENDPOINT + '/machine?id=');
+    if (!data || !data.length) {
+      this.failed = true;
+    }
+    /*
     const data = [{
       part_id: 999,
       part_name: 'Тапок',
@@ -46,6 +53,7 @@ export default {
       part_name: 'Сосиска в тесте',
       operation_name: 'Поднимание'
     }];
+     */
 
     data.forEach(item => {
       const content = `${item.part_id}_${machineId}`;
