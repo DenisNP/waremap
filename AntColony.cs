@@ -52,6 +52,11 @@ namespace Waremap
             {
                 FromNode = carNode,
                 ToNode = nextNode,
+                OperationId = 0
+            });
+            route.CarWaypoints.Add(new Waypoint
+            {
+                
             });
         }
 
