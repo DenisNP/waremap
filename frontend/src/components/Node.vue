@@ -1,6 +1,6 @@
 <template>
   <g>
-    <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" />
+    <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
     <rect
       :id="data.id"
       :x="(draggingX || data.x) - w/2"
