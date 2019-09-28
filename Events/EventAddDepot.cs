@@ -47,25 +47,23 @@ namespace Waremap.Events
 
         public static void RedefineDepots(State state)
         {
-            foreach (var depot in state.Geo.Depots)
+            foreach (var node in state.Geo.Nodes)
             {
-                foreach (var node in state.Geo.Nodes)
+                node.Depot = 0;
+                foreach (var depot in state.Geo.Depots)
                 {
                     if (
                         node.X >= depot.X
                         && node.X <= depot.X + depot.W
                         && node.Y >= depot.Y
                         && node.Y <= depot.Y + depot.H
-                        && node.Floor == depot.Floor
+                        && depot.Floor == node.Floor
                     )
                     {
                         node.Depot = depot.Id;
+                        break;
                     }
-                    else
-                    {
-                        node.Depot = 0;
-                    }
-                }   
+                }
             }
         }
     }
