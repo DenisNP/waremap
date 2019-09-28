@@ -1,23 +1,17 @@
 <template>
-  <div class="controls">
-    <div class="pallete tools">
-    </div>
+  <div class="pallete pallete-right MachineParams">
+    <div class="pallete-heading">Возможные операции</div>
 
-    <div class="pallete pallete-right floors">
-      <div>Возможные операции</div>
-      <div
-        v-for="operation in $store.state.serverState.equipment.operations"
-        :key="operation.id"
-      >
-        <span class="pallete-item-name">
-          <label>
-            <input type="checkbox" @input="onCheck" :value="operation.id" :checked="operation_ids.includes(operation.id)"/>
-            {{ operation.name }}
-          </label>
-        </span>
-      </div>
-      <br>
-      <button @click="save">Сохранить</button>
+    <div class="pallete-item"
+      v-for="operation in $store.state.serverState.equipment.operations"
+      :key="operation.id"
+      :class="{selected: machineOperationsObject[operation.id]}"
+      @click="setOperation(operation.id)"
+    >
+      <span class="pallete-item-icon"></span>
+      <span class="pallete-item-name">
+        {{ operation.name }}
+      </span>
     </div>
   </div>
 </template>
@@ -31,27 +25,31 @@
     data() {
       return {
         operation_ids: this.data.operation_ids,
+        machineOperationsObject: {} 
       };
     },
     computed: {
-
     },
     mounted() {
+      let operations = {};
+      this.operation_ids.map((id) => {
+        operations[id] = true;
+      });
+      this.machineOperationsObject = operations;
     },
     methods: {
-      onCheck(e) {
-        const id = Number(e.currentTarget.value);
-        if (!this.operation_ids.includes(id)) {
-          this.operation_ids.push(id);
-        }
-        console.log('new ids', this.operation_ids);
+      setOperation(id) {
+        this.machineOperationsObject[id] = !this.machineOperationsObject[id];
+        this.operation_ids = Object.keys(this.machineOperationsObject).filter((id) => {
+          return this.machineOperationsObject[id];
+        });
+        this.save();
       },
       async save() {
         await this.$store.dispatch('editor/updateNode', {
           ...this.data,
           operation_ids: this.operation_ids
         });
-        this.$store.commit('editor/unselect');
       }
     }
   }

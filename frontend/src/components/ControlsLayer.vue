@@ -264,7 +264,7 @@ export default {
   background-repeat: no-repeat;
   background-position: top left;
   margin-top: 72px;
-  padding: 35px 0 0;
+  padding: 40px 0 0;
 }
 .tools .pallete-item {
   padding: 11px 35px;
@@ -292,7 +292,7 @@ export default {
 .tools .pallete-heading {
   font-size: 18px;
   color: #333;
-  padding: 20px 35px 10px;
+  padding: 15px 35px 10px;
 }
 
 
@@ -383,6 +383,59 @@ label.myLabel {
   padding: 3px 5px;
   border: 1px solid transparent;
   border-radius: 4px;
+}
+
+/* -------------------------------------------------------------------- */
+
+.pallete.MachineParams {
+  background-image: url(../assets/right.svg);
+  left: auto;
+  right: 0;
+  top: 0;
+  box-sizing: border-box;
+  height: 620px;
+  width: 228px;
+  box-shadow: none;
+  background-repeat: no-repeat;
+  background-position: top left;
+  margin-top: 72px;
+  padding: 30px 0 0;
+  color: #333;
+  font-size: 14px;
+}
+.pallete.MachineParams .pallete-heading {
+  font-size: 16px;
+  padding: 25px 30px 10px 35px;
+}
+.pallete.MachineParams .pallete-item {
+  padding: 10px 30px 10px 35px;
+}
+.MachineParams .pallete-item-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid #3878FF;
+    position: relative;
+    margin-top: -6px;
+}
+.MachineParams .pallete-item-icon:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7px;
+    height: 7px;
+    margin: -3.5px;
+    border-radius: 50%;
+}
+.MachineParams .selected .pallete-item-icon {
+    background-color: #3878FF;
+}
+.MachineParams .selected .pallete-item-name {
+    color: #3878FF;
+    font-weight: initial;
 }
 
 </style>
