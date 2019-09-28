@@ -170,6 +170,10 @@ export default {
       const newState = await API.removeDepot(c.state.selectedDepotId);
       c.commit('setServerState', newState, {root: true});
     },
+
+    async uploadFloorBackground(c, base64) {
+      await API.sendBackground(base64, c.state.floor);
+    }
   }
 };
 

@@ -127,7 +127,7 @@ export default {
   methods: {
     async onFileSelected(e) {
       const base64 = await helpers.toBase64(e.target.files[0]);
-      // await this.$store.dispatch('editor/uploadBackground');
+      await this.$store.dispatch('editor/uploadFloorBackground', base64);
       console.log(base64.length, 'bytes uploaded');
     },
     setDefaultMode() {

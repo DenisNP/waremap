@@ -80,10 +80,7 @@ export default {
   async sendBackground(base64, floor) {
     const endpoint = window.endpoint || ENDPOINT;
 
-    const res = method === 'GET' ?
-      await getData(`${endpoint}/${action}`, data) :
-      await postJson(`${endpoint}/${action}`, data);
-
+    const res = await postData(`${endpoint}/background?floor=${floor}`, base64);
 
     if (!res.ok || res.status !== 200) {
       throw new Error('fetch fail', res);
