@@ -69,10 +69,6 @@ svg {
   -moz-osx-font-smoothing: grayscale;
 }
 
-svg image {
-  pointer-events: none;
-}
-
 /* ---------------------------------------------------------------- */
 
 .node {
