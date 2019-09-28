@@ -9,6 +9,7 @@ export default {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
     floorBackground: null,
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
+    selectedNode: null,
     selectedNodeId: null,
     selectedDepotId: null,
     selectedEdge: null,
@@ -36,6 +37,7 @@ export default {
       state.mode = 'default';
       state.isSelectedSomething = false;
       state.selectedEdge = null;
+      state.selectedNode = null;
       state.selectedNodeId = null;
       state.selectedDepotId = null;
     },
@@ -56,6 +58,7 @@ export default {
       state.mode = 'nodeSelected';
       state.isSelectedSomething = true;
       state.selectedEdge = null;
+      state.selectedNode = node;
       state.selectedNodeId = node.id;
       state.selectedDepotId = null;
     },
@@ -64,6 +67,7 @@ export default {
       state.mode = 'edgeSelected';
       state.isSelectedSomething = true;
       state.selectedEdge = edge;
+      state.selectedNode = null;
       state.selectedNodeId = null;
       state.selectedDepotId = null;
     },
@@ -72,6 +76,7 @@ export default {
       state.mode = 'depotSelected';
       state.isSelectedSomething = true;
       state.selectedEdge = null;
+      state.selectedNode = null;
       state.selectedNodeId = null;
       state.selectedDepotId = depot.id;
     },

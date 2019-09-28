@@ -9,7 +9,7 @@ namespace Waremap.Models
         public Equipment Equipment { get; set; } = new Equipment();
         
         [JsonIgnore]
-        public string Background { get; set; }
+        public Dictionary<int, string> Background { get; set; } = new Dictionary<int, string>();
     }
     
     public class Node
