@@ -26,6 +26,12 @@ export default {
       state.depot = depot;
     },
 
+    setDefaultMode(state) {
+      state.mode = 'default';
+      state.selectedEdge = null;
+      state.selectedNodeId = null;
+    },
+
     startAddingNode(state, nodeIcon) {
       state.mode = 'addingNode';
       state.addingNodeIcon = nodeIcon;

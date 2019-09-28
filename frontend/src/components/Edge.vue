@@ -32,7 +32,7 @@ export default {
     onClick(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.$store.commit('depotEditor/selectEdge', data);
+      this.$store.commit('depotEditor/selectEdge', this.data);
     },
   },
   computed: {
