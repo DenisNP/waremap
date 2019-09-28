@@ -1,5 +1,7 @@
 <template>
   <g class="node" :class="{show, highlighted, ['node-' + data.icon]: true, selected}">
+    <title>{{ data.id }}</title>
+    
     <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
@@ -42,7 +44,6 @@ export default {
     'highlighted'
   ],
   mounted() {
-    console.log(this.highlighted)
     window.addEventListener('click', () => {
       this.showMenu = false;
     });
@@ -67,7 +68,6 @@ export default {
     },
     iconWidth() {
       let icon = this.$store.state.icons.node[this.data.icon];
-      console.log(this.data.icon)
       if (icon) return icon.w;
     }
   },
@@ -182,11 +182,12 @@ export default {
   filter: hue-rotate(180deg);
 }*/
 
-.nodesHighlighted .node:not(.node-Depot),
-.nodesHighlighted .edge {
+.highlighted .node:not(.node-Depot),
+.highlighted .edge {
   opacity: 0.3;
 }
-.nodesHighlighted .node.highlighted {
+.highlighted .edge.highlighted,
+.highlighted .node.highlighted {
   opacity: 1;
 }
 

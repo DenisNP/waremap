@@ -15,6 +15,7 @@ export default {
     selectedDepotId: null,
     selectedEdge: null,
     highlightedNodes: {},
+    highlightedEdges: {},
     isSomeHighlighted: false,
     isSelectedSomething: false,
     FloorToFloorEdge: null,
@@ -111,6 +112,13 @@ export default {
       nodesIds.map((id) => highlightedNodes[id] = true);
       state.highlightedNodes = highlightedNodes;
       state.isSomeHighlighted = (Object.keys(highlightedNodes).length > 0);
+    },
+
+    highlightedEdges(state, edges) {
+      let highlightedEdges = {};
+      edges.map(({from, to}) => highlightedEdges[[from, to].sort().join('_')] = true);
+      state.highlightedEdges = highlightedEdges;
+      state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
     }
   },
   actions: {
@@ -241,6 +249,7 @@ function unselect(state) {
   state.selectedEdge = null;
   state.selectedDepotId = null;
   state.highlightedNodes = {};
+  state.highlightedEdges = {};
   state.isSomeHighlighted = false;
   state.FloorToFloorEdge = null;
 }

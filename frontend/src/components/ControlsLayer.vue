@@ -445,6 +445,14 @@ label.myLabel {
   font-size: 16px;
   padding: 25px 30px 10px 35px;
 }
+.pallete.pallete-right .pallete-heading-top {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 20px 30px 0 35px;
+}
+.pallete.pallete-right .pallete-heading-top + .pallete-heading {
+  padding-top: 10px;
+}
 .pallete.pallete-right .pallete-item {
   padding: 10px 30px 10px 35px;
 }
