@@ -1,8 +1,7 @@
 <template>
   <div @click="onClick">
-    <svg @mousemove="onMouseMove" :class="{nodesHighlighted: $store.state.editor.isSomeHighlighted}">
-      <!-- <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" v-if="" /> -->
-      <foreignObject v-if="$store.state.editor.floorBackground" x="260" y="20" width="100%" height="100%">
+    <svg @mousemove="onMouseMove" :class="{nodesHighlighted: $store.state.editor.isSomeHighlighted}" @click="clickBg">
+      <foreignObject v-if="$store.state.editor.floorBackground" x="260" y="20" width="100%" height="100%" style="pointer-events: none">
         <img :src="$store.state.editor.floorBackground" style=" filter: invert(1); opacity: .6">
       </foreignObject>
 
@@ -87,6 +86,11 @@ export default {
 
   },
   methods: {
+    clickBg(e) {
+      if (e.target.tagName === 'svg') {
+        this.$store.commit('editor/unselect');
+      }
+    },
     async onKeyDown(e) {
       if (e.keyCode === 46) { // delete
         if (this.$store.state.editor.mode === 'nodeSelected') {
