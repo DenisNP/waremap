@@ -28,19 +28,25 @@ module.exports = {
   equipment: {
     parts: [{
       id: Number,
-      car_id: Number,
       name: String,
       weight: Number,
       assembly_id: Number,
       path: [{
-        node_id: Number,
-        processing_time: Number // sec
+        id: Number,
+        order: Number,
+        operation_id: Number,
+        start_time: Number,
+        end_time: Number
       }]
     }],
     operations: [{
         id: Number,
         name: String,
         processing_time: Number
-    }]
+    }],
+    assemblies: [{
+        id: Number,
+        name: String
+    }],
   }
 };

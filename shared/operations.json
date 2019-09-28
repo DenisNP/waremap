@@ -1,0 +1,42 @@
+[{
+        "id": 0,
+        "processing_time": 442,
+        "name": "Фрезерование"
+    }, {
+        "id": 1,
+        "processing_time": 1617,
+        "name": "Сборка"
+    }, {
+        "id": 2,
+        "processing_time": 1504,
+        "name": "Сварка"
+    }, {
+        "id": 3,
+        "processing_time": 1671,
+        "name": "Токарная операция"
+    }, {
+        "id": 4,
+        "processing_time": 3386,
+        "name": "Покраска"
+    }, {
+        "id": 5,
+        "processing_time": 3146,
+        "name": "Фрезерование"
+    }, {
+        "id": 6,
+        "processing_time": 270,
+        "name": "Фрезерование"
+    }, {
+        "id": 7,
+        "processing_time": 661,
+        "name": "Сверление"
+    }, {
+        "id": 8,
+        "processing_time": 2765,
+        "name": "Шлифование"
+    }, {
+        "id": 9,
+        "processing_time": 2543,
+        "name": "Сверление"
+    }
+]

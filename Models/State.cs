@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace Waremap.Models
@@ -65,7 +64,6 @@ namespace Waremap.Models
     public class Part
     {
         public int Id { get; set; }
-        public int CarId { get; set; }
         public string Name { get; set; }
         public int Weight { get; set; }
         public int AssemblyId { get; set; }
@@ -82,6 +80,7 @@ namespace Waremap.Models
     {
         public List<Operation> Operations { get; set; } = new List<Operation>();
         public List<Part> Parts { get; set; } = new List<Part>();
+        public List<Assembly> Assemblies { get; set; } = new List<Assembly>();
     }
 
     public enum NodeType

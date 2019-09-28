@@ -57,5 +57,21 @@ namespace Waremap.Controllers
             var newNodes = nodes.Where(p => !existIds.Contains(p.Id));
             state.Geo.Nodes.AddRange(newNodes);
         }
+
+        public static void LoadOperationsToState(string json, State state)
+        {
+            var operations = JsonConvert.DeserializeObject<List<Operation>>(json, Utils.ConverterSettings);
+            var existIds = state.Equipment.Operations.Select(p => p.Id);
+            var newOperations = operations.Where(p => !existIds.Contains(p.Id));
+            state.Equipment.Operations.AddRange(newOperations);
+        }
+
+        public static void LoadAssembliesToState(string json, State state)
+        {
+            var assemblies = JsonConvert.DeserializeObject<List<Assembly>>(json, Utils.ConverterSettings);
+            var existIds = state.Equipment.Assemblies.Select(p => p.Id);
+            var newAssemblies = assemblies.Where(p => !existIds.Contains(p.Id));
+            state.Equipment.Assemblies.AddRange(newAssemblies);
+        }
     }
 }
