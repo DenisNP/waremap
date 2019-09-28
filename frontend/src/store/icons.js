@@ -6,8 +6,8 @@ export default {
   },
   state: {
     node: {
-      Machine: require('../assets/machine-tool.svg'),
-      Point: require('../assets/node.svg')
+      Machine: {i: require('../assets/machine-tool.svg'), w: 50},
+      Point: {i: require('../assets/node.svg'), w: 30}
     }
   },
   getters: {
