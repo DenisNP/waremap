@@ -111,7 +111,6 @@ export default {
         x: this.draggingX,
         y: this.draggingY
       });
-      this.$store.commit('editor/unselect');
     },
     onMouseUp(e) {
       const wasDown = this.down;

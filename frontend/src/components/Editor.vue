@@ -140,7 +140,18 @@ export default {
       } else if (['nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode)) {
         this.$store.commit('editor/unselect');
       }
+    },
+    onKeyDown(e) {
+      if (e.which == 27) {
+        this.$store.commit('editor/unselect');
+      }
     }
+  },
+  mounted() {
+    window.addEventListener('keydown', this.onKeyDown);
+  },
+  destroyed() {
+    window.removeEventListener('keydown', this.onKeyDown);
   }
 };
 </script>
