@@ -11,19 +11,11 @@
         <span class="pallete-item--name">{{ tool.name }}</span>
       </div>
 
-      <div class="pallete-item"
-           key="autoComputeEdges"
-           @click="autoComputeEdges()"
-      >
-        <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
-        <span class="pallete-item--name">Заполнить связи</span>
-      </div>
-
       <label class="myLabel">
         <div class="pallete-item"
              key="uploadBackground"
         >
-          <div class="pallete-item-icon"><img src="@/assets/edge.svg"/></div>
+          <div class="pallete-item-icon"><img :src="$store.state.icons.pallete.UploadBg.i" /></div>
             <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
 
             <span class="pallete-item--name">
@@ -66,37 +58,42 @@ export default {
         {
           name: 'Режим курсора',
           key: 'setDefaultMode',
-          icon: require('../assets/cursor_02.svg')
+          icon: this.$store.state.icons.pallete.Cursor.i
         },
         {
           name: 'Участок',
           key: 'Machine',
-          icon: require('../assets/machine-tool.svg')
+          icon: this.$store.state.icons.pallete.Machine.i
         },
         {
           name: 'Узел',
           key: 'Node',
-          icon: require('../assets/node.svg')
+          icon: this.$store.state.icons.pallete.Node.i
         },
         {
           name: 'Лестница',
           key: 'Ladder',
-          icon: require('../assets/stairs.svg')
+          icon: this.$store.state.icons.pallete.Stairs.i
         },
         {
           name: 'Лифт',
           key: 'Elevator',
-          icon: require('../assets/lift.svg')
+          icon: this.$store.state.icons.pallete.Elevator.i
         },
         {
           name: 'Дверь',
           key: 'Door',
-          icon: require('../assets/door.svg')
+          icon: this.$store.state.icons.pallete.Door.i
         },
         {
           name: 'Цех',
           key: 'Depot',
-          icon: ''
+          icon: this.$store.state.icons.pallete.Depot.i
+        },
+        {
+          name: 'Сгенерировать связи',
+          key: 'autoComputeEdges',
+          icon: this.$store.state.icons.pallete.Edges.i
         }
       ],
       selectedTool: false,
@@ -139,6 +136,9 @@ export default {
 
       if (this.tools[index].key == 'setDefaultMode') {
         this.setDefaultMode();
+      }
+      if (this.tools[index].key == 'autoComputeEdges') {
+        this.autoComputeEdges();
       }
     },
     async floorSelect(floor) {
@@ -226,9 +226,9 @@ export default {
 }
 
 .pallete-item-icon {
-  width: 30px;
-  height: 30px;
-  margin: -3px 14px -3px 0;
+  width: 32px;
+  height: 32px;
+  margin: -4px 14px -4px 0;
   display: flex;
   justify-content: center;
   align-items: center;

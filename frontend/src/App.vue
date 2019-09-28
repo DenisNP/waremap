@@ -6,6 +6,10 @@
       v-if="$store.state.editor.mode === 'edgeSelected'"
       :data="$store.state.editor.selectedEdge"
     />
+    <MachineParams
+      v-if="isMachineSelected"
+      :data="$store.state.editor.selectedNode"
+    />
   </div>
 </template>
 
@@ -13,14 +17,21 @@
 import Editor from './components/Editor.vue';
 import ControlsLayer from './components/ControlsLayer.vue';
 import EdgeParams from './components/EdgeParams.vue';
+import MachineParams from './components/MachineParams.vue';
 
 export default {
   name: 'app',
   components: {
     EdgeParams,
+    MachineParams,
     Editor,
     ControlsLayer
   },
+  computed: {
+    isMachineSelected() {
+      return this.$store.state.editor.mode === 'nodeSelected' && this.$store.state.editor.selectedNode.type === 'Machine';
+    }
+  }
 };
 </script>
 
@@ -126,7 +137,7 @@ svg image {
 
 .edge.edge-Dashed,
 .edge.edge-Footway {
-  stroke: rgba(30,30,30,.7);
+  stroke: rgba(255,255,255,.3);
   stroke-width: 2px;
   fill: transparent;
   stroke-dasharray: 10 5;
@@ -145,7 +156,7 @@ svg image {
 
 .edge.edge-Road {
   fill: transparent;
-  stroke: #333;
+  stroke: rgba(255,255,255,.6);
   stroke-width: 2px;
 }
 

@@ -10,7 +10,10 @@
           selected: selected,
           ['edge-'+data.type]: true
         }"
-        :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y) + 'L' + (toNode.x - gap) + ',' + (toNode.y) + 'L' + (toNode.x + gap) + ',' + (toNode.y) + 'L' + (fromNode.x + gap) + ',' + (fromNode.y)"
+        :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y)
+          + 'L' + (toNode.x - gap) + ',' + (toNode.y)
+          + 'L' + (toNode.x + gap) + ',' + (toNode.y)
+          + 'L' + (fromNode.x + gap) + ',' + (fromNode.y)"
           />
     <line
       :x1="fromNode.x"
@@ -20,6 +23,14 @@
       stroke-width="20"
       stroke="rgba(0,0,0,0.05)"
     />
+    <g class="edge-weight">
+      <text align="center" class="edge-weight-value"
+        :x="fromNode.x + (toNode.x - fromNode.x) / 2 - 7"
+        :y="fromNode.y + (toNode.y - fromNode.y) / 2 + 3"
+      >
+        {{ data.weight }}
+      </text>
+    </g>
   </g>
 </template>
 
@@ -67,5 +78,14 @@ export default {
 </script>
 
 <style>
+
+.edge-weight-value {
+  font-size: 11px;
+  fill: #FFF;
+  stroke: #333;
+  stroke-width: 1px;
+  stroke-linecap: round;
+  font-weight: 900;
+}
 
 </style>
