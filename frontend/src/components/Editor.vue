@@ -1,7 +1,10 @@
 <template>
   <div @click="onClick">
     <svg @mousemove="onMouseMove">
-      <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" v-if="$store.state.editor.floorBackground" />
+      <!-- <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" v-if="" /> -->
+      <foreignObject v-if="$store.state.editor.floorBackground" x="260" y="20" width="100%" height="100%">
+        <img :src="$store.state.editor.floorBackground" style=" filter: invert(1);">
+      </foreignObject>
 
       <Depot
         v-for="data in $store.state.serverState.geo.depots"
