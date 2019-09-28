@@ -42,8 +42,10 @@ namespace Waremap
                 var probs = new List<double>();
                 foreach (var neighbour in potential)
                 {
+                    if (neighbour == carNode) continue;
                     var edgeFood = _food[carNode, neighbour];
-                    probs.Add(edgeFood * route.Graph.DistFromWeight(neighbour, carNode));
+                    var edgeW = route.Graph.DistFromWeight(neighbour, carNode);
+                    probs.Add(edgeFood * edgeW);
                 }
 
                 var sumProb = probs.Sum();

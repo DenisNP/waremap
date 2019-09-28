@@ -24,15 +24,12 @@ namespace Waremap.Events
             {
                 Console.WriteLine("Core ids: " + JsonConvert.SerializeObject(coreIds));
                 GraphUtils.AssignClosestCores(graph, coreIds.Select(n => n.Id).ToList());
-                state.CarRoadmap.Path.Add(new Waypoint
-                {
-                    FromNode = 1,
-                    ToNode = 1,
-                    OperationId = 0,
-                });
+                
                 state.CarRoadmap.Path.RemoveRange(1, state.CarRoadmap.Path.Count - 1);
+                state.CarRoadmap.Position = 0;
                 state.Equipment.Parts.ForEach(p =>
                 {
+                    p.Roadmap.Position = 0;
                     p.Roadmap.Path.RemoveRange(1, p.Roadmap.Path.Count - 1);
                 });
                 
