@@ -12,6 +12,7 @@ namespace Waremap.Models
         public List<Waypoint> CarWaypoints = new List<Waypoint>();
         public int Time = 0;
         public double Result = 0;
+        public readonly Dictionary<int, Operation> Operations = new Dictionary<int, Operation>();
 
         public Route(Graph graph, State state)
         {
@@ -33,6 +34,7 @@ namespace Waremap.Models
             }
             
             CarWaypoints.Add(state.CarRoadmap.CurrentWaypoint());
+            state.Equipment.Operations.ForEach(o => Operations.Add(o.Id, o));
         }
     }
         

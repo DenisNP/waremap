@@ -25,14 +25,14 @@ namespace Waremap.Events
                 
                 // go
                 _colony = new AntColony(graph);
-                var bestRoute = new Route(graph, state);
-                var initialResult = bestRoute.Result;
+                Route bestRoute = null;
+                var initialResult = 999;
                 var k = 1000;
-                while (bestRoute.Result > initialResult / 2.0 && k-- > 0)
+                while (bestRoute == null || bestRoute.Result > initialResult / 2.0 && k-- > 0)
                 {
                     _route = new Route(graph, state);
                     _colony.RunAnt(_route);
-                    if (bestRoute.Result > _route.Result)
+                    if (bestRoute == null || bestRoute.Result > _route.Result)
                     {
                         bestRoute = _route;
                     }
