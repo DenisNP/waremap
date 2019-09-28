@@ -2,16 +2,22 @@
   <div id="app">
     <ControlsLayer floor="2" tool="3" />
     <DepotEditor/>
+    <EdgeParams
+      v-if="$store.state.depotEditor.mode === 'edgeSelected'"
+      :data="$store.state.depotEditor.selectedEdge"
+    />
   </div>
 </template>
 
 <script>
 import DepotEditor from './components/DepotEditor.vue';
 import ControlsLayer from './components/ControlsLayer.vue';
+import EdgeParams from './components/EdgeParams.vue';
 
 export default {
   name: 'app',
   components: {
+    EdgeParams,
     DepotEditor,
     ControlsLayer
   },

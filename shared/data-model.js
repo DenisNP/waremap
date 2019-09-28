@@ -16,7 +16,7 @@ module.exports = {
       floor: Number,
       x: Number,
       y: Number,
-      operation_ids: [], // array of ints 
+      operation_ids: [], // array of ints
     }],
     edges: [{
       from: Number,

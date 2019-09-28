@@ -105,6 +105,27 @@ export default {
       c.commit('setServerState', newState, {root: true});
     },
 
+    async updateEdge(c, {from, to, type, weight}) {
+      const existingEdge = c.rootState.serverState.geo.edges.find(edge =>
+        (edge.from === from && edge.to === to) ||
+        (edge.from === to && edge.to === from)
+      );
+
+      if (!existingEdge) {
+        console.log('not existingEdge');
+        return;
+      }
+
+      const newState = await API.addOrUpdateEdge({
+        type,
+        weight,
+        from,
+        to
+      });
+
+      c.commit('setServerState', newState, {root: true});
+    },
+
     async removeSelectedEdge(c) {
       const newState = await API.removeEdge({
         from: c.state.selectedEdge.from,
