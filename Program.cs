@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Waremap.Controllers;
+using Waremap.Models;
 
 namespace Waremap
 {
@@ -18,6 +19,7 @@ namespace Waremap
                 foreach (var node in state.Geo.Nodes)
                 {
                     node.Name = $"Участок {node.Id}, Цех {node.Depot}, Этаж {node.Floor}";
+                    node.Icon = node.Type == NodeType.Machine ? "Machine" : "Node";
                 }
                 Console.WriteLine($"Mock nodes loaded: {state.Geo.Nodes.Count}");
             }
