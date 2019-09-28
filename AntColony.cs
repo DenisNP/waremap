@@ -54,12 +54,6 @@ namespace Waremap
 
                 // take food from node
                 var nextNodeId = potential[index];
-                var time = AddTime(route.Graph.Edges[carNode, nextNodeId]);
-                route.Time += time;
-                var nextNode = route.Graph.Nodes[nextNodeId];
-                currentFood += TakeInPart(route, nextNode.NeedClosestCore().NId, time);
-                var (addFood, waypoint) = TakeOutPart(route, nextNode.NeedClosestCore().NId);
-                currentFood += addFood;
                 
                 // add edge
                 route.CarWaypoints.Add(new Waypoint
@@ -71,10 +65,13 @@ namespace Waremap
                 currentEdges.Add((carNode, nextNodeId));
                 currentWeight += route.Graph.Edges[carNode, nextNodeId].Weight;
                 
-                // machine waypoint
-                if (waypoint != null)
-                    route.CarWaypoints.Add(waypoint);
-                
+                // add machine process if needed
+                var time = AddTime(route.Graph.Edges[carNode, nextNodeId]);
+                route.Time += time;
+                var nextNode = route.Graph.Nodes.Values.First(n => n.NeedClosestCore().NId == nextNodeId);
+                currentFood += TakeInPart(route, nextNode.NeedClosestCore(), nextNode.Id, time);
+                currentFood += TakeOutPart(route, nextNode.NeedClosestCore(), nextNode.Id);
+
                 // if exit
                 if (!route.OperationsLeft.Values.SelectMany(x => x).Any())
                 {
@@ -93,14 +90,14 @@ namespace Waremap
             route.Result = 1.0 / route.Time + 5.0 / addAllFood;
         }
 
-        private (double, Waypoint) TakeOutPart(Route route, int node)
+        private double TakeOutPart(Route route, GraphUtils.PathToNode path, int targetNode)
         {
             var partsOnCar = new List<int>();
             foreach (var pPos in route.PartPositions)
             {
-                if (pPos.Value.ToNode == node)
+                if (pPos.Value.ToNode == targetNode)
                 {
-                    return (0.0, null);
+                    return 0.0;
                 }
 
                 if (pPos.Value.ToNode == 0)
@@ -117,30 +114,38 @@ namespace Waremap
                     var first = opsLeft.First();
                     var opsNeeded = opsLeft.Where(op => op.Order == first.Order);
                     var firstOpMatch = opsNeeded.FirstOrDefault(op =>
-                        route.Graph.Nodes[node].OperationIds.Contains(op.OperationId));
+                        route.Graph.Nodes[targetNode].OperationIds.Contains(op.OperationId));
                     if (firstOpMatch != null)
                     {
                         route.OperationsLeft[i].Remove(firstOpMatch);
+                        // TODO add all waypoints
+                        
+                        // add machine waypoint
                         var waypoint = new Waypoint
                         {
-                            FromNode = node,
-                            ToNode = node,
+                            FromNode = targetNode,
+                            ToNode = targetNode,
                             OperationId = firstOpMatch.OperationId
                         };
-                        route.Time += route.Operations[firstOpMatch.OperationId].ProcessingTime;
-                        return (TakeOutFood, waypoint);
+                        
+                        // TODO add back waypoints
+                        
+                        var time = route.Operations[firstOpMatch.OperationId].ProcessingTime + WeightToTime(path.Weight) * 2;
+                        route.PartPositions[i].ToNode = targetNode;
+                        route.PartPositions[i].EndTime = route.Time + time;
+                        return TakeOutFood;
                     }
                 }
             }
-            
-            return (0.0, null);
+
+            return 0.0;
         }
 
-        private double TakeInPart(Route route, int node, int time)
+        private double TakeInPart(Route route, GraphUtils.PathToNode node, int nextNodeId, int time)
         {
             foreach (var pPos in route.PartPositions)
             {
-                if (pPos.Value.ToNode == node && pPos.Value.EndTime <= route.Time)
+                if (pPos.Value.ToNode == nextNodeId && pPos.Value.EndTime <= route.Time)
                 {
                     // take part back
                     route.PartPositions[pPos.Key].ToNode = 0;
@@ -154,7 +159,12 @@ namespace Waremap
 
         private int AddTime(Edge edge)
         {
-            return (int)Math.Round(edge.Weight / ManSpeed);
+            return WeightToTime(edge.Weight);
+        }
+
+        private int WeightToTime(int w)
+        {
+            return (int)Math.Round(w / ManSpeed);
         }
     }
 }
