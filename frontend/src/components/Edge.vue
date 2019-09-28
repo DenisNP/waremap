@@ -1,7 +1,7 @@
 <template>
   <g
     cursor="pointer"
-    @click="$store.commit('depotEditor/selectEdge', data)"
+    @click="onClick"
   >
     <line
       :x1="fromNode.x"
@@ -28,6 +28,13 @@ export default {
   props: [
     'data',
   ],
+  methods: {
+    onClick(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.$store.commit('depotEditor/selectEdge', data);
+    },
+  },
   computed: {
     id() {
       return this.data.from + '_' + this.data.to;

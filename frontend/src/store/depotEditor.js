@@ -78,7 +78,7 @@ export default {
       c.commit('setServerState', newState, {root: true});
     },
 
-    async addingEdge(c, {from, to}) {
+    async createEdge(c, {from, to}) {
       const newState = await API.addOrUpdateEdge({
         type: 'Road',
         weight: helpers.distance(c.rootGetters['serverState/nodeById'](from), c.rootGetters['serverState/nodeById'](to)),

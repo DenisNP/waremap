@@ -70,6 +70,10 @@ export default {
       if (this.$store.state.depotEditor.mode === 'addingNode') {
         this.$store.dispatch('depotEditor/endAddingNode', {x, y});
       }
+
+      if (['nodeSelected', 'edgeSelected'].includes(this.$store.state.depotEditor.mode)) {
+        this.$store.commit('depotEditor/unselect');
+      }
     }
   }
 };

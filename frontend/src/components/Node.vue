@@ -38,9 +38,14 @@ export default {
   methods: {
     onClick(e) {
       e.preventDefault();
+      e.stopPropagation();
 
-      if (this.$store.state.depotEditor.selectedNodeId && this.data.id !== this.$store.state.depotEditor.selectedNodeId) {
-        this.$store.dispatch('depotEditor/addingEdge', {from: this.$store.state.depotEditor.selectedNodeId, to: this.data.id});
+      console.log('11 click', this.data.id);
+      if (this.$store.state.depotEditor.mode === 'nodeSelected' && this.data.id !== this.$store.state.depotEditor.selectedNodeId) {
+        this.$store.dispatch('depotEditor/createEdge', {
+          from: this.$store.state.depotEditor.selectedNodeId,
+          to: this.data.id
+        });
         this.$store.commit('depotEditor/unselect');
       }
     },
@@ -86,9 +91,11 @@ export default {
         return;
       }
 
-      console.log('update node');
-      this.dragging = false;
-      this.$root.$emit('nodeUpdated', {...this.data, x: this.draggingX, y: this.draggingY});
+      if (this.dragging) {
+        console.log('update node');
+        this.$root.$emit('nodeUpdated', {...this.data, x: this.draggingX, y: this.draggingY});
+        this.dragging = false;
+      }
     }
   },
   mounted() {
