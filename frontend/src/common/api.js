@@ -95,15 +95,15 @@ export default {
     return await this.sendAction('computeEdges', {depotId});
   },
 
-  async addDepot({x, y, w, h, floor}) {
+  async addDepot({x, y, w, h, floor, name}) {
     return await this.sendAction('addDepot', {
-      x, y, w, h, floor
+      x, y, w, h, floor, name
     });
   },
 
-  async updateDepot({id, x, y, w, h, floor}) {
+  async updateDepot({id, x, y, w, h, floor, name}) {
     return await this.sendAction('addDepot', {
-      id, x, y, w, h, floor
+      id, x, y, w, h, floor, name
     });
   },
 

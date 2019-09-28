@@ -98,6 +98,9 @@ export default {
     },
     isAddingNodeMode() {
       return ['addingNode', 'addingEdge'].includes(this.$store.state.editor.mode);
+    },
+    isAddingDepotMode() {
+      return ['addingDepot'].includes(this.$store.state.editor.mode);
     }
   },
   mounted() {
