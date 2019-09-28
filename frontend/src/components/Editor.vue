@@ -116,12 +116,17 @@ export default {
         this.$store.dispatch('editor/endAddingNode', {x, y});
       } else if (this.$store.state.editor.mode === 'addingDepot') {
         if (!this.isDrawingDepot) {
-          console.log('start drawing depot');
+          this.newDepot = {
+            x: Math.min(x, this.startX),
+            y: Math.min(y, this.startY),
+            w: Math.abs(x - this.startX),
+            h: Math.abs(y - this.startY),
+          };
+
           this.startX = x;
           this.startY = y;
           this.isDrawingDepot = true;
         } else {
-          console.log('end drawing depot');
           this.$store.dispatch('editor/addDepot', {
             x: Math.min(x, this.startX),
             y: Math.min(y, this.startY),

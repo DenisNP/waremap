@@ -11,6 +11,7 @@ export default {
     selectedNodeId: null,
     selectedDepotId: null,
     selectedEdge: null,
+    isSelectedSomething: false,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 0,
     depot: {
@@ -30,8 +31,10 @@ export default {
 
     setDefaultMode(state) {
       state.mode = 'default';
+      state.isSelectedSomething = false;
       state.selectedEdge = null;
       state.selectedNodeId = null;
+      state.selectedDepotId = null;
     },
 
     startAddingNode(state, nodeIcon) {
@@ -46,6 +49,7 @@ export default {
 
     selectNode(state, node) {
       state.mode = 'nodeSelected';
+      state.isSelectedSomething = true;
       state.selectedEdge = null;
       state.selectedNodeId = node.id;
       state.selectedDepotId = null;
@@ -53,14 +57,15 @@ export default {
 
     selectEdge(state, edge) {
       state.mode = 'edgeSelected';
+      state.isSelectedSomething = true;
       state.selectedEdge = edge;
       state.selectedNodeId = null;
       state.selectedDepotId = null;
     },
 
     selectDepot(state, depot) {
-      console.log('select depot', depot.id);
       state.mode = 'depotSelected';
+      state.isSelectedSomething = true;
       state.selectedEdge = null;
       state.selectedNodeId = null;
       state.selectedDepotId = depot.id;
@@ -68,6 +73,7 @@ export default {
 
     unselect(state) {
       state.mode = 'default';
+      state.isSelectedSomething = false;
       state.selectedNodeId = null;
       state.selectedEdge = null;
       state.selectedDepotId = null;

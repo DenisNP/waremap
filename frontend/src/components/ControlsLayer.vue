@@ -94,7 +94,7 @@ export default {
   },
   computed: {
     isDefaultMode() {
-      return ['default', 'nodeSelected', 'edgeSelected'].includes(this.$store.state.editor.mode);
+      return ['default', 'nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode);
     },
     isAddingNodeMode() {
       return ['addingNode', 'addingEdge'].includes(this.$store.state.editor.mode);

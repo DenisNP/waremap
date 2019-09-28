@@ -28,13 +28,15 @@ export default {
     },
     onClick(e) {
       e.preventDefault();
-      e.stopPropagation();
 
       if (this.isNew) {
         return;
       }
 
-      this.$store.commit('editor/selectDepot', this.data);
+      if (this.$store.state.editor.mode === 'default' || this.$store.state.editor.isSelectedSomething) {
+        this.$store.commit('editor/selectDepot', this.data);
+        e.stopPropagation();
+      }
 
       if (this.$store.state.editor.mode === 'depotSelected' && this.data.id !== this.$store.state.editor.selectedDepotId) {
       }
