@@ -44,7 +44,6 @@ export default {
     'highlighted'
   ],
   mounted() {
-    console.log(this.highlighted)
     window.addEventListener('click', () => {
       this.showMenu = false;
     });
@@ -69,7 +68,6 @@ export default {
     },
     iconWidth() {
       let icon = this.$store.state.icons.node[this.data.icon];
-      console.log(this.data.icon)
       if (icon) return icon.w;
     }
   },
