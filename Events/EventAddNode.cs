@@ -4,6 +4,7 @@ using Waremap.Models;
 
 namespace Waremap.Events
 {
+    #nullable enable
     public class EventAddNode : IEvent
     {
         public int? Id { get; set; }
@@ -12,8 +13,9 @@ namespace Waremap.Events
         public int Y { get; set; }
         public int Floor { get; set; }
         public int Depot { get; set; }
-        public string Name { get; set; }
         
+        public string? Name { get; set; }
+        public string? Icon { get; set; }
         public List<int>? OperationIds { get; set; }
         
         public void Run(State state)
@@ -27,7 +29,8 @@ namespace Waremap.Events
                 node.Y = Y;
                 node.Floor = Floor;
                 node.Depot = Depot;
-                node.Name = Name;
+                node.Icon = Icon ?? node.Icon;
+                node.Name = Name ?? node.Name;
                 if (OperationIds != null)
                     node.OperationIds = OperationIds;
             }
@@ -42,10 +45,12 @@ namespace Waremap.Events
                     Type = Type,
                     X = X,
                     Y = Y,
-                    Name = Name,
+                    Icon = Icon ?? "",
+                    Name = Name ?? $"Участок {Id}, Цех {Depot}, Этаж {Floor}",
                     OperationIds = OperationIds ?? new List<int>() 
                 });
             }
         }
     }
+    #nullable disable
 }
