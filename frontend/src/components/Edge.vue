@@ -7,7 +7,8 @@
     <path
         :class="{
           edge: true,
-          selected: selected,
+          highlighted,
+          selected,
           ['edge-'+data.type]: true
         }"
         :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y)
@@ -39,6 +40,7 @@ export default {
   name: 'Edge',
   props: [
     'data',
+    'highlighted'
   ],
   data() {
     return {

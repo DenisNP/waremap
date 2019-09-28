@@ -43,8 +43,10 @@
         });
         Object.keys(assemblies).map((id) => {
           let assembly = this.$store.state.serverState.equipment.assemblies.find(r => r.id == id);
-          if (assembly) {
+          if (assembly && assembly.name) {
             assemblies[id].name = assembly.name;
+          } else {
+            assemblies[id].name = 'Детали без сборки';
           }
         });
         return assemblies;
@@ -56,11 +58,20 @@
       showAssemblyNodes(id) {
         let details = this.assemblies[id].details.map(detail => detail);
         // console.log(details);
-        this.$store.commit('editor/highlightNodes', ['5', '3']);
+        this.$store.commit('editor/highlightNodes', ['15', '13']);
       },
       showDetailNodes(detail) {
         // console.log(detail);
-        this.$store.commit('editor/highlightNodes', ['6']);
+        this.$store.commit('editor/highlightNodes', ['16']);
+
+        detail.roadmap.path = [
+          {from: 10, to: 12},
+          {from: 12, to: 17},
+          {from: 17, to: 11},
+          {from: 11, to: 14},
+          {from: 14, to: 15}
+        ];
+        this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
       }
     }
   }
