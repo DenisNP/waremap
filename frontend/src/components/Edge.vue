@@ -4,14 +4,14 @@
     @click="onClick"
     v-show="show"
   >
-    <line
-      :x1="fromNode.x"
-      :y1="fromNode.y"
-      :x2="toNode.x"
-      :y2="toNode.y"
-      stroke-width="3"
-      :stroke="selected ? '#f00' : '#000'"
-    />
+    <path
+        :class="{
+          edge: true,
+          selected: selected,
+          ['edge-'+data.type]: true
+        }"
+        :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y) + 'L' + (toNode.x - gap) + ',' + (toNode.y) + 'L' + (toNode.x + gap) + ',' + (toNode.y) + 'L' + (fromNode.x + gap) + ',' + (fromNode.y)"
+          />
     <line
       :x1="fromNode.x"
       :y1="fromNode.y"
@@ -29,6 +29,11 @@ export default {
   props: [
     'data',
   ],
+  data() {
+    return {
+      gap: 2
+    }
+  },
   methods: {
     onClick(e) {
       e.preventDefault();
@@ -64,5 +69,22 @@ export default {
 </script>
 
 <style>
+
+.edge.edge-Road {
+  stroke: #333;
+  stroke-width: 1px;
+  fill: transparent;
+  stroke-dasharray: 10 5;
+  animation: dash 50s linear infinite;
+}
+.edge.inverse {
+  animation-direction: reverse;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 500;
+  }
+}
 
 </style>
