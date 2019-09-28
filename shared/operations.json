@@ -1,8 +1,4 @@
-[{
-        "id": 0,
-        "processing_time": 442,
-        "name": "Фрезерование"
-    }, {
+[ {
         "id": 1,
         "processing_time": 1617,
         "name": "Сборка"
@@ -38,5 +34,14 @@
         "id": 9,
         "processing_time": 2543,
         "name": "Сверление"
-    }
+    }, {
+        "id": 10,
+        "processing_time": 543,
+        "name": "Покраска"
+    },
+	{
+        "id": 11,
+        "processing_time": 442,
+        "name": "Фрезерование"
+    },
 ]

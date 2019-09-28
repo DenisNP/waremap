@@ -16,7 +16,20 @@ namespace Waremap.Models
         public int Floor { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
+        public string Name { get; set; }
         public List<int> OperationIds { get; set; } = new List<int>();
+
+        private int _closestCore;
+
+        public void AssignClosestCore(int v)
+        {
+            _closestCore = v;
+        }
+
+        public int NeedClosestCore()
+        {
+            return _closestCore;
+        }
     }
 
     public class Operation
@@ -42,6 +55,7 @@ namespace Waremap.Models
         public int W { get; set; }
         public int H { get; set; }
         public int Floor { get; set; }
+        public string Name { get; set; }
     }
 
     public class Geo
@@ -73,7 +87,7 @@ namespace Waremap.Models
     public class Assembly
     {
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
     }
 
     public class Equipment
@@ -94,12 +108,5 @@ namespace Waremap.Models
         Elevator,
         Ladder,
         Footway
-    }
-
-    public enum CarType
-    {
-        Man,
-        ManWithCar,
-        Forklift
     }
 }

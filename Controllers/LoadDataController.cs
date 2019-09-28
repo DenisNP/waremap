@@ -24,14 +24,21 @@ namespace Waremap.Controllers
             try
             {
                 using var reader = new StreamReader(Request.Body);
+                var state = ReceiveEventController.GetState();
                 switch (data)
                 {
                     case "nodes":
-                        LoadNodesToState(reader.ReadToEnd(), ReceiveEventController.GetState());
-                        return "ok";
+                        LoadNodesToState(reader.ReadToEnd(), state);
+                        return $"Total nodes: {state.Geo.Nodes.Count}";
                     case "parts":
-                        LoadPartsToState(reader.ReadToEnd(), ReceiveEventController.GetState());
-                        return "ok";
+                        LoadPartsToState(reader.ReadToEnd(), state);
+                        return $"Total parts: {state.Equipment.Parts.Count}";
+                    case "operations":
+                        LoadOperationsToState(reader.ReadToEnd(), state);
+                        return $"Total operations: {state.Equipment.Operations.Count}";
+                    case "assemblies":
+                        LoadAssembliesToState(reader.ReadToEnd(), state);
+                        return $"Total assemblies: {state.Equipment.Assemblies.Count}";
                     default:
                         return "wrong data";
                 }
@@ -50,6 +57,7 @@ namespace Waremap.Controllers
             var newParts = parts.Where(p => !existIds.Contains(p.Id));
             state.Equipment.Parts.AddRange(newParts);
         }
+        
         public static void LoadNodesToState(string json, State state)
         {
             var nodes = JsonConvert.DeserializeObject<List<Node>>(json, Utils.ConverterSettings);
