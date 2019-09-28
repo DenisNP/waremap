@@ -11,7 +11,7 @@ namespace Waremap.Events
         public int W { get; set; }
         public int H { get; set; }
         public int Floor { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public void Run(State state)
         {
@@ -24,6 +24,18 @@ namespace Waremap.Events
                 depot.H = H;
                 depot.Floor = Floor;
                 depot.Name = Name;
+
+                foreach (var node in state.Geo.Nodes)
+                {
+                    if (node.X > X && node.X < X + W && node.Y > Y && node.Y < Y + H && node.Floor == Floor)
+                    {
+                        node.Depot = Id;
+                    }
+                    else
+                    {
+                        node.Depot = 0;
+                    }
+                }
             }
             else
             {
@@ -35,8 +47,22 @@ namespace Waremap.Events
                     W = W,
                     H = H,
                     Floor = Floor,
-                    Name = Name
+                    Name = $"{Name} №{Id}, Этаж {Floor}"
                 });
+
+                foreach (var node in state.Geo.Nodes)
+                {
+                    if (node.X > X && node.X < X + W 
+                                   && node.Y > Y && node.Y < Y + H 
+                                   && node.Floor == Floor)
+                    {
+                        node.Depot = Id;
+                    }
+                    else
+                    {
+                        node.Depot = 0;
+                    }
+                }
             }
         }
     }
