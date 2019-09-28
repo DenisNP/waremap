@@ -82,6 +82,11 @@ export default {
           name: 'Дверь',
           key: 'Door',
           icon: ''
+        },
+        {
+          name: 'Цех',
+          key: 'Depot',
+          icon: ''
         }
       ],
       selectedTool: false,
@@ -93,10 +98,10 @@ export default {
   },
   computed: {
     isDefaultMode() {
-      return ['default', 'nodeSelected', 'edgeSelected'].includes(this.$store.state.depotEditor.mode);
+      return ['default', 'nodeSelected', 'edgeSelected'].includes(this.$store.state.editor.mode);
     },
     isAddingNodeMode() {
-      return ['addingNode', 'addingEdge'].includes(this.$store.state.depotEditor.mode);
+      return ['addingNode', 'addingEdge'].includes(this.$store.state.editor.mode);
     }
   },
   mounted() {
@@ -112,7 +117,7 @@ export default {
   },
   methods: {
     setDefaultMode() {
-      this.$store.commit('depotEditor/setDefaultMode');
+      this.$store.commit('editor/setDefaultMode');
     },
     toolSelect(index) {
       this.selectedTool = index;
@@ -123,8 +128,8 @@ export default {
       this.$root.$emit('floorSelected', floor);
     },
     autoComputeEdges() {
-      this.$store.dispatch('depotEditor/autoComputeEdges');
-    }
+      this.$store.dispatch('editor/autoComputeEdges');
+    },
   }
 }
 

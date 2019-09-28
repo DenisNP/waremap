@@ -32,7 +32,7 @@ export default {
     onClick(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.$store.commit('depotEditor/selectEdge', this.data);
+      this.$store.commit('editor/selectEdge', this.data);
     },
   },
   computed: {
@@ -40,7 +40,7 @@ export default {
       return this.data.from + '_' + this.data.to;
     },
     selected() {
-      const selected = this.$store.state.depotEditor.selectedEdge;
+      const selected = this.$store.state.editor.selectedEdge;
       return selected && selected.from === this.data.from && selected.to === this.data.to;
     },
     fromNode() {

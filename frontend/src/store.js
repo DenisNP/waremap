@@ -4,7 +4,7 @@ import helpers from './common/helpers';
 import config from './common/config';
 import API from './common/api';
 import serverState from './store/serverState';
-import depotEditor from './store/depotEditor';
+import editor from './store/editor';
 import icons from './store/icons';
 
 Vue.use(Vuex);
@@ -12,7 +12,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   modules: {
     serverState,
-    depotEditor,
+    editor,
     icons,
   },
   state: {

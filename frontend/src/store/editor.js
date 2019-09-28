@@ -6,7 +6,7 @@ export default {
   modules: {
   },
   state: {
-    mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected'
+    mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'drawingDepot'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
     selectedEdge: null,

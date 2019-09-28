@@ -43,12 +43,12 @@
         this.type = e.target.value;
       },
       async save() {
-        await this.$store.dispatch('depotEditor/updateEdge', {
+        await this.$store.dispatch('editor/updateEdge', {
           ...this.data,
           weight: this.weight,
           type: this.type,
         });
-        this.$store.commit('depotEditor/unselect');
+        this.$store.commit('editor/unselect');
       }
     }
   }

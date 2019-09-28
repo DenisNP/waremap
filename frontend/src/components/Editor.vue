@@ -10,11 +10,11 @@
         v-for="data in $store.state.serverState.geo.nodes"
         :key="data.id"
         :data="data"
-        :selected="$store.state.depotEditor.selectedNodeId === data.id"
+        :selected="$store.state.editor.selectedNodeId === data.id"
       ></Node>
 
-      <Text>{{ $store.state.depotEditor.floor }}</Text>
-      <Text>{{ $store.state.depotEditor.depot.id }}</Text>
+      <Text>{{ $store.state.editor.floor }}</Text>
+      <Text>{{ $store.state.editor.depot.id }}</Text>
     </svg>
   </div>
 </template>
@@ -24,23 +24,23 @@ import Node from './Node.vue';
 import Edge from './Edge.vue';
 
 export default {
-  name: 'DepotEditor',
+  name: 'Editor',
   mounted() {
     this.$root.$on('toolSelected', e => {
       const {name, key, icon} = e;
-      this.$store.commit('depotEditor/startAddingNode', key);
+      this.$store.commit('editor/startAddingNode', key);
     });
 
     this.$root.$on('floorSelected', floor => {
-      this.$store.commit('depotEditor/setFloor', floor);
+      this.$store.commit('editor/setFloor', floor);
     });
 
     this.$root.$on('nodeUpdated', data => {
-      this.$store.dispatch('depotEditor/updateNode', data);
+      this.$store.dispatch('editor/updateNode', data);
     });
 
     this.$root.$on('nodeSelected', data => {
-      this.$store.commit('depotEditor/selectNode', data);
+      this.$store.commit('editor/selectNode', data);
     });
 
     window.addEventListener('keydown', this.onKeyDown);
@@ -58,11 +58,11 @@ export default {
   methods: {
     async onKeyDown(e) {
       if (e.keyCode === 46) { // delete
-        if (this.$store.state.depotEditor.mode === 'nodeSelected') {
-          await this.$store.dispatch('depotEditor/removeSelectedNode');
+        if (this.$store.state.editor.mode === 'nodeSelected') {
+          await this.$store.dispatch('editor/removeSelectedNode');
         }
-        if (this.$store.state.depotEditor.mode === 'edgeSelected') {
-          await this.$store.dispatch('depotEditor/removeSelectedEdge');
+        if (this.$store.state.editor.mode === 'edgeSelected') {
+          await this.$store.dispatch('editor/removeSelectedEdge');
         }
       }
     },
@@ -70,12 +70,12 @@ export default {
       const x = e.clientX;
       const y = e.clientY;
 
-      if (this.$store.state.depotEditor.mode === 'addingNode') {
-        this.$store.dispatch('depotEditor/endAddingNode', {x, y});
+      if (this.$store.state.editor.mode === 'addingNode') {
+        this.$store.dispatch('editor/endAddingNode', {x, y});
       }
 
-      if (['nodeSelected', 'edgeSelected'].includes(this.$store.state.depotEditor.mode)) {
-        this.$store.commit('depotEditor/unselect');
+      if (['nodeSelected', 'edgeSelected'].includes(this.$store.state.editor.mode)) {
+        this.$store.commit('editor/unselect');
       }
     }
   }
