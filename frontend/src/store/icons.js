@@ -8,8 +8,8 @@ export default {
     node: {
       Machine: {i: require('../assets/machine-tool.svg'), w: 40},
       Node: {i: require('../assets/node.svg'), w: 15},
-      Ladder: {i: require('../assets/stairs.svg'), w: 40},
-      Elevator: {i: require('../assets/lift.svg'), w: 40},
+      Ladder: {i: require('../assets/stair.svg'), w: 40},
+      Elevator: {i: require('../assets/elevator.svg'), w: 40},
       Door: {i: require('../assets/door.svg'), w: 40},
 
       undefined: {i: require('../assets/node.svg'), w: 15},
