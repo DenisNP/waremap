@@ -54,12 +54,8 @@ export default {
   },
   computed: {
     show() {
-      return (this.$store.state.depotEditor.displayMode == 'floor' && this.data.floor == this.$store.state.depotEditor.floor)
-        ||   (this.$store.state.depotEditor.displayMode == 'depot' && this.data.depot == this.$store.state.depotEditor.depot.id);
-    },
-    iconWidth() {
-      let icon = this.$store.state.icons.node[this.data.type];
-      if (icon) return icon.w;
+      return (this.$store.state.editor.displayMode == 'floor' && this.data.floor == this.$store.state.editor.floor)
+        ||   (this.$store.state.editor.displayMode == 'depot' && this.data.depot == this.$store.state.editor.depot.id);
     }
   },
   methods: {
@@ -68,12 +64,12 @@ export default {
       e.stopPropagation();
 
       console.log('11 click', this.data.id);
-      if (this.$store.state.depotEditor.mode === 'nodeSelected' && this.data.id !== this.$store.state.depotEditor.selectedNodeId) {
-        this.$store.dispatch('depotEditor/createEdge', {
-          from: this.$store.state.depotEditor.selectedNodeId,
+      if (this.$store.state.editor.mode === 'nodeSelected' && this.data.id !== this.$store.state.editor.selectedNodeId) {
+        this.$store.dispatch('editor/createEdge', {
+          from: this.$store.state.editor.selectedNodeId,
           to: this.data.id
         });
-        this.$store.commit('depotEditor/unselect');
+        this.$store.commit('editor/unselect');
       }
     },
     onMouseDown(e) {
@@ -106,13 +102,13 @@ export default {
         x: this.draggingX,
         y: this.draggingY
       });
-      this.$store.commit('depotEditor/unselect');
+      this.$store.commit('editor/unselect');
     },
     onMouseUp(e) {
       const wasDown = this.down;
       this.down = false;
 
-      if (wasDown && !this.dragging && !this.$store.state.depotEditor.selectedNodeId) {
+      if (wasDown && !this.dragging && !this.$store.state.editor.selectedNodeId) {
         // we just selected
         this.$root.$emit('nodeSelected', this.data);
         return;

@@ -2,6 +2,7 @@ module.exports = {
   geo: {
     depots: [{
       id: Number,
+      name: String,
       floor: Number,
       w: Number,
       h: Number,
