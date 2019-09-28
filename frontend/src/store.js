@@ -5,6 +5,7 @@ import config from './common/config';
 import API from './common/api';
 import serverState from './store/serverState';
 import depotEditor from './store/depotEditor';
+import icons from './store/icons';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   modules: {
     serverState,
     depotEditor,
+    icons,
   },
   state: {
     currentDepotId: null, // if null = creating new depo

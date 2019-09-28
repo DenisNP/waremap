@@ -12,6 +12,9 @@
         :data="data"
         :selected="$store.state.depotEditor.selectedNodeId === data.id"
       ></Node>
+
+      <Text>{{ $store.state.depotEditor.floor }}</Text>
+      <Text>{{ $store.state.depotEditor.depot.id }}</Text>
     </svg>
   </div>
 </template>
@@ -28,7 +31,7 @@ export default {
       this.$store.commit('depotEditor/startAddingNode', key);
     });
 
-    this.$root.$on('floorSelect', floor => {
+    this.$root.$on('floorSelected', floor => {
       this.$store.commit('depotEditor/setFloor', floor);
     });
 
