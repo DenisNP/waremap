@@ -120,7 +120,7 @@ body {
   stroke-width: 1px;
   fill: transparent;
   stroke-dasharray: 10 5;
-  animation: dash 50s linear infinite;
+  animation: dash 200s linear infinite;
 }
 .edge.inverse,
 .edge.edge-Dashed {
@@ -129,7 +129,7 @@ body {
 
 @keyframes dash {
   to {
-    stroke-dashoffset: 500;
+    stroke-dashoffset: 2000;
   }
 }
 

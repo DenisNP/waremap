@@ -1,5 +1,5 @@
 <template>
-  <g class="node" :class="{show, ['node-' + data.icon]: true}">
+  <g class="node" :class="{show, ['node-' + data.icon]: true, selected}">
     <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
@@ -13,20 +13,6 @@
     >
       <div class="node-icon" v-if="$store.state.icons.node[data.icon]">
         <img :src="$store.state.icons.node[data.icon].i" />
-      </div>
-      <div
-        class="walls"
-        :class="{selected}"
-      >
-        <div class="wall top"></div>
-        <div class="wall right"></div>
-        <div class="wall bottom"></div>
-        <div class="wall left"></div>
-
-        <div class="corner top"></div>
-        <div class="corner right"></div>
-        <div class="corner bottom"></div>
-        <div class="corner left"></div>
       </div>
     </foreignObject>
 
@@ -185,5 +171,26 @@ export default {
     padding: 10px 40px 10px 20px;
     cursor: pointer;
   }
+
+/*.node.selected .node-icon {
+  filter: hue-rotate(180deg);
+}*/
+
+.node.selected .node-icon:before {
+  z-index: -1;
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -45%;
+  width: 90%;
+  height: 90%;
+  box-shadow: 0 0 0 6px rgba(255,0,0,1);
+  border-radius: 9px;
+}
+.node foreignObject {
+  overflow: visible;
+}
 
 </style>
