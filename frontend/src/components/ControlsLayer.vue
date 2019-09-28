@@ -6,7 +6,7 @@
         key="setDefaultMode"
         @click="setDefaultMode"
       >
-        <img class="pallete-item-icon" :src="tool.icon"/>
+        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon"/></div>
         <span class="pallete-item--name">Режим курсора</span>
       </div>
 
@@ -16,7 +16,7 @@
         :class="{selected: isAddingNodeMode && index == selectedTool}"
         @click="toolSelect(index)"
       >
-        <img class="pallete-item-icon" :src="tool.icon" v-if="tool.icon"/>
+        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon" v-if="tool.icon"/></div>
         <span class="pallete-item--name">{{ tool.name }}</span>
       </div>
 
@@ -24,7 +24,7 @@
         key="autoComputeEdges"
         @click="autoComputeEdges()"
       >
-        <img class="pallete-item-icon" :src="tool.icon"/>
+        <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon"/></div>
         <span class="pallete-item--name">Заполнить связи</span>
       </div>
     </div>
@@ -202,9 +202,18 @@ export default {
 }
 
 .pallete-item-icon {
-  margin-right: 10px;
-  max-height: 25px;
+  width: 24px;
+  height: 24px;
+  margin: -3px 14px -3px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.pallete-item-icon img {
+  max-width: 100%;
+}
+
+
 
 .floors .pallete-item {
   justify-content: center;
