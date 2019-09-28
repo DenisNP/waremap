@@ -75,7 +75,6 @@ namespace Waremap.Models
     
     public class Process
     {
-        public int Id { get; set; }
         public int Order { get; set; }
         public int OperationId { get; set; }
     }

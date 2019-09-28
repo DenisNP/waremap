@@ -79,12 +79,6 @@ namespace Waremap.Controllers
                         case "removeDepot":
                             DeserializeAndRun<EventRemoveDepot>(body);
                             break;
-                        case "addProcess":
-                            DeserializeAndRun<EventAddProcess>(body);
-                            break;
-                        case "removeProcess":
-                            DeserializeAndRun<EventRemoveProcess>(body);
-                            break;
                         case "addOperation":
                             DeserializeAndRun<EventAddOperation>(body);
                             break;
@@ -93,6 +87,9 @@ namespace Waremap.Controllers
                             break;
                         case "computeEdges":
                             (new EventComputeEdges()).Run(State);
+                            break;
+                        case "optimize":
+                            (new EventOptimize()).Run(State);
                             break;
                     }
                 }

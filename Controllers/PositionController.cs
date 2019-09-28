@@ -60,7 +60,7 @@ namespace Waremap.Controllers
                     .FirstOrDefault(
                         wp => wp.FromNode == presence.MachineId
                               && wp.ToNode == presence.MachineId
-                              && part.Process.Select(process => process.Id).Contains(presence.OperationId)
+                              && part.Process.Select(process => process.OperationId).Contains(presence.OperationId)
                     );
 
                 if (potentialWaypoint != null)

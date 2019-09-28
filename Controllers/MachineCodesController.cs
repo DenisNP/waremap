@@ -24,7 +24,7 @@ namespace Waremap.Controllers
             }
             
             var parts = state.Equipment.Parts.Where(
-                p => p.Process.Any(process => node.OperationIds.Contains(process.Id))
+                p => p.Process.Any(process => node.OperationIds.Contains(process.OperationId))
             );
 
             var awaitingParts = parts.Select(p =>
