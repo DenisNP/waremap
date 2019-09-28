@@ -51,7 +51,7 @@ export default {
 <style lang="scss">
 
 body {
-  background-color: #4D4D4D;
+  background-color: #333;
 }
 
 svg {
