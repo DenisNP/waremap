@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Waremap.Events;
@@ -20,17 +21,26 @@ namespace Waremap.Controllers
 
         public static Node GetNextNode()
         {
-            throw new NotImplementedException();
+            Waypoint waypoint = State.CarWaypoints.First();
+
+            if (State.CarWaypoints.Count < State.CarPosition) waypoint = State.CarWaypoints[State.CarPosition + 1];
+
+            return State.Geo.Nodes.First(node => node.Id == waypoint.ToNode);
+
         }
 
-        public static Node SwitchToNextNode()
+        public static void SwitchToNextNode()
         {
-            throw new NotImplementedException();
+            if (State.CarPosition < State.CarWaypoints.Count)
+                State.CarPosition += 1;
+            else
+                State.CarPosition = 0;
         }
 
         public static Node GetCurrentNode()
         {
-            throw new NotImplementedException();
+            var carPos = State.CarWaypoints[State.CarPosition];
+            return State.Geo.Nodes.First(node => node.Id == carPos.FromNode);
         }
 
         [HttpGet]
