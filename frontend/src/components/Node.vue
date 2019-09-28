@@ -67,6 +67,7 @@ export default {
     },
     iconWidth() {
       let icon = this.$store.state.icons.node[this.data.icon];
+      console.log(this.data.icon)
       if (icon) return icon.w;
     }
   },
