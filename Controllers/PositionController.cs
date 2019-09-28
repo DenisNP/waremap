@@ -77,6 +77,15 @@ namespace Waremap.Controllers
             var curNode = ReceiveEventController.GetCurrentNode();
             var nextNode = ReceiveEventController.GetNextNode();
 
+            if (curNode == null || nextNode == null)
+            {
+                return new PositionResult
+                {
+                    Current = new WaypointInfo {NodeName = "Текущий участок", NodeId = 1},
+                    Next = new WaypointInfo {NodeName = "Следующий участок", NodeId = 2}
+                };
+            }
+
             return new PositionResult
             {
                 Current = new WaypointInfo {NodeName = curNode.Name, NodeId = curNode.Id},

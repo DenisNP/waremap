@@ -22,10 +22,8 @@ namespace Waremap.Controllers
         public static Node GetNextNode()
         {
             var waypoint = State.CarWaypoints.First();
-
             if (State.CarWaypoints.Count < State.CarPosition) waypoint = State.CarWaypoints[State.CarPosition + 1];
-
-            return State.Geo.Nodes.First(node => node.Id == waypoint.ToNode);
+            return State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.ToNode);
 
         }
 
@@ -45,7 +43,7 @@ namespace Waremap.Controllers
         public static Node GetCurrentNode()
         {
             var carPos = State.CarWaypoints[State.CarPosition];
-            return State.Geo.Nodes.First(node => node.Id == carPos.FromNode);
+            return State.Geo.Nodes.FirstOrDefault(node => node.Id == carPos.FromNode);
         }
 
         [HttpGet]
