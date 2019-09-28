@@ -12,6 +12,7 @@ namespace Waremap.Events
         public int Y { get; set; }
         public int Floor { get; set; }
         public int Depot { get; set; }
+        public string Name { get; set; }
         
         public List<int>? OperationIds { get; set; }
         
@@ -26,6 +27,7 @@ namespace Waremap.Events
                 node.Y = Y;
                 node.Floor = Floor;
                 node.Depot = Depot;
+                node.Name = Name;
                 if (OperationIds != null)
                     node.OperationIds = OperationIds;
             }
@@ -40,6 +42,7 @@ namespace Waremap.Events
                     Type = Type,
                     X = X,
                     Y = Y,
+                    Name = Name,
                     OperationIds = OperationIds ?? new List<int>() 
                 });
             }

@@ -22,13 +22,16 @@ namespace Waremap.Events
             }
             else
             {
-                state.Geo.Edges.Add(new Edge
+                if (state.Geo.Nodes.Count(n => n.Id == From || n.Id == To) == 2)
                 {
-                    Type = Type,
-                    Weight = Weight,
-                    From = From,
-                    To = To
-                });
+                    state.Geo.Edges.Add(new Edge
+                    {
+                        Type = Type,
+                        Weight = Weight,
+                        From = From,
+                        To = To
+                    });
+                }
             }
         }
     }
