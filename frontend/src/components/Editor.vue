@@ -1,10 +1,12 @@
 <template>
   <div @click="onClick">
+    <svg class="floorBgContainer">
+      <image id="floorBg" :href="$store.state.editor.floorBackground" x="250" y="120" width="1000" />
+    </svg>
     <svg @mousemove="onMouseMove" :class="{highlighted: $store.state.editor.isSomeHighlighted}" @click="clickBg">
-      <foreignObject v-if="$store.state.editor.floorBackground" x="242" y="125" width="100%" height="100%" style="pointer-events: none">
+      <!-- <foreignObject v-if="$store.state.editor.floorBackground" x="242" y="125" width="100%" height="100%" style="pointer-events: none">
         <img :src="$store.state.editor.floorBackground" style=" filter: invert(1); opacity: .6">
-      </foreignObject>
-
+      </foreignObject> -->
       <Depot
         v-for="data in $store.state.serverState.geo.depots"
         :key="'depot' + data.id"
@@ -33,9 +35,6 @@
       <FloorToFloorEdge
         :data="$store.state.editor.selectedNodeId">
       </FloorToFloorEdge>
-
-      <Text>{{ $store.state.editor.floor }}</Text>
-      <Text>{{ $store.state.editor.depot.id }}</Text>
     </svg>
   </div>
 </template>
@@ -174,6 +173,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+.floorBgContainer {
+  opacity: .2;
+  filter: invert(1);
+}
 
 svg {
   position: absolute;
