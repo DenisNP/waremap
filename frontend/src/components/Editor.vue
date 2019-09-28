@@ -1,6 +1,6 @@
 <template>
   <div @click="onClick">
-    <svg @mousemove="onMouseMove" :class="{nodesHighlighted: $store.state.editor.isSomeHighlighted}" @click="clickBg">
+    <svg @mousemove="onMouseMove" :class="{highlighted: $store.state.editor.isSomeHighlighted}" @click="clickBg">
       <foreignObject v-if="$store.state.editor.floorBackground" x="242" y="125" width="100%" height="100%" style="pointer-events: none">
         <img :src="$store.state.editor.floorBackground" style=" filter: invert(1); opacity: .6">
       </foreignObject>
@@ -19,6 +19,7 @@
       <Edge
         v-for="data in $store.state.serverState.geo.edges"
         :key="'edge' + data.from + '_' + data.to"
+        :highlighted="$store.state.editor.highlightedEdges[[data.from, data.to].sort().join('_')] === true"
         :data="data"
       ></Edge>
       <Node
