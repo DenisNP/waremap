@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,16 +11,26 @@ namespace Waremap.Controllers
         [HttpPost]
         public string Post()
         {
-            using var reader = new StreamReader(Request.Body);
-            var body = reader.ReadToEnd();
-            ReceiveEventController.GetState().Background = body;
-            return $"Saved {body.Length} symbols";
+            if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+            {
+                using var reader = new StreamReader(Request.Body);
+                var body = reader.ReadToEnd();
+                ReceiveEventController.GetState().Background.Add(floor, body);
+                return $"Saved {body.Length} symbols on floor {floor}";
+            }
+
+            return "No floor specified";
         }
 
         [HttpGet]
         public string Get()
         {
-            return ReceiveEventController.GetState().Background;
+            if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+            {
+                return ReceiveEventController.GetState().Background.GetValueOrDefault(floor);
+            }
+            
+            return "No floor specified";
         }
     }
 }
