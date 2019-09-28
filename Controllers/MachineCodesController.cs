@@ -29,7 +29,8 @@ namespace Waremap.Controllers
                             PartId = p.Id,
                             MachineId = nodeId,
                             PartName = p.Name,
-                            OperationName = operation == null ? "" : operation.Name
+                            OperationId = operation?.Id ?? 0,
+                            OperationName = operation?.Name ?? ""
                         };
                     });
 
@@ -45,6 +46,7 @@ namespace Waremap.Controllers
             public int PartId { get; set; }
             public int MachineId { get; set; }
             public string PartName { get; set; }
+            public int OperationId { get; set; }
             public string OperationName { get; set; }
         }
     }

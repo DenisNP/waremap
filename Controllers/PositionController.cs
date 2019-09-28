@@ -11,7 +11,7 @@ namespace Waremap.Controllers
     [Route("/position")]
     public class PositionController : Controller
     {
-        public struct TextWaypoint
+        public struct WaypointInfo
         {
             public string NodeName { get; set; }
             public int NodeId { get; set; }
@@ -19,8 +19,8 @@ namespace Waremap.Controllers
 
         public struct PositionResult
         {
-            public TextWaypoint Current { get; set; }
-            public TextWaypoint Next { get; set; }
+            public WaypointInfo Current { get; set; }
+            public WaypointInfo Next { get; set; }
             public bool OffWay { get; set; }
         }
 
@@ -28,6 +28,7 @@ namespace Waremap.Controllers
         {
             public int PartId { get; set; }
             public int MachineId { get; set; }
+            public int OperationId { get; set; }
         }
 
         [HttpGet]
@@ -41,30 +42,34 @@ namespace Waremap.Controllers
         {
             var state = ReceiveEventController.GetState();
             var part = state.Equipment.Parts.FirstOrDefault(x => x.Id == presence.PartId);
-            var machineNode = state.Geo.Nodes
-                .FirstOrDefault(x => x.Id == presence.MachineId);
+            var machineNode = state.Geo.Nodes.FirstOrDefault(x => x.Id == presence.MachineId);
 
-            if (machineNode != null && machineNode.Type == NodeType.Machine)
-            {
-                foreach (var wp in state.CarWaypoints)
-                {
-                    if (wp.FromNode == presence.MachineId && wp.ToNode == presence.MachineId)
-                    {
-                        state.CarPosition = state.CarWaypoints.IndexOf(wp);
-                        if (part != null) part.Waypoint = wp;
+            if (machineNode == null || machineNode.Type != NodeType.Machine || part == null) 
+                return "No machine or part found";
 
-                        return GetPosition();
-                    }
-
-                }
-
-                state.CarWaypoints.Insert(state.CarPosition + 1, part.Waypoint);
-
-                return JsonConvert.SerializeObject(Position(true),Utils.ConverterSettings);
+            var potentialWaypoint = state.CarWaypoints
+                .FirstOrDefault(
+                    wp => wp.FromNode == presence.MachineId 
+                          && wp.ToNode == presence.MachineId
+                          && part.Path.Select(process => process.Id).Contains(presence.OperationId)
+                );
+            
+            if (potentialWaypoint != null) {
+                state.CarPosition = state.CarWaypoints.IndexOf(potentialWaypoint);
+                part.Waypoint = potentialWaypoint;
+                return GetPosition();
             }
-
-
-            return "No machine found";
+            
+            // new waypoint
+            part.Waypoint = new Waypoint
+            {
+                FromNode = presence.MachineId,
+                ToNode = presence.MachineId,
+                OperationId = presence.OperationId,
+                OffWay = true
+            };
+            state.CarWaypoints.Insert(state.CarPosition + 1, part.Waypoint);
+            return JsonConvert.SerializeObject(Position(true), Utils.ConverterSettings);
         }
 
         public PositionResult Position(bool offWay = false)
@@ -74,8 +79,8 @@ namespace Waremap.Controllers
 
             return new PositionResult
             {
-                Current = new TextWaypoint {NodeName = curNode.Name, NodeId = curNode.Id},
-                Next = new TextWaypoint {NodeName = nextNode.Name, NodeId = nextNode.Id},
+                Current = new WaypointInfo {NodeName = curNode.Name, NodeId = curNode.Id},
+                Next = new WaypointInfo {NodeName = nextNode.Name, NodeId = nextNode.Id},
                 OffWay = offWay
             };
         }

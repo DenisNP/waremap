@@ -98,6 +98,7 @@ namespace Waremap.Models
         public int TimeLeft { get; set; }
         public int TimeTotal { get; set; }
         public int OperationId { get; set; }
+        public bool OffWay { get; set; }
     }
 
     public class Assembly
