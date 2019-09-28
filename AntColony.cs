@@ -36,7 +36,7 @@ namespace Waremap
                 
             while (steps-- > 0)
             {
-                var carNode = route.CarWaypoints.Last().FromNode;
+                var carNode = route.CarWaypoints.Last().ToNode;
                 var potential = GraphUtils.FindNeighbours(route.Graph, carNode, new List<int>());
                 var probs = new List<double>();
                 foreach (var neighbour in potential)
@@ -66,7 +66,7 @@ namespace Waremap
                 currentWeight += route.Graph.Edges[carNode, nextNodeId].Weight;
                 
                 // add machine process if needed
-                var time = AddTime(route.Graph.Edges[carNode, nextNodeId]);
+                var time = WeightToTime(route.Graph.Edges[carNode, nextNodeId].Weight);
                 route.Time += time;
                 var nextNode = route.Graph.Nodes.Values.First(n => n.NeedClosestCore().NId == nextNodeId);
                 currentFood += TakeInPart(route, nextNode.NeedClosestCore(), nextNode.Id, time);
@@ -118,7 +118,7 @@ namespace Waremap
                     if (firstOpMatch != null)
                     {
                         route.OperationsLeft[i].Remove(firstOpMatch);
-                        // TODO add all waypoints
+                        // TODO add forward waypoints
                         
                         // add machine waypoint
                         var waypoint = new Waypoint
@@ -128,9 +128,7 @@ namespace Waremap
                             OperationId = firstOpMatch.OperationId
                         };
                         
-                        // TODO add back waypoints
-                        
-                        var time = route.Operations[firstOpMatch.OperationId].ProcessingTime + WeightToTime(path.Weight) * 2;
+                        var time = route.Operations[firstOpMatch.OperationId].ProcessingTime + WeightToTime(path.Weight);
                         route.PartPositions[i].ToNode = targetNode;
                         route.PartPositions[i].EndTime = route.Time + time;
                         return TakeOutFood;
@@ -149,17 +147,16 @@ namespace Waremap
                 {
                     // take part back
                     route.PartPositions[pPos.Key].ToNode = 0;
+                    route.Time += WeightToTime(node.Weight);
+                    // TODO add back waypoints here
+                    
+                    //
                     route.PartPositions[pPos.Key].EndTime = route.Time + time;
                     return TakeInFood;
                 }
             }
 
             return 0.0;
-        }
-
-        private int AddTime(Edge edge)
-        {
-            return WeightToTime(edge.Weight);
         }
 
         private int WeightToTime(int w)
