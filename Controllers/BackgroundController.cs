@@ -18,7 +18,15 @@ namespace Waremap.Controllers
                 {
                     using var reader = new StreamReader(Request.Body);
                     var body = reader.ReadToEnd();
-                    ReceiveEventController.GetState().Background.Add(floor, body);
+                    var bg = ReceiveEventController.GetState().Background;
+                    if (bg.ContainsKey(floor))
+                    {
+                        bg[floor] = body;
+                    }
+                    else
+                    {
+                        bg.Add(floor, body);
+                    }
                     return $"Saved {body.Length} symbols on floor {floor}";
                 }
 
