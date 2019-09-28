@@ -1,14 +1,25 @@
 <template>
   <div @click="onClick">
-    <svg>
+    <svg @mousemove="onMouseMove">
+      <Depot
+        v-for="data in $store.state.serverState.geo.depots"
+        :key="'depot' + data.id"
+        :data="data"
+        :selected="$store.state.editor.selectedDepotId === data.id"
+      ></Depot>
+      <Depot
+        v-if="isDrawingDepot"
+        :data="newDepot"
+        :isNew="true"
+      ></Depot>
       <Edge
         v-for="data in $store.state.serverState.geo.edges"
-        :key="data.from + '_' + data.to"
+        :key="'edge' + data.from + '_' + data.to"
         :data="data"
       ></Edge>
       <Node
         v-for="data in $store.state.serverState.geo.nodes"
-        :key="data.id"
+        :key="'node' + data.id"
         :data="data"
         :selected="$store.state.editor.selectedNodeId === data.id"
       ></Node>
@@ -22,13 +33,24 @@
 <script>
 import Node from './Node.vue';
 import Edge from './Edge.vue';
+import Depot from './Depot.vue';
 
 export default {
   name: 'Editor',
+  components: {
+    Node,
+    Depot,
+    Edge
+  },
   mounted() {
     this.$root.$on('toolSelected', e => {
       const {name, key, icon} = e;
-      this.$store.commit('editor/startAddingNode', key);
+
+      if (key !== 'Depot') {
+        this.$store.commit('editor/startAddingNode', key);
+      } else {
+        this.$store.commit('editor/startAddingDepot', key);
+      }
     });
 
     this.$root.$on('floorSelected', floor => {
@@ -45,12 +67,16 @@ export default {
 
     window.addEventListener('keydown', this.onKeyDown);
   },
-  components: {
-    Node,
-    Edge
-  },
   props: {
     msg: String,
+  },
+  data() {
+    return {
+      newDepot: null,
+      isDrawingDepot: false,
+      startX: null,
+      startY: null,
+    }
   },
   computed: {
 
@@ -64,6 +90,22 @@ export default {
         if (this.$store.state.editor.mode === 'edgeSelected') {
           await this.$store.dispatch('editor/removeSelectedEdge');
         }
+        if (this.$store.state.editor.mode === 'depotSelected') {
+          await this.$store.dispatch('editor/removeSelectedDepot');
+        }
+      }
+    },
+    onMouseMove(e) {
+      const x = e.clientX;
+      const y = e.clientY;
+
+      if (this.isDrawingDepot) {
+        this.newDepot = {
+          x: Math.min(x, this.startX),
+          y: Math.min(y, this.startY),
+          w: Math.abs(x - this.startX),
+          h: Math.abs(y - this.startY),
+        }
       }
     },
     onClick(e) {
@@ -72,9 +114,26 @@ export default {
 
       if (this.$store.state.editor.mode === 'addingNode') {
         this.$store.dispatch('editor/endAddingNode', {x, y});
-      }
+      } else if (this.$store.state.editor.mode === 'addingDepot') {
+        if (!this.isDrawingDepot) {
+          console.log('start drawing depot');
+          this.startX = x;
+          this.startY = y;
+          this.isDrawingDepot = true;
+        } else {
+          console.log('end drawing depot');
+          this.$store.dispatch('editor/addDepot', {
+            x: Math.min(x, this.startX),
+            y: Math.min(y, this.startY),
+            w: Math.abs(x - this.startX),
+            h: Math.abs(y - this.startY),
+          });
 
-      if (['nodeSelected', 'edgeSelected'].includes(this.$store.state.editor.mode)) {
+          this.startX = null;
+          this.startY = null;
+          this.isDrawingDepot = false;
+        }
+      } else if (['nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode)) {
         this.$store.commit('editor/unselect');
       }
     }

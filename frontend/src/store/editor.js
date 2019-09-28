@@ -6,9 +6,10 @@ export default {
   modules: {
   },
   state: {
-    mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'drawingDepot'
+    mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNodeId: null,
+    selectedDepotId: null,
     selectedEdge: null,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 0,
@@ -38,22 +39,38 @@ export default {
       state.addingNodeIcon = nodeIcon;
     },
 
+    startAddingDepot(state, nodeIcon) {
+      state.mode = 'addingDepot';
+      state.addingNodeIcon = nodeIcon;
+    },
+
     selectNode(state, node) {
       state.mode = 'nodeSelected';
       state.selectedEdge = null;
       state.selectedNodeId = node.id;
+      state.selectedDepotId = null;
     },
 
     selectEdge(state, edge) {
       state.mode = 'edgeSelected';
       state.selectedEdge = edge;
       state.selectedNodeId = null;
+      state.selectedDepotId = null;
+    },
+
+    selectDepot(state, depot) {
+      console.log('select depot', depot.id);
+      state.mode = 'depotSelected';
+      state.selectedEdge = null;
+      state.selectedNodeId = null;
+      state.selectedDepotId = depot.id;
     },
 
     unselect(state) {
       state.mode = 'default';
       state.selectedNodeId = null;
       state.selectedEdge = null;
+      state.selectedDepotId = null;
     },
   },
   actions: {
@@ -132,6 +149,16 @@ export default {
         from: c.state.selectedEdge.from,
         to: c.state.selectedEdge.to,
       });
+      c.commit('setServerState', newState, {root: true});
+    },
+
+    async addDepot(c, data) {
+      const newState = await API.addDepot(data);
+      c.commit('setServerState', newState, {root: true});
+    },
+
+    async removeSelectedDepot(c) {
+      const newState = await API.removeDepot(c.state.selectedDepotId);
       c.commit('setServerState', newState, {root: true});
     },
   }

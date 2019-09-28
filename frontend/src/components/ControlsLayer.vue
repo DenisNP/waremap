@@ -13,7 +13,7 @@
       <div class="pallete-item"
         v-for="(tool, index) in tools"
         :key="index"
-        :class="{selected: isAddingNodeMode && index == selectedTool}"
+        :class="{selected: (isAddingNodeMode || isAddingDepotMode) && index == selectedTool}"
         @click="toolSelect(index)"
       >
         <div v-if="tool.icon" class="pallete-item-icon"><img :src="tool.icon" v-if="tool.icon"/></div>
@@ -102,6 +102,9 @@ export default {
     },
     isAddingNodeMode() {
       return ['addingNode', 'addingEdge'].includes(this.$store.state.editor.mode);
+    },
+    isAddingDepotMode() {
+      return ['addingDepot'].includes(this.$store.state.editor.mode);
     }
   },
   mounted() {

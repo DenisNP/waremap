@@ -63,7 +63,6 @@ export default {
       e.preventDefault();
       e.stopPropagation();
 
-      console.log('11 click', this.data.id);
       if (this.$store.state.editor.mode === 'nodeSelected' && this.data.id !== this.$store.state.editor.selectedNodeId) {
         this.$store.dispatch('editor/createEdge', {
           from: this.$store.state.editor.selectedNodeId,
