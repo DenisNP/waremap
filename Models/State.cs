@@ -8,8 +8,9 @@ namespace Waremap.Models
     {
         public Geo Geo { get; set; } = new Geo();
         public Equipment Equipment { get; set; } = new Equipment();
-        public Waypoint CarWaypoint { get; set; } = new Waypoint();
-        
+        public List<Waypoint> CarWaypoints { get; set; } = new List<Waypoint>();
+        public int CarPosition { get; set; } = 0;
+
         [JsonIgnore]
         public Dictionary<int, string> Background { get; set; } = new Dictionary<int, string>();
     }
