@@ -141,24 +141,16 @@ export default {
         this.setDefaultMode();
       }
     },
-    floorSelect(floor) {
+    async floorSelect(floor) {
       console.log('select floor', floor);
       this.$store.commit('editor/setFloor', floor);
+      await this.$store.dispatch('editor/downloadFloorBackground');
     },
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');
     },
-    uploadBackground() {
-
-    },
   }
 }
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = error => reject(error);
-});
 </script>
 
 <style>

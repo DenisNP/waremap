@@ -1,6 +1,8 @@
 <template>
   <div @click="onClick">
     <svg @mousemove="onMouseMove">
+      <image width="1000" height="700" x="260" y="20" :xlink:href="$store.state.editor.floorBackground" v-if="$store.state.editor.floorBackground" />
+
       <Depot
         v-for="data in $store.state.serverState.geo.depots"
         :key="'depot' + data.id"
@@ -92,6 +94,10 @@ export default {
         if (this.$store.state.editor.mode === 'depotSelected') {
           await this.$store.dispatch('editor/removeSelectedDepot');
         }
+        this.$store.commit('editor/unselect');
+      }
+      if (e.which == 27) {
+        this.$store.commit('editor/unselect');
       }
     },
     onMouseMove(e) {
@@ -140,15 +146,7 @@ export default {
       } else if (['nodeSelected', 'edgeSelected', 'depotSelected'].includes(this.$store.state.editor.mode)) {
         this.$store.commit('editor/unselect');
       }
-    },
-    onKeyDown(e) {
-      if (e.which == 27) {
-        this.$store.commit('editor/unselect');
-      }
     }
-  },
-  mounted() {
-    window.addEventListener('keydown', this.onKeyDown);
   },
   destroyed() {
     window.removeEventListener('keydown', this.onKeyDown);
