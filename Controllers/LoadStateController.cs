@@ -17,12 +17,7 @@ namespace Waremap.Controllers
             {
                 using var reader = new StreamReader(Request.Body);
                 var body = reader.ReadToEnd();
-                var state = JsonConvert.DeserializeObject<State>(body);
-
-                var actualState = ReceiveEventController.GetState();
-                actualState.Equipment = state.Equipment;
-                actualState.Geo = state.Geo;
-                actualState.CarRoadmap = state.CarRoadmap;
+                var actualState = LoadState(body);
 
                 return JsonConvert.SerializeObject(actualState, Utils.ConverterSettings);
             }
@@ -31,6 +26,17 @@ namespace Waremap.Controllers
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public static State LoadState(string body)
+        {
+            var state = JsonConvert.DeserializeObject<State>(body, Utils.ConverterSettings);
+
+            var actualState = ReceiveEventController.GetState();
+            actualState.Equipment = state.Equipment;
+            actualState.Geo = state.Geo;
+            actualState.CarRoadmap = state.CarRoadmap;
+            return actualState;
         }
     }
 }

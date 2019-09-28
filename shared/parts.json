@@ -1,11 +1,10 @@
 [
   {
-  {
     "id": 1,
     "name": "Корпус датчика",
     "weight": 3,
     "assembly_id": 1,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 1,
         "path": [
@@ -35,7 +34,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 2,
@@ -44,111 +43,98 @@
       {
         "operation_id": 4,
         "order": 2
-      }
       }
     ]
   },
   {
     "id": 2,
-    "name": "Деталь_2",
-    "weight": 16,
-    "assembly_id": 14,
-    "roadmap": [
+    "name": "Крепление датчика",
+    "weight": 1,
+    "assembly_id": 1,
+    "roadmap": 
       {
-        "position": 33,
+        "position": 1,
         "path": [
           {
-            "from_node": 0,
-            "to_node": 2,
-            "operation_id": 20,
-            "off_way": false
-          },
-          {
             "from_node": 1,
-            "to_node": 4,
-            "operation_id": 41,
+            "to_node": 5,
+            "operation_id": 0,
             "off_way": false
           },
           {
-            "from_node": 2,
+            "from_node": 5,
+            "to_node": 5,
+            "operation_id": 5,
+            "off_way": false
+          },
+          {
+            "from_node": 5,
+            "to_node": 10,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 10,
+            "to_node": 10,
+            "operation_id": 6,
+            "off_way": false
+          },
+          {
+            "from_node": 10,
             "to_node": 1,
-            "operation_id": 3,
-            "off_way": false
-          },
-          {
-            "from_node": 3,
-            "to_node": 3,
-            "operation_id": 53,
-            "off_way": false
-          },
-          {
-            "from_node": 4,
-            "to_node": 1,
-            "operation_id": 78,
+            "operation_id": 0,
             "off_way": false
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
-        "operation_id": 2,
+        "operation_id": 5,
         "order": 3
       },
       {
-        "operation_id": 5,
+        "operation_id": 6,
         "order": 5
-      },
-      {
-        "operation_id": 4,
-        "order": 5
-      },
-      {
-        "operation_id": 2,
-        "order": 1
-      },
-      {
-        "operation_id": 5,
-        "order": 1
       }
     ]
   },
   {
     "id": 3,
-    "name": "Деталь_3",
-    "weight": 11,
-    "assembly_id": 9,
-    "roadmap": [
+    "name": "Сенсор",
+    "weight": 1,
+    "assembly_id": 1,
+    "roadmap": 
       {
-        "position": 30,
+        "position": 1,
         "path": [
           {
-            "from_node": 0,
-            "to_node": 1,
-            "operation_id": 96,
+            "from_node": 1,
+            "to_node": 3,
+            "operation_id": 0,
             "off_way": false
           },
           {
-            "from_node": 1,
-            "to_node": 1,
-            "operation_id": 78,
+            "from_node": 3,
+            "to_node": 3,
+            "operation_id": 3,
             "off_way": false
           },
           {
             "from_node": 2,
             "to_node": 4,
-            "operation_id": 37,
+            "operation_id": 2,
             "off_way": false
           },
           {
             "from_node": 3,
             "to_node": 4,
-            "operation_id": 62,
+            "operation_id": 0,
             "off_way": false
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 1,
@@ -177,7 +163,7 @@
     "name": "Деталька_4",
     "weight": 17,
     "assembly_id": 10,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 54,
         "path": [
@@ -207,7 +193,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 2,
@@ -232,7 +218,7 @@
     "name": "Деталька_5",
     "weight": 9,
     "assembly_id": 8,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 14,
         "path": [
@@ -262,7 +248,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 1,
@@ -291,7 +277,7 @@
     "name": "Деталька_6",
     "weight": 13,
     "assembly_id": 10,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 86,
         "path": [
@@ -327,7 +313,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 2,
@@ -356,7 +342,7 @@
     "name": "Деталька_7",
     "weight": 10,
     "assembly_id": 5,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 36,
         "path": [
@@ -386,7 +372,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 5,
@@ -415,7 +401,7 @@
     "name": "Деталь_8",
     "weight": 12,
     "assembly_id": 11,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 34,
         "path": [
@@ -445,7 +431,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 1,
@@ -470,7 +456,7 @@
     "name": "Деталька_9",
     "weight": 10,
     "assembly_id": 10,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 29,
         "path": [
@@ -506,7 +492,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 5,
@@ -535,7 +521,7 @@
     "name": "Деталька_10",
     "weight": 4,
     "assembly_id": 12,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 84,
         "path": [
@@ -571,7 +557,7 @@
           }
         ]
       }
-    ],
+   ,
     "process": [
       {
         "operation_id": 1,
@@ -596,7 +582,7 @@
     "name": "Деталька_11",
     "weight": 12,
     "assembly_id": 11,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 71,
         "path": [
@@ -632,7 +618,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 4,
@@ -665,7 +651,7 @@
     "name": "Деталька_12",
     "weight": 4,
     "assembly_id": 13,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 85,
         "path": [
@@ -695,7 +681,7 @@
           }
         ]
       }
-    ],
+   ,
     "process": [
       {
         "operation_id": 1,
@@ -720,7 +706,7 @@
     "name": "Деталь_13",
     "weight": 10,
     "assembly_id": 1,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 28,
         "path": [
@@ -756,7 +742,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 5,
@@ -781,7 +767,7 @@
     "name": "Деталь_14",
     "weight": 18,
     "assembly_id": 3,
-    "roadmap": [
+    "roadmap": 
       {
         "position": 23,
         "path": [
@@ -811,7 +797,7 @@
           }
         ]
       }
-    ],
+    ,
     "process": [
       {
         "operation_id": 3,

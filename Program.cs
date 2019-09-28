@@ -1,7 +1,11 @@
 using System;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Hosting;
+using MoreLinq;
+using Newtonsoft.Json;
 using Waremap.Controllers;
+using Waremap.Models;
 
 namespace Waremap
 {
@@ -39,6 +43,19 @@ namespace Waremap
             {
                 LoadDataController.LoadAssembliesToState(reader.ReadToEnd(), state);
                 Console.WriteLine($"Mock assemblies loaded: {state.Equipment.Assemblies.Count}");
+            }
+
+            using (var reader = new StreamReader("shared/waremap-state.json"))
+            {
+                var savedState = JsonConvert.DeserializeObject<SavedState>(reader.ReadToEnd(),Utils.ConverterSettings);
+                
+                state.Geo = savedState.State.Geo;
+                state.Equipment = savedState.State.Equipment;
+                state.CarRoadmap = savedState.State.CarRoadmap;
+
+                savedState.Backgrounds.Where(x => x != null).ForEach(x => { state.Background.Add(x.Floor, x.Base64); });
+
+                Console.WriteLine($"Saved state loaded: {state.Geo.Nodes.Count}");
             }
             // start server
             StartServer();
