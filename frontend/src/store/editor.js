@@ -206,7 +206,12 @@ export default {
     },
 
     async uploadFloorBackground(c, base64) {
-      await API.sendBackground(base64, c.state.floor);
+      try {
+        await API.sendBackground(base64, c.state.floor);
+        c.state.floorBackground = base64;
+      } catch(e) {
+        console.log('uploadFloorBackground exception')
+      }
     },
 
     async downloadFloorBackground(c) {

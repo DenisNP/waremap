@@ -36,19 +36,14 @@
 
 
     <div  class="pallete pallete-bottom floorBgUpload">
-      <label class="pallete-item pallete-bottom">
-        <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
-        <span class="pallete-item-icon">+</span>
-        <span class="pallete-item--name">
-          Добавить план помещения
-        </span>
-      </label>
+      
       <label class="pallete-item pallete-bottom">
         <input type="file" @change="onImportClick" accept=".json"/>
-        <span class="pallete-item-icon">+</span>
-        <span class="pallete-item--name">
           Импорт
-        </span>
+      </label>
+      <label class="pallete-item pallete-bottom">
+        <input type="file" @change="onFileSelected" accept=".jpg, .jpeg, .png"/>
+          Добавить план помещения
       </label>
       <div class="pallete-item pallete-bottom" @click="onExportClick">
         Экспорт
@@ -527,6 +522,37 @@ label.myLabel {
 .pallete.PartsList .pallete-heading:hover,
 .pallete.PartsList .pallete-item:hover {
   color: #3878FF;
+}
+
+/* ---------------------------------------------------------------- */
+
+.pallete-bottom .pallete-item {
+  margin: 5px;
+  white-space: nowrap;
+  background-color: #373737;
+  border-radius: 15px;
+  pointer-events: all;
+  cursor: pointer;
+}
+.pallete.floorBgUpload {
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  right: auto;
+  margin: 0;
+  padding: 0 0 5px;
+  pointer-events: none;
+  background-color: transparent;
+  border-radius: 0;
+}
+.pallete.floorBgUpload .pallete-item-icon {
+  margin: -10px 10px -10px 0;
+}
+.pallete-bottom .pallete-item:before {
+  display: none;
+}
+.pallete-bottom .pallete-item:hover {
+  background-color: #424242;
 }
 
 </style>

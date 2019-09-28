@@ -29,6 +29,7 @@
     },
     computed: {
       assemblies() {
+        console.log(this.$store.state.serverState.equipment)
         let assemblies = {};
         this.$store.state.serverState.equipment.parts.map((detail) => {
           if (!(detail.assembly_id in assemblies)) {
