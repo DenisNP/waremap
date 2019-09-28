@@ -1,13 +1,29 @@
 <template>
   <g>
-    <rect
-      @click="onClick"
-      @mousedown="onMouseDown"
-      :x="data.x"
-      :y="data.y"
-      :width="data.w"
-      :height="data.h"
-      :fill="selected ? 'rgba(255,0,0,0.3)' : 'rgba(100,100,100,0.3)'"></rect>
+      <foreignObject
+        class="node node-Depot show"
+        @click="onClick"
+        @mousedown="onMouseDown"
+        :x="data.x"
+        :y="data.y"
+        :width="data.w"
+        :height="data.h"
+      >
+        <div
+          class="walls"
+          :class="{selected}"
+        >
+          <div class="wall top"></div>
+          <div class="wall right"></div>
+          <div class="wall bottom"></div>
+          <div class="wall left"></div>
+
+          <div class="corner top"></div>
+          <div class="corner right"></div>
+          <div class="corner bottom"></div>
+          <div class="corner left"></div>
+        </div>
+      </foreignObject>
   </g>
 </template>
 
@@ -51,57 +67,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-
-.node {
-  display: none;
-  cursor: pointer;
-}
-.node.show {
-  display: block;
-}
-
-.walls {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: #FFF;
-    cursor: pointer;
-}
-.walls.selected {
-  background-color: #f00;
-}
-.wall, .corner {
-    position: absolute;
-    background-color: rgba(0,0,0,.5);
-}
-.wall.left,
-.wall.right,
-.corner { width: 5px; }
-.wall.left,
-.wall.right { height: 100%; }
-.wall.top,
-.wall.bottom,
-.corner { height: 5px; }
-.wall.top,
-.wall.bottom { width: 100%; }
-.walls .top { top: 0; bottom: auto; }
-.walls .bottom { top: auto; bottom: 0; }
-.walls .left { left: 0; right: auto; }
-.walls .right { left: auto; right: 0; }
-
-
-.node-icon {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.node-icon img {
-  max-height: 98%;
-}
+<style>
 
 </style>
