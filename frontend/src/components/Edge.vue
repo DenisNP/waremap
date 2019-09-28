@@ -67,21 +67,4 @@ export default {
 
 <style>
 
-.edge.edge-Road {
-  stroke: #333;
-  stroke-width: 1px;
-  fill: transparent;
-  stroke-dasharray: 10 5;
-  animation: dash 50s linear infinite;
-}
-.edge.inverse {
-  animation-direction: reverse;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 500;
-  }
-}
-
 </style>

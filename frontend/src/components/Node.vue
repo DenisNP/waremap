@@ -1,6 +1,6 @@
 <template>
   <g class="node" :class="{show, ['node-' + data.icon]: true}">
-    <line :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
+    <line class="edge edge-Dashed" :x1="data.x" :y1="data.y" :x2="newX" :y2="newY" stroke="black" v-if="selected" style="pointer-events: none;"/>
 
     <foreignObject
       @click="onClick"

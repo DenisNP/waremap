@@ -39,6 +39,8 @@ body {
   margin-top: 60px;
 }
 
+/* ---------------------------------------------------------------- */
+
 .node {
   display: none;
   cursor: pointer;
@@ -108,6 +110,27 @@ body {
 }
 .node-Depot .node-icon {
   display: none;
+}
+
+/* ---------------------------------------------------------------- */
+
+.edge.edge-Dashed,
+.edge.edge-Road {
+  stroke: #333;
+  stroke-width: 1px;
+  fill: transparent;
+  stroke-dasharray: 10 5;
+  animation: dash 50s linear infinite;
+}
+.edge.inverse,
+.edge.edge-Dashed {
+  animation-direction: reverse;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 500;
+  }
 }
 
 </style>
