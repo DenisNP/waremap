@@ -41,22 +41,20 @@ export default {
   },
   actions: {
     async importFullState(c, fullState) {
-      debugger;
-      /*
       const res = await Promise.all([
-        API.sendAction('load', fullState.state),
+        API.api('POST', 'load', fullState.state),
         ...fullState.backgrounds.filter(Boolean).map(bg =>
           API.sendBackground(bg.base64, bg.floor),
         )
       ]);
-      */
-      const newState = await API.sendAction('load', fullState.state);
 
-      for (const bg of fullState.backgrounds) {
-        await API.sendBackground(bg.base64, bg.floor);
-      }
+      // const newState = await API.api('POST', 'load', fullState.state);
 
-      c.commit('setServerState', newState, {root: true});
+      // for (const bg of fullState.backgrounds.filter(Boolean)) {
+      //   await API.sendBackground(bg.base64, bg.floor);
+      // }
+
+      c.commit('setServerState', res[0], {root: true});
     },
   }
 };
