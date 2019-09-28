@@ -32,7 +32,7 @@
 </template>
 
 <script>
-const MIN_DRAGGING_DISTANCE = 50;
+const MIN_DRAGGING_DISTANCE = 10;
 
 export default {
   name: 'Node',
