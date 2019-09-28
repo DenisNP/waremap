@@ -7,11 +7,10 @@ namespace Waremap
 {
     public static class GraphUtils
     {
-        public static List<int> FindNeighbours(Graph graph, Node node, List<Node> exclude)
+        public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude)
         {
-            var edges = graph.Edges.Where(e => e.From == node.Id || e.To == node.Id).ToList();
-            var ids = exclude.Select(n => n.Id).ToList();
-            ids.Add(node.Id);
+            var edges = graph.Edges.Where(e => e.From == nodeId || e.To == nodeId).ToList();
+            var ids = exclude.Concat(new List<int>(nodeId));
 
             return edges
                 .Select(e => e.From)
@@ -23,23 +22,22 @@ namespace Waremap
         
         public static List<Node> FindCore(Graph graph, params EdgeType[] types)
         {
-            var start = graph.Edges.FirstOrDefault(e => types.Contains(e.Type));
-            if (start == null)
+            var edges = graph.Edges.Where(e => types.Contains(e.Type)).ToList();
+            if (edges.Count == 0)
             {
                 return new List<Node>();
             }
 
-            var nodesLeft = graph.Nodes.Values.Where(n => n.Id != start.From && n.Id != start.To).ToList();
-            var found = new List<Node>
-            {
-                graph.Nodes[start.From],
-                graph.Nodes[start.To]
-            };
-            // var nextNode = graph.Nodes[start.]
+            var nodeIds = edges
+                .Select(e => e.From)
+                .Concat(edges.Select(e => e.To))
+                .Distinct()
+                .ToList();
 
-            while (nodesLeft.Count > 0)
+            var seen = new List<int>();
+            for (var i = 0; i < nodeIds.Count; i++)
             {
-                
+                // var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds[0..i]);
             }
             
             throw new NotImplementedException();

@@ -18,7 +18,6 @@ namespace Waremap.Events
             var depot = state.Geo.Depots.FirstOrDefault(x => x.X == X && x.Y == Y);
             if (depot != null)
             {
-                depot.Id = Id;
                 depot.X = X;
                 depot.Y = Y;
                 depot.W = W;
@@ -30,7 +29,7 @@ namespace Waremap.Events
             {
                 state.Geo.Depots.Add(new Depot
                 {
-                    Id = Id,
+                    Id = Utils.CreateIdFor(state.Geo.Depots.Select(d => d.Id).ToList()),
                     X = X,
                     Y = Y,
                     W = W,
