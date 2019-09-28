@@ -149,9 +149,6 @@ export default {
       }
     }
   },
-  mounted() {
-    window.addEventListener('keydown', this.onKeyDown);
-  },
   destroyed() {
     window.removeEventListener('keydown', this.onKeyDown);
   }

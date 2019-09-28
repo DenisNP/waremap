@@ -45,6 +45,10 @@ svg {
   -moz-osx-font-smoothing: grayscale;
 }
 
+svg image {
+  pointer-events: none;
+}
+
 /* ---------------------------------------------------------------- */
 
 .node {
@@ -121,9 +125,9 @@ svg {
 /* ---------------------------------------------------------------- */
 
 .edge.edge-Dashed,
-.edge.edge-Road {
-  stroke: #333;
-  stroke-width: 1px;
+.edge.edge-Footway {
+  stroke: rgba(30,30,30,.7);
+  stroke-width: 2px;
   fill: transparent;
   stroke-dasharray: 10 5;
   animation: dash 200s linear infinite;
@@ -137,6 +141,16 @@ svg {
   to {
     stroke-dashoffset: 2000;
   }
+}
+
+.edge.edge-Road {
+  fill: transparent;
+  stroke: #333;
+  stroke-width: 2px;
+}
+
+.edge.selected {
+  stroke: #F00;
 }
 
 </style>
