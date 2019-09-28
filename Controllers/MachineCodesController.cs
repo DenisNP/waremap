@@ -8,7 +8,7 @@ namespace Waremap.Controllers
     [Route("/machine")]
     public class MachineCodesController : ControllerBase
     {
-        [HttpPost]
+        [HttpGet]
         public string Get()
         {
             if (Request.Query.ContainsKey("id") && int.TryParse(Request.Query["id"], out var nodeId))
@@ -40,8 +40,8 @@ namespace Waremap.Controllers
 
             return "No correct id specified";
         }
-        
-        public struct AwaitingPart
+
+        private struct AwaitingPart
         {
             public int PartId { get; set; }
             public int MachineId { get; set; }
