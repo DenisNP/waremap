@@ -75,12 +75,14 @@ export default {
     });
 
     window.addEventListener('keydown', this.onKeyDown);
+    this.$el.addEventListener('mousewheel', this.onMouseWheel);
   },
   props: {
     msg: String,
   },
   data() {
     return {
+      zoom: 1,
       newDepot: null,
       isDrawingDepot: false,
       startX: null,
@@ -110,6 +112,18 @@ export default {
     }
   },
   methods: {
+    onMouseWheel(e) {
+      console.log('wheel', e);
+      e.preventDefault();
+
+      if (e.deltaY < 0) {
+        this.zoom *= 1.05;
+      } else {
+        this.zoom /= 1.05;
+      }
+
+      this.$el.style.transform = 'scale(' + this.zoom + ')';
+    },
     clickBg(e) {
       if (this.$store.state.editor.isSomeHighlighted) {
         if (e.target.tagName === 'svg' || e.target.classList.contains('node-Depot')) {
