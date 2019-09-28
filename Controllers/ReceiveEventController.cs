@@ -17,7 +17,22 @@ namespace Waremap.Controllers
         {
             return State;
         }
-        
+
+        public static Node GetNextNode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Node SwitchToNextNode()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Node GetCurrentNode()
+        {
+            throw new NotImplementedException();
+        }
+
         [HttpGet]
         public string Get()
         {
