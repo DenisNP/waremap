@@ -1,20 +1,20 @@
 <template>
-  <div class="controls">
-    <div class="pallete tools">
+  <div class="pallete edges">
+    <div class="pallete-heading">Тип связи</div>
+    <div class="inline-group">
+      <div class="edge-type"
+        v-for="item in types"
+        :key="item.key"
+        :class="{selected: item.key === type}"
+        @click="setType(item.key)"
+      >
+        <img :src="item.icon.i" :width="item.icon.w" />
+      </div>
     </div>
 
-    <div class="pallete pallete-right floors">
-      <div>Тип связи</div>
-      <select :value="data.type" @input="setType">
-        <option :value="'Road'">Дорога для тележки</option>
-        <option :value="'Footway'">Проход для человека</option>
-        <option :value="'Elevator'">Лифт</option>
-        <option :value="'Ladder'">Лестница</option>
-      </select>
-      <div>Вес</div>
-      <input type="text" :value="data.weight" @input="setWeight">
-      <br>
-      <button @click="save">Сохранить</button>
+    <div class="inline-group">
+      <div class="pallete-heading">Длина:</div>
+      <input class="edge-weight-input" type="text" :value="data.weight" @input="setWeight">
     </div>
   </div>
 </template>
@@ -28,6 +28,12 @@
     ],
     data() {
       return {
+        types: [
+          {key: 'Road',     name: 'Дорога для тележки',   icon: this.$store.state.icons.edgeParams.Road},
+          {key: 'Footway',  name: 'Проход для человека',  icon: this.$store.state.icons.edgeParams.Footway},
+          {key: 'Elevator', name: 'Лифт',                 icon: this.$store.state.icons.edgeParams.Elevator},
+          {key: 'Ladder',   name: 'Лестница',             icon: this.$store.state.icons.edgeParams.Ladder}
+        ],
         weight: this.data.weight,
         type: this.data.type,
       };
@@ -36,11 +42,13 @@
 
     },
     methods: {
+      setType(type) {
+        this.type = type;
+        this.save();
+      },
       setWeight(e) {
         this.weight = e.target.value;
-      },
-      setType(e) {
-        this.type = e.target.value;
+        this.save();
       },
       async save() {
         await this.$store.dispatch('editor/updateEdge', {
@@ -48,7 +56,6 @@
           weight: this.weight,
           type: this.type,
         });
-        this.$store.commit('editor/unselect');
       }
     }
   }

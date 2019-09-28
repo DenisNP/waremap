@@ -24,6 +24,12 @@ export default {
       Edges: {i: require('../assets/create_edge.svg'), w: 32},
       Node: {i: require('../assets/add_edge.svg'), w: 32},
       UploadBg: {i: require('../assets/cursor_01.svg'), w: 32}
+    },
+    edgeParams: {
+      Road: {i: require('../assets/create_edge.svg'), w: 32},
+      Footway: {i: require('../assets/create_edge.svg'), w: 32},
+      Elevator: {i: require('../assets/create_edge.svg'), w: 32},
+      Ladder: {i: require('../assets/create_edge.svg'), w: 32},
     }
   },
   getters: {

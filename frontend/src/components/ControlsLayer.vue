@@ -350,4 +350,39 @@ label.myLabel {
   font-size: 18px;
 }
 
+/* -------------------------------------------------------------------- */
+
+.pallete.edges {
+  left: 0;
+  top: 530px;
+  padding-left: 30px;
+  background-color: transparent;
+  box-shadow: none;
+  color: #333;
+}
+.pallete.edges .inline-group {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.pallete.edges .pallete-heading {
+  padding: 5px;
+  font-size: 16px;
+}
+.pallete.edges .edge-type {
+  padding: 5px;
+  cursor: pointer;
+}
+.pallete.edges .edge-type.selected {
+  transform: scale(1.2);
+}
+.pallete.edges .edge-weight-input {
+  width: 95px;
+  margin-left: 5px;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 </style>
