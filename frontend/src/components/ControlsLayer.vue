@@ -19,7 +19,11 @@
       <div class="pallete-item"
         v-for="floor in floors"
         :key="floor"
-        :class="{selected: floor == selectedFloor}"
+        :ref="'floor' + floor"
+        :class="{
+          selected: floor == selectedFloor,
+          ['floor-' + floor]: true
+        }"
         @click="floorSelect(floor)"
       >
         <span class="pallete-item-name">

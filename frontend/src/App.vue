@@ -101,9 +101,20 @@ svg {
     display: none;
     width: 100%;
     height: 100%;
-    background-color: #FFF;
+    // background-color: #FFF;
     cursor: pointer;
-    background-image: url(./assets/tiles/tile.svg);
+    // background-image: url(./assets/tiles/tile.svg);
+}
+.walls:before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .7;
+    background-image: url(/img/tile.73847b9d.svg);
 }
 .walls.selected .wall,
 .walls.selected .corner {
