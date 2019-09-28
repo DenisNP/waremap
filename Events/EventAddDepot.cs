@@ -24,7 +24,7 @@ namespace Waremap.Events
                 depot.W = W;
                 depot.H = H;
                 depot.Floor = Floor;
-                depot.Name = Name;
+                depot.Name = Name ?? depot.Name;
 
                 foreach (var node in state.Geo.Nodes)
                 {
@@ -48,7 +48,7 @@ namespace Waremap.Events
                     W = W,
                     H = H,
                     Floor = Floor,
-                    Name = $"{Name} №{Id}, Этаж {Floor}"
+                    Name = Name ?? $"Цех {Id}, Этаж {Floor}"
                 });
 
                 foreach (var node in state.Geo.Nodes)

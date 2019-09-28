@@ -18,6 +18,7 @@ namespace Waremap.Models
         public int Y { get; set; }
         public string Name { get; set; }
         public List<int> OperationIds { get; set; } = new List<int>();
+        public string Icon { get; set; }
 
         private int _closestCore;
 
