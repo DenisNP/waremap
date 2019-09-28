@@ -196,9 +196,11 @@ svg {
   stroke: rgba(255,255,255,.6);
   stroke-width: 2px;
 }
-
 .edge.selected {
   stroke: #F00;
+}
+.highlighted .edge.highlighted {
+  stroke: #0F0;
 }
 
 </style>

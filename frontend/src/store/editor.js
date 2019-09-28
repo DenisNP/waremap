@@ -8,12 +8,14 @@ export default {
   state: {
     mode: 'default', // 'draggingNode'?, 'addingNode', 'addingEdge', 'nodeSelected', 'edgeSelected', 'depotSelected', 'addingDepot'
     floorBackground: null,
+    floorBackgroundMap: {},
     addingNodeIcon: null, // enum('Machine, Point, Ladder, Elevator, Door')
     selectedNode: null,
     selectedNodeId: null,
     selectedDepotId: null,
     selectedEdge: null,
     highlightedNodes: {},
+    highlightedEdges: {},
     isSomeHighlighted: false,
     isSelectedSomething: false,
     FloorToFloorEdge: null,
@@ -110,6 +112,13 @@ export default {
       nodesIds.map((id) => highlightedNodes[id] = true);
       state.highlightedNodes = highlightedNodes;
       state.isSomeHighlighted = (Object.keys(highlightedNodes).length > 0);
+    },
+
+    highlightedEdges(state, edges) {
+      let highlightedEdges = {};
+      edges.map(({from, to}) => highlightedEdges[[from, to].sort().join('_')] = true);
+      state.highlightedEdges = highlightedEdges;
+      state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
     }
   },
   actions: {
@@ -138,7 +147,7 @@ export default {
     },
 
     async autoComputeEdges(c) {
-      const newState = await API.autoComputeEdges(c.state.depot.id);
+      const newState = await API.autoComputeEdges(c.state.depot.id, c.state.floor);
       c.commit('setServerState', newState, {root: true});
     },
 
@@ -206,13 +215,24 @@ export default {
     },
 
     async uploadFloorBackground(c, base64) {
-      await API.sendBackground(base64, c.state.floor);
+      try {
+        await API.sendBackground(base64, c.state.floor);
+        c.state.floorBackground = base64;
+      } catch(e) {
+        console.log('uploadFloorBackground exception')
+      }
     },
 
     async downloadFloorBackground(c) {
+      if (c.state.floorBackgroundMap[c.state.floor]) {
+        c.state.floorBackground = c.state.floorBackgroundMap[c.state.floor];
+        return;
+      }
+
       c.state.floorBackground = '';
       try {
         c.state.floorBackground = await API.getBackground(c.state.floor);
+        c.state.floorBackgroundMap[c.state.floor] = c.state.floorBackground;
       } catch(e) {
         return;
       }
@@ -229,6 +249,7 @@ function unselect(state) {
   state.selectedEdge = null;
   state.selectedDepotId = null;
   state.highlightedNodes = {};
+  state.highlightedEdges = {};
   state.isSomeHighlighted = false;
   state.FloorToFloorEdge = null;
 }

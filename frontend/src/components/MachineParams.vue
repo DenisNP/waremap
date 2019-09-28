@@ -1,5 +1,10 @@
 <template>
   <div class="pallete pallete-right MachineParams">
+    <div class="pallete-heading-top">
+      Участок
+      <span v-if="data.id">№{{ data.id }}.</span>
+      <span v-else>без номера.</span>
+    </div>
     <div class="pallete-heading">Возможные операции</div>
 
     <div class="pallete-item"

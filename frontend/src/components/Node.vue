@@ -182,11 +182,12 @@ export default {
   filter: hue-rotate(180deg);
 }*/
 
-.nodesHighlighted .node:not(.node-Depot),
-.nodesHighlighted .edge {
+.highlighted .node:not(.node-Depot),
+.highlighted .edge {
   opacity: 0.3;
 }
-.nodesHighlighted .node.highlighted {
+.highlighted .edge.highlighted,
+.highlighted .node.highlighted {
   opacity: 1;
 }
 
