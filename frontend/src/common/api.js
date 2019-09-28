@@ -65,9 +65,9 @@ export default {
     });
   },
 
-  async addNode({type, x, y, floor, depot}) {
+  async addNode({type, x, y, floor, depot, icon}) {
     return await this.sendAction('addNode', {
-      type, x, y, floor, depot
+      type, x, y, floor, depot, icon
     });
   },
 
