@@ -27,6 +27,19 @@ namespace Waremap
                 Console.WriteLine($"Mock nodes loaded: {state.Geo.Nodes.Count}");
             } */
             
+            using (var reader = new StreamReader("shared/waremap-state.json"))
+            {
+                var savedState = JsonConvert.DeserializeObject<SavedState>(reader.ReadToEnd(),Utils.ConverterSettings);
+                
+                state.Geo = savedState.State.Geo;
+                state.Equipment = savedState.State.Equipment;
+                state.CarRoadmap = savedState.State.CarRoadmap;
+
+                savedState.Backgrounds.Where(x => x != null).ForEach(x => { state.Background.Add(x.Floor, x.Base64); });
+
+                Console.WriteLine($"Saved state loaded: {state.Geo.Nodes.Count}");
+            }
+
             using (var reader = new StreamReader("shared/parts.json"))
             {
                 LoadDataController.LoadPartsToState(reader.ReadToEnd(), state);
@@ -43,19 +56,6 @@ namespace Waremap
             {
                 LoadDataController.LoadAssembliesToState(reader.ReadToEnd(), state);
                 Console.WriteLine($"Mock assemblies loaded: {state.Equipment.Assemblies.Count}");
-            }
-
-            using (var reader = new StreamReader("shared/waremap-state.json"))
-            {
-                var savedState = JsonConvert.DeserializeObject<SavedState>(reader.ReadToEnd(),Utils.ConverterSettings);
-                
-                state.Geo = savedState.State.Geo;
-                state.Equipment = savedState.State.Equipment;
-                state.CarRoadmap = savedState.State.CarRoadmap;
-
-                savedState.Backgrounds.Where(x => x != null).ForEach(x => { state.Background.Add(x.Floor, x.Base64); });
-
-                Console.WriteLine($"Saved state loaded: {state.Geo.Nodes.Count}");
             }
             // start server
             StartServer();
