@@ -17,7 +17,27 @@ namespace Waremap.Events
         public string? Name { get; set; }
         public string? Icon { get; set; }
         public List<int>? OperationIds { get; set; }
-        
+
+        public string GetEventName(State state)
+        {
+            var newName = "";
+
+            switch (Icon)
+            {
+                case "Node":
+                    newName = "Точка"; break;
+                case "Machine":
+                    newName = $"Участок {state.Equipment.GetOperationById(OperationIds.First())}"; break;
+                case "Elevator": break;
+                    newName = "Лифт в"; break;
+                case "Ladder": break;
+                    newName = "Лестница в"; break;
+                case "Door": break;
+                    newName = "Дверь в"; break;
+            }
+
+            return Name ?? $"{newName} {Id}, Цех {Depot}, Этаж {Floor}";
+        }
         public void Run(State state)
         {
             var node = state.Geo.Nodes.FirstOrDefault(n => n.Id == Id);
@@ -46,7 +66,7 @@ namespace Waremap.Events
                     X = X,
                     Y = Y,
                     Icon = Icon ?? "",
-                    Name = Name ?? $"Участок {Id}, Цех {Depot}, Этаж {Floor}",
+                    Name = GetEventName(state),
                     OperationIds = OperationIds ?? new List<int>() 
                 });
             }

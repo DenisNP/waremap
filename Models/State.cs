@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 
 namespace Waremap.Models
@@ -145,6 +146,10 @@ namespace Waremap.Models
         public List<Operation> Operations { get; set; } = new List<Operation>();
         public List<Part> Parts { get; set; } = new List<Part>();
         public List<Assembly> Assemblies { get; set; } = new List<Assembly>();
+        public string GetOperationById(int id)
+        {
+            return Operations.First(x => x.Id == id).Name;
+        }
     }
 
     public enum NodeType
