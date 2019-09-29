@@ -1582,7 +1582,42 @@
         "car_roadmap": {
             "path": [{
                     "from_node": 1,
+                    "to_node": 3,
+                    "operation_id": 0,
+                    "off_way": false
+                }
+            ],
+			            "path": [{
+                    "from_node": 3,
                     "to_node": 1,
+                    "operation_id": 0,
+                    "off_way": false
+                }
+            ],
+			            "path": [{
+                    "from_node": 1,
+                    "to_node": 15,
+                    "operation_id": 0,
+                    "off_way": false
+                }
+            ],
+			            "path": [{
+                    "from_node": 15,
+                    "to_node": 13,
+                    "operation_id": 0,
+                    "off_way": false
+                }
+            ],
+			            "path": [{
+                    "from_node": 13,
+                    "to_node": 17,
+                    "operation_id": 0,
+                    "off_way": false
+                }
+            ],
+			            "path": [{
+                    "from_node": 17,
+                    "to_node": 8,
                     "operation_id": 0,
                     "off_way": false
                 }
