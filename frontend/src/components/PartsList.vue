@@ -1,18 +1,20 @@
 <template>
   <div class="pallete pallete-right PartsList">
-    <template v-for="group in assemblies">
-      <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
-      <div class="pallete-item"
-        v-for="detail in group.details"
-        :key="detail.id"
-        @click="showDetailNodes(detail)"
-      >
-        <span class="pallete-item-icon">&laquo;</span>
-        <span class="pallete-item-name">
-          {{ detail.name }}
-        </span>
-      </div>
-    </template>
+    <div class="scrollable">
+      <template v-for="group in assemblies">
+        <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
+        <div class="pallete-item"
+          v-for="detail in group.details"
+          :key="detail.id"
+          @click="showDetailNodes(detail)"
+        >
+          <span class="pallete-item-icon">—</span>
+          <span class="pallete-item-name">
+            {{ detail.name }}
+          </span>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,7 @@
     ],
     data() {
       return {
-        
+
       };
     },
     computed: {
@@ -52,18 +54,19 @@
         return assemblies;
       }
     },
-    mounted() {      
+    mounted() {
     },
     methods: {
       showAssemblyNodes(id) {
         let details = this.assemblies[id].details.map(detail => detail);
         // console.log(details);
-        this.$store.commit('editor/highlightNodes', ['15', '13']);
+        this.$store.commit('editor/highlightNodes', details.map(detail => detail.roadmap.position));
       },
       showDetailNodes(detail) {
         // console.log(detail);
-        this.$store.commit('editor/highlightNodes', ['16']);
+        this.$store.commit('editor/highlightNodes', [detail.roadmap.position]);
 
+        /*
         detail.roadmap.path = [
           {from: 10, to: 12},
           {from: 12, to: 17},
@@ -71,6 +74,7 @@
           {from: 11, to: 14},
           {from: 14, to: 15}
         ];
+        */
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
       }
     }
@@ -79,5 +83,10 @@
 </script>
 
 <style>
-
+.PartsList {
+}
+.PartsList .scrollable {
+  overflow-y: auto;
+  height: calc(100% - 70px);
+}
 </style>
