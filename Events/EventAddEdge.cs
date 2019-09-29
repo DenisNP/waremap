@@ -34,5 +34,21 @@ namespace Waremap.Events
                 }
             }
         }
+
+        public static void RecalculateWeights(Node node, State state)
+        {
+            state.Geo.Edges.ForEach(e =>
+            {
+                if (node == null || node.Id == e.From || node.Id == e.To)
+                {
+                    var fromNode = state.Geo.Nodes.FirstOrDefault(n => n.Id == e.From);
+                    var toNode = state.Geo.Nodes.FirstOrDefault(n => n.Id == e.To);
+                    if (fromNode != null && toNode != null)
+                    {
+                        e.Weight = Utils.Dist(fromNode, toNode);
+                    }
+                }
+            });
+        }
     }
 }

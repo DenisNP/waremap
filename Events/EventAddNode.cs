@@ -53,6 +53,8 @@ namespace Waremap.Events
                 node.Name = Name ?? node.Name;
                 if (OperationIds != null)
                     node.OperationIds = OperationIds;
+
+                EventAddEdge.RecalculateWeights(node, state);
             }
             else
             {

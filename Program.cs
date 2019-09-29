@@ -47,7 +47,9 @@ namespace Waremap
                 LoadDataController.LoadAssembliesToState(reader.ReadToEnd(), state, true);
                 Console.WriteLine($"Mock assemblies loaded: {state.Equipment.Assemblies.Count}");
             }
+            
             EventAddDepot.RedefineDepots(state);
+            EventAddEdge.RecalculateWeights(null, state);
             // start server
             StartServer();
         }
