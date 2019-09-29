@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
@@ -11,26 +12,50 @@ namespace Waremap.Controllers
         [HttpPost]
         public string Post()
         {
-            if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+            try
             {
-                using var reader = new StreamReader(Request.Body);
-                var body = reader.ReadToEnd();
-                ReceiveEventController.GetState().Background.Add(floor, body);
-                return $"Saved {body.Length} symbols on floor {floor}";
-            }
+                if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+                {
+                    using var reader = new StreamReader(Request.Body);
+                    var body = reader.ReadToEnd();
+                    var bg = ReceiveEventController.GetState().Background;
+                    if (bg.ContainsKey(floor))
+                    {
+                        bg[floor] = body;
+                    }
+                    else
+                    {
+                        bg.Add(floor, body);
+                    }
+                    return $"Saved {body.Length} symbols on floor {floor}";
+                }
 
-            return "No floor specified";
+                return "No floor specified";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         [HttpGet]
         public string Get()
         {
-            if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+            try
             {
-                return ReceiveEventController.GetState().Background.GetValueOrDefault(floor);
+                if (Request.Query.ContainsKey("floor") && int.TryParse(Request.Query["floor"], out var floor))
+                {
+                    return ReceiveEventController.GetState().Background.GetValueOrDefault(floor);
+                }
+
+                return "No floor specified";
             }
-            
-            return "No floor specified";
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Waremap.Events;
@@ -17,7 +18,25 @@ namespace Waremap.Controllers
         {
             return State;
         }
-        
+
+        public static Node GetNextNode()
+        {
+            var waypoint = State.CarRoadmap.NextWaypoint();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode);
+        }
+
+        public static Node SwitchToNextNode()
+        {
+            var waypoint = State.CarRoadmap.GoToNext();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode); 
+        }
+
+        public static Node GetCurrentNode()
+        {
+            var waypoint = State.CarRoadmap.CurrentWaypoint();
+            return waypoint == null ? null : State.Geo.Nodes.FirstOrDefault(node => node.Id == waypoint.FromNode);
+        }
+
         [HttpGet]
         public string Get()
         {
@@ -60,12 +79,6 @@ namespace Waremap.Controllers
                         case "removeDepot":
                             DeserializeAndRun<EventRemoveDepot>(body);
                             break;
-                        case "addWaypoint":
-                            DeserializeAndRun<EventAddWaypoint>(body);
-                            break;
-                        case "removeWaypoint":
-                            DeserializeAndRun<EventRemoveWaypoint>(body);
-                            break;
                         case "addOperation":
                             DeserializeAndRun<EventAddOperation>(body);
                             break;
@@ -74,6 +87,9 @@ namespace Waremap.Controllers
                             break;
                         case "computeEdges":
                             (new EventComputeEdges()).Run(State);
+                            break;
+                        case "optimize":
+                            (new EventOptimize()).Run(State);
                             break;
                     }
                 }

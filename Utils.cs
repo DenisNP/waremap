@@ -38,5 +38,24 @@ namespace Waremap
         {
             return Dist(node1.X, node1.Y, node2.X, node2.Y);
         }
+
+        public static bool IsNullOrEmpty(this string s)
+        {
+            return string.IsNullOrEmpty(s);
+        }
+
+        public static bool ContainsStartWith(this IEnumerable<string> list, string start)
+        {
+            return list.Any(element => element.ToLower().Trim().StartsWith(start) && start.Length >= element.Length / 2);
+        }
+
+        public static bool CheckTokens(IEnumerable<string> tokens, params string[] expected)
+        {
+            return expected.Any(expectedString =>
+            {
+                var expectedTokens = expectedString.Split(" ");
+                return expectedTokens.All(tokens.ContainsStartWith);
+            });
+        }
     }
 }

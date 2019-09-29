@@ -1,118 +1,828 @@
 [
   {
     "id": 1,
-    "name": "Корпус редуктора",
-    "weight": 12,
+    "name": "Корпус датчика",
+    "weight": 3,
     "assembly_id": 1,
-    "path": [
+    "roadmap": 
       {
-        "id": 1,
-        "order": 1,
-        "operation_id": 11,
-        "start_time": 0,
-        "end_time": 0
-      },
+        "position": 1,
+        "path": [
+          {
+            "from_node": 1,
+            "to_node": 2,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 2,
+            "operation_id": 2,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 3,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 3,
+            "operation_id": 4,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
       {
-        "id": 1,
-        "order": 3,
-        "operation_id": 1,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 2,
-        "order": 2,
         "operation_id": 2,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 3,
-        "order": 2,
-        "operation_id": 7,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 4,
-        "order": 2,
-        "operation_id": 8,
-        "start_time": 0,
-        "end_time": 0
+        "order": 2
       },
       {
-        "id": 5,
-        "order": 4,
-        "operation_id": 10,
-        "start_time": 0,
-        "end_time": 0
+        "operation_id": 4,
+        "order": 2
       }
     ]
   },
   {
     "id": 2,
-    "name": "Зубчатое колесо",
+    "name": "Крепление датчика",
     "weight": 1,
     "assembly_id": 1,
-    "path": [
+    "roadmap": 
       {
-        "id": 1,
-        "order": 1,
-        "operation_id": 11,
-        "start_time": 0,
-        "end_time": 0
+        "position": 1,
+        "path": [
+          {
+            "from_node": 1,
+            "to_node": 5,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 5,
+            "to_node": 5,
+            "operation_id": 5,
+            "off_way": false
+          },
+          {
+            "from_node": 5,
+            "to_node": 10,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 10,
+            "to_node": 10,
+            "operation_id": 6,
+            "off_way": false
+          },
+          {
+            "from_node": 10,
+            "to_node": 1,
+            "operation_id": 0,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 5,
+        "order": 3
       },
-            {
-        "id": 1,
-        "order": 3,
-        "operation_id": 2,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 2,
-        "order": 2,
-        "operation_id": 4,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 3,
-        "order": 2,
+      {
         "operation_id": 6,
-        "start_time": 0,
-        "end_time": 0
+        "order": 5
       }
     ]
   },
   {
     "id": 3,
-    "name": "Вал",
-    "weight": 2,
+    "name": "Сенсор",
+    "weight": 1,
     "assembly_id": 1,
-    "path": [
+    "roadmap": 
       {
-        "id": 1,
-        "order": 3,
+        "position": 1,
+        "path": [
+          {
+            "from_node": 1,
+            "to_node": 3,
+            "operation_id": 0,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 3,
+            "operation_id": 3,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 4,
+            "operation_id": 2,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 4,
+            "operation_id": 0,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
         "operation_id": 1,
-        "start_time": 0,
-        "end_time": 0
+        "order": 5
       },
-            {
-        "id": 1,
-        "order": 3,
-        "operation_id": 2,
-        "start_time": 0,
-        "end_time": 0
-      },
-            {
-        "id": 2,
-        "order": 6,
+      {
         "operation_id": 4,
-        "start_time": 0,
-        "end_time": 0
+        "order": 2
+      },
+      {
+        "operation_id": 3,
+        "order": 3
+      },
+      {
+        "operation_id": 4,
+        "order": 5
+      },
+      {
+        "operation_id": 2,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Деталька_4",
+    "weight": 17,
+    "assembly_id": 10,
+    "roadmap": 
+      {
+        "position": 54,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 5,
+            "operation_id": 84,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 4,
+            "operation_id": 21,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 4,
+            "operation_id": 44,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 5,
+            "operation_id": 7,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 2,
+        "order": 1
+      },
+      {
+        "operation_id": 1,
+        "order": 5
+      },
+      {
+        "operation_id": 5,
+        "order": 4
+      },
+      {
+        "operation_id": 4,
+        "order": 5
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Деталька_5",
+    "weight": 9,
+    "assembly_id": 8,
+    "roadmap": 
+      {
+        "position": 14,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 5,
+            "operation_id": 9,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 3,
+            "operation_id": 79,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 5,
+            "operation_id": 14,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 1,
+            "operation_id": 6,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 1,
+        "order": 5
+      },
+      {
+        "operation_id": 3,
+        "order": 2
+      },
+      {
+        "operation_id": 2,
+        "order": 2
+      },
+      {
+        "operation_id": 5,
+        "order": 4
+      },
+      {
+        "operation_id": 3,
+        "order": 4
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Деталька_6",
+    "weight": 13,
+    "assembly_id": 10,
+    "roadmap": 
+      {
+        "position": 86,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 4,
+            "operation_id": 41,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 1,
+            "operation_id": 8,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 2,
+            "operation_id": 57,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 2,
+            "operation_id": 47,
+            "off_way": false
+          },
+          {
+            "from_node": 4,
+            "to_node": 4,
+            "operation_id": 55,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 2,
+        "order": 2
+      },
+      {
+        "operation_id": 5,
+        "order": 2
+      },
+      {
+        "operation_id": 4,
+        "order": 5
+      },
+      {
+        "operation_id": 2,
+        "order": 5
+      },
+      {
+        "operation_id": 2,
+        "order": 4
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Деталька_7",
+    "weight": 10,
+    "assembly_id": 5,
+    "roadmap": 
+      {
+        "position": 36,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 4,
+            "operation_id": 30,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 5,
+            "operation_id": 78,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 2,
+            "operation_id": 80,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 5,
+            "operation_id": 49,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 5,
+        "order": 1
+      },
+      {
+        "operation_id": 2,
+        "order": 4
+      },
+      {
+        "operation_id": 3,
+        "order": 4
+      },
+      {
+        "operation_id": 5,
+        "order": 3
+      },
+      {
+        "operation_id": 5,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Деталь_8",
+    "weight": 12,
+    "assembly_id": 11,
+    "roadmap": 
+      {
+        "position": 34,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 3,
+            "operation_id": 94,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 5,
+            "operation_id": 37,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 3,
+            "operation_id": 92,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 5,
+            "operation_id": 9,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 1,
+        "order": 3
+      },
+      {
+        "operation_id": 2,
+        "order": 1
+      },
+      {
+        "operation_id": 3,
+        "order": 1
+      },
+      {
+        "operation_id": 2,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Деталька_9",
+    "weight": 10,
+    "assembly_id": 10,
+    "roadmap": 
+      {
+        "position": 29,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 5,
+            "operation_id": 53,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 4,
+            "operation_id": 1,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 5,
+            "operation_id": 44,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 4,
+            "operation_id": 20,
+            "off_way": false
+          },
+          {
+            "from_node": 4,
+            "to_node": 4,
+            "operation_id": 41,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 5,
+        "order": 2
+      },
+      {
+        "operation_id": 5,
+        "order": 1
+      },
+      {
+        "operation_id": 3,
+        "order": 5
+      },
+      {
+        "operation_id": 1,
+        "order": 3
+      },
+      {
+        "operation_id": 3,
+        "order": 4
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Деталька_10",
+    "weight": 4,
+    "assembly_id": 12,
+    "roadmap": 
+      {
+        "position": 84,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 4,
+            "operation_id": 68,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 3,
+            "operation_id": 66,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 3,
+            "operation_id": 77,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 4,
+            "operation_id": 13,
+            "off_way": false
+          },
+          {
+            "from_node": 4,
+            "to_node": 2,
+            "operation_id": 3,
+            "off_way": false
+          }
+        ]
+      }
+   ,
+    "process": [
+      {
+        "operation_id": 1,
+        "order": 3
+      },
+      {
+        "operation_id": 1,
+        "order": 5
+      },
+      {
+        "operation_id": 2,
+        "order": 5
+      },
+      {
+        "operation_id": 5,
+        "order": 2
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Деталька_11",
+    "weight": 12,
+    "assembly_id": 11,
+    "roadmap": 
+      {
+        "position": 71,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 1,
+            "operation_id": 59,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 4,
+            "operation_id": 91,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 1,
+            "operation_id": 81,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 2,
+            "operation_id": 93,
+            "off_way": false
+          },
+          {
+            "from_node": 4,
+            "to_node": 2,
+            "operation_id": 96,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 4,
+        "order": 1
+      },
+      {
+        "operation_id": 3,
+        "order": 4
+      },
+      {
+        "operation_id": 5,
+        "order": 2
+      },
+      {
+        "operation_id": 2,
+        "order": 1
+      },
+      {
+        "operation_id": 5,
+        "order": 3
+      },
+      {
+        "operation_id": 3,
+        "order": 1
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Деталька_12",
+    "weight": 4,
+    "assembly_id": 13,
+    "roadmap": 
+      {
+        "position": 85,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 3,
+            "operation_id": 83,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 4,
+            "operation_id": 17,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 4,
+            "operation_id": 43,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 4,
+            "operation_id": 39,
+            "off_way": false
+          }
+        ]
+      }
+   ,
+    "process": [
+      {
+        "operation_id": 1,
+        "order": 1
+      },
+      {
+        "operation_id": 4,
+        "order": 1
+      },
+      {
+        "operation_id": 1,
+        "order": 4
+      },
+      {
+        "operation_id": 1,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Деталь_13",
+    "weight": 10,
+    "assembly_id": 1,
+    "roadmap": 
+      {
+        "position": 28,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 3,
+            "operation_id": 99,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 1,
+            "operation_id": 72,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 5,
+            "operation_id": 74,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 3,
+            "operation_id": 38,
+            "off_way": false
+          },
+          {
+            "from_node": 4,
+            "to_node": 5,
+            "operation_id": 52,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 5,
+        "order": 3
+      },
+      {
+        "operation_id": 2,
+        "order": 5
+      },
+      {
+        "operation_id": 4,
+        "order": 3
+      },
+      {
+        "operation_id": 5,
+        "order": 3
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Деталь_14",
+    "weight": 18,
+    "assembly_id": 3,
+    "roadmap": 
+      {
+        "position": 23,
+        "path": [
+          {
+            "from_node": 0,
+            "to_node": 2,
+            "operation_id": 38,
+            "off_way": false
+          },
+          {
+            "from_node": 1,
+            "to_node": 5,
+            "operation_id": 9,
+            "off_way": false
+          },
+          {
+            "from_node": 2,
+            "to_node": 2,
+            "operation_id": 19,
+            "off_way": false
+          },
+          {
+            "from_node": 3,
+            "to_node": 3,
+            "operation_id": 18,
+            "off_way": false
+          }
+        ]
+      }
+    ,
+    "process": [
+      {
+        "operation_id": 3,
+        "order": 2
+      },
+      {
+        "operation_id": 5,
+        "order": 2
+      },
+      {
+        "operation_id": 1,
+        "order": 4
+      },
+      {
+        "operation_id": 4,
+        "order": 3
+      },
+      {
+        "operation_id": 2,
+        "order": 5
+      },
+      {
+        "operation_id": 5,
+        "order": 4
       }
     ]
   }
-
- ]
+]

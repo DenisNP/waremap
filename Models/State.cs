@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -7,7 +8,8 @@ namespace Waremap.Models
     {
         public Geo Geo { get; set; } = new Geo();
         public Equipment Equipment { get; set; } = new Equipment();
-        
+        public Roadmap CarRoadmap { get; set; } = new Roadmap();
+
         [JsonIgnore]
         public Dictionary<int, string> Background { get; set; } = new Dictionary<int, string>();
     }
@@ -24,14 +26,14 @@ namespace Waremap.Models
         public List<int> OperationIds { get; set; } = new List<int>();
         public string Icon { get; set; }
 
-        private int _closestCore;
+        private GraphUtils.PathToNode _closestCore;
 
-        public void AssignClosestCore(int v)
+        public void AssignClosestCore(GraphUtils.PathToNode v)
         {
             _closestCore = v;
         }
 
-        public int NeedClosestCore()
+        public GraphUtils.PathToNode NeedClosestCore()
         {
             return _closestCore;
         }
@@ -69,15 +71,49 @@ namespace Waremap.Models
         public List<Edge> Edges { get; set; } = new List<Edge>();
         public List<Depot> Depots { get; set; } = new List<Depot>();
     }
-
-
-    public class Waypoint
+    
+    public class Process
     {
-        public int Id { get; set; }
         public int Order { get; set; }
         public int OperationId { get; set; }
-        public int StarTime { get; set; }
-        public int EndTime { get; set; }
+    }
+
+    public class Roadmap
+    {
+        public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+        public int Position { get; set; } = 0;
+
+        public Waypoint CurrentWaypoint()
+        {
+            return Path.Count == 0 ? null : Path[Position];
+        }
+
+        public Waypoint NextWaypoint()
+        {
+            if (Path.Count == 0) return null;
+            return Position < Path.Count - 1 ? Path[Position + 1] : Path[0];
+        }
+
+        public Waypoint GoToNext()
+        {
+            var next = NextWaypoint();
+            if (next == null) return null;
+            Position = Path.IndexOf(next);
+            return CurrentWaypoint();
+        }
+
+        public void SetWaypoint(Waypoint wp)
+        {
+            if (Path.Contains(wp))
+            {
+                Position = Path.IndexOf(wp);
+            }
+            else
+            {
+                Path.Insert(Position + 1, wp);
+                Position++;
+            }
+        }
     }
 
     public class Part
@@ -86,7 +122,16 @@ namespace Waremap.Models
         public string Name { get; set; }
         public int Weight { get; set; }
         public int AssemblyId { get; set; }
-        public List<Waypoint> Path { get; set; } = new List<Waypoint>();
+        public Roadmap Roadmap { get; set; } = new Roadmap();
+        public List<Process> Process { get; set; } = new List<Process>();
+    }
+
+    public class Waypoint
+    {
+        public int FromNode { get; set; }
+        public int ToNode { get; set; }
+        public int OperationId { get; set; }
+        public bool OffWay { get; set; }
     }
 
     public class Assembly
