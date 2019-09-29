@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -124,6 +125,8 @@ namespace Waremap.Controllers
                 "как дойти"
             }))
             {
+                response.Response.Text = $"Ошибка обнаружения пути";
+
                 var depotNum = request.Request.Nlu.Tokens.Select(x =>
                 {
                     if (int.TryParse(x, out var n))
@@ -136,21 +139,18 @@ namespace Waremap.Controllers
                               request.Request.Nlu.Tokens.ContainsStartWith("погруз") ||
                               request.Request.Nlu.Tokens.ContainsStartWith("телег");
 
-
-                (Node,bool) resultPath;
-
                 foreach (var depot in ReceiveEventController.GetState().Geo.Depots.Where(depot => depot.Id == depotNum))
                 {
-                    resultPath = ReceiveEventController.FindPath(depot, onCart);
+                    var nextNode = ReceiveEventController.GetNextNode();
+                    var resultPath = ReceiveEventController.FindPath(depot, onCart);
+
+                    if (onCart && resultPath.Item2)
+                        response.Response.Text = $"Ваш пункт назначения {resultPath.Item1.Name}. Следуйте в {nextNode.Name}. Часть пути придется пройти пешком.";
+                    else
+                        response.Response.Text = $"Ваш пункт назначения {resultPath.Item1.Name}. Следуйте в {nextNode.Name}.";
+                    break;
                 }
-
-                var curNode = ReceiveEventController.GetCurrentNode();
-                var nextNode = ReceiveEventController.GetNextNode();
-
-                response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
             }
-
-
             return response;
         }
     }
