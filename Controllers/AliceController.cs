@@ -88,6 +88,12 @@ namespace Waremap.Controllers
             {
                 
                 var node = ReceiveEventController.GetNextNode();
+
+                if (node.Depot == 0)
+                {
+                    node.Name = node.Name.Replace("Цех 0", "Корридор");
+                }
+
                 response.Response.Text = $"Двигайтесь в {node.Name}.";
             }
 
@@ -115,6 +121,17 @@ namespace Waremap.Controllers
             {
                 var curNode = ReceiveEventController.GetCurrentNode();
                 var nextNode = ReceiveEventController.GetNextNode();
+
+                if (curNode.Depot == 0)
+                {
+                    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
+                }
+
+                if (nextNode.Depot == 0)
+                {
+                    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
+                }
+
                 response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
             }
 
@@ -143,6 +160,12 @@ namespace Waremap.Controllers
                 foreach (var depot in ReceiveEventController.GetState().Geo.Depots.Where(depot => depot.Id == depotNum))
                 {
                     var nextNode = ReceiveEventController.GetNextNode();
+
+                    if (nextNode.Depot == 0)
+                    {
+                        nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
+                    }
+
                     var resultPath = ReceiveEventController.FindPath(depot, onCart);
 
                     if (onCart && resultPath.Item2)
