@@ -137,6 +137,12 @@ namespace Waremap.Models
                 Position++;
             }
         }
+
+        public void AddWaypoint(Waypoint wp)
+        {
+            Path.Add(wp);
+            Position = Path.Count - 1;
+        }
     }
 
     public class Part

@@ -82,7 +82,7 @@ namespace Waremap.Controllers
                     OffWay = true
                 };
                 state.CarRoadmap.SetWaypoint(newWp);
-                part.Roadmap.SetWaypoint(newWp);
+                part.Roadmap.AddWaypoint(newWp);
                 return JsonConvert.SerializeObject(Position(true), Utils.ConverterSettings);
             }
             catch (Exception e)
