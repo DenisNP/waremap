@@ -128,7 +128,7 @@ namespace Waremap.Controllers
                     var finalPath = GraphUtils.FindClosestWithCriteria(graph, node.Id, i => i == targetCar,
                         new List<int>(), true);
                     finalPath.AddToWaypoints(State.CarRoadmap.Path);
-                    return (graph.Nodes[finalPath.Target()], false);
+                    return (graph.Nodes.GetValueOrDefault(finalPath.Target()), false);
                 }
                 else
                 {
@@ -136,7 +136,7 @@ namespace Waremap.Controllers
                         new List<int>(), true);
                     finalPath.AddToWaypoints(State.CarRoadmap.Path);
                     path.AddToWaypoints(State.CarRoadmap.Path, true);
-                    return (graph.Nodes[finalPath.Target()], true);
+                    return (graph.Nodes.GetValueOrDefault(finalPath.Target()), true);
                 }
             }
             else
@@ -149,7 +149,7 @@ namespace Waremap.Controllers
                     false
                 );
                 path.AddToWaypoints(State.CarRoadmap.Path);
-                return (graph.Nodes[path.Target()], true);
+                return (graph.Nodes.GetValueOrDefault(path.Target()), true);
             }
         }
 

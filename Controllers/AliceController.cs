@@ -202,8 +202,6 @@ namespace Waremap.Controllers
                     //}
 
                     var resultPath = ReceiveEventController.FindPath(depot, onCart);
-
-
                     var targetName = GetCorrectNodeName(state, resultPath.Item1);
                     var nextName = GetCorrectNodeName(state, nextNode);
 
