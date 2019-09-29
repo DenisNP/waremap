@@ -108,5 +108,10 @@ namespace Waremap.Controllers
             var evt = JsonConvert.DeserializeObject<T>(json, Utils.ConverterSettings);
             evt.Run(State);
         }
+
+        internal static (Node, bool) FindPath(Depot depot, bool onCart)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
