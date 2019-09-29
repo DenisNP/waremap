@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using MoreLinq;
 using Newtonsoft.Json;
 using Waremap.Controllers;
+using Waremap.Events;
 using Waremap.Models;
 
 namespace Waremap
@@ -46,6 +47,7 @@ namespace Waremap
                 LoadDataController.LoadAssembliesToState(reader.ReadToEnd(), state, true);
                 Console.WriteLine($"Mock assemblies loaded: {state.Equipment.Assemblies.Count}");
             }
+            EventAddDepot.RedefineDepots(state);
             // start server
             StartServer();
         }
