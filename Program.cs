@@ -50,6 +50,8 @@ namespace Waremap
             
             EventAddDepot.RedefineDepots(state);
             EventAddEdge.RecalculateWeights(null, state);
+            state.CarRoadmap.Path.RemoveRange(1, state.CarRoadmap.Path.Count - 1);
+            state.CarRoadmap.Position = 0;
             // start server
             StartServer();
         }
