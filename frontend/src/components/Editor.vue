@@ -39,6 +39,8 @@
         :data="data"
       ></Detail>
 
+      <Car :data="$store.state.serverState.car_roadmap"></Car>
+
       <FloorToFloorEdge
         :data="$store.state.editor.selectedNodeId">
       </FloorToFloorEdge>
@@ -51,6 +53,7 @@ import Node from './Node.vue';
 import Edge from './Edge.vue';
 import Depot from './Depot.vue';
 import Detail from './Detail.vue';
+import Car from './Car.vue';
 
 import FloorToFloorEdge from './FloorToFloorEdge.vue';
 
@@ -61,6 +64,7 @@ export default {
     Depot,
     Edge,
     Detail,
+    Car,
     FloorToFloorEdge
   },
   mounted() {

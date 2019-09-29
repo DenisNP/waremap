@@ -12,6 +12,7 @@ export default {
       Elevator: {i: require('../assets/elevator.svg'), w: 40},
       Door: {i: require('../assets/door.svg'), w: 40},
       Detail: {i: require('../assets/detail.svg'), w: 25},
+      Car: {i: require('../assets/car.svg'), w: 30},
 
       undefined: {i: require('../assets/node.svg'), w: 15},
       '': {i: require('../assets/node.svg'), w: 15},

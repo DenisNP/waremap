@@ -143,6 +143,7 @@ export default {
       else this._tool = this.tool;
       this.selectedTool = this._tool;
       this.toolSelect(this.selectedTool);
+      this.floorSelect(this.floor);
 
       this.allFloors = this.floors;
   },
