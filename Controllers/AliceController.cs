@@ -199,9 +199,9 @@ namespace Waremap.Controllers
                 else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
                 {
                 "где начальник цеха",
-                "где мастер участка"
-
-
+                "где мастер участка",
+                "где мастер",
+                "где начальник"
                 }))
                 {
                     response.Response.Text = $"Орел в гнезде";
