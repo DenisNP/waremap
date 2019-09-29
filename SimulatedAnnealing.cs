@@ -102,141 +102,106 @@ namespace Waremap
             {
                 waypoints.Add(prt, new List<Waypoint>());
             }
-            
+
             while (l.Count > 0)
             {
                 var nextOperation = l[0];
-                if (busyNodes.Count(bNode => bNode.Value.PartId == nextOperation.PartId) > 0)
+                
+                var possibleNodes = graph.NodesAsList().OrderBy(node =>
                 {
-                    var busy = busyNodes.First(bn => bn.Value.PartId == nextOperation.PartId);
-                    var bNode = graph.Nodes[busy.Key];
-                    
-                    // part busy, wait
-                    var path = GraphUtils.FindClosestWithCriteria(graph, carNode, i =>
+                    if (node.Type != NodeType.Machine) return 99999;
+                    GraphUtils.PathToNode pathTo = null;
+                    if (node.NeedIsCore())
                     {
-                        if (i == bNode.Id && bNode.Type == NodeType.Machine)
-                        {
-                            return true;
-                        }
-                        if (bNode.Type != NodeType.Machine)
-                        {
-                            var core = bNode.NeedClosestCore() != null ? bNode.NeedClosestCore().Target() : -1;
-                            return core == i;
-                        }
-                        return false;
-                    }, new List<int>());
-
-                    t += path.Weight;
-                    if (busy.Value.EndTime > t)
-                    {
-                        t = busy.Value.EndTime;
-                    }
-
-                    busyNodes.Remove(busy.Key);
-                    foreach (var prt in partsOnCar)
-                    {
-                        path.AddToWaypoints(waypoints[prt]);
-                    }
-                    partsOnCar.Add(nextOperation.PartId);
-                    continue;
-                }
-
-                var closest = GraphUtils.FindClosestWithCriteria(graph, carNode, nodeId =>
-                {
-                    var node = graph.Nodes[nodeId];
-                    if (!node.NeedIsCore()) return false;
-                    
-                    if (node.Type != NodeType.Machine)
-                    {
-                        nodeId = node.NeedClosestFor() != null && node.NeedClosestFor().Path.Count != 0 ? node.NeedClosestFor().Target() : -1;
-                        if (nodeId != -1)
-                        {
-                            node = graph.Nodes[nodeId];
-                            if (node.OperationIds.Contains(nextOperation.OperationId))
-                            {
-                                var pathToThis = GraphUtils.FindClosestWithCriteria(
-                                    graph,
-                                    carNode,
-                                    i => i == nodeId,
-                                    new List<int>()
-                                );
-                                return !IsBusy(busyNodes, nodeId, t + WeightToTime(pathToThis.Weight));
-                            }
-                        }
-                    }
-                    else if (node.OperationIds.Contains(nextOperation.OperationId))
-                    {
-                        var pathToThis = GraphUtils.FindClosestWithCriteria(
+                        pathTo = GraphUtils.FindClosestWithCriteria(
                             graph,
                             carNode,
-                            i => i == nodeId,
-                            new List<int>()
+                            i => i == node.Id,
+                            new List<int>(),
+                            true
                         );
-                        return !IsBusy(busyNodes, nodeId, t + WeightToTime(pathToThis.Weight));
                     }
-                    return false;
-                }, new List<int>());
-                
-                // go car
-                
-                var nextNodeId = closest.Target();
-                if (nextNodeId == -1)
+                    else
+                    {
+                        if (node.NeedClosestCore() != null && node.NeedClosestCore().Target() != -1)
+                        {
+                            node = graph.Nodes[node.NeedClosestCore().Target()];
+                            pathTo = GraphUtils.FindClosestWithCriteria(
+                                graph,
+                                carNode,
+                                i => i == node.Id,
+                                new List<int>(),
+                                true
+                            );
+                        }
+                    }
+
+                    if (pathTo == null || pathTo.Target() == -1)
+                    {
+                        return 99998;
+                    }
+
+                    var coeff = GetBusyTime(busyNodes, node.Id, t) - WeightToTime(pathTo.Weight);
+                    if (node.OperationIds.Contains(nextOperation.OperationId))
+                    {
+                        return coeff;
+                    }
+
+                    return coeff * 2;
+                });
+
+                var nextNode = possibleNodes.First();
+                var pathTo = GraphUtils.FindClosestWithCriteria(
+                    graph,
+                    carNode,
+                    i => i == nextNode.Id,
+                    new List<int>(),
+                    true
+                );
+                if (pathTo == null || pathTo.Target() == -1)
                 {
-                    t += 300; // wait for 5 minutes
-                    continue;
+                    pathTo = GraphUtils.FindClosestWithCriteria(
+                        graph,
+                        carNode,
+                        i => i == nextNode.Id,
+                        new List<int>(),
+                        false
+                    );
                 }
-                
+
+                carNode = nextNode.Id;
                 foreach (var prt in partsOnCar)
                 {
-                    closest.AddToWaypoints(waypoints[prt]);
+                    pathTo.AddToWaypoints(waypoints[prt]);
                 }
-                t += WeightToTime(closest.Weight);
-                
-                //put part or take part
-                var nextNode = graph.Nodes[nextNodeId];
-                if (nextNode.Type != NodeType.Machine)
+                t += WeightToTime(pathTo.Weight);
+                var diff = GetBusyTime(busyNodes, carNode, t);
+                if (diff > 0)
                 {
-                    nextNodeId = nextNode.NeedClosestFor().Target();
-                    nextNode = graph.Nodes[nextNodeId];
+                    t += diff;
                 }
 
-                var pathToTarget = GraphUtils.FindClosestWithCriteria(
-                    graph,
-                    closest.Target(),
-                    i => i == nextNodeId,
-                    new List<int>()
-                );
-                
-                if (busyNodes.ContainsKey(nextNodeId))
+                if (busyNodes.ContainsKey(carNode))
                 {
-                    var takePart = busyNodes[nextNodeId];
-                    busyNodes.Remove(nextNodeId);
-                    partsOnCar.Add(takePart.PartId);
-                    t += WeightToTime(pathToTarget.Weight);
-                    pathToTarget.AddToWaypoints(waypoints[takePart.PartId], true);
+                    partsOnCar.Add(busyNodes[carNode].PartId);
+                    busyNodes.Remove(carNode);
                 }
-
-                if (nextNode.OperationIds.Contains(nextOperation.OperationId))
-                {
-                    t += WeightToTime(pathToTarget.Weight);
-                    busyNodes.Add(nextOperation.PartId, new BusyNode
-                    {
-                        OperationId = nextOperation.OperationId,
-                        PartId = nextOperation.PartId,
-                        EndTime = t + nextOperation.OperationTime
-                    });
-                    pathToTarget.AddToWaypoints(waypoints[nextOperation.PartId]);
-                    
-                    l.RemoveAt(0);
-                }
-
-                carNode = closest.Target();
             }
 
             return (100.0 / t, waypoints);
         }
 
-        private static bool IsBusy(Dictionary<int, BusyNode> busyNodes, int node, int time)
+        private static int GetBusyTime(Dictionary<int, BusyNode> busyNodes, int node, int time)
+        {
+            if (!busyNodes.ContainsKey(node))
+            {
+                return 0;
+            }
+
+            return busyNodes[node].EndTime - time;
+        }
+
+        private static bool NeedPickup(Dictionary<int, BusyNode> busyNodes, int node, int time)
         {
             if (!busyNodes.ContainsKey(node))
             {

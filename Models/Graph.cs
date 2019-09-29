@@ -28,6 +28,11 @@ namespace Waremap.Models
             });
         }
 
+        public List<Node> NodesAsList()
+        {
+            return Nodes.Values.ToList();
+        }
+
         public double DistFromWeight(int from, int to)
         {
             var edge = Edges[from, to];

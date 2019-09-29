@@ -23,7 +23,17 @@ namespace Waremap.Events
                 GraphUtils.AssignClosestCores(graph, coreIds.Select(n => n.Id).ToList());
 
                 state.CarRoadmap.LeaveFirst();
-                state.Equipment.Parts.ForEach(p => p.Roadmap.LeaveFirst());
+                var allOperations = state.Geo.Nodes.Select(n => n.OperationIds).SelectMany(x => x).Distinct().ToList();
+                Console.WriteLine(JsonConvert.SerializeObject(allOperations));
+                state.Equipment.Parts.ForEach(p =>
+                {
+                    p.Roadmap.LeaveFirst();
+                    var toRemove = p.Process.Where(process => !allOperations.Contains(process.OperationId));
+                    foreach (var process in toRemove)
+                    {
+                        p.Process.Remove(process);
+                    }
+                });
                 
                 // go
                 var ann = new SimulatedAnnealing(graph, state);
@@ -32,7 +42,5 @@ namespace Waremap.Events
                 Console.WriteLine(JsonConvert.SerializeObject(result.Item2));
             }
         }
-
-        
     }
 }

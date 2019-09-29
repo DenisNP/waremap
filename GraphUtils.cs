@@ -8,7 +8,7 @@ namespace Waremap
 {
     public static class GraphUtils
     {
-        public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude)
+        public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude, bool onlyCore)
         {
             var edges = graph.EdgesAsList.Where(e => e.From == nodeId || e.To == nodeId).ToList();
 
@@ -16,7 +16,7 @@ namespace Waremap
                 .Select(e => e.From)
                 .Concat(edges.Select(e => e.To))
                 .Distinct()
-                .Where(nId => !exclude.Contains(nId) && nId != nodeId)
+                .Where(nId => !exclude.Contains(nId) && nId != nodeId && (!onlyCore || graph.Nodes[nId].NeedIsCore()))
                 .ToList();
         }
         
@@ -38,7 +38,7 @@ namespace Waremap
             for (var i = 0; i < nodeIds.Count; i++)
             {
                 seen.Add(nodeIds[i]);
-                var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds.GetRange(0, i));
+                var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds.GetRange(0, i), false);
                 seen.AddRange(neighbours.Where(nId => nodeIds.Contains(nId)));
             }
 
@@ -54,7 +54,8 @@ namespace Waremap
             Graph graph,
             int startNode,
             Predicate<int> criteria,
-            List<int> seen
+            List<int> seen,
+            bool onlyCore
         )
         {
             if (criteria.Invoke(startNode))
@@ -66,7 +67,7 @@ namespace Waremap
                 };
             }
             
-            var neighbours = FindNeighbours(graph, startNode, seen);
+            var neighbours = FindNeighbours(graph, startNode, seen, onlyCore);
             var closest = new List<PathToNode>();
             
             var newSeen = seen.Concat(neighbours).ToList();
@@ -74,7 +75,7 @@ namespace Waremap
 
             foreach (var neighbour in neighbours)
             {
-                var closestCore = FindClosestWithCriteria(graph, neighbour, criteria, newSeen);
+                var closestCore = FindClosestWithCriteria(graph, neighbour, criteria, newSeen, onlyCore);
                 if (closestCore.Target() != -1)
                 {
                     var edge = graph.Edges[neighbour, startNode];
@@ -96,7 +97,7 @@ namespace Waremap
 
         public static PathToNode FindClosestCore(Graph graph, int nodeId, List<int> coreIds)
         {
-            return FindClosestWithCriteria(graph, nodeId, coreIds.Contains, new List<int>());
+            return FindClosestWithCriteria(graph, nodeId, coreIds.Contains, new List<int>(), false);
         }
 
         public static void AssignClosestCores(Graph graph, List<int> coreIds)
