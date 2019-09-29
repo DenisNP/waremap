@@ -108,7 +108,7 @@
           nodesIds[p.to_node] = true;
         });
         this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
-        this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
+        this.$store.commit('editor/highlightedEdges', {edges: detail.roadmap.path});
         this.$store.commit('editor/highlightedDetails', [detail]);
       }
     }
