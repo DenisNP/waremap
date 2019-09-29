@@ -107,8 +107,11 @@ namespace Waremap
                 if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
                 {
                     var cCore = FindClosestCore(graph, node.Id, coreIds);
-                    node.AssignClosestCore(cCore);
-                    graph.Nodes[cCore.Target()].AssignClosestFor(cCore.GetReverse());
+                    if (cCore.Target() != -1)
+                    {
+                        node.AssignClosestCore(cCore);
+                        graph.Nodes[cCore.Target()].AssignClosestFor(cCore.GetReverse());
+                    }
                 }
             }
         }
