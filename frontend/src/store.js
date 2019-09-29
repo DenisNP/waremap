@@ -31,16 +31,17 @@ export default new Vuex.Store({
   },
   actions: {
     async init(c) {
-      let data;
-      let initNeeded = true;
-
-      data = await API.getState();
-
-      if (!initNeeded) {
-        return;
+      while (true) {
+        const data = await API.getState();
+        c.commit('setServerState', data);
+        await wait(2000);
       }
-
-      c.commit('setServerState', data);
     },
   }
 });
+
+function wait(t, v) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve.bind(null, v), t)
+  });
+}

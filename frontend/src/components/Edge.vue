@@ -4,18 +4,6 @@
     @click="onClick"
     v-show="show"
   >
-    <path
-        :class="{
-          edge: true,
-          highlighted,
-          selected,
-          ['edge-'+data.type]: true
-        }"
-        :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y)
-          + 'L' + (toNode.x - gap) + ',' + (toNode.y)
-          + 'L' + (toNode.x + gap) + ',' + (toNode.y)
-          + 'L' + (fromNode.x + gap) + ',' + (fromNode.y)"
-          />
     <line
       :x1="fromNode.x"
       :y1="fromNode.y"
@@ -24,6 +12,19 @@
       stroke-width="20"
       stroke="rgba(0,0,0,0.05)"
     />
+    <path
+        :class="{
+          edge: true,
+          highlighted,
+          hightlighted_car,
+          selected,
+          ['edge-'+data.type]: true
+        }"
+        :d="'M' + (fromNode.x - gap) + ',' + (fromNode.y)
+          + 'L' + (toNode.x - gap) + ',' + (toNode.y)
+          + 'L' + (toNode.x + gap) + ',' + (toNode.y)
+          + 'L' + (fromNode.x + gap) + ',' + (fromNode.y)"
+          />
     <g class="edge-weight">
       <text align="center" class="edge-weight-value"
         :x="fromNode.x + (toNode.x - fromNode.x) / 2 - 7"
@@ -40,7 +41,8 @@ export default {
   name: 'Edge',
   props: [
     'data',
-    'highlighted'
+    'highlighted',
+    'hightlighted_car'
   ],
   data() {
     return {
@@ -88,6 +90,10 @@ export default {
   stroke-width: 1px;
   stroke-linecap: round;
   font-weight: 900;
+}
+
+g[highlighted_car="true"] line {
+    stroke: rgba(0,255,0,.2) !important;
 }
 
 </style>
