@@ -75,14 +75,15 @@ namespace Waremap.Controllers
                 case "Machine":
                     newName = $"Участок {state.Equipment.GetOperationById(node.OperationIds.First())}"; break;
                 case "Elevator":
-                    newName = "Лифт в"; break;
+                    newName = "Лифт"; break;
                 case "Ladder":
-                    newName = "Лестница в"; break;
+                    newName = "Лестница"; break;
                 case "Door":
-                    newName = "Дверь в"; break;
+                    newName = "Дверь"; break;
             }
+             var place = node.Depot == 0 ? "Коридор" : $"Цех {node.Depot}";
 
-            return node.Name ?? $"{newName} {node.Id}, Цех {node.Depot}, Этаж {node.Floor}";
+            return $"{newName} {node.Id}, {place}, Этаж {node.Floor}";
         }
 
         public static AliceResponse HandleRequest(AliceRequest request)
