@@ -19,6 +19,7 @@ export default {
     isSomeHighlighted: false,
     isSelectedSomething: false,
     FloorToFloorEdge: null,
+    highlightedDetails: {},
     maxFloors: 5,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
@@ -121,6 +122,14 @@ export default {
       edges.map(({from_node, to_node}) => highlightedEdges[[from_node, to_node].sort().join('_')] = true);
       state.highlightedEdges = highlightedEdges;
       state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
+    },
+
+    highlightedDetails(state, details) {
+      let highlightedDetails = {};
+      details.map((detail) => {
+        highlightedDetails[detail.id] = true;
+      });
+      state.highlightedDetails = highlightedDetails;
     }
   },
   actions: {
@@ -254,4 +263,5 @@ function unselect(state) {
   state.highlightedEdges = {};
   state.isSomeHighlighted = false;
   state.FloorToFloorEdge = null;
+  state.highlightedEdges = {};
 }
