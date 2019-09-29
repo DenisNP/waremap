@@ -86,6 +86,11 @@ svg {
   -moz-osx-font-smoothing: grayscale;
 }
 
+svg line,
+svg path {
+    stroke-linecap: round;
+}
+
 /* ---------------------------------------------------------------- */
 
 .node {
