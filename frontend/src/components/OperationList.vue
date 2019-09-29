@@ -1,7 +1,7 @@
 <template>
-  <ul>
-    <li v-for="item in data">{{ item.name }}</li>
-  </ul>
+  <div class="root">
+    <div v-for="item in list" :key="">{{ item.operation && item.operation.name || '?' }}</div>
+  </div>
 </template>
 
 <script>
@@ -9,9 +9,17 @@
 export default {
   name: 'OperationsList',
   props: [
-    'data'
+    'detail'
   ],
-  data() {
+  computed: {
+    list() {
+      return this.detail.roadmap.path.map(item => {
+        return {
+          ...item,
+          operation: this.$store.state.serverState.equipment.operations.find(op => op.id === item.operation_id)
+        };
+      });
+    }
   },
   methods: {
   },
@@ -21,6 +29,7 @@ export default {
 
 </script>
 
-<style>
-
+<style scoped>
+.root {
+}
 </style>
