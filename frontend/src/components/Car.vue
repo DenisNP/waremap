@@ -6,7 +6,7 @@
       :width="$store.state.icons.node['Car'].w"
       :height="$store.state.icons.node['Car'].w"
     >
-      <div class="detail-icon">
+      <div class="car-icon">
         <img :src="$store.state.icons.node['Car'].i" />
       </div>
     </foreignObject>
@@ -22,6 +22,7 @@ export default {
   ],
   computed: {
     nodes() {
+      if (!this.data) return false;
       let position = this.data.path[this.data.position];
       if (!position) return false;
       return {
