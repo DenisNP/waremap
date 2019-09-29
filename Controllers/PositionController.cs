@@ -87,7 +87,14 @@ namespace Waremap.Controllers
                     var lastNode = state.Geo.Nodes.FirstOrDefault(n => n.Id == lastWp.ToNode);
                     if (lastNode != null)
                     {
-                        ReceiveEventController.FindPath(lastNode, true);
+                        try
+                        {
+                            ReceiveEventController.FindPath(lastNode, true);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
                 }
                 else
