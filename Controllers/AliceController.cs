@@ -115,7 +115,7 @@ namespace Waremap.Controllers
                 "что делать",
                 "какая задача",
                 "пункт назначения"
-            }))
+                }))
                 {
 
                     var node = ReceiveEventController.GetNextNode();
@@ -132,7 +132,7 @@ namespace Waremap.Controllers
                 "дальше",
                 "переключить точку",
                 "я на месте"
-            }))
+                }))
                 {
                     var switchedNode = ReceiveEventController.SwitchToNextNode();
 
@@ -147,7 +147,7 @@ namespace Waremap.Controllers
                 "где нахожусь",
                 "местоположение",
                 "локация"
-            }))
+                }))
                 {
                     var curNode = ReceiveEventController.GetCurrentNode();
                     var nextNode = ReceiveEventController.GetNextNode();
@@ -163,7 +163,7 @@ namespace Waremap.Controllers
                 "хочу попасть в",
                 "как дойти",
                 "как попасть"
-            }))
+                }))
                 {
                     response.Response.Text = $"Ошибка обнаружения пути";
 
@@ -208,10 +208,6 @@ namespace Waremap.Controllers
                 }
             }
             catch (Exception e)
-            {
-                response.Response.Text = $"Ошибка обнаружения пути";
-            }
-            finally
             {
                 response.Response.Text = $"Ошибка обнаружения пути";
             }
