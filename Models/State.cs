@@ -114,7 +114,7 @@ namespace Waremap.Models
         public Waypoint NextWaypoint()
         {
             if (Path.Count == 0) return null;
-            return Position < Path.Count - 1 ? Path[Position + 1] : Path[0];
+            return Position < Path.Count - 1 ? Path[Position + 1] : Path[Position];
         }
 
         public Waypoint GoToNext()
