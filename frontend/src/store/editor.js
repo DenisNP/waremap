@@ -20,6 +20,7 @@ export default {
     isSelectedSomething: false,
     FloorToFloorEdge: null,
     highlightedDetails: {},
+    highlightedCarEdges: {},
     maxFloors: 5,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
@@ -117,11 +118,16 @@ export default {
       state.isSomeHighlighted = (Object.keys(highlightedNodes).length > 0);
     },
 
-    highlightedEdges(state, edges) {
+    highlightedEdges(state, {edges, isCar}) {
       let highlightedEdges = {};
       edges.map(({from_node, to_node}) => highlightedEdges[[from_node, to_node].sort().join('_')] = true);
-      state.highlightedEdges = highlightedEdges;
-      state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
+
+      if (isCar) {
+        state.highlightedCarEdges = highlightedEdges;
+      } else {
+        state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
+        state.highlightedEdges = highlightedEdges;
+      }
     },
 
     highlightedDetails(state, details) {
