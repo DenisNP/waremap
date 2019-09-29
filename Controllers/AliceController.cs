@@ -70,8 +70,8 @@ namespace Waremap.Controllers
             {
                 response.Response.Text = "Добро пожаловать в голосовой помощник рабочего. " +
                                          "Я помогу вам добраться до пункта назначения с нужным грузом." +
-                                         "Спросите меня куда идти или попросите переключить на следующую" +
-                                         " точку маршрута, если хотите ее пропустить ";
+                                         "Спросите меня, куда идти или попросите переключить на следующую" +
+                                         " точку маршрута, если хотите ее пропустить. ";
             }
 
             if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
@@ -84,7 +84,7 @@ namespace Waremap.Controllers
             }))
             {
                 var node = ReceiveEventController.GetNextNode();
-                response.Response.Text = $"Двигайтесь в {node.Name}";
+                response.Response.Text = $"Двигайтесь в {node.Name}.";
             }
 
             if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
@@ -97,7 +97,7 @@ namespace Waremap.Controllers
             }))
             {
                 var switchedNode = ReceiveEventController.SwitchToNextNode();
-                response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {switchedNode.Name} ";
+                response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {switchedNode.Name}.";
             }
 
             if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
@@ -111,7 +111,7 @@ namespace Waremap.Controllers
             {
                 var curNode = ReceiveEventController.GetCurrentNode();
                 var nextNode = ReceiveEventController.GetNextNode();
-                response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name} ";
+                response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
             }
 
             return response;
