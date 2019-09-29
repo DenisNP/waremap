@@ -107,8 +107,11 @@ namespace Waremap
                 if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
                 {
                     var cCore = FindClosestCore(graph, node.Id, coreIds);
-                    node.AssignClosestCore(cCore);
-                    graph.Nodes[cCore.Target()].AssignClosestFor(cCore.GetReverse());
+                    if (cCore.Target() != -1)
+                    {
+                        node.AssignClosestCore(cCore);
+                        graph.Nodes[cCore.Target()].AssignClosestFor(cCore.GetReverse());
+                    }
                 }
             }
         }
@@ -138,6 +141,8 @@ namespace Waremap
             public void AddToWaypoints(List<Waypoint> waypoint, bool reversed = false)
             {
                 var list = new List<int>(Path);
+                if (list.Count == 0) return;
+                
                 if (reversed) list.Reverse();
                 for (var i = 0; i < list.Count - 1; i++)
                 {

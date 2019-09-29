@@ -123,11 +123,6 @@ namespace Waremap.Controllers
 
                     var name = GetCorrectNodeName(state, node);
 
-                    //if (node.Depot == 0)
-                    //{
-                    //    node.Name = node.Name.Replace("Цех 0", "Корридор");
-                    //}
-
                     response.Response.Text = $"Двигайтесь в {name}.";
                 }
                 else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
@@ -156,16 +151,6 @@ namespace Waremap.Controllers
                 {
                     var curNode = ReceiveEventController.GetCurrentNode();
                     var nextNode = ReceiveEventController.GetNextNode();
-
-                    //if (curNode.Depot == 0)
-                    //{
-                    //    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
-                    //}
-
-                    //if (nextNode.Depot == 0)
-                    //{
-                    //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
-                    //}
 
                     var curName = GetCorrectNodeName(state, curNode);
                     var nextName = GetCorrectNodeName(state, nextNode);
@@ -198,13 +183,7 @@ namespace Waremap.Controllers
                     {
                         var nextNode = ReceiveEventController.GetNextNode();
 
-                        //if (nextNode.Depot == 0)
-                        //{
-                        //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
-                        //}
-
                         var resultPath = ReceiveEventController.FindPath(depot, onCart);
-
 
                         var targetName = GetCorrectNodeName(state, resultPath.Item1);
                         var nextName = GetCorrectNodeName(state, nextNode);
@@ -221,6 +200,7 @@ namespace Waremap.Controllers
                 {
                 "где начальник цеха",
                 "где мастер участка"
+
 
                 }))
                 {
