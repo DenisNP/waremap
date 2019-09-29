@@ -444,7 +444,7 @@ label.myLabel {
 }
 .pallete.pallete-right .pallete-heading {
   font-size: 16px;
-  padding: 25px 30px 10px 35px;
+  padding: 25px 30px 10px 25px;
 }
 .pallete.pallete-right .pallete-heading-top {
   font-size: 16px;
@@ -525,7 +525,7 @@ label.myLabel {
   width: auto;
 }
 .pallete.PartsList .pallete-item {
-  padding: 5px 30px 5px 35px;
+  padding: 5px 30px 5px 25px;
   cursor: pointer;
 }
 .pallete.PartsList .pallete-heading:hover,

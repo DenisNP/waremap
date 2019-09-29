@@ -2,10 +2,15 @@
   <div class="pallete pallete-right PartsList">
     <div class="scrollable">
       <template v-for="group in assemblies">
-        <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
+        <div
+          class="pallete-heading"
+          :class="{bold: selectedAssemblyId === group.id}"
+          @click="showAssemblyNodes(group.id)">{{ group.name }}
+        </div>
         <div class="pallete-item"
           v-for="detail in group.details"
           :key="detail.id"
+          :class="{bold: selectedDetailId === detail.id}"
           @click="showDetailNodes(detail)"
         >
           <span class="pallete-item-icon">—</span>
@@ -26,7 +31,8 @@
     ],
     data() {
       return {
-
+        selectedDetailId: null,
+        selectedAssemblyId: null,
       };
     },
     computed: {
@@ -58,11 +64,16 @@
     },
     methods: {
       showAssemblyNodes(id) {
+        this.selectedDetailId = null;
+        this.selectedAssemblyId = id;
+
         let details = this.assemblies[id].details.map(detail => detail);
         // console.log(details);
         this.$store.commit('editor/highlightNodes', details.map(detail => detail.roadmap.position));
       },
       showDetailNodes(detail) {
+        this.selectedAssemblyId = null;
+        this.selectedDetailId = detail.id;
         // console.log(detail);
         this.$store.commit('editor/highlightNodes', [detail.roadmap.position]);
 
@@ -88,5 +99,8 @@
 .PartsList .scrollable {
   overflow-y: auto;
   height: calc(100% - 70px);
+}
+.bold {
+  font-weight: bold;
 }
 </style>
