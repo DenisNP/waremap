@@ -198,10 +198,8 @@ export default {
       }
     },
     async floorSelect(floor) {
-      console.log('select floor', floor);
-
-      if (floor == 'new') {
-        this.allFloors += 1;
+      if (floor === 'new') {
+        this.allFloors = Math.max(this.allFloors, this.floors) + 1;
         this.$store.commit('editor/setFloor', Math.max(this.floors, this.allFloors));
       } else {
         this.$store.commit('editor/setFloor', floor);
