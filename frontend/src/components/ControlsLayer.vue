@@ -268,7 +268,7 @@ export default {
 .pallete-item-icon {
   width: 32px;
   height: 32px;
-  margin: -4px 14px -4px 0;
+  margin: -4px 8px -4px 0;
   display: flex;
   justify-content: center;
   align-items: center;

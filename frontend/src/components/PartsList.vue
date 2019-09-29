@@ -1,18 +1,20 @@
 <template>
   <div class="pallete pallete-right PartsList">
-    <template v-for="group in assemblies">
-      <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
-      <div class="pallete-item"
-        v-for="detail in group.details"
-        :key="detail.id"
-        @click="showDetailNodes(detail)"
-      >
-        <span class="pallete-item-icon">&laquo;</span>
-        <span class="pallete-item-name">
-          {{ detail.name }}
-        </span>
-      </div>
-    </template>
+    <div class="scrollable">
+      <template v-for="group in assemblies">
+        <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
+        <div class="pallete-item"
+          v-for="detail in group.details"
+          :key="detail.id"
+          @click="showDetailNodes(detail)"
+        >
+          <span class="pallete-item-icon">—</span>
+          <span class="pallete-item-name">
+            {{ detail.name }}
+          </span>
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -24,7 +26,7 @@
     ],
     data() {
       return {
-        
+
       };
     },
     computed: {
@@ -52,7 +54,7 @@
         return assemblies;
       }
     },
-    mounted() {      
+    mounted() {
     },
     methods: {
       showAssemblyNodes(id) {
@@ -79,5 +81,10 @@
 </script>
 
 <style>
-
+.PartsList {
+}
+.PartsList .scrollable {
+  overflow-y: auto;
+  height: calc(100% - 70px);
+}
 </style>
