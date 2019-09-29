@@ -1,8 +1,7 @@
 ﻿using System.Linq;
 using Newtonsoft.Json.Linq;
-using Waremap;
 
-namespace HatForAlice.Alice
+namespace Waremap.Models.Alice
 {
     public class RequestModel
     {

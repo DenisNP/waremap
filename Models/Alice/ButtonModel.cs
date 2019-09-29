@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace HatForAlice.Alice
+﻿namespace Waremap.Models.Alice
 {
     public class ButtonModel
     {
