@@ -15,10 +15,12 @@
         :data="newDepot"
         :isNew="true"
       ></Depot>
+
       <Edge
         v-for="data in $store.state.serverState.geo.edges"
         :key="'edge' + data.from + '_' + data.to"
         :highlighted="$store.state.editor.highlightedEdges[[data.from, data.to].sort().join('_')] === true"
+        :highlighted_car="highlightedCarEdges[[data.from, data.to].sort().join('_')] === true"
         :data="data"
       ></Edge>
       <Node
@@ -37,6 +39,8 @@
         :data="data"
       ></Detail>
 
+      <Car :data="$store.state.serverState.car_roadmap"></Car>
+
       <FloorToFloorEdge
         :data="$store.state.editor.selectedNodeId">
       </FloorToFloorEdge>
@@ -49,6 +53,7 @@ import Node from './Node.vue';
 import Edge from './Edge.vue';
 import Depot from './Depot.vue';
 import Detail from './Detail.vue';
+import Car from './Car.vue';
 
 import FloorToFloorEdge from './FloorToFloorEdge.vue';
 
@@ -59,6 +64,7 @@ export default {
     Depot,
     Edge,
     Detail,
+    Car,
     FloorToFloorEdge
   },
   mounted() {
@@ -99,6 +105,10 @@ export default {
     }
   },
   computed: {
+    highlightedCarEdges() {
+      this.$store.commit('editor/highlightedEdges', {edges: this.$store.state.serverState.car_roadmap.path, isCar: true});
+      return this.$store.state.editor.highlightedCarEdges;
+    },
     floorsEdges() {
       let floorsEdges = {};
 
@@ -242,4 +252,5 @@ li {
 a {
   color: #42b983;
 }
+
 </style>
