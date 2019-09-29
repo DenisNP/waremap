@@ -107,7 +107,7 @@ namespace Waremap.Controllers
             evt.Run(State);
         }
 
-        public static (Node, bool) FindPath(Depot depot, bool onCart)
+        public static (Node, bool) FindPath(Node targetNode, bool onCart)
         {
             var node = GetCurrentNode();
             var graph = new Graph(State.Geo);
@@ -115,19 +115,9 @@ namespace Waremap.Controllers
             core.ForEach(cNode => cNode.AssignIsCore(true));
             var coreIds = core.Select(n => n.Id).ToList();
             GraphUtils.AssignClosestCores(graph, coreIds);
-
+            
             State.CarRoadmap.Path.Clear();
             State.CarRoadmap.Position = 0;
-            var targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id && n.Type != NodeType.Machine);
-            if (targetNode == null)
-            {
-                targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id);
-            }
-
-            if (targetNode == null)
-            {
-                targetNode = State.Geo.Nodes[0];
-            }
 
             if (onCart)
             {
@@ -161,6 +151,22 @@ namespace Waremap.Controllers
                 path.AddToWaypoints(State.CarRoadmap.Path);
                 return (graph.Nodes[path.Target()], true);
             }
+        }
+
+        public static (Node, bool) FindPath(Depot depot, bool onCart)
+        {
+            var targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id && n.Type != NodeType.Machine);
+            if (targetNode == null)
+            {
+                targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id);
+            }
+
+            if (targetNode == null)
+            {
+                targetNode = State.Geo.Nodes[0];
+            }
+
+            return FindPath(targetNode, onCart);
         }
     }
 }

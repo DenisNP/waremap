@@ -81,7 +81,20 @@ namespace Waremap.Controllers
                     OperationId = presence.OperationId,
                     OffWay = true
                 };
-                state.CarRoadmap.SetWaypoint(newWp);
+                if (state.CarRoadmap.Path.Count > 0)
+                {
+                    var lastWp = state.CarRoadmap.Path.Last();
+                    var lastNode = state.Geo.Nodes.FirstOrDefault(n => n.Id == lastWp.ToNode);
+                    if (lastNode != null)
+                    {
+                        ReceiveEventController.FindPath(lastNode, true);
+                    }
+                }
+                else
+                {
+                    state.CarRoadmap.SetWaypoint(newWp);
+                }
+
                 part.Roadmap.SetWaypoint(newWp);
                 return JsonConvert.SerializeObject(Position(true), Utils.ConverterSettings);
             }
