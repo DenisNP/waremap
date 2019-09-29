@@ -4,7 +4,7 @@
       <button @click="showScanner">Отметиться через QR код</button>
       <br>
       <div v-show="wrongQrCode" class="error msg">
-        Ошибочный QR-код
+        {{ errorMsg || 'Ошибочный QR-код' }}
       </div>
       <div v-show="Boolean(code)">
         <div class="success msg">
@@ -56,6 +56,7 @@ export default {
       position: null,
       checkpointDate: null,
       wrongQrCode: false,
+      errorMsg: null,
     };
   },
   async mounted() {
@@ -95,16 +96,21 @@ export default {
 
       const [part_id, machine_id, operation_id] = arr;
 
-      const res = await API.api('POST', 'position', {
-        part_id: Number(part_id),
-        machine_id: Number(machine_id),
-        operation_id: Number(operation_id),
-      });
-      console.log('send checkpoint res', res);
+      try {
+        this.position = await API.api('POST', 'position', {
+          part_id: Number(part_id),
+          machine_id: Number(machine_id),
+          operation_id: Number(operation_id),
+        });
+      } catch(e) {
+        this.errorMsg = 'Сервер не принял QR-код';
+        console.error(e);
+      }
     },
     async showScanner() {
       this.code = null;
       this.wrongQrCode = null;
+      this.errorMsg = null;
       this.isScanning = true;
 
       var video = document.createElement('video');
