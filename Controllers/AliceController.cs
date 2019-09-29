@@ -67,13 +67,18 @@ namespace Waremap.Controllers
         public static string GetCorrectNodeName(State state, Node node)
         {
             var newName = "";
+            var pointName = "";
+            if (node.OperationIds.Count > 0)
+            {
+                pointName = state.Equipment.GetOperationById(node.OperationIds.First());
+            }
 
             switch (node.Icon)
             {
                 case "Node":
                     newName = "Точка"; break;
                 case "Machine":
-                    newName = $"Участок {state.Equipment.GetOperationById(node.OperationIds.First())}"; break;
+                    newName = $"Участок {pointName}"; break;
                 case "Elevator":
                     newName = "Лифт"; break;
                 case "Ladder":
