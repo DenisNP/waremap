@@ -139,11 +139,11 @@ namespace Waremap
             {
                 var list = new List<int>(Path);
                 if (reversed) list.Reverse();
-                for (var i = 1; i < list.Count; i++)
+                for (var i = 0; i < list.Count; i++)
                 {
                     waypoint.Add(new Waypoint
                     {
-                        FromNode = list[i-1],
+                        FromNode = list[i],
                         ToNode = list[i]
                     });
                 }
