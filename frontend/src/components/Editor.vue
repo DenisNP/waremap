@@ -141,7 +141,7 @@ export default {
         this.zoom /= 1.05;
       }
 
-      this.$el.style.transform = 'scale(' + this.zoom + ')';
+      // this.$el.style.transform = 'scale(' + this.zoom + ')';
     },
     clickBg(e) {
       if (this.$store.state.editor.isSomeHighlighted) {

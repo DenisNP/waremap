@@ -1,5 +1,5 @@
 <template>
-  <g class="FloorToFloorEdge" v-if="$store.state.editor.FloorToFloorEdge">
+  <g class="FloorToFloorEdge" v-if="show">
     <line class="edge edge-Dashed"
       :x1="$store.state.editor.FloorToFloorEdge.floorPos.x"
       :y1="$store.state.editor.FloorToFloorEdge.floorPos.y"
@@ -18,6 +18,16 @@ export default {
     return {
       endX: null,
       endY: null
+    }
+  },
+  computed: {
+    show() {
+      let floorToFloorEdge = this.$store.state.editor.FloorToFloorEdge;
+      return floorToFloorEdge
+          && floorToFloorEdge.fromNode
+          && floorToFloorEdge.fromNode.floor != this.$store.state.editor.floor
+          && (['Ladder', 'Elevator'].indexOf(floorToFloorEdge.fromNode.icon) > -1)
+          && (this.$store.state.editor.mode == 'nodeSelected');
     }
   },
   methods: {
