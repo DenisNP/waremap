@@ -31,9 +31,13 @@ export default {
       };
     },
     x() {
+    	if (!this.nodes.from) return;
+    	if (!this.nodes.to) return;
       return this.nodes.from.x + (this.nodes.to.x - this.nodes.from.x) / 2;
     },
     y() {
+    	if (!this.nodes.from) return;
+    	if (!this.nodes.to) return;
       return this.nodes.from.y + (this.nodes.to.y - this.nodes.from.y) / 2;
     },
     floor() {
