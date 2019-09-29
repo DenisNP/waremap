@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 style="text-align: center">Участок #{{ machineId }}</h1>
     <div class="container">
       <div v-if="failed">Нет данных для данного участка.</div>
       <div
@@ -31,47 +32,60 @@ export default {
   data() {
     return {
       qrs: [],
-      failed: false
+      failed: false,
+      machineId: '...',
     };
   },
   async mounted() {
-    const params = location.hash.replace('#', '').split('/').slice(1);
-    const machineId = params[0];
+    window.addEventListener('hashchange', () => this.refreshCodes(), false);
+    await this.refreshCodes();
+  },
+  methods: {
+    async refreshCodes() {
+      this.failed = false;
+      this.machineId = '...';
+      this.qrs = [];
 
-    const data = await API.api('GET', 'machine?id=' + machineId);
+      const params = location.hash.replace('#', '').split('/').slice(1);
+      const machineId = params[0];
+      this.machineId = machineId + '...';
 
-    if (!data || !data.length) {
-      this.failed = true;
-    }
-    /*
-    const data = [{
-      part_id: 999,
-      part_name: 'Тапок',
-      operation_name: 'Одевание'
-    }, {
-      part_id: 666,
-      part_name: 'Сосиска в тесте',
-      operation_name: 'Поднимание'
-    }];
-     */
+      const data = await API.api('GET', 'machine?id=' + machineId);
+      this.machineId = machineId;
 
-    data.forEach(item => {
-      const content = `${item.part_id}_${machineId}_${item.operation_id}`;
-      QRCode.toDataURL(content, {
-        errorCorrectionLevel: 'H',
-        width: 400,
-        height: 400,
-        margin: 2
-      }, (err, base64) => {
-        if (err) {
-          return console.error(err);
-        }
-        this.qrs.push({
-          ...item,
-          base64,
+      if (!data || !data.length) {
+        this.failed = true;
+      }
+      /*
+       const data = [{
+         part_id: 999,
+         part_name: 'Тапок',
+         operation_name: 'Одевание'
+       }, {
+         part_id: 666,
+         part_name: 'Сосиска в тесте',
+         operation_name: 'Поднимание'
+       }];
+       */
+
+      data.forEach(item => {
+        const content = `${item.part_id}_${machineId}_${item.operation_id}`;
+        QRCode.toDataURL(content, {
+          errorCorrectionLevel: 'H',
+          width: 400,
+          height: 400,
+          margin: 2
+        }, (err, base64) => {
+          if (err) {
+            return console.error(err);
+          }
+          this.qrs.push({
+            ...item,
+            base64,
+          });
         });
       });
-    });
+    }
   },
   computed: {
   }
