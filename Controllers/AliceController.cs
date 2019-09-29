@@ -76,8 +76,7 @@ namespace Waremap.Controllers
                                          "Спросите меня, куда идти или попросите переключить на следующую" +
                                          " точку маршрута, если хотите ее пропустить. ";
             }
-
-            if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
                 "куда идти",
                 "куда мне",
@@ -89,9 +88,8 @@ namespace Waremap.Controllers
                 
                 var node = ReceiveEventController.GetNextNode();
                 response.Response.Text = $"Двигайтесь в {node.Name}.";
-            }
-
-            if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+            } 
+            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
                 "следующий пункт",
                 "следующая точка",
@@ -103,8 +101,7 @@ namespace Waremap.Controllers
                 var switchedNode = ReceiveEventController.SwitchToNextNode();
                 response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {switchedNode.Name}.";
             }
-
-            if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
                 "где я",
                 "где сейчас",
@@ -117,8 +114,7 @@ namespace Waremap.Controllers
                 var nextNode = ReceiveEventController.GetNextNode();
                 response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
             }
-
-            if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
                 "как пройти",
                 "хочу попасть в",
