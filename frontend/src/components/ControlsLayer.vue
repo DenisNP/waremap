@@ -1,5 +1,5 @@
 <template>
-  <div class="controls">
+  <div id="controls" class="controls">
     <div class="pallete tools">
       <template v-for="(item, index) in tools">
         <div class="pallete-heading" v-if="item.heading">{{ item.heading }}</div>
@@ -195,7 +195,6 @@ export default {
 </script>
 
 <style>
-
 .pallete {
   z-index: 10;
   color: #FFF;
@@ -290,6 +289,7 @@ export default {
   border-radius: 7px;
 }
 .pallete.tools {
+  position: fixed;
   left: 0;
   top: 0;
   box-sizing: border-box;
@@ -348,6 +348,7 @@ label.myLabel {
 /* -------------------------------------------------------- */
 
 .pallete.floors {
+  position: fixed;
   padding: 0 0 4px;
   top: 0;
   left: 50%;

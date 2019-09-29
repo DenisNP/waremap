@@ -95,6 +95,7 @@
 
 <style>
 .PartsList {
+  position: fixed;
 }
 .PartsList .scrollable {
   overflow-y: auto;
