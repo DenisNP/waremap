@@ -28,6 +28,8 @@ namespace Waremap.Models
         public string Icon { get; set; }
 
         private GraphUtils.PathToNode _closestCore;
+        private GraphUtils.PathToNode _closestFor;
+        private bool _isCore;
 
         public void AssignClosestCore(GraphUtils.PathToNode v)
         {
@@ -37,6 +39,26 @@ namespace Waremap.Models
         public GraphUtils.PathToNode NeedClosestCore()
         {
             return _closestCore;
+        }
+
+        public void AssignClosestFor(GraphUtils.PathToNode v)
+        {
+            _closestFor = v;
+        }
+
+        public GraphUtils.PathToNode NeedClosestFor()
+        {
+            return _closestFor;
+        }
+
+        public void AssignIsCore(bool v)
+        {
+            _isCore = v;
+        }
+
+        public bool NeedIsCore()
+        {
+            return _isCore;
         }
     }
 
@@ -114,6 +136,12 @@ namespace Waremap.Models
                 Path.Insert(Position + 1, wp);
                 Position++;
             }
+        }
+
+        public void LeaveFirst()
+        {
+            Path.RemoveRange(1, Path.Count - 1);
+            Position = 0;
         }
     }
 
