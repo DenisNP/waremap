@@ -59,7 +59,7 @@ namespace Waremap.Controllers
                 if (machineNode == null || machineNode.Type != NodeType.Machine || part == null)
                     return "No machine or part found";
 
-                var potentialWaypoint = state.CarRoadmap.Path
+                /*var potentialWaypoint = state.CarRoadmap.Path
                     .FirstOrDefault(
                         wp => wp.FromNode == presence.MachineId
                               && wp.ToNode == presence.MachineId
@@ -71,7 +71,7 @@ namespace Waremap.Controllers
                     state.CarRoadmap.SetWaypoint(potentialWaypoint);
                     part.Roadmap.SetWaypoint(potentialWaypoint);
                     return GetPosition();
-                }
+                }*/
 
                 // new waypoint
                 var newWp = new Waypoint

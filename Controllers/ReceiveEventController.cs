@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -108,7 +109,58 @@ namespace Waremap.Controllers
 
         public static (Node, bool) FindPath(Depot depot, bool onCart)
         {
-            throw new NotImplementedException();
+            var node = GetCurrentNode();
+            var graph = new Graph(State.Geo);
+            var core = GraphUtils.FindCore(graph, EdgeType.Elevator, EdgeType.Road);
+            core.ForEach(cNode => cNode.AssignIsCore(true));
+            var coreIds = core.Select(n => n.Id).ToList();
+            GraphUtils.AssignClosestCores(graph, coreIds);
+
+            State.CarRoadmap.Path.Clear();
+            State.CarRoadmap.Position = 0;
+            var targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id && n.Type != NodeType.Machine);
+            if (targetNode == null)
+            {
+                targetNode = State.Geo.Nodes.FirstOrDefault(n => n.Depot == depot.Id);
+            }
+
+            if (targetNode == null)
+            {
+                targetNode = State.Geo.Nodes[0];
+            }
+
+            if (onCart)
+            {
+                var path = GraphUtils.FindClosestCore(graph, targetNode.Id, coreIds);
+                var targetCar = path.Target();
+                if (targetCar == node.Id)
+                {
+                    var finalPath = GraphUtils.FindClosestWithCriteria(graph, node.Id, i => i == targetCar,
+                        new List<int>(), true);
+                    finalPath.AddToWaypoints(State.CarRoadmap.Path);
+                    return (graph.Nodes[finalPath.Target()], false);
+                }
+                else
+                {
+                    var finalPath = GraphUtils.FindClosestWithCriteria(graph, node.Id, i => i == targetCar,
+                        new List<int>(), true);
+                    finalPath.AddToWaypoints(State.CarRoadmap.Path);
+                    path.AddToWaypoints(State.CarRoadmap.Path, true);
+                    return (graph.Nodes[finalPath.Target()], true);
+                }
+            }
+            else
+            {
+                var path = GraphUtils.FindClosestWithCriteria(
+                    graph,
+                    node.Id,
+                    i => i == targetNode.Id,
+                    new List<int>(),
+                    false
+                );
+                path.AddToWaypoints(State.CarRoadmap.Path);
+                return (graph.Nodes[path.Target()], true);
+            }
         }
     }
 }
