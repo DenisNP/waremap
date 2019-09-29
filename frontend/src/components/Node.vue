@@ -213,6 +213,7 @@ export default {
 }
 
 text.badge {
+  white-space: nowrap;
   border: 1px solid #FFF;
   min-width: 15px;
   height: 15px;

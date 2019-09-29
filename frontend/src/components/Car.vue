@@ -44,6 +44,7 @@ export default {
       return this.nodes.from ? this.nodes.from.floor : false;
     },
     show() {
+    	if (!this.x || !this.y) return false;
       if (this.floor) {
         return (this.$store.state.editor.displayMode == 'floor' && this.floor == this.$store.state.editor.floor);
       }
