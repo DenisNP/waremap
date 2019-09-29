@@ -47,7 +47,7 @@ namespace Waremap.Controllers
                 }
 
                 // parse request
-                Console.WriteLine($"\nRequest got: {body}" );
+                Console.WriteLine($"\nRequest got: {body}");
 
                 // return response
                 var aliceResponse = HandleRequest(aliceRequest);
@@ -86,7 +86,7 @@ namespace Waremap.Controllers
                 case "Door":
                     newName = "Дверь"; break;
             }
-             var place = node.Depot == 0 ? "Коридор" : $"Цех {node.Depot}";
+            var place = node.Depot == 0 ? "Коридор" : $"Цех {node.Depot}";
 
             return $"{newName} {node.Id}, {place}, Этаж {node.Floor}";
         }
@@ -98,122 +98,144 @@ namespace Waremap.Controllers
             var state = ReceiveEventController.GetState();
 
 
+            try
+            {
 
-            if (request.Request.Command.IsNullOrEmpty() || request.Request.Nlu.Tokens.First() == "да")
-            {
-                response.Response.Text = "Добро пожаловать в голосовой помощник рабочего. " +
-                                         "Я помогу вам добраться до пункта назначения с нужным грузом." +
-                                         "Спросите меня, куда идти или попросите переключить на следующую" +
-                                         " точку маршрута, если хотите ее пропустить. ";
-            }
-            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
-            {
+                if (request.Request.Command.IsNullOrEmpty() || request.Request.Nlu.Tokens.First() == "да")
+                {
+                    response.Response.Text = "Добро пожаловать в голосовой помощник рабочего. " +
+                                             "Я помогу вам добраться до пункта назначения с нужным грузом." +
+                                             "Спросите меня, куда идти или попросите переключить на следующую" +
+                                             " точку маршрута, если хотите ее пропустить. ";
+                }
+                else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+                {
                 "куда идти",
                 "куда мне",
                 "что делать",
                 "какая задача",
                 "пункт назначения"
             }))
-            {
-                
-                var node = ReceiveEventController.GetNextNode();
+                {
+
+                    var node = ReceiveEventController.GetNextNode();
 
 
-                var name = GetCorrectNodeName(state,node);
+                    var name = GetCorrectNodeName(state, node);
 
-                //if (node.Depot == 0)
-                //{
-                //    node.Name = node.Name.Replace("Цех 0", "Корридор");
-                //}
+                    //if (node.Depot == 0)
+                    //{
+                    //    node.Name = node.Name.Replace("Цех 0", "Корридор");
+                    //}
 
-                response.Response.Text = $"Двигайтесь в {name}.";
-            } 
-            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
-            {
+                    response.Response.Text = $"Двигайтесь в {name}.";
+                }
+                else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+                {
                 "следующий пункт",
                 "следующая точка",
                 "дальше",
                 "переключить точку",
                 "я на месте"
             }))
-            {
-                var switchedNode = ReceiveEventController.SwitchToNextNode();
+                {
+                    var switchedNode = ReceiveEventController.SwitchToNextNode();
 
-                var name = GetCorrectNodeName(state, switchedNode);
+                    var name = GetCorrectNodeName(state, switchedNode);
 
-                response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {name}.";
-            }
-            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
-            {
+                    response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {name}.";
+                }
+                else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+                {
                 "где я",
                 "где сейчас",
                 "где нахожусь",
                 "местоположение",
                 "локация"
             }))
-            {
-                var curNode = ReceiveEventController.GetCurrentNode();
-                var nextNode = ReceiveEventController.GetNextNode();
-
-                //if (curNode.Depot == 0)
-                //{
-                //    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
-                //}
-
-                //if (nextNode.Depot == 0)
-                //{
-                //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
-                //}
-
-                var curName = GetCorrectNodeName(state, curNode);
-                var nextName = GetCorrectNodeName(state, nextNode);
-
-                response.Response.Text = $"Вы находитесь в {curName}. Следуйте в {nextName}. ";
-            }
-            else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
-            {
-                "как пройти",
-                "хочу попасть в",
-                "как дойти",
-                "как попасть"
-            }))
-            {
-                response.Response.Text = $"Ошибка обнаружения пути";
-
-                var depotNum = request.Request.Nlu.Tokens.Select(x =>
                 {
-                    if (int.TryParse(x, out var n))
-                        return n;
-                    
-                    return -1;
-                }).FirstOrDefault(y => y != -1);
-
-                bool onCart = request.Request.Nlu.Tokens.ContainsStartWith("тележк") ||
-                              request.Request.Nlu.Tokens.ContainsStartWith("погруз") ||
-                              request.Request.Nlu.Tokens.ContainsStartWith("телег");
-
-                foreach (var depot in ReceiveEventController.GetState().Geo.Depots.Where(depot => depot.Id == depotNum))
-                {
+                    var curNode = ReceiveEventController.GetCurrentNode();
                     var nextNode = ReceiveEventController.GetNextNode();
+
+                    //if (curNode.Depot == 0)
+                    //{
+                    //    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
+                    //}
 
                     //if (nextNode.Depot == 0)
                     //{
                     //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
                     //}
 
-                    var resultPath = ReceiveEventController.FindPath(depot, onCart);
-
-
-                    var targetName = GetCorrectNodeName(state, resultPath.Item1);
+                    var curName = GetCorrectNodeName(state, curNode);
                     var nextName = GetCorrectNodeName(state, nextNode);
 
-                    if (onCart && resultPath.Item2)
-                        response.Response.Text = $"Ваш пункт назначения {targetName}. Следуйте в {nextName}. Часть пути придется пройти пешком.";
-                    else
-                        response.Response.Text = $"Ваш пункт назначения {targetName}. Следуйте в {nextName}.";
-                    break;
+                    response.Response.Text = $"Вы находитесь в {curName}. Следуйте в {nextName}. ";
+                }
+                else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+                {
+                "как пройти",
+                "хочу попасть в",
+                "как дойти",
+                "как попасть"
+            }))
+                {
+                    response.Response.Text = $"Ошибка обнаружения пути";
+
+                    var depotNum = request.Request.Nlu.Tokens.Select(x =>
+                    {
+                        if (int.TryParse(x, out var n))
+                            return n;
+
+                        return -1;
+                    }).FirstOrDefault(y => y != -1);
+
+                    bool onCart = request.Request.Nlu.Tokens.ContainsStartWith("тележк") ||
+                                  request.Request.Nlu.Tokens.ContainsStartWith("погруз") ||
+                                  request.Request.Nlu.Tokens.ContainsStartWith("телег");
+
+                    foreach (var depot in ReceiveEventController.GetState().Geo.Depots.Where(depot => depot.Id == depotNum))
+                    {
+                        var nextNode = ReceiveEventController.GetNextNode();
+
+                        //if (nextNode.Depot == 0)
+                        //{
+                        //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
+                        //}
+
+                        var resultPath = ReceiveEventController.FindPath(depot, onCart);
+
+
+                        var targetName = GetCorrectNodeName(state, resultPath.Item1);
+                        var nextName = GetCorrectNodeName(state, nextNode);
+
+                        if (onCart && resultPath.Item2)
+                            response.Response.Text =
+                                $"Ваш пункт назначения {targetName}. Следуйте в {nextName}. Часть пути придется пройти пешком.";
+                        else
+                            response.Response.Text = $"Ваш пункт назначения {targetName}. Следуйте в {nextName}.";
+                        break;
+                    }
+                }
+                else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+                {
+                "где начальник цеха",
+                "где мастер участка"
+
+                }))
+                {
+                    response.Response.Text = $"Орел в гнезде";
                 }
             }
+            catch (Exception e)
+            {
+                response.Response.Text = $"Ошибка обнаружения пути";
+            }
+            finally
+            {
+                response.Response.Text = $"Ошибка обнаружения пути";
+            }
+
             return response;
         }
     }
