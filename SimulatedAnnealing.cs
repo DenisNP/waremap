@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 using Waremap.Models;
 
 namespace Waremap
@@ -18,7 +19,7 @@ namespace Waremap
             foreach (var part in state.Equipment.Parts)
             {
                 var processes = part.Process.OrderBy(process => process.Order);
-                var lastInsertIdx = 0;
+                var lastInsertIdx = -1;
                 var lastInsertOrder = 0;
                 foreach (var process in processes)
                 {
@@ -33,6 +34,8 @@ namespace Waremap
                         insertIndex = _random.Next(lastInsertIdx + 1, _lattice.Count + 1);
                         lastInsertIdx = insertIndex;
                     }
+
+                    // Console.WriteLine(insertIndex + " " + _lattice.Count + " " + process.Order + " " + lastInsertOrder);
                     _lattice.Insert(lastInsertIdx, new FullOperation
                     {
                         OperationId = process.OperationId,
@@ -44,6 +47,7 @@ namespace Waremap
             }
 
             _carStartNode = state.CarRoadmap.CurrentWaypoint().FromNode;
+            Console.WriteLine("Operations created: " + JsonConvert.SerializeObject(_lattice));
         }
 
         public (double, Dictionary<int, List<Waypoint>>) Run()
@@ -102,6 +106,40 @@ namespace Waremap
             while (l.Count > 0)
             {
                 var nextOperation = l[0];
+                if (busyNodes.Count(bNode => bNode.Value.PartId == nextOperation.PartId) > 0)
+                {
+                    var busy = busyNodes.First(bn => bn.Value.PartId == nextOperation.PartId);
+                    var bNode = graph.Nodes[busy.Key];
+                    
+                    // part busy, wait
+                    var path = GraphUtils.FindClosestWithCriteria(graph, carNode, i =>
+                    {
+                        if (i == bNode.Id && bNode.Type == NodeType.Machine)
+                        {
+                            return true;
+                        }
+                        if (bNode.Type != NodeType.Machine)
+                        {
+                            var core = bNode.NeedClosestCore() != null ? bNode.NeedClosestCore().Target() : -1;
+                            return core == i;
+                        }
+                        return false;
+                    }, new List<int>());
+
+                    t += path.Weight;
+                    if (busy.Value.EndTime > t)
+                    {
+                        t = busy.Value.EndTime;
+                    }
+
+                    busyNodes.Remove(busy.Key);
+                    foreach (var prt in partsOnCar)
+                    {
+                        path.AddToWaypoints(waypoints[prt]);
+                    }
+                    partsOnCar.Add(nextOperation.PartId);
+                    continue;
+                }
 
                 var closest = GraphUtils.FindClosestWithCriteria(graph, carNode, nodeId =>
                 {
@@ -110,7 +148,7 @@ namespace Waremap
                     
                     if (node.Type != NodeType.Machine)
                     {
-                        nodeId = node.NeedClosestFor().Path.Count != 0 ? node.NeedClosestFor().Target() : -1;
+                        nodeId = node.NeedClosestFor() != null && node.NeedClosestFor().Path.Count != 0 ? node.NeedClosestFor().Target() : -1;
                         if (nodeId != -1)
                         {
                             node = graph.Nodes[nodeId];
@@ -140,6 +178,14 @@ namespace Waremap
                 }, new List<int>());
                 
                 // go car
+                
+                var nextNodeId = closest.Target();
+                if (nextNodeId == -1)
+                {
+                    t += 300; // wait for 5 minutes
+                    continue;
+                }
+                
                 foreach (var prt in partsOnCar)
                 {
                     closest.AddToWaypoints(waypoints[prt]);
@@ -147,7 +193,6 @@ namespace Waremap
                 t += WeightToTime(closest.Weight);
                 
                 //put part or take part
-                var nextNodeId = closest.Target();
                 var nextNode = graph.Nodes[nextNodeId];
                 if (nextNode.Type != NodeType.Machine)
                 {
@@ -184,6 +229,8 @@ namespace Waremap
                     
                     l.RemoveAt(0);
                 }
+
+                carNode = closest.Target();
             }
 
             return (100.0 / t, waypoints);

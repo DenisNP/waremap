@@ -118,8 +118,8 @@ namespace Waremap
             public int Weight;
 
             public int Target()
-            {
-                return Path.Last();
+            { 
+                return Path.Count == 0 ? -1 : Path.Last();
             }
 
             public PathToNode GetReverse()
@@ -136,7 +136,16 @@ namespace Waremap
 
             public void AddToWaypoints(List<Waypoint> waypoint, bool reversed = false)
             {
-                throw new NotImplementedException();
+                var list = new List<int>(Path);
+                if (reversed) list.Reverse();
+                for (var i = 1; i < list.Count; i++)
+                {
+                    waypoint.Add(new Waypoint
+                    {
+                        FromNode = list[i-1],
+                        ToNode = list[i]
+                    });
+                }
             }
         }
     }
