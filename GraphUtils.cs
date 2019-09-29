@@ -8,7 +8,7 @@ namespace Waremap
 {
     public static class GraphUtils
     {
-        public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude)
+        public static List<int> FindNeighbours(Graph graph, int nodeId, List<int> exclude, bool onlyCore)
         {
             var edges = graph.EdgesAsList.Where(e => e.From == nodeId || e.To == nodeId).ToList();
 
@@ -16,7 +16,7 @@ namespace Waremap
                 .Select(e => e.From)
                 .Concat(edges.Select(e => e.To))
                 .Distinct()
-                .Where(nId => !exclude.Contains(nId) && nId != nodeId)
+                .Where(nId => !exclude.Contains(nId) && nId != nodeId && (!onlyCore || graph.Nodes[nId].NeedIsCore()))
                 .ToList();
         }
         
@@ -38,7 +38,7 @@ namespace Waremap
             for (var i = 0; i < nodeIds.Count; i++)
             {
                 seen.Add(nodeIds[i]);
-                var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds.GetRange(0, i));
+                var neighbours = FindNeighbours(graph, nodeIds[i], nodeIds.GetRange(0, i), false);
                 seen.AddRange(neighbours.Where(nId => nodeIds.Contains(nId)));
             }
 
@@ -50,36 +50,40 @@ namespace Waremap
             return new List<Node>();
         }
 
-        public static PathToNode FindClosestCore(Graph graph, int nodeId, List<int> coreIds, List<int> seen)
+        public static PathToNode FindClosestWithCriteria(
+            Graph graph,
+            int startNode,
+            Predicate<int> criteria,
+            List<int> seen,
+            bool onlyCore
+        )
         {
-            if (coreIds.Contains(nodeId)) return new PathToNode {NId = nodeId, Weight = 0};
-            var neighbours = FindNeighbours(graph, nodeId, seen);
-
+            if (criteria.Invoke(startNode))
+            {
+                return new PathToNode
+                {
+                    Path = new List<int>{startNode},
+                    Weight = 0
+                };
+            }
+            
+            var neighbours = FindNeighbours(graph, startNode, seen, onlyCore);
             var closest = new List<PathToNode>();
-            foreach (var neighbour in neighbours)
-            {
-                if (coreIds.Contains(neighbour))
-                {
-                    var edge = graph.Edges[neighbour, nodeId];
-                    closest.Add(new PathToNode{NId = neighbour, Weight = edge.Weight});
-                }
-            }
-
-            if (closest.Count > 0)
-            {
-                return closest.MinBy(path => path.Weight).First();
-            }
-
+            
             var newSeen = seen.Concat(neighbours).ToList();
-            newSeen.Add(nodeId);
+            newSeen.Add(startNode);
 
             foreach (var neighbour in neighbours)
             {
-                var closestCore = FindClosestCore(graph, neighbour, coreIds, newSeen);
-                if (closestCore.NId != -1)
+                var closestCore = FindClosestWithCriteria(graph, neighbour, criteria, newSeen, onlyCore);
+                if (closestCore.Target() != -1)
                 {
-                    var edge = graph.Edges[neighbour, nodeId];
-                    closest.Add(new PathToNode{NId = neighbour, Weight = edge.Weight + closestCore.Weight});
+                    var edge = graph.Edges[neighbour, startNode];
+                    closest.Add(new PathToNode
+                    {
+                        Path = new List<int> {startNode}.Concat(closestCore.Path).ToList(),
+                        Weight = edge.Weight + closestCore.Weight
+                    });
                 }
             }
             
@@ -88,7 +92,12 @@ namespace Waremap
                 return closest.MinBy(path => path.Weight).First();
             }
 
-            return new PathToNode{NId = -1, Weight = -1};
+            return new PathToNode{Path = new List<int>(), Weight = -1};
+        }
+
+        public static PathToNode FindClosestCore(Graph graph, int nodeId, List<int> coreIds)
+        {
+            return FindClosestWithCriteria(graph, nodeId, coreIds.Contains, new List<int>(), false);
         }
 
         public static void AssignClosestCores(Graph graph, List<int> coreIds)
@@ -97,31 +106,48 @@ namespace Waremap
             {
                 if (!coreIds.Contains(node.Id) && node.Type == NodeType.Machine)
                 {
-                    node.AssignClosestCore(FindClosestCore(graph, node.Id, coreIds, new List<int>()));
-                }
-                else
-                {
-                    node.AssignClosestCore(new PathToNode{NId = node.Id, Weight = 0});
+                    var cCore = FindClosestCore(graph, node.Id, coreIds);
+                    node.AssignClosestCore(cCore);
+                    graph.Nodes[cCore.Target()].AssignClosestFor(cCore.GetReverse());
                 }
             }
-        }
-        
-        public static int SelectFromRoulette(double[] weight, Random rng) {
-            double total = 0;
-            var amount = rng.NextDouble();
-            for(var a = 0; a < weight.Length; a++){
-                total += weight[a];
-                if(amount <= total){
-                    return a;
-                }
-            }
-            return -1;
         }
 
-        public struct PathToNode
+        public class PathToNode
         {
-            public int NId;
+            public List<int> Path = new List<int>();
             public int Weight;
+
+            public int Target()
+            { 
+                return Path.Count == 0 ? -1 : Path.Last();
+            }
+
+            public PathToNode GetReverse()
+            {
+                var ptn = new PathToNode();
+                foreach (var p in Path)
+                {
+                    ptn.Path.Insert(0, p);
+                }
+
+                ptn.Weight = Weight;
+                return ptn;
+            }
+
+            public void AddToWaypoints(List<Waypoint> waypoint, bool reversed = false)
+            {
+                var list = new List<int>(Path);
+                if (reversed) list.Reverse();
+                for (var i = 1; i < list.Count; i++)
+                {
+                    waypoint.Add(new Waypoint
+                    {
+                        FromNode = list[i-1],
+                        ToNode = list[i]
+                    });
+                }
+            }
         }
     }
 }
