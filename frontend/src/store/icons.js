@@ -28,8 +28,8 @@ export default {
       Node: {i: require('../assets/add_edge.svg'), w: 32},
     },
     edgeParams: {
-      Road: {i: require('../assets/004.svg'), w: 32},
-      Footway: {i: require('../assets/001.svg'), w: 32},
+      Road: {i: require('../assets/001.svg'), w: 32},
+      Footway: {i: require('../assets/004.svg'), w: 32},
       Elevator: {i: require('../assets/003.svg'), w: 32},
       Ladder: {i: require('../assets/002.svg'), w: 32},
     }
