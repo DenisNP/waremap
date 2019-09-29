@@ -28,11 +28,11 @@ namespace Waremap.Events
                     newName = "Точка"; break;
                 case "Machine":
                     newName = $"Участок {state.Equipment.GetOperationById(OperationIds.First())}"; break;
-                case "Elevator": break;
+                case "Elevator":
                     newName = "Лифт в"; break;
-                case "Ladder": break;
+                case "Ladder": 
                     newName = "Лестница в"; break;
-                case "Door": break;
+                case "Door": 
                     newName = "Дверь в"; break;
             }
 

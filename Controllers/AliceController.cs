@@ -64,10 +64,34 @@ namespace Waremap.Controllers
             }
         }
 
+        public static string GetCorrectNodeName(State state, Node node)
+        {
+            var newName = "";
+
+            switch (node.Icon)
+            {
+                case "Node":
+                    newName = "Точка"; break;
+                case "Machine":
+                    newName = $"Участок {state.Equipment.GetOperationById(node.OperationIds.First())}"; break;
+                case "Elevator":
+                    newName = "Лифт в"; break;
+                case "Ladder":
+                    newName = "Лестница в"; break;
+                case "Door":
+                    newName = "Дверь в"; break;
+            }
+
+            return node.Name ?? $"{newName} {node.Id}, Цех {node.Depot}, Этаж {node.Floor}";
+        }
+
         public static AliceResponse HandleRequest(AliceRequest request)
         {
             var response = new AliceResponse { Session = request.Session, Response = new ResponseModel() };
             response.Response.Text = "Извините, произошла ошибка, разработчики уже уведомлены";
+            var state = ReceiveEventController.GetState();
+
+
 
             if (request.Request.Command.IsNullOrEmpty() || request.Request.Nlu.Tokens.First() == "да")
             {
@@ -88,12 +112,15 @@ namespace Waremap.Controllers
                 
                 var node = ReceiveEventController.GetNextNode();
 
-                if (node.Depot == 0)
-                {
-                    node.Name = node.Name.Replace("Цех 0", "Корридор");
-                }
 
-                response.Response.Text = $"Двигайтесь в {node.Name}.";
+                var name = GetCorrectNodeName(state,node);
+
+                //if (node.Depot == 0)
+                //{
+                //    node.Name = node.Name.Replace("Цех 0", "Корридор");
+                //}
+
+                response.Response.Text = $"Двигайтесь в {name}.";
             } 
             else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
@@ -105,7 +132,10 @@ namespace Waremap.Controllers
             }))
             {
                 var switchedNode = ReceiveEventController.SwitchToNextNode();
-                response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {switchedNode.Name}.";
+
+                var name = GetCorrectNodeName(state, switchedNode);
+
+                response.Response.Text = $"Переключаю на точку {switchedNode.Id}. Следуйте в {name}.";
             }
             else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
@@ -119,17 +149,20 @@ namespace Waremap.Controllers
                 var curNode = ReceiveEventController.GetCurrentNode();
                 var nextNode = ReceiveEventController.GetNextNode();
 
-                if (curNode.Depot == 0)
-                {
-                    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
-                }
+                //if (curNode.Depot == 0)
+                //{
+                //    curNode.Name = curNode.Name.Replace("Цех 0", "Корридор");
+                //}
 
-                if (nextNode.Depot == 0)
-                {
-                    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
-                }
+                //if (nextNode.Depot == 0)
+                //{
+                //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
+                //}
 
-                response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
+                var curName = GetCorrectNodeName(state, curNode);
+                var nextName = GetCorrectNodeName(state, nextNode);
+
+                response.Response.Text = $"Вы находитесь в {curName}. Следуйте в {nextName}. ";
             }
             else if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
             {
@@ -157,17 +190,21 @@ namespace Waremap.Controllers
                 {
                     var nextNode = ReceiveEventController.GetNextNode();
 
-                    if (nextNode.Depot == 0)
-                    {
-                        nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
-                    }
+                    //if (nextNode.Depot == 0)
+                    //{
+                    //    nextNode.Name = nextNode.Name.Replace("Цех 0", "Корридор");
+                    //}
 
                     var resultPath = ReceiveEventController.FindPath(depot, onCart);
 
+
+                    var targetName = GetCorrectNodeName(state, resultPath.Item1);
+                    var nextName = GetCorrectNodeName(state, nextNode);
+
                     if (onCart && resultPath.Item2)
-                        response.Response.Text = $"Ваш пункт назначения {resultPath.Item1.Name}. Следуйте в {nextNode.Name}. Часть пути придется пройти пешком.";
+                        response.Response.Text = $"Ваш пункт назначения {targetName}. Следуйте в {nextName}. Часть пути придется пройти пешком.";
                     else
-                        response.Response.Text = $"Ваш пункт назначения {resultPath.Item1.Name}. Следуйте в {nextNode.Name}.";
+                        response.Response.Text = $"Ваш пункт назначения {targetName}. Следуйте в {nextName}.";
                     break;
                 }
             }
