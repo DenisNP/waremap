@@ -288,6 +288,16 @@ export default {
   border: 4px solid #4D4D4D;
   border-radius: 7px;
 }
+.pallete.pallete-right .scrollable {
+  border-radius: 25px 0 0 25px;
+}
+.pallete.pallete-right .scrollable::-webkit-scrollbar {
+  background-color: rgb(230,230,230);
+}
+.pallete.pallete-right .scrollable::-webkit-scrollbar-thumb {
+  border-color: rgb(230,230,230);
+}
+
 .pallete.tools {
   position: fixed;
   left: 0;
@@ -442,6 +452,9 @@ label.myLabel {
   padding: 30px 0 0;
   color: #333;
   font-size: 14px;
+  background-size: 228px 590px;
+  overflow: hidden;
+  padding-left: 2px;
 }
 .pallete.pallete-right .pallete-heading {
   font-size: 16px;

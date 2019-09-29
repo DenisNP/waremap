@@ -68,13 +68,23 @@
     mounted() {
     },
     methods: {
-      showAssemblyNodes(id) {
+      async showAssemblyNodes(id) {
         this.selectedDetailId = null;
         this.selectedAssemblyId = id;
 
         let details = this.assemblies[id].details.map(detail => detail);
-        // console.log(details);
         this.$store.commit('editor/highlightNodes', details.map(detail => detail.roadmap.position));
+        
+        let nodeId = details[0].roadmap.path[0] ? details[0].roadmap.path[0].from_node : false;
+        if (nodeId) {
+          let node = this.$store.getters['serverState/nodeById'](nodeId);
+          if (node) {
+            if (!(node.floor in this.$store.state.editor.floorBackgroundMap)) {
+              await this.$store.dispatch('editor/downloadFloorBackground');
+            }
+            this.$store.commit('editor/setFloor', node.floor);
+          }
+        }
       },
       showDetailNodes(detail) {
         this.selectedAssemblyId = null;

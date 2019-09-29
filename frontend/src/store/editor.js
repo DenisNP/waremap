@@ -45,6 +45,7 @@ export default {
         }
       }
       state.floor = floor;
+      state.floorBackground = state.floorBackgroundMap[floor];
     },
 
     setDepot(state, depot) {
