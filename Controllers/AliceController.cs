@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using HatForAlice.Alice;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
 
 using Newtonsoft.Json;
 
@@ -16,8 +15,9 @@ namespace Waremap.Controllers
     public class AliceController : ControllerBase
     {
         [HttpPost]
-        public string AliceWebhook()
+        public Task AliceWebhook()
         {
+            Console.WriteLine("Alice request got");
             try
             {
                 // read request
@@ -26,6 +26,7 @@ namespace Waremap.Controllers
                 // Console.WriteLine("http got: " + body);
 
                 var aliceRequest = JsonConvert.DeserializeObject<AliceRequest>(body, Utils.ConverterSettings);
+                Response.Headers.Add("Content-Type", "application/json");
                 //var userId = aliceRequest.Session.UserId;
 
                 // ping
@@ -40,7 +41,7 @@ namespace Waremap.Controllers
                         Session = aliceRequest.Session
                     };
 
-                    return JsonConvert.SerializeObject(pong, Utils.ConverterSettings);
+                    return Response.WriteAsync(JsonConvert.SerializeObject(pong, Utils.ConverterSettings));
                 }
 
                 // parse request
@@ -52,12 +53,12 @@ namespace Waremap.Controllers
 
                 Console.WriteLine($"\nResponse: {stringResponse}");
 
-                return stringResponse;
+                return Response.WriteAsync(stringResponse);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return "Error";
+                throw;
             }
         }
 

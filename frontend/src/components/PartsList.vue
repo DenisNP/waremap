@@ -1,30 +1,45 @@
 <template>
   <div class="pallete pallete-right PartsList">
-    <template v-for="group in assemblies">
-      <div class="pallete-heading" @click="showAssemblyNodes(group.id)">{{ group.name }}</div>
-      <div class="pallete-item"
-        v-for="detail in group.details"
-        :key="detail.id"
-        @click="showDetailNodes(detail)"
-      >
-        <span class="pallete-item-icon">&laquo;</span>
-        <span class="pallete-item-name">
-          {{ detail.name }}
-        </span>
-      </div>
-    </template>
+    <div class="scrollable">
+      <template v-for="group in assemblies">
+        <div
+          class="pallete-heading"
+          :class="{'selected-item': selectedAssemblyId === group.id}"
+          @click="showAssemblyNodes(group.id)">{{ group.name }}
+        </div>
+        <div class="pallete-item"
+          v-for="detail in group.details"
+          :key="detail.id"
+          :class="{'selected-item': selectedDetailId === detail.id}"
+          @click="showDetailNodes(detail)"
+        >
+          <span class="pallete-item-icon">—</span>
+          <span class="pallete-item-name">
+            {{ detail.name }}
+          </span>
+
+          <OperationList v-if="selectedDetailId === detail.id" :detail="detail" />
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
+  import OperationList from './OperationList.vue';
+
   export default {
     name: 'PartsList',
+    components: {
+      OperationList,
+    },
     props: [
       'data',
     ],
     data() {
       return {
-        
+        selectedDetailId: null,
+        selectedAssemblyId: null,
       };
     },
     computed: {
@@ -52,25 +67,46 @@
         return assemblies;
       }
     },
-    mounted() {      
+    mounted() {
     },
     methods: {
-      showAssemblyNodes(id) {
+      async showAssemblyNodes(id) {
+        this.selectedDetailId = null;
+        this.selectedAssemblyId = id;
+
         let details = this.assemblies[id].details.map(detail => detail);
-        // console.log(details);
-        this.$store.commit('editor/highlightNodes', ['15', '13']);
+        let nodesIds = {};
+        details.map(detail => {
+          detail.roadmap.path.map(p => {
+            nodesIds[p.from_node] = true;
+            nodesIds[p.to_node] = true;
+          });
+        });
+        this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
+        
+        let nodeId = null;
+        if (Object.keys(nodesIds).length > 0) {
+          nodeId = Object.keys(nodesIds)[0];
+        }
+        if (nodeId) {
+          let node = this.$store.getters['serverState/nodeById'](nodeId);
+          if (node) {
+            if (!(node.floor in this.$store.state.editor.floorBackgroundMap)) {
+              await this.$store.dispatch('editor/downloadFloorBackground');
+            }
+            this.$store.commit('editor/setFloor', node.floor);
+          }
+        }
       },
       showDetailNodes(detail) {
-        // console.log(detail);
-        this.$store.commit('editor/highlightNodes', ['16']);
-
-        detail.roadmap.path = [
-          {from: 10, to: 12},
-          {from: 12, to: 17},
-          {from: 17, to: 11},
-          {from: 11, to: 14},
-          {from: 14, to: 15}
-        ];
+        this.selectedAssemblyId = null;
+        this.selectedDetailId = detail.id;
+        let nodesIds = {};
+        detail.roadmap.path.map(p => {
+          nodesIds[p.from_node] = true;
+          nodesIds[p.to_node] = true;
+        });
+        this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
       }
     }
@@ -79,5 +115,18 @@
 </script>
 
 <style>
-
+.PartsList {
+  position: fixed;
+}
+.PartsList .scrollable {
+  overflow-y: auto;
+  height: calc(100% - 70px);
+}
+.PartsList .selected-item {
+  background: rgb(56, 120, 255);
+  color: white;
+}
+.PartsList .selected-item:hover {
+  color: white !important;
+}
 </style>

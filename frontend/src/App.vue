@@ -3,7 +3,7 @@
     <AppQr v-if="page === 'qr'"></AppQr>
     <AppMobile v-if="page === 'mobile'"></AppMobile>
     <div v-if="page === 'main'">
-      <ControlsLayer floor="1" tool="0" />
+      <ControlsLayer :floor="$store.state.editor.floor" tool="0" />
       <Editor/>
       <EdgeParams
         v-if="$store.state.editor.mode === 'edgeSelected'"

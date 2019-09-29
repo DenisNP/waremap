@@ -1,5 +1,5 @@
 <template>
-  <div class="controls">
+  <div id="controls" class="controls">
     <div class="pallete tools">
       <template v-for="(item, index) in tools">
         <div class="pallete-heading" v-if="item.heading">{{ item.heading }}</div>
@@ -17,7 +17,7 @@
     <div class="pallete pallete-top floors">
       <div class="pallete-heading">Этажи</div>
       <div class="pallete-item"
-        v-for="floor in floors"
+        v-for="floor in Math.max(floors, allFloors)"
         :key="floor"
         :ref="'floor' + floor"
         :class="{
@@ -30,7 +30,7 @@
           {{ floor }}
         </span>
       </div>
-      <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
+      <div class="pallete-item" v-if="Math.max(floors, allFloors) < maxFloors" :class="{selected: selectedFloor === 'new'}" @click="floorSelect('new')">+</div>
     </div>
 
     <div  class="pallete pallete-bottom floorBgUpload">
@@ -108,8 +108,7 @@ export default {
         }
       ],
       selectedTool: false,
-
-      floors: 3,
+      allFloors: 0
     };
   },
   computed: {
@@ -124,6 +123,19 @@ export default {
     },
     selectedFloor() {
       return this.$store.state.editor.floor;
+    },
+    floors() {
+      let floor = 1;
+      this.$store.state.serverState.geo.nodes.map((node) => {
+        if (node.floor > floor) floor = node.floor;
+      });
+      this.$store.state.serverState.geo.depots.map((depot) => {
+        if (depot.floor > floor) floor = depot.floor;
+      });
+      return floor;
+    },
+    maxFloors() {
+      return this.$store.state.editor.maxFloors;
     }
   },
   mounted() {
@@ -131,6 +143,8 @@ export default {
       else this._tool = this.tool;
       this.selectedTool = this._tool;
       this.toolSelect(this.selectedTool);
+
+      this.allFloors = this.floors;
   },
   methods: {
     async onImportClick(e) {
@@ -184,8 +198,14 @@ export default {
     },
     async floorSelect(floor) {
       console.log('select floor', floor);
-      this.$store.commit('editor/setFloor', floor);
-      await this.$store.dispatch('editor/downloadFloorBackground');
+
+      if (floor == 'new') {
+        this.allFloors += 1;
+        this.$store.commit('editor/setFloor', Math.max(this.floors, this.allFloors));
+      } else {
+        this.$store.commit('editor/setFloor', floor);
+        await this.$store.dispatch('editor/downloadFloorBackground');
+      }
     },
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');
@@ -195,7 +215,6 @@ export default {
 </script>
 
 <style>
-
 .pallete {
   z-index: 10;
   color: #FFF;
@@ -268,7 +287,7 @@ export default {
 .pallete-item-icon {
   width: 32px;
   height: 32px;
-  margin: -4px 14px -4px 0;
+  margin: -4px 8px -4px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -289,7 +308,18 @@ export default {
   border: 4px solid #4D4D4D;
   border-radius: 7px;
 }
+.pallete.pallete-right .scrollable {
+  border-radius: 25px 0 0 25px;
+}
+.pallete.pallete-right .scrollable::-webkit-scrollbar {
+  background-color: rgb(230,230,230);
+}
+.pallete.pallete-right .scrollable::-webkit-scrollbar-thumb {
+  border-color: rgb(230,230,230);
+}
+
 .pallete.tools {
+  position: fixed;
   left: 0;
   top: 0;
   box-sizing: border-box;
@@ -348,6 +378,7 @@ label.myLabel {
 /* -------------------------------------------------------- */
 
 .pallete.floors {
+  position: fixed;
   padding: 0 0 4px;
   top: 0;
   left: 50%;
@@ -375,14 +406,14 @@ label.myLabel {
 }
 .pallete.floors .pallete-item:hover:before {
   border-left-color: transparent;
-  border-bottom-color: #EE4722;
+  border-bottom-color: rgb(56, 120, 255);
 }
 .pallete.floors .pallete-item.selected {
   color: #3878FF;
 }
 .pallete.floors .pallete-item.selected:before {
   border-left-color: transparent;
-  border-bottom-color: #EE4722;
+  border-bottom-color: rgb(56, 120, 255);
 }
 .pallete.floors .pallete-heading {
   font-size: 18px;
@@ -441,10 +472,14 @@ label.myLabel {
   padding: 30px 0 0;
   color: #333;
   font-size: 14px;
+  background-size: 228px 590px;
+  overflow: hidden;
+  padding-left: 2px;
 }
 .pallete.pallete-right .pallete-heading {
   font-size: 16px;
-  padding: 25px 30px 10px 35px;
+  margin-top: 15px;
+  padding: 10px 30px 10px 25px;
 }
 .pallete.pallete-right .pallete-heading-top {
   font-size: 16px;
@@ -525,7 +560,7 @@ label.myLabel {
   width: auto;
 }
 .pallete.PartsList .pallete-item {
-  padding: 5px 30px 5px 35px;
+  padding: 5px 30px 5px 25px;
   cursor: pointer;
 }
 .pallete.PartsList .pallete-heading:hover,

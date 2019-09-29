@@ -19,6 +19,7 @@ export default {
     isSomeHighlighted: false,
     isSelectedSomething: false,
     FloorToFloorEdge: null,
+    maxFloors: 5,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
     depot: {
@@ -45,6 +46,7 @@ export default {
         }
       }
       state.floor = floor;
+      state.floorBackground = state.floorBackgroundMap[floor];
     },
 
     setDepot(state, depot) {
@@ -116,7 +118,7 @@ export default {
 
     highlightedEdges(state, edges) {
       let highlightedEdges = {};
-      edges.map(({from, to}) => highlightedEdges[[from, to].sort().join('_')] = true);
+      edges.map(({from_node, to_node}) => highlightedEdges[[from_node, to_node].sort().join('_')] = true);
       state.highlightedEdges = highlightedEdges;
       state.isSomeHighlighted = (Object.keys(highlightedEdges).length > 0);
     }

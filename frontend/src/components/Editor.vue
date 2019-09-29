@@ -30,6 +30,12 @@
         :badge="floorsEdges[data.id]"
       ></Node>
 
+      <Detail
+        v-for="(data, index) in $store.state.serverState.equipment.parts"
+        :key="index"
+        :data="data"
+      ></Detail>
+
       <FloorToFloorEdge
         :data="$store.state.editor.selectedNodeId">
       </FloorToFloorEdge>
@@ -41,6 +47,7 @@
 import Node from './Node.vue';
 import Edge from './Edge.vue';
 import Depot from './Depot.vue';
+import Detail from './Detail.vue';
 
 import FloorToFloorEdge from './FloorToFloorEdge.vue';
 
@@ -50,6 +57,7 @@ export default {
     Node,
     Depot,
     Edge,
+    Detail,
     FloorToFloorEdge
   },
   mounted() {
@@ -75,12 +83,14 @@ export default {
     });
 
     window.addEventListener('keydown', this.onKeyDown);
+    this.$el.addEventListener('mousewheel', this.onMouseWheel);
   },
   props: {
     msg: String,
   },
   data() {
     return {
+      zoom: 1,
       newDepot: null,
       isDrawingDepot: false,
       startX: null,
@@ -110,6 +120,18 @@ export default {
     }
   },
   methods: {
+    onMouseWheel(e) {
+      console.log('wheel', e);
+      e.preventDefault();
+
+      if (e.deltaY < 0) {
+        this.zoom *= 1.05;
+      } else {
+        this.zoom /= 1.05;
+      }
+
+      this.$el.style.transform = 'scale(' + this.zoom + ')';
+    },
     clickBg(e) {
       if (this.$store.state.editor.isSomeHighlighted) {
         if (e.target.tagName === 'svg' || e.target.classList.contains('node-Depot')) {
