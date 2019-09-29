@@ -127,7 +127,7 @@ namespace Waremap.Models
 
         public void SetWaypoint(Waypoint wp)
         {
-            if (Path.Contains(wp))
+            /*if (Path.Contains(wp))
             {
                 Position = Path.IndexOf(wp);
             }
@@ -135,13 +135,9 @@ namespace Waremap.Models
             {
                 Path.Insert(Position + 1, wp);
                 Position++;
-            }
-        }
-
-        public void LeaveFirst()
-        {
-            Path.RemoveRange(1, Path.Count - 1);
-            Position = 0;
+            }*/
+            Path.Add(wp);
+            Position = Path.Count - 1;
         }
     }
 
