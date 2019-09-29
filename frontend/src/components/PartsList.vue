@@ -60,12 +60,13 @@
       showAssemblyNodes(id) {
         let details = this.assemblies[id].details.map(detail => detail);
         // console.log(details);
-        this.$store.commit('editor/highlightNodes', ['15', '13']);
+        this.$store.commit('editor/highlightNodes', details.map(detail => detail.roadmap.position));
       },
       showDetailNodes(detail) {
         // console.log(detail);
-        this.$store.commit('editor/highlightNodes', ['16']);
+        this.$store.commit('editor/highlightNodes', [detail.roadmap.position]);
 
+        /*
         detail.roadmap.path = [
           {from: 10, to: 12},
           {from: 12, to: 17},
@@ -73,6 +74,7 @@
           {from: 11, to: 14},
           {from: 14, to: 15}
         ];
+        */
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
       }
     }
