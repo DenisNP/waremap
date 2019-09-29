@@ -141,6 +141,8 @@ namespace Waremap
             public void AddToWaypoints(List<Waypoint> waypoint, bool reversed = false)
             {
                 var list = new List<int>(Path);
+                if (list.Count == 0) return;
+                
                 if (reversed) list.Reverse();
                 for (var i = 0; i < list.Count - 1; i++)
                 {
