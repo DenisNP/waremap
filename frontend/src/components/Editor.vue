@@ -30,6 +30,12 @@
         :badge="floorsEdges[data.id]"
       ></Node>
 
+      <Detail
+        v-for="(data, index) in $store.state.serverState.equipment.parts"
+        :key="index"
+        :data="data"
+      ></Detail>
+
       <FloorToFloorEdge
         :data="$store.state.editor.selectedNodeId">
       </FloorToFloorEdge>
@@ -41,6 +47,7 @@
 import Node from './Node.vue';
 import Edge from './Edge.vue';
 import Depot from './Depot.vue';
+import Detail from './Detail.vue';
 
 import FloorToFloorEdge from './FloorToFloorEdge.vue';
 
@@ -50,6 +57,7 @@ export default {
     Node,
     Depot,
     Edge,
+    Detail,
     FloorToFloorEdge
   },
   mounted() {
