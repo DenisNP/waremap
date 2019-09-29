@@ -376,14 +376,14 @@ label.myLabel {
 }
 .pallete.floors .pallete-item:hover:before {
   border-left-color: transparent;
-  border-bottom-color: #EE4722;
+  border-bottom-color: rgb(56, 120, 255);
 }
 .pallete.floors .pallete-item.selected {
   color: #3878FF;
 }
 .pallete.floors .pallete-item.selected:before {
   border-left-color: transparent;
-  border-bottom-color: #EE4722;
+  border-bottom-color: rgb(56, 120, 255);
 }
 .pallete.floors .pallete-heading {
   font-size: 18px;
@@ -445,7 +445,8 @@ label.myLabel {
 }
 .pallete.pallete-right .pallete-heading {
   font-size: 16px;
-  padding: 25px 30px 10px 25px;
+  margin-top: 15px;
+  padding: 10px 30px 10px 25px;
 }
 .pallete.pallete-right .pallete-heading-top {
   font-size: 16px;

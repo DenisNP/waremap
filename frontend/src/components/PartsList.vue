@@ -4,13 +4,13 @@
       <template v-for="group in assemblies">
         <div
           class="pallete-heading"
-          :class="{bold: selectedAssemblyId === group.id}"
+          :class="{'selected-item': selectedAssemblyId === group.id}"
           @click="showAssemblyNodes(group.id)">{{ group.name }}
         </div>
         <div class="pallete-item"
           v-for="detail in group.details"
           :key="detail.id"
-          :class="{bold: selectedDetailId === detail.id}"
+          :class="{'selected-item': selectedDetailId === detail.id}"
           @click="showDetailNodes(detail)"
         >
           <span class="pallete-item-icon">—</span>
@@ -24,8 +24,13 @@
 </template>
 
 <script>
+  import OperationList from './OperationList.vue';
+
   export default {
     name: 'PartsList',
+    components: {
+      OperationList,
+    },
     props: [
       'data',
     ],
@@ -101,7 +106,11 @@
   overflow-y: auto;
   height: calc(100% - 70px);
 }
-.bold {
-  font-weight: bold;
+.PartsList .selected-item {
+  background: rgb(56, 120, 255);
+  color: white;
+}
+.PartsList .selected-item:hover {
+  color: white !important;
 }
 </style>
