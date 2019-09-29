@@ -75,9 +75,19 @@
         this.selectedAssemblyId = id;
 
         let details = this.assemblies[id].details.map(detail => detail);
-        this.$store.commit('editor/highlightNodes', details.map(detail => detail.roadmap.position));
+        let nodesIds = {};
+        details.map(detail => {
+          detail.roadmap.path.map(p => {
+            nodesIds[p.from_node] = true;
+            nodesIds[p.to_node] = true;
+          });
+        });
+        this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
         
-        let nodeId = details[0].roadmap.path[0] ? details[0].roadmap.path[0].from_node : false;
+        let nodeId = null;
+        if (Object.keys(nodesIds).length > 0) {
+          nodeId = Object.keys(nodesIds)[0];
+        }
         if (nodeId) {
           let node = this.$store.getters['serverState/nodeById'](nodeId);
           if (node) {
@@ -91,10 +101,13 @@
       showDetailNodes(detail) {
         this.selectedAssemblyId = null;
         this.selectedDetailId = detail.id;
-        // console.log(detail);
-        this.$store.commit('editor/highlightNodes', [detail.roadmap.position]);
+        let nodesIds = {};
+        detail.roadmap.path.map(p => {
+          nodesIds[p.from_node] = true;
+          nodesIds[p.to_node] = true;
+        });
+        this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
-        console.log(detail.roadmap.path)
       }
     }
   }
