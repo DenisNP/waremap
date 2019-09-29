@@ -83,6 +83,7 @@
           });
         });
         this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
+        this.$store.commit('editor/highlightedDetails', details);
         
         let nodeId = null;
         if (Object.keys(nodesIds).length > 0) {
@@ -108,6 +109,7 @@
         });
         this.$store.commit('editor/highlightNodes', Object.keys(nodesIds));
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
+        this.$store.commit('editor/highlightedDetails', [detail]);
       }
     }
   }

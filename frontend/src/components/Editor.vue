@@ -32,6 +32,7 @@
 
       <Detail
         v-for="(data, index) in $store.state.serverState.equipment.parts"
+        :highlighted="$store.state.editor.highlightedDetails[data.id]"
         :key="index"
         :data="data"
       ></Detail>

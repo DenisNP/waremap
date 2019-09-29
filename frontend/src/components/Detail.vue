@@ -1,5 +1,5 @@
 <template>
-  <g class="detail">
+  <g class="detail" :class="{ highlighted }">
     <foreignObject v-if="nodes && show"
       :id="data.id"
       :x="x"
@@ -19,7 +19,8 @@
 export default {
   name: 'Detail',
   props: [
-    'data'
+    'data',
+    'highlighted'
   ],
   computed: {
     nodes() {
