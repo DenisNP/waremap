@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -45,10 +46,12 @@ namespace Waremap.Controllers
         }
 
         [HttpPost]
-        public string PostPosition([FromBody] Presence presence)
+        public string PostPosition()
         {
             try
             {
+                using var reader = new StreamReader(Request.Body);
+                var presence = JsonConvert.DeserializeObject<Presence>(reader.ReadToEnd(), Utils.ConverterSettings);
                 var state = ReceiveEventController.GetState();
                 var part = state.Equipment.Parts.FirstOrDefault(x => x.Id == presence.PartId);
                 var machineNode = state.Geo.Nodes.FirstOrDefault(x => x.Id == presence.MachineId);

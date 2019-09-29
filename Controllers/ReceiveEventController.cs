@@ -88,9 +88,6 @@ namespace Waremap.Controllers
                         case "computeEdges":
                             (new EventComputeEdges()).Run(State);
                             break;
-                        case "optimize":
-                            (new EventOptimize()).Run(State);
-                            break;
                     }
                 }
             }
