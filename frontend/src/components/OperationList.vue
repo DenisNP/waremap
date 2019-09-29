@@ -1,6 +1,6 @@
 <template>
-  <div class="root">
-    <div v-for="item in list" :key="">{{ item.operation && item.operation.name || '?' }}</div>
+  <div class="operationsList">
+    <div class="operationsList-item" v-for="(item, index) in list" :key="index" v-if="item.operation && item.operation.name">{{ item.operation.name }}</div>
   </div>
 </template>
 
@@ -29,7 +29,18 @@ export default {
 
 </script>
 
-<style scoped>
-.root {
+<style>
+
+.pallete.PartsList .pallete-item {
+  flex-wrap: wrap;
 }
+.operationsList {
+  display: block;
+}
+.operationsList-item {
+  padding: 5px 22px 0;
+  font-size: .8em;
+  line-height: 16px;
+}
+
 </style>

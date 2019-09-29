@@ -17,6 +17,8 @@
           <span class="pallete-item-name">
             {{ detail.name }}
           </span>
+
+          <OperationList v-if="selectedDetailId === detail.id" :detail="detail" />
         </div>
       </template>
     </div>
