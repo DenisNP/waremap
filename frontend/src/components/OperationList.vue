@@ -38,7 +38,7 @@ export default {
   display: block;
 }
 .operationsList-item {
-  padding: 5px 22px 0;
+  padding: 5px 15px 0;
   font-size: .8em;
   line-height: 16px;
 }

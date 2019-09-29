@@ -13,7 +13,7 @@
           :class="{'selected-item': selectedDetailId === detail.id}"
           @click="showDetailNodes(detail)"
         >
-          <span class="pallete-item-icon">—</span>
+          <span class="pallete-item-icon">&laquo;</span>
           <span class="pallete-item-name">
             {{ detail.name }}
           </span>
