@@ -2,11 +2,12 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using HatForAlice.Alice;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Newtonsoft.Json;
+using Waremap.Models;
+using Waremap.Models.Alice;
 
 namespace Waremap.Controllers
 {
@@ -84,6 +85,7 @@ namespace Waremap.Controllers
                 "пункт назначения"
             }))
             {
+                
                 var node = ReceiveEventController.GetNextNode();
                 response.Response.Text = $"Двигайтесь в {node.Name}.";
             }
@@ -114,6 +116,40 @@ namespace Waremap.Controllers
                 var nextNode = ReceiveEventController.GetNextNode();
                 response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
             }
+
+            if (Utils.CheckTokens(request.Request.Nlu.Tokens, new[]
+            {
+                "как пройти",
+                "хочу попасть в",
+                "как дойти"
+            }))
+            {
+                var depotNum = request.Request.Nlu.Tokens.Select(x =>
+                {
+                    if (int.TryParse(x, out var n))
+                        return n;
+                    
+                    return -1;
+                }).FirstOrDefault(y => y != -1);
+
+                bool onCart = request.Request.Nlu.Tokens.ContainsStartWith("тележк") ||
+                              request.Request.Nlu.Tokens.ContainsStartWith("погруз") ||
+                              request.Request.Nlu.Tokens.ContainsStartWith("телег");
+
+
+                (Node,bool) resultPath;
+
+                foreach (var depot in ReceiveEventController.GetState().Geo.Depots.Where(depot => depot.Id == depotNum))
+                {
+                    resultPath = ReceiveEventController.FindPath(depot, onCart);
+                }
+
+                var curNode = ReceiveEventController.GetCurrentNode();
+                var nextNode = ReceiveEventController.GetNextNode();
+
+                response.Response.Text = $"Вы находитесь в {curNode.Name}. Следуйте в {nextNode.Name}. ";
+            }
+
 
             return response;
         }

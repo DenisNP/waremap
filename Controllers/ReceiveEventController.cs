@@ -109,7 +109,7 @@ namespace Waremap.Controllers
             evt.Run(State);
         }
 
-        internal static (Node, bool) FindPath(Depot depot, bool onCart)
+        public static (Node, bool) FindPath(Depot depot, bool onCart)
         {
             throw new NotImplementedException();
         }
