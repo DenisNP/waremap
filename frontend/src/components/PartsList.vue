@@ -81,17 +81,8 @@
         this.selectedDetailId = detail.id;
         // console.log(detail);
         this.$store.commit('editor/highlightNodes', [detail.roadmap.position]);
-
-        /*
-        detail.roadmap.path = [
-          {from: 10, to: 12},
-          {from: 12, to: 17},
-          {from: 17, to: 11},
-          {from: 11, to: 14},
-          {from: 14, to: 15}
-        ];
-        */
         this.$store.commit('editor/highlightedEdges', detail.roadmap.path);
+        console.log(detail.roadmap.path)
       }
     }
   }
