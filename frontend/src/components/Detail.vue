@@ -1,7 +1,6 @@
 <template>
   <g class="detail">
-    <foreignObject v-if="nodes"
-      @click="onClick"
+    <foreignObject v-if="nodes && show"
       :id="data.id"
       :x="x"
       :y="y - 5"
@@ -36,14 +35,14 @@ export default {
     },
     y() {
       return this.nodes.from.y + (this.nodes.to.y - this.nodes.from.y) / 2;
-    }
-  },
-  data() {
-    return {};
-  },
-  methods: {
-    onClick(e) {
-
+    },
+    floor() {
+      return this.nodes.from ? this.nodes.from.floor : false;
+    },
+    show() {
+      if (this.floor) {
+        return (this.$store.state.editor.displayMode == 'floor' && this.floor == this.$store.state.editor.floor);
+      }
     }
   }
 }
@@ -51,5 +50,9 @@ export default {
 </script>
 
 <style>
+
+.detail {
+  pointer-events: none;
+}
 
 </style>

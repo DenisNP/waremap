@@ -19,6 +19,7 @@ export default {
     isSomeHighlighted: false,
     isSelectedSomething: false,
     FloorToFloorEdge: null,
+    maxFloors: 5,
     displayMode: 'floor', // 'floor', 'depot'
     floor: 1,
     depot: {

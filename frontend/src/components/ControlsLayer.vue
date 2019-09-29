@@ -17,7 +17,7 @@
     <div class="pallete pallete-top floors">
       <div class="pallete-heading">Этажи</div>
       <div class="pallete-item"
-        v-for="floor in floors"
+        v-for="floor in Math.max(floors, allFloors)"
         :key="floor"
         :ref="'floor' + floor"
         :class="{
@@ -30,7 +30,7 @@
           {{ floor }}
         </span>
       </div>
-      <div class="pallete-item" :class="{selected: selectedFloor === 'new'}" @click="selectedFloor = 'new'">+</div>
+      <div class="pallete-item" v-if="Math.max(floors, allFloors) < maxFloors" :class="{selected: selectedFloor === 'new'}" @click="floorSelect('new')">+</div>
     </div>
 
     <div  class="pallete pallete-bottom floorBgUpload">
@@ -108,8 +108,7 @@ export default {
         }
       ],
       selectedTool: false,
-
-      floors: 3,
+      allFloors: 0
     };
   },
   computed: {
@@ -124,6 +123,19 @@ export default {
     },
     selectedFloor() {
       return this.$store.state.editor.floor;
+    },
+    floors() {
+      let floor = 1;
+      this.$store.state.serverState.geo.nodes.map((node) => {
+        if (node.floor > floor) floor = node.floor;
+      });
+      this.$store.state.serverState.geo.depots.map((depot) => {
+        if (depot.floor > floor) floor = depot.floor;
+      });
+      return floor;
+    },
+    maxFloors() {
+      return this.$store.state.editor.maxFloors;
     }
   },
   mounted() {
@@ -131,6 +143,8 @@ export default {
       else this._tool = this.tool;
       this.selectedTool = this._tool;
       this.toolSelect(this.selectedTool);
+
+      this.allFloors = this.floors;
   },
   methods: {
     async onImportClick(e) {
@@ -184,8 +198,14 @@ export default {
     },
     async floorSelect(floor) {
       console.log('select floor', floor);
-      this.$store.commit('editor/setFloor', floor);
-      await this.$store.dispatch('editor/downloadFloorBackground');
+
+      if (floor == 'new') {
+        this.allFloors += 1;
+        this.$store.commit('editor/setFloor', Math.max(this.floors, this.allFloors));
+      } else {
+        this.$store.commit('editor/setFloor', floor);
+        await this.$store.dispatch('editor/downloadFloorBackground');
+      }
     },
     autoComputeEdges() {
       this.$store.dispatch('editor/autoComputeEdges');
